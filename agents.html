@@ -1,0 +1,975 @@
+<!-- ===========================
+  AI AGENTS LANDING (SCOPED)
+  ROI-forward + Lead Qualification
+=========================== -->
+<div class="ag-scope">
+
+  <!-- ================= HERO ================= -->
+  <section class="ag-hero" aria-labelledby="ag-hero-title">
+    <div class="ag-container">
+      <span class="ag-pill">Trusted by 50+ companies</span>
+
+      <h1 id="ag-hero-title" class="ag-title">
+        Get more done without adding<br class="ag-br"> headcount with AI Agents
+      </h1>
+
+      <p class="ag-sub">
+        We design and integrate quick-ROI agents (Email, Chat, Voice, Follow-ups) that plug into your tools,
+handle repetitive work, and make more sales — without extra hiring.
+      </p>
+
+      <a href="#demo" class="ag-btn" aria-label="Book a demo">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 6h-2v5l4 2 .9-1.7-2.9-1.6V8Z" fill="currentColor"/>
+        </svg>
+        Book a Demo
+      </a>
+
+      <p class="ag-note">35+ booked this month</p>
+    </div>
+  </section>
+
+  <!-- ================= KPIs ================= -->
+  <section class="ag-kpis" aria-label="Key results & partners">
+    <div class="ag-container">
+      <div class="kpi-rail">
+        <div class="kpi">
+          <strong class="kpi-num">30–70%</strong>
+          <span class="kpi-label">less time on admin</span>
+        </div>
+
+        <span class="kpi-divider" aria-hidden="true"></span>
+
+        <div class="kpi">
+          <strong class="kpi-num">2–5×</strong>
+          <span class="kpi-label">more work done with the same team</span>
+        </div>
+
+        <span class="kpi-divider" aria-hidden="true"></span>
+
+        <div class="kpi">
+          <strong class="kpi-num">60–90%</strong>
+          <span class="kpi-label">faster replies to customers</span>
+        </div>
+      </div>
+
+      <p class="ag-partners-note">We implement with best-in-class partners and your existing stack</p>
+      <div class="ag-logos" aria-label="Partner logos">
+        <span class="logo">ChatGPT</span>
+        <span class="logo">Claude</span>
+        <span class="logo">Microsoft</span>
+        <span class="logo">AWS</span>
+        <span class="logo">Salesforce</span>
+        <span class="logo">HubSpot</span>
+        <span class="logo">Zapier</span>
+        <span class="logo">Make</span>
+      </div>
+    </div>
+  </section>
+  <!-- ================= PROBLEM / SOLUTION ================= -->
+  <section class="ag-problem" aria-labelledby="ag-problem-title">
+    <div class="ag-container">
+      <p class="eyebrow">Automation that actually ships</p>
+      <h2 id="ag-problem-title" class="ag-h2">Your team is drowning in admin. Let AI Agents handle it.</h2>
+      <p class="ag-sub2">Too much of your team’s time is spent on repetitive tasks — updating spreadsheets, replying to the same questions, entering data, and chasing follow-ups.<br>
+Our AI Agents take care of that automatically, so your people can focus on sales, customers, and growth.</p>
+
+      <div class="pr-grid">
+        <div class="pr-visual">
+          <div class="ph">
+            <img src="http://automate4u.co/wp-content/uploads/2025/10/AI-Agent-Team-03.png" alt="Systems connected by AI agents">
+          </div>
+        </div>
+        <div class="pr-card">
+          <h3 class="pr-title">Where Agents Help Most</h3>
+          <ul class="pr-list pr-list--check">
+            <li>Capture and qualify leads automatically — never miss an opportunity</li>
+            <li>Instantly respond to customer questions and support tickets</li>
+            <li>Update your CRM, send emails, and log data without human effort</li>
+            <li>Generate invoices, reports, and proposals in seconds</li>
+            <li>Keep all your tools connected and in sync — 24/7</li>
+          </ul>
+          <p class="hint">Fully autonomous or <strong>human-in-the-loop</strong> for sensitive steps.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= AGENT CATALOG (Search + Filters + Cards) ================= -->
+  <section class="ag-catalog" id="agent-use-cases" aria-labelledby="ag-catalog-title">
+    <div class="ag-container">
+      <p class="eyebrow">Popular Agent Examples</p>
+      <h2 id="ag-catalog-title" class="ag-h2">Find your agent. We’ll build it to fit.</h2>
+
+      <div class="ac-panel">
+        <!-- Controls -->
+        <div class="ac-controls" role="search">
+          <label class="sr-only" for="ac-search">Search agents</label>
+          <input id="ac-search" class="ac-search" type="search" placeholder="Search by role, task, or tool… (e.g., HubSpot, invoices, CS)" autocomplete="off" />
+
+          <div class="ac-toolbar">
+            <div class="ac-filters" role="group" aria-label="Filters">
+              <label class="ac-filter">
+                <span class="ac-filter-label">Category</span>
+                <select id="ac-filter-category">
+                  <option value="">All</option>
+                  <option>Sales</option>
+                  <option>Support</option>
+                  <option>Operations</option>
+                  <option>HR</option>
+                  <option>Finance</option>
+                </select>
+              </label>
+
+              <label class="ac-filter">
+                <span class="ac-filter-label">Type</span>
+                <select id="ac-filter-type">
+                  <option value="">All</option>
+                  <option>Chat Agent</option>
+                  <option>Voice Agent</option>
+                  <option>Workflow</option>
+                  <option>RPA</option>
+                  <option>Integrator</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="ac-meta" aria-live="polite">
+              <span id="ac-count">12 results</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid (scrollable when long) -->
+        <div class="ac-grid" id="ac-grid" aria-describedby="ac-count">
+          <article class="ac-card">
+            <h3 class="ac-name">AI Sales Rep</h3>
+            <p class="ac-blurb">Captures leads from chat/email, qualifies, and books meetings automatically.</p>
+            <div class="ac-meta-row"><span class="ac-badge">Sales</span><span class="ac-badge">Chat Agent</span><span class="ac-badge">OpenAI</span><span class="ac-badge">HubSpot</span><span class="ac-badge">Calendly</span></div>
+            <div class="ac-actions"><a class="ac-btn ac-primary" href="#demo">Request this agent</a><a class="ac-btn" href="#demo">Learn more</a></div>
+          </article>
+
+          <article class="ac-card">
+            <h3 class="ac-name">Outbound SDR Autopilot</h3>
+            <p class="ac-blurb">Personalizes cold emails, sequences follow-ups, and updates CRM.</p>
+            <div class="ac-meta-row"><span class="ac-badge">Sales</span><span class="ac-badge">Workflow</span><span class="ac-badge">OpenAI</span><span class="ac-badge">Apollo</span><span class="ac-badge">Gmail</span></div>
+            <div class="ac-actions"><a class="ac-btn ac-primary" href="#demo">Request this agent</a><a class="ac-btn" href="#demo">Learn more</a></div>
+          </article>
+
+          <article class="ac-card">
+            <h3 class="ac-name">Customer Success Companion</h3>
+            <p class="ac-blurb">Answers FAQs and triages tickets; escalates with full context.</p>
+            <div class="ac-meta-row"><span class="ac-badge">Support</span><span class="ac-badge">Chat Agent</span><span class="ac-badge">OpenAI</span><span class="ac-badge">Zendesk</span></div>
+            <div class="ac-actions"><a class="ac-btn ac-primary" href="#demo">Request this agent</a><a class="ac-btn" href="#demo">Learn more</a></div>
+          </article>
+
+          <article class="ac-card">
+            <h3 class="ac-name">Voice Receptionist</h3>
+            <p class="ac-blurb">Answers calls, qualifies, and books appointments.</p>
+            <div class="ac-meta-row"><span class="ac-badge">Support</span><span class="ac-badge">Voice Agent</span><span class="ac-badge">OpenAI</span><span class="ac-badge">Twilio</span><span class="ac-badge">Google Calendar</span></div>
+            <div class="ac-actions"><a class="ac-btn ac-primary" href="#demo">Request this agent</a><a class="ac-btn" href="#demo">Learn more</a></div>
+          </article>
+
+          <article class="ac-card">
+            <h3 class="ac-name">RMA & Returns Bot</h3>
+            <p class="ac-blurb">Automates returns authorizations and shipping labels.</p>
+            <div class="ac-meta-row"><span class="ac-badge">Support</span><span class="ac-badge">Workflow</span><span class="ac-badge">Shopify</span><span class="ac-badge">Gorgias</span></div>
+            <div class="ac-actions"><a class="ac-btn ac-primary" href="#demo">Request this agent</a><a class="ac-btn" href="#demo">Learn more</a></div>
+          </article>
+
+          <article class="ac-card">
+            <h3 class="ac-name">Invoice Generator</h3>
+            <p class="ac-blurb">Creates invoices/POs from emails or form submissions.</p>
+            <div class="ac-meta-row"><span class="ac-badge">Operations</span><span class="ac-badge">Workflow</span><span class="ac-badge">QuickBooks</span><span class="ac-badge">Zapier</span></div>
+            <div class="ac-actions"><a class="ac-btn ac-primary" href="#demo">Request this agent</a><a class="ac-btn" href="#demo">Learn more</a></div>
+          </article>
+
+          <article class="ac-card">
+            <h3 class="ac-name">CRM Data Cleaner</h3>
+            <p class="ac-blurb">Deduplicates, enriches, and standardizes CRM records nightly.</p>
+            <div class="ac-meta-row"><span class="ac-badge">Operations</span><span class="ac-badge">RPA</span><span class="ac-badge">Salesforce</span><span class="ac-badge">n8n</span></div>
+            <div class="ac-actions"><a class="ac-btn ac-primary" href="#demo">Request this agent</a><a class="ac-btn" href="#demo">Learn more</a></div>
+          </article>
+
+          <article class="ac-card">
+            <h3 class="ac-name">HR Onboarding Guide</h3>
+            <p class="ac-blurb">Answers policy questions and guides new hires through onboarding.</p>
+            <div class="ac-meta-row"><span class="ac-badge">HR</span><span class="ac-badge">Chat Agent</span><span class="ac-badge">Notion</span><span class="ac-badge">Google Drive</span></div>
+            <div class="ac-actions"><a class="ac-btn ac-primary" href="#demo">Request this agent</a><a class="ac-btn" href="#demo">Learn more</a></div>
+          </article>
+
+          <article class="ac-card">
+            <h3 class="ac-name">Recruiting Screener</h3>
+            <p class="ac-blurb">Screens resumes and drafts structured scorecards.</p>
+            <div class="ac-meta-row"><span class="ac-badge">HR</span><span class="ac-badge">Workflow</span><span class="ac-badge">Greenhouse</span><span class="ac-badge">OpenAI</span></div>
+            <div class="ac-actions"><a class="ac-btn ac-primary" href="#demo">Request this agent</a><a class="ac-btn" href="#demo">Learn more</a></div>
+          </article>
+
+          <article class="ac-card">
+            <h3 class="ac-name">AP Inbox Triage</h3>
+            <p class="ac-blurb">Parses vendor emails, extracts totals, and drafts bills.</p>
+            <div class="ac-meta-row"><span class="ac-badge">Finance</span><span class="ac-badge">Workflow</span><span class="ac-badge">Gmail</span><span class="ac-badge">QuickBooks</span></div>
+            <div class="ac-actions"><a class="ac-btn ac-primary" href="#demo">Request this agent</a><a class="ac-btn" href="#demo">Learn more</a></div>
+          </article>
+
+          <article class="ac-card">
+            <h3 class="ac-name">Collections Nudge</h3>
+            <p class="ac-blurb">Sends friendly, staged reminders for overdue invoices.</p>
+            <div class="ac-meta-row"><span class="ac-badge">Finance</span><span class="ac-badge">Workflow</span><span class="ac-badge">QuickBooks</span><span class="ac-badge">HubSpot</span></div>
+            <div class="ac-actions"><a class="ac-btn ac-primary" href="#demo">Request this agent</a><a class="ac-btn" href="#demo">Learn more</a></div>
+          </article>
+
+          <article class="ac-card">
+            <h3 class="ac-name">Ops Integrator</h3>
+            <p class="ac-blurb">Keeps data in sync across your tools with guardrails.</p>
+            <div class="ac-meta-row"><span class="ac-badge">Operations</span><span class="ac-badge">Integrator</span><span class="ac-badge">Zapier</span><span class="ac-badge">Make</span><span class="ac-badge">n8n</span></div>
+            <div class="ac-actions"><a class="ac-btn ac-primary" href="#demo">Request this agent</a><a class="ac-btn" href="#demo">Learn more</a></div>
+          </article>
+        </div>
+      </div>
+
+      <p class="ac-note">Can’t find the exact fit? <a href="#demo">Tell us your workflow</a> — we’ll tailor an agent for it.</p>
+    </div>
+  </section>
+
+  <!-- ================= ROI CALCULATOR ================= -->
+  <section class="ag-roi" aria-labelledby="ag-roi-title">
+    <div class="ag-container">
+      <p class="eyebrow">Estimate your ROI</p>
+      <h2 id="ag-roi-title" class="ag-h2">What could an AI Agent save you each month?</h2>
+      <p class="ag-sub2">Adjust the sliders to see conservative savings. Share this with your team to align on value.</p>
+
+      <form class="roi-grid" id="roi-form" onsubmit="return false;" aria-describedby="roi-note">
+        <label class="roi-item">
+          <span class="roi-label">Repetitive hours per week</span>
+          <input type="range" min="5" max="200" value="40" step="5" id="roi-hours" aria-label="Repetitive hours per week">
+          <output id="out-hours">40</output>
+        </label>
+
+        <label class="roi-item">
+          <span class="roi-label">Blended hourly cost (USD)</span>
+          <input type="range" min="15" max="150" value="45" step="5" id="roi-rate" aria-label="Blended hourly cost">
+          <output id="out-rate">$45</output>
+        </label>
+
+        <label class="roi-item">
+          <span class="roi-label">Automation coverage</span>
+          <input type="range" min="10" max="90" value="50" step="5" id="roi-coverage" aria-label="Automation coverage percent">
+          <output id="out-coverage">50%</output>
+        </label>
+      </form>
+
+      <div class="roi-result" role="status" aria-live="polite">
+        <div class="rr-card">
+          <span class="rr-kicker">Projected monthly savings</span>
+          <div class="rr-value" id="roi-savings">$3,900</div>
+          <p class="rr-foot" id="roi-note">Based on hours × rate × coverage × 4.3 weeks.</p>
+        </div>
+        <div class="rr-card">
+          <span class="rr-kicker">Payback period (est.)</span>
+          <div class="rr-value" id="roi-payback">~1.5 months</div>
+          <p class="rr-foot">Assumes a mid-tier build & support plan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STEPS ================= -->
+  <section class="ag-steps" aria-labelledby="ag-steps-title">
+    <div class="ag-container">
+      <span class="sv-pill">How it works</span>
+      <h2 id="ag-steps-title" class="ag-h2">From pilot to scale in 3 steps</h2>
+      <div class="sv-grid">
+        <article class="sv-card">
+          <div class="sv-num">1</div>
+          <h3 class="sv-h3">Discover</h3>
+          <p class="sv-text">We map workflows, quantify ROI, and select the best stack for your use case.</p>
+        </article>
+        <article class="sv-card sv-card--seam">
+          <div class="sv-num">2</div>
+          <h3 class="sv-h3">Design</h3>
+          <p class="sv-text">We configure agent behavior, data access, guardrails, and integrations.</p>
+        </article>
+        <article class="sv-card">
+          <div class="sv-num">3</div>
+          <h3 class="sv-h3">Deploy & Improve</h3>
+          <p class="sv-text">Pilot, measure, and iterate. Human-in-the-loop where needed.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LEAD QUAL (STRONG CTA) ================= -->
+  <section class="ag-qualify" aria-labelledby="ag-qual-title">
+    <div class="ag-container">
+      <span class="q-pill">Get a tailored plan</span>
+      <h2 id="ag-qual-title" class="ag-h2">Tell us about your workflow — we’ll propose the right agent</h2>
+
+      <form id="demo" class="qual-form" action="https://formspree.io/f/xzzjvgkw" method="post">
+        <div class="q-grid">
+          <label class="q-field">
+            <span class="q-label">Work email</span>
+            <input type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+          </label>
+
+          <label class="q-field">
+            <span class="q-label">Company</span>
+            <input type="text" name="company" required placeholder="Company Inc.">
+          </label>
+
+          <label class="q-field">
+            <span class="q-label">Team size</span>
+            <select name="team_size" required>
+              <option value="" disabled selected>Select</option>
+              <option>1–10</option>
+              <option>11–50</option>
+              <option>51–200</option>
+              <option>200+</option>
+            </select>
+          </label>
+
+          <label class="q-field">
+            <span class="q-label">Primary use case</span>
+            <select name="use_case" required>
+              <option value="" disabled selected>Select</option>
+              <option>Sales (lead capture & booking)</option>
+              <option>Support (ticket deflection & triage)</option>
+              <option>Operations (docs, data, finance)</option>
+              <option>Custom workflow</option>
+            </select>
+          </label>
+
+          <label class="q-field">
+            <span class="q-label">Monthly budget (USD)</span>
+            <select name="budget" required>
+              <option value="" disabled selected>Select</option>
+              <option>$1k–$3k</option>
+              <option>$3k–$7k</option>
+              <option>$7k–$15k</option>
+              <option>$15k+</option>
+            </select>
+          </label>
+
+          <label class="q-field">
+            <span class="q-label">Timeline</span>
+            <select name="timeline" required>
+              <option value="" disabled selected>Select</option>
+              <option>ASAP (this month)</option>
+              <option>1–2 months</option>
+              <option>Quarter</option>
+              <option>Exploring</option>
+            </select>
+          </label>
+
+          <label class="q-field q-field--full">
+            <span class="q-label">What does success look like?</span>
+            <textarea name="goals" rows="4" placeholder="e.g., 50% fewer tickets, instant lead booking, weekly invoice automation…"></textarea>
+          </label>
+        </div>
+
+        <div class="q-actions" role="group" aria-label="Primary calls to action">
+          <button class="q-btn q-primary" type="submit" id="agent-form-submit-btn">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 7V3h2v4H8Zm4 0V3h2v4h-2Zm4 0V3h2v4h-2ZM4 21V9h16v12H4Zm2-2h12V11H6v8Z" fill="currentColor"/>
+            </svg>
+            Request Meeting
+          </button>
+        </div>
+        <p class="q-note">By submitting, you agree we may contact you about this request. We never sell data.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="ag-faq" aria-labelledby="faq-title">
+    <div class="ag-container">
+      <span class="faq-pill">FAQ</span>
+      <h2 id="faq-title" class="ag-h2">Everything you need to know</h2>
+      <p class="ag-sub2">From safety to integrations to pricing.</p>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary class="faq-q">Can agents run fully on their own?</summary>
+          <div class="faq-a"><p>Yes. You can choose autonomous execution or require human approval for specific steps (human-in-the-loop).</p></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Do you integrate with our tools?</summary>
+          <div class="faq-a"><p>We connect to your CRM, helpdesk, calendar, data sources, and internal APIs for seamless workflows.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">How fast can we launch?</summary>
+          <div class="faq-a"><p>Most pilots launch in 2–3 weeks depending on scope and integrations.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">How do you keep responses safe?</summary>
+          <div class="faq-a"><p>We implement guardrails, role permissions, audit logs, and fallback to humans when confidence is low.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FINAL CTA ================= -->
+  <section class="ag-cta" aria-labelledby="ag-cta-title">
+    <div class="ag-container">
+      <span class="cf-brand">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="#1db993"/></svg>
+        <span>Automate4U Agents</span>
+      </span>
+
+      <h2 id="ag-cta-title" class="cf-title">
+        Ready to ship your first AI Agent?
+      </h2>
+
+      <div class="cf-actions" role="group" aria-label="Primary calls to action">
+        <div class="cf-col">
+          <a class="cf-btn cf-primary" href="#demo" role="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 6h-2v5l4 2 .9-1.7-2.9-1.6V8Z" fill="currentColor"/></svg>
+            Book a Demo
+          </a>
+          <p class="cf-note">35+ booked this month</p>
+        </div>
+
+        <div class="cf-col">
+          <a class="cf-btn cf-secondary" href="#agent-use-cases" role="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h10l6 6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm10 0v6h6" fill="currentColor"/></svg>
+            See Examples
+          </a>
+          <p class="cf-note">Show your team what’s possible</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div> <!-- /ag-scope -->
+
+<!-- ===========================
+  CONSOLIDATED SCOPED STYLES
+=========================== -->
+<style>
+/* Scope so styles don't bleed out */
+.ag-scope { display:block; }
+.ag-scope * { box-sizing:border-box; }
+
+/* Tokens */
+.ag-scope{
+  --ink:#0f1720;
+  --muted:#6b7b8d;
+  --accent:#1db993;
+  --accent-hover:#169b78;
+  --accent-ink:#179c79;
+  --pill-bg:#e9f9f3;
+  --panel:#f8fbfa;
+  --card:#ffffff;
+  --border:#E7EDF2;
+  --soft:#f6f8fb;
+  --radius:22px;
+}
+
+/* Shared container */
+.ag-scope .ag-container{max-width:1280px;margin:0 auto;padding:0 18px}
+
+/* HERO */
+.ag-scope .ag-hero{background:#fff;color:var(--ink);padding:44px 0;text-align:center}
+.ag-scope .ag-pill{display:inline-block;background:var(--pill-bg);color:#169b78;padding:.4rem .7rem;border-radius:999px;font-weight:700;letter-spacing:.05em;font-size:.72rem;white-space:nowrap;margin-bottom:4px}
+.ag-scope .ag-title{margin:16px auto 12px;font-weight:800;line-height:1.08;letter-spacing:-.01em;font-size:32px}
+.ag-scope .ag-br{display:none}
+.ag-scope .ag-sub{margin:0 auto 24px;max-width:70ch;color:var(--muted);font-size:.98rem}
+.ag-scope .ag-btn{display:inline-flex;align-items:center;gap:.55rem;background:var(--accent);color:#fff;text-decoration:none;padding:.8rem 1.2rem;border-radius:999px;font-weight:800;box-shadow:0 10px 26px rgba(29,185,147,.28)}
+.ag-scope .ag-btn:hover{background:var(--accent-hover)}
+.ag-scope .ag-note{margin:10px 0 0;color:var(--muted);font-size:.85rem}
+@media (min-width:768px){ .ag-scope .ag-hero{padding:64px 0} .ag-scope .ag-title{font-size:48px} .ag-scope .ag-sub{font-size:1.05rem} }
+@media (min-width:1200px){ .ag-scope .ag-title{font-size:60px} .ag-scope .ag-br{display:inline} }
+
+/* KPIs */
+.ag-scope .ag-kpis{background:#fff;color:var(--ink);padding:28px 0}
+.ag-scope .kpi-rail{max-width:1280px;margin:0 auto;padding:0 18px;display:flex;align-items:center;gap:28px;justify-content:center;text-align:center}
+.ag-scope .kpi{flex:1;min-width:0}
+.ag-scope .kpi-num{display:block;font-weight:800;line-height:1;font-size:clamp(1.25rem,3.6vw,1.9rem);color:var(--accent)}
+.ag-scope .kpi-label{display:block;margin-top:8px;font-size:clamp(.9rem,2.1vw,1rem);color:var(--ink)}
+.ag-scope .kpi-divider{flex:0 0 auto;width:2px;height:46px;border-radius:2px;background:linear-gradient(180deg, rgba(207,214,221,0) 0%,rgba(160,170,180,.9) 50%,rgba(207,214,221,0) 100%)}
+.ag-scope .ag-partners-note{margin:24px 0 16px;text-align:center;color:var(--muted);font-size:.92rem}
+.ag-scope .ag-logos{display:flex;flex-wrap:wrap;gap:18px 26px;align-items:center;justify-content:center;padding-top:4px}
+.ag-scope .logo{color:#8da0b1;font-size:.95rem;padding:6px 10px;border:1px dashed #d7e1ea;border-radius:10px;background:#fff;min-width:86px;text-align:center}
+@media (max-width:600px){ .ag-scope .kpi-rail{gap:18px} .ag-scope .kpi-divider{height:40px} }
+
+/* PROBLEM */
+.ag-scope .ag-problem{
+  width:100vw; position:relative; left:50%; transform:translateX(-50%);
+  background:#F0F0F0; color:var(--ink); padding:40px 0; text-align:center; overflow:hidden;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23eef2f5' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2zM36 4V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.ag-scope .eyebrow{display:inline-block;padding:.35rem .6rem;border-radius:999px;background:var(--pill-bg);color:var(--accent-ink);font-weight:700;font-size:.72rem;letter-spacing:.06em}
+.ag-scope .ag-h2{font-size:28px;line-height:1.15;letter-spacing:-.02em;margin:12px 0 8px;font-weight:800;text-wrap:balance}
+.ag-scope .ag-sub2{color:var(--muted);margin:0 auto 24px;max-width:70ch}
+.ag-scope .pr-grid{display:grid;gap:16px;max-width:1100px;margin-inline:auto}
+.ag-scope .pr-visual{margin-inline:auto}
+.ag-scope .ph{position:relative;display:block;width:100%;overflow:hidden;background:#fff;
+  -webkit-mask-image:radial-gradient(#000 99%, transparent 100%);
+  mask-image:radial-gradient(#000 99%, transparent 100%);
+  clip-path:inset(0 round 18px)}
+.ag-scope .ph img{width:100%;height:100%;object-fit:contain;display:block}
+.ag-scope .pr-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px;text-align:left}
+.ag-scope .pr-title{margin:0 0 12px;font-size:1.05rem}
+.ag-scope .pr-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ag-scope .pr-list--check li{display:flex;align-items:center;gap:12px;color:var(--ink);font-weight:500;font-size:.95rem}
+.ag-scope .pr-list--check li::before{content:"✓";display:grid;place-items:center;flex:0 0 24px;width:24px;height:24px;border-radius:999px;background:var(--pill-bg);color:var(--accent);font-weight:900}
+.ag-scope .hint{margin:1rem 0 0;color:var(--muted)}
+@media (min-width:900px){
+  .ag-scope .pr-grid{grid-template-columns:1fr 1fr; gap:22px; align-items:center}
+  .ag-scope .pr-card{padding:28px 32px}
+}
+
+/* =============== Agent Catalog =============== */
+.ag-scope .ag-catalog{ text-align:left; }
+
+/* Panel */
+.ag-scope .ac-panel{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:0 6px 18px rgba(15,23,32,.05);
+  padding:12px 12px 8px;
+  display:grid;
+  grid-template-rows:auto auto 1fr; /* controls, meta, scroll area */
+  gap:8px;
+  max-height:70vh;                     /* <— overall module height */
+}
+
+/* Controls */
+.ag-scope .ac-controls{
+  position:sticky; top:8px; z-index:2;
+  background:#fff;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+  display:grid; gap:12px; margin:0;
+}
+.ag-scope .ac-search{
+  width:100%; padding:14px 16px; border:1px solid var(--border);
+  border-radius:999px; background:#fff; font-size:1rem;
+  outline:0; transition:border-color .15s, box-shadow .15s;
+}
+.ag-scope .ac-search:focus{ border-color:var(--accent); box-shadow:0 0 0 4px rgba(29,185,147,.14); }
+
+.ag-scope .ac-filters{ display:flex; flex-wrap:wrap; gap:12px 14px; }
+.ag-scope .ac-filter{ display:grid; gap:6px; }
+.ag-scope .ac-filter-label{ font-weight:600; font-size:.9rem; color:#7a8a9a; }
+.ag-scope .ac-filter select{
+  padding:10px 14px; border:1px solid var(--border); border-radius:999px; background:#fff;
+}
+
+/* Meta */
+.ag-scope .ac-meta{ margin:4px 2px 0; color:#7a8a9a; font-size:.9rem; }
+
+/* Results grid — inner scroll */
+.ag-scope .ac-grid{
+  overflow:auto; -webkit-overflow-scrolling:touch;
+  padding:6px 4px 6px 2px;
+  display:grid; gap:16px;
+  grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
+  mask-image:linear-gradient(to bottom, transparent 0, black 10px, black calc(100% - 10px), transparent 100%); /* soft fade at top/bottom edges */
+}
+
+/* Cards */
+.ag-scope .ac-card{
+  background:#fff; border:1px solid var(--border); border-radius:16px;
+  padding:16px; box-shadow:0 3px 12px rgba(15,23,32,.04);
+  display:grid; gap:8px; text-align:left;
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.ag-scope .ac-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(15,23,32,.08);
+  border-color:#dfe7ee;
+}
+.ag-scope .ac-name{ margin:0; font-weight:800; font-size:1.05rem; }
+.ag-scope .ac-blurb{ margin:0; color:#5f6f81; line-height:1.45; }
+.ag-scope .ac-meta-row{ display:flex; flex-wrap:wrap; gap:8px 10px; }
+.ag-scope .ac-badge{
+  display:inline-block; padding:.3rem .6rem; border-radius:999px;
+  background:#eef7f3; color:#167f65; font-weight:700; font-size:.75rem; white-space:nowrap;
+}
+
+/* Actions (smaller primary only) */
+.ag-scope .ac-actions{ margin-top:6px; display:flex; justify-content:flex-start; }
+.ag-scope .ac-primary{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:8px 12px; font-size:.9rem; font-weight:800;
+  border-radius:12px; border:1px solid var(--accent);
+  background:linear-gradient(180deg, #1db993, #17a882); color:#fff;
+}
+.ag-scope .ac-primary:hover{ filter:brightness(.98); }
+.ag-scope .ac-actions a:not(.ac-primary){ display:none !important; } /* hide legacy "Learn more" */
+
+/* Responsive tweaks */
+@media (max-width:720px){
+  .ag-scope .ac-grid{ grid-template-columns:1fr; gap:14px; }
+  .ag-scope .ac-actions{ flex-direction:column; }
+  .ag-scope .ac-primary{ width:100%; justify-content:center; }
+}
+
+/* ROI */
+.ag-scope .ag-roi{background:#fff;color:var(--ink);padding:44px 0;text-align:center}
+.ag-scope .roi-grid{display:grid;gap:16px;max-width:760px;margin:10px auto 24px;text-align:left}
+.ag-scope .roi-item{display:grid;gap:6px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:14px}
+.ag-scope .roi-label{font-weight:600}
+.ag-scope input[type="range"]{width:100%}
+.ag-scope output{font-weight:700}
+.ag-scope .roi-result{display:grid;gap:12px;grid-template-columns:1fr;max-width:760px;margin:0 auto}
+.ag-scope .rr-card{background:linear-gradient(180deg,#fbfdfc 0%, #f5fbf8 100%);border:1px solid var(--border);border-radius:16px;padding:16px}
+.ag-scope .rr-kicker{display:block;color:#167f65;font-weight:700;margin-bottom:6px}
+.ag-scope .rr-value{font-size:32px;font-weight:800}
+.ag-scope .rr-foot{margin:8px 0 0;color:var(--muted)}
+@media (min-width:900px){ .ag-scope .roi-result{grid-template-columns:1fr 1fr} .ag-scope .rr-value{font-size:38px} }
+
+/* STEPS */
+.ag-scope .ag-steps{background:#fff;color:var(--ink);padding:44px 0;text-align:center}
+.ag-scope .sv-pill{display:inline-block;padding:.38rem .65rem;border-radius:999px;background:var(--pill-bg);color:#169b78;font-weight:700;font-size:.72rem;letter-spacing:.06em;margin-bottom:4px}
+.ag-scope .sv-grid{display:grid;gap:14px;text-align:left}
+.ag-scope .sv-card{background:linear-gradient(180deg,#fbfdfc 0%, #f5fbf8 100%);border:1px solid var(--border);border-radius:24px;padding:22px 20px}
+.ag-scope .sv-card--seam{position:relative;overflow:hidden}
+.ag-scope .sv-card--seam::after{content:"";position:absolute;inset:-30% -60% auto -60%;height:55%;transform:skewY(-8deg);background:linear-gradient(180deg, rgba(29,185,147,.07), rgba(29,185,147,0));pointer-events:none}
+.ag-scope .sv-num{font-size:42px;line-height:1;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.ag-scope .sv-h3{margin:0 0 6px;font-size:1.12rem}
+.ag-scope .sv-text{margin:0;color:var(--muted)}
+@media (min-width:900px){ .ag-scope .sv-grid{grid-template-columns:1fr 1fr 1fr;gap:18px} .ag-scope .sv-card{padding:26px 24px} .ag-scope .sv-num{font-size:56px} }
+
+/* QUALIFY */
+.ag-scope .ag-qualify{
+  background:#fff;color:var(--ink);padding:48px 0;text-align:center
+}
+.ag-scope .q-pill{display:inline-block;background:var(--pill-bg);color:#167f65;padding:.38rem .7rem;border-radius:999px;font-weight:700;font-size:.72rem;letter-spacing:.06em;margin-bottom:8px}
+.ag-scope .qual-form{max-width:960px;margin:16px auto 0;text-align:left;}
+.ag-scope .q-grid{display:grid;gap:16px}
+.ag-scope .q-field{display:grid;gap:6px}
+.ag-scope .q-field--full{grid-column:1/-1}
+.ag-scope .q-label{font-weight:600}
+.ag-scope input, .ag-scope select, .ag-scope textarea{
+  width:100%; padding:12px 12px; border-radius:12px; border:1px solid var(--border); background:#fff; color:var(--ink);
+}
+.ag-scope .q-actions{margin-top:24px;display:grid;gap:12px;justify-content:start}
+.ag-scope .q-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;font-weight:800;text-decoration:none;white-space:nowrap}
+.ag-scope .q-btn svg{width:18px;height:18px}
+.ag-scope .q-primary{background:var(--accent);color:#fff;box-shadow:0 8px 24px rgba(29,185,147,.22)}
+.ag-scope .q-primary:hover{background:var(--accent-hover)}
+.ag-scope .q-secondary{background:#121416;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.ag-scope .q-secondary:hover{background:#0f1113}
+.ag-scope .q-note{margin:1rem 0 0;color:var(--muted);font-size:.9rem}
+.ag-scope .q-spinner { animation: q-spin 1s linear infinite; }
+.ag-scope .q-spinner circle {
+  stroke: currentColor;
+  stroke-linecap: round;
+  animation: q-dash 1.5s ease-in-out infinite;
+}
+@keyframes q-dash {
+  0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
+  50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
+  100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
+}
+@keyframes q-spin { 100% { transform: rotate(360deg); } }
+@media (min-width:780px){ .ag-scope .q-grid{grid-template-columns:1fr 1fr;gap:18px} .ag-scope .q-actions{grid-template-columns:auto auto} }
+
+/* FAQ */
+.ag-scope .ag-faq{background:#fff;color:var(--ink);padding:44px 0;text-align:center}
+.ag-scope .faq-pill{display:inline-block;padding:.36rem .6rem;border-radius:999px;background:var(--pill-bg);color:var(--accent-ink);font-weight:700;font-size:.72rem;letter-spacing:.06em;margin-bottom:4px}
+.ag-scope .faq-list{max-width:880px;margin:0 auto;display:grid;gap:12px;text-align:left}
+.ag-scope .faq-item{border:1px solid var(--border);border-radius:14px;background:#f7faf9;transition:background .2s ease}
+.ag-scope .faq-item[open]{background:#fff}
+.ag-scope .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;background:transparent;border:none;border-radius:14px;padding:14px 16px;font:inherit;text-align:left;font-weight:600;cursor:pointer;color:var(--ink)}
+.ag-scope .faq-q::-webkit-details-marker{display:none}
+.ag-scope .faq-a{overflow:hidden;display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.ag-scope .faq-item[open] .faq-a{grid-template-rows:1fr}
+.ag-scope .faq-a > p{padding:2px 16px 14px;margin:0;color:var(--muted);border-top:1px solid var(--border)}
+
+/* FINAL CTA */
+.ag-scope .ag-cta{background:#fff;color:var(--ink);padding:48px 0;text-align:center}
+.ag-scope .cf-brand{display:inline-flex;align-items:center;gap:8px;padding:.38rem .70rem;border-radius:999px;background:var(--pill-bg);color:#167f65;font-weight:700;font-size:.82rem;margin:0 auto 12px}
+.ag-scope .cf-title{margin:0 0 28px;font-weight:800;letter-spacing:-.01em;line-height:1.1;font-size:28px}
+.ag-scope .cf-actions{display:grid;gap:12px;justify-content:center}
+.ag-scope .cf-col{display:flex;flex-direction:column;align-items:center;gap:6px}
+.ag-scope .cf-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;font-weight:800;text-decoration:none;white-space:nowrap}
+.ag-scope .cf-btn svg{width:18px;height:18px}
+.ag-scope .cf-primary{background:var(--accent);color:#fff;box-shadow:0 8px 24px rgba(29,185,147,.22)}
+.ag-scope .cf-primary:hover{background:var(--accent-hover)}
+.ag-scope .cf-secondary{background:#121416;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.ag-scope .cf-secondary:hover{background:#0f1113}
+.ag-scope .cf-note{margin:0;color:var(--muted);font-size:.9rem}
+@media (min-width:780px){ .ag-scope .cf-actions{grid-template-columns:auto auto;gap:18px} .ag-scope .cf-title{font-size:44px;margin-bottom:32px} }
+@media (min-width:1200px){ .ag-scope .cf-title{font-size:50px;margin-bottom:34px} }
+
+/* ===== Agent Catalog — tweaks per request ===== */
+
+/* 1) Center heading above + add breathing room */
+.ag-scope .ag-catalog{ padding:56px 0; text-align:center; }
+.ag-scope .ag-catalog .eyebrow{ margin:0 auto 8px; }
+.ag-scope .ag-catalog .ag-h2{ margin:0 auto 18px; line-height:1.15; }
+
+/* 2) Make the panel a bit taller and spaced out */
+.ag-scope .ac-panel{
+  max-height:82vh;         /* was 70vh */
+  margin:18px auto 18px;   /* space above/below panel */
+  padding:16px;            /* a touch more inner space */
+}
+
+/* keep controls sticky inside the panel */
+.ag-scope .ac-panel .ac-controls{ top:10px; }
+
+/* 3) Results grid — slightly taller feel + comfy edges */
+.ag-scope .ac-grid{
+  min-height:420px;        /* ensures a taller “section” feel */
+  padding:8px 6px 12px 4px;/* extra bottom so last cards don't look tight */
+}
+
+/* 4) Filters: label + dropdown on one line */
+.ag-scope .ac-filters{ display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center; }
+.ag-scope .ac-filter{ display:flex; align-items:center; gap:10px; }
+.ag-scope .ac-filter-label{ margin:0; line-height:1; font-weight:600; color:#7a8a9a; }
+.ag-scope .ac-filter select{ padding:10px 14px; border-radius:999px; }
+
+/* 5) Center the sentence below the grid + extra margin */
+.ag-scope .ac-note{
+  text-align:center;
+  margin:18px auto 0;      /* more space from panel */
+  max-width:70ch;
+}
+
+/* Controls layout: search on its own row, then a toolbar row */
+.ag-scope .ac-controls{
+  position:sticky; top:10px; z-index:2;
+  background:#fff; padding-bottom:10px; border-bottom:1px solid var(--border);
+  display:grid; gap:12px; margin:0;
+}
+
+/* New toolbar row: filters left, count right */
+.ag-scope .ac-toolbar{
+  display:flex; align-items:center; justify-content:space-between; gap:12px 16px; flex-wrap:wrap;
+}
+
+/* Filters stay inline */
+.ag-scope .ac-filters{ display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center; }
+
+/* Labels inline with selects */
+.ag-scope .ac-filter{ display:flex; align-items:center; gap:10px; }
+.ag-scope .ac-filter-label{ margin:0; line-height:1; font-weight:600; color:#7a8a9a; }
+
+/* Count on the right, no extra margins */
+.ag-scope .ac-meta{ margin:0 0 0 auto; padding-left:8px; color:#7a8a9a; font-size:.9rem; white-space:nowrap; }
+</style>
+
+<!-- ===========================
+  Scoped Scripts
+=========================== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const scope = document.querySelector('.ag-scope');
+  if (!scope) return;
+
+  // Tabs
+  const tabContainer = scope.querySelector('.ag-tabs');
+  if (tabContainer) {
+    const triggers = tabContainer.querySelector('.tab-triggers');
+    triggers.addEventListener('click', (e) => {
+      const btn = e.target.closest('.tab-btn');
+      if (!btn) return;
+      const id = btn.getAttribute('data-target');
+      tabContainer.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      tabContainer.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const panel = tabContainer.querySelector('#' + id);
+      if (panel) panel.classList.add('active');
+    });
+  }
+
+  // ROI calculator
+  const hours = scope.querySelector('#roi-hours');
+  const rate = scope.querySelector('#roi-rate');
+  const coverage = scope.querySelector('#roi-coverage');
+  const outHours = scope.querySelector('#out-hours');
+  const outRate = scope.querySelector('#out-rate');
+  const outCoverage = scope.querySelector('#out-coverage');
+  const savingsEl = scope.querySelector('#roi-savings');
+  const paybackEl = scope.querySelector('#roi-payback');
+
+  function fmtUSD(n){ return n.toLocaleString(undefined,{style:'currency',currency:'USD',maximumFractionDigits:0}); }
+
+  function recalc(){
+    outHours.textContent = hours.value;
+    outRate.textContent = '$' + rate.value;
+    outCoverage.textContent = coverage.value + '%';
+    const weeks = 4.3;
+    const monthly = (hours.value * weeks) * rate.value * (coverage.value/100);
+    savingsEl.textContent = fmtUSD(monthly);
+
+    // naive payback calc: assume typical build+support ~ $6,000
+    const assumedCost = 6000;
+    const months = Math.max( (assumedCost / Math.max(1, monthly)), 0.2 );
+    paybackEl.textContent = (months < 0.95 ? '~<1 month' : '~' + months.toFixed(1) + ' months');
+  }
+
+  if (hours && rate && coverage) {
+    [hours, rate, coverage].forEach(inp => inp.addEventListener('input', recalc));
+    recalc();
+  }
+
+  // FAQ single-open behavior (optional)
+  const faqItems = scope.querySelectorAll('.faq-item');
+  function closeAll(except){ faqItems.forEach(d => { if(d!==except) d.removeAttribute('open'); }); }
+  faqItems.forEach(d => d.addEventListener('toggle', () => { if (d.open) closeAll(d); }));
+
+  // Form submission state
+  const agentForm = scope.querySelector('.qual-form');
+  const agentSubmitBtn = scope.querySelector('#agent-form-submit-btn');
+  if (agentForm && agentSubmitBtn) {
+    agentForm.addEventListener('submit', function() {
+      // Disable the button and change text
+      agentSubmitBtn.disabled = true;
+      agentSubmitBtn.innerHTML = `
+        <svg class="q-spinner" viewBox="0 0 50 50" aria-hidden="true"><circle cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>
+        Submitting...`;
+    });
+  }
+
+  // --- Robust Anchor Scrolling Fix ---
+  const demoLinks = scope.querySelectorAll('a[href="#demo"]');
+  if (demoLinks.length > 0) {
+    const targetElement = scope.querySelector('#demo');
+    if (targetElement) {
+      demoLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault(); // Prevent default anchor behavior
+
+          // Calculate position of the target element
+          const offset = 20; // A small gap above the form
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = targetElement.getBoundingClientRect().top;
+          const elementPosition = elementRect - bodyRect;
+          const offsetPosition = elementPosition - offset;
+
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        });
+      });
+    }
+  }
+
+  // --- Agent Catalog (simple search + two filters + cards) ---
+  try {
+    var catalogRoot = scope.querySelector('.ag-catalog');
+    if (!catalogRoot) return;
+
+    // Dataset
+    var AGENTS = [
+      { name:'AI Sales Rep', category:'Sales', type:'Chat Agent', stack:['OpenAI','HubSpot','Calendly'], blurb:'Captures leads from chat/email, qualifies, and books meetings automatically.' },
+      { name:'Outbound SDR Autopilot', category:'Sales', type:'Workflow', stack:['OpenAI','Apollo','Gmail'], blurb:'Personalizes cold emails, sequences follow-ups, and updates CRM.' },
+      { name:'Customer Success Companion', category:'Support', type:'Chat Agent', stack:['OpenAI','Zendesk'], blurb:'Answers FAQs and triages tickets; escalates with full context.' },
+      { name:'Voice Receptionist', category:'Support', type:'Voice Agent', stack:['OpenAI','Twilio','Google Calendar'], blurb:'Answers calls, qualifies, and books appointments.' },
+      { name:'RMA & Returns Bot', category:'Support', type:'Workflow', stack:['Shopify','Gorgias'], blurb:'Automates returns authorizations and shipping labels.' },
+      { name:'Invoice Generator', category:'Operations', type:'Workflow', stack:['QuickBooks','Zapier'], blurb:'Creates invoices/POs from emails or form submissions.' },
+      { name:'CRM Data Cleaner', category:'Operations', type:'RPA', stack:['Salesforce','n8n'], blurb:'Deduplicates, enriches, and standardizes CRM records nightly.' },
+      { name:'HR Onboarding Guide', category:'HR', type:'Chat Agent', stack:['Notion','Google Drive'], blurb:'Answers policy questions and guides new hires through onboarding.' },
+      { name:'Recruiting Screener', category:'HR', type:'Workflow', stack:['Greenhouse','OpenAI'], blurb:'Screens resumes and drafts structured scorecards.' },
+      { name:'AP Inbox Triage', category:'Finance', type:'Workflow', stack:['Gmail','QuickBooks'], blurb:'Parses vendor emails, extracts totals, and drafts bills.' },
+      { name:'Collections Nudge', category:'Finance', type:'Workflow', stack:['QuickBooks','HubSpot'], blurb:'Sends friendly, staged reminders for overdue invoices.' },
+      { name:'Ops Integrator', category:'Operations', type:'Integrator', stack:['Zapier','Make','n8n'], blurb:'Keeps data in sync across your tools with guardrails.' }
+    ];
+
+    var searchInput = catalogRoot.querySelector('#ac-search');
+    var catSelect   = catalogRoot.querySelector('#ac-filter-category');
+    var typeSelect  = catalogRoot.querySelector('#ac-filter-type');
+    var grid        = catalogRoot.querySelector('#ac-grid');
+    var countEl     = catalogRoot.querySelector('#ac-count');
+
+    function renderCard(a){
+      var stackBadges = a.stack.map(function(s){ return '<span class="ac-badge" aria-label="Tech stack">'+s+'</span>'; }).join('');
+      return ''+
+        '<article class="ac-card">'+
+          '<h3 class="ac-name">'+a.name+'</h3>'+
+          '<p class="ac-blurb">'+a.blurb+'</p>'+
+          '<div class="ac-meta-row" aria-label="Meta">'+
+            '<span class="ac-badge">'+a.category+'</span>'+
+            '<span class="ac-badge">'+a.type+'</span>'+ stackBadges +
+          '</div>'+
+          '<div class="ac-actions">'+
+            '<button class="ac-btn ac-primary" data-agent="'+a.name+'" data-usecase="'+a.category+'">Request this agent</button>'+
+          '</div>'+
+        '</article>';
+    }
+
+    function filterAgents(){
+      var q   = (searchInput && searchInput.value ? searchInput.value : '').toLowerCase();
+      var cat = (catSelect   && catSelect.value   ? catSelect.value   : '');
+      var typ = (typeSelect  && typeSelect.value  ? typeSelect.value  : '');
+
+      var results = AGENTS.filter(function(a){
+        var hay = (a.name+' '+a.category+' '+a.type+' '+a.stack.join(' ')+' '+a.blurb).toLowerCase();
+        var okQ   = !q  || hay.indexOf(q) !== -1;
+        var okCat = !cat || a.category === cat;
+        var okTyp = !typ || a.type === typ;
+        return okQ && okCat && okTyp;
+      });
+
+      if (grid) {
+        grid.innerHTML = results.length
+          ? results.map(renderCard).join('')
+          : '<div class="ac-card"><p class="ac-blurb">No results. Try a different term or filter.</p></div>';
+
+        // re-bind CTA buttons
+        var ctas = grid.querySelectorAll('.ac-primary');
+        for (var i=0;i<ctas.length;i++){
+          ctas[i].addEventListener('click', function(e){
+            var btn = e.currentTarget;
+            var agentName = btn.getAttribute('data-agent');
+            var usecase   = btn.getAttribute('data-usecase');
+
+            var form      = scope.querySelector('#demo');
+            if (form) {
+              var useCaseEl = form.querySelector('select[name="use_case"]');
+              var goalsEl   = form.querySelector('textarea[name="goals"]');
+
+              if (useCaseEl) {
+                var map = {
+                  'Sales':'Sales (lead capture & booking)',
+                  'Support':'Support (ticket deflection & triage)',
+                  'Operations':'Operations (docs, data, finance)',
+                  'HR':'Custom workflow',
+                  'Finance':'Custom workflow'
+                };
+                var target = map[usecase] || 'Custom workflow';
+                for (var j=0;j<useCaseEl.options.length;j++){
+                  if (useCaseEl.options[j].text === target){ useCaseEl.value = target; break; }
+                }
+              }
+              if (goalsEl && !goalsEl.value) {
+                goalsEl.value = 'Interested in: '+agentName+'. Success = measurable time saved and SLA improvements.';
+              }
+
+              var offset = 20;
+              var bodyRect = document.body.getBoundingClientRect().top;
+              var elementRect = form.getBoundingClientRect().top;
+              var elementPosition = elementRect - bodyRect;
+              window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
+            }
+          });
+        }
+      }
+
+      if (countEl) {
+        countEl.textContent = results.length + ' result' + (results.length===1?'':'s');
+      }
+    }
+
+    if (searchInput) searchInput.addEventListener('input', filterAgents);
+    if (catSelect)   catSelect.addEventListener('input', filterAgents);
+    if (typeSelect)  typeSelect.addEventListener('input', filterAgents);
+
+    // Initial render (will overwrite SSR cards)
+    filterAgents();
+  } catch (e) {
+    // Never kill the page if something goes wrong
+    if (window && window.console) console.error('Agent catalog init failed:', e);
+  }
+});
+</script>
+
+<script
+  src="https://app.livechatai.com/embed.js"
+  data-id="cmgdycnrf0001jx042rasimwz"
+  async defer>
+</script>
