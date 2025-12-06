@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-ink: var(--ink);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-btn: var(--btn);
+  --color-btn-hover: var(--btn-hover);
+  --color-card-border: var(--card-border);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --animate-gradient-text: gradient-text 2s linear infinite;
+
+  @keyframes gradient-text {
+    to {
+      background-position: 200% center;
+    }
+  }
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f1720;
+  /* ink */
+
+  --ink: #0f1720;
+  --accent: #1db993;
+  --muted: #6b7b8d;
+  --btn: #1aa27f;
+  --btn-hover: #189171;
+  --card-border: #E7EDF2;
+}
+
+/* Force light mode for now to match original design */
+/* @media (prefers-color-scheme: dark) { ... } removed */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

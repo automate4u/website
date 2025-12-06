@@ -1,0 +1,1368 @@
+import React from 'react';
+
+export default function Page() {
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: `
+    .ab-scope {
+        display: block;
+    }
+
+    .ab-scope * {
+        box-sizing: border-box;
+    }
+
+    /* Tokens */
+    .ab-scope {
+        --ink: #0f1720;
+        --muted: #6b7b8d;
+        --accent: #1db993;
+        --accent-hover: #169b78;
+        --accent-ink: #179c79;
+        --pill-bg: #e9f9f3;
+        --panel: #f8fbfa;
+        --card: #ffffff;
+        --border: #E7EDF2;
+        --soft: #f6f8fb;
+        --radius: 22px;
+    }
+
+    /* Container */
+    .ab-scope .ab-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 18px;
+    }
+
+    /* HERO */
+    .ab-scope .ab-hero {
+        background: #fff;
+        color: var(--ink);
+        padding: 44px 0;
+        text-align: center;
+    }
+
+    .ab-scope .ab-title {
+        margin: 0 auto 12px;
+        font-weight: 800;
+        line-height: 1.08;
+        letter-spacing: -.01em;
+        font-size: 32px;
+    }
+
+    .ab-scope .ab-subtitle {
+        margin: 0 auto 24px;
+        max-width: 70ch;
+        color: var(--muted);
+        font-size: 1.05rem;
+        font-weight: 500;
+    }
+
+    .ab-scope .ab-intro {
+        max-width: 80ch;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    .ab-scope .ab-intro p {
+        margin: 0 0 1em;
+        line-height: 1.6;
+        color: var(--ink);
+    }
+
+    .ab-scope .ab-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+        border-bottom: 2px solid var(--accent);
+    }
+
+    .ab-scope .ab-link:hover {
+        color: var(--accent-hover);
+        border-bottom-color: var(--accent-hover);
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-hero {
+            padding: 64px 0;
+        }
+
+        .ab-scope .ab-title {
+            font-size: 48px;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .ab-scope .ab-title {
+            font-size: 56px;
+        }
+    }
+
+    /* BY THE NUMBERS */
+    .ab-scope .ab-numbers {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #F0F0F0;
+        color: var(--ink);
+        padding: 40px 0;
+        text-align: center;
+        overflow: hidden;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23eef2f5' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2zM36 4V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .ab-scope .ab-h2 {
+        font-size: 28px;
+        line-height: 1.15;
+        letter-spacing: -.02em;
+        margin: 10px 0 6px;
+        font-weight: 800;
+        text-wrap: balance;
+    }
+
+    .ab-scope .ab-sub {
+        color: var(--muted);
+        margin: 0 auto 18px;
+        max-width: 70ch;
+    }
+
+    .ab-scope .ab-kpi-grid {
+        display: grid;
+        gap: 16px;
+        margin-top: 24px;
+        max-width: 1100px;
+        margin-inline: auto;
+    }
+
+    .ab-scope .ab-kpi {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(15, 23, 32, 0.04);
+    }
+
+    .ab-scope .ab-kpi-num {
+        display: block;
+        font-weight: 800;
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        line-height: 1;
+        color: var(--accent);
+        margin-bottom: 8px;
+    }
+
+    .ab-scope .ab-kpi-label {
+        display: block;
+        color: var(--ink);
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        line-height: 1.4;
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-numbers {
+            padding: 56px 0;
+        }
+
+        .ab-scope .ab-h2 {
+            font-size: 44px;
+        }
+
+        .ab-scope .ab-kpi-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .ab-scope .ab-kpi-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .ab-scope .ab-h2 {
+            font-size: 50px;
+        }
+    }
+
+    /* OUR STORY */
+    .ab-scope .ab-story {
+        background: #fff;
+        color: var(--ink);
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .ab-scope .ab-story-content {
+        max-width: 80ch;
+        margin: 24px auto 0;
+        text-align: left;
+    }
+
+    .ab-scope .ab-story-content p {
+        margin: 0 0 1em;
+        line-height: 1.6;
+        color: var(--ink);
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-story {
+            padding: 56px 0;
+        }
+    }
+
+    /* WHAT WE DO */
+    .ab-scope .ab-what {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #f8fafc;
+        color: var(--ink);
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .ab-scope .ab-what-grid {
+        display: grid;
+        gap: 16px;
+        margin-top: 24px;
+        max-width: 1100px;
+        margin-inline: auto;
+    }
+
+    .ab-scope .ab-what-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+        text-align: left;
+        box-shadow: 0 2px 8px rgba(15, 23, 32, 0.04);
+    }
+
+    .ab-scope .ab-h3 {
+        margin: 0 0 10px;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--ink);
+    }
+
+    .ab-scope .ab-what-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+    }
+
+    .ab-scope .ab-what-examples {
+        max-width: 80ch;
+        margin: 32px auto 0;
+        text-align: left;
+    }
+
+    .ab-scope .ab-examples-intro {
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: var(--ink);
+    }
+
+    .ab-scope .ab-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 10px;
+    }
+
+    .ab-scope .ab-list li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--ink);
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+
+    .ab-scope .ab-list li::before {
+        content: "✓";
+        display: grid;
+        place-items: center;
+        flex: 0 0 24px;
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        background: var(--pill-bg);
+        color: var(--accent);
+        font-weight: 900;
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-what {
+            padding: 56px 0;
+        }
+
+        .ab-scope .ab-what-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .ab-scope .ab-what-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    /* HOW WE WORK */
+    .ab-scope .ab-how {
+        background: #fff;
+        color: var(--ink);
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .ab-scope .ab-steps {
+        display: grid;
+        gap: 24px;
+        margin-top: 32px;
+        max-width: 900px;
+        margin-inline: auto;
+    }
+
+    .ab-scope .ab-step {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 20px;
+        text-align: left;
+        align-items: start;
+    }
+
+    .ab-scope .ab-step-num {
+        display: grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 800;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+    }
+
+    .ab-scope .ab-step-content p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+    }
+
+    .ab-scope .ab-how-note {
+        max-width: 80ch;
+        margin: 32px auto 0;
+        padding: 20px;
+        background: var(--pill-bg);
+        border-radius: 12px;
+        text-align: left;
+    }
+
+    .ab-scope .ab-how-note p {
+        margin: 0;
+        color: var(--ink);
+        line-height: 1.6;
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-how {
+            padding: 56px 0;
+        }
+    }
+
+    /* LEADERSHIP TEAM */
+    .ab-scope .ab-team {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #f8fafc;
+        color: var(--ink);
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .ab-scope .ab-team-grid {
+        display: grid;
+        gap: 24px;
+        margin-top: 32px;
+        max-width: 1100px;
+        margin-inline: auto;
+    }
+
+    .ab-scope .ab-person {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 28px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(15, 23, 32, 0.04);
+    }
+
+    .ab-scope .ab-person-image {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid var(--accent);
+        box-shadow: 0 4px 12px rgba(29, 185, 147, 0.2);
+    }
+
+    .ab-scope .ab-person-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .ab-scope .ab-person-name {
+        margin: 0 0 6px;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--ink);
+    }
+
+    .ab-scope .ab-person-title {
+        margin: 0 0 16px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--accent);
+        line-height: 1.3;
+    }
+
+    .ab-scope .ab-person-bio {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+        text-align: left;
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-team {
+            padding: 56px 0;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .ab-scope .ab-team-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* PRINCIPLES */
+    .ab-scope .ab-principles {
+        background: #fff;
+        color: var(--ink);
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .ab-scope .ab-principles-grid {
+        display: grid;
+        gap: 20px;
+        margin-top: 32px;
+        max-width: 1100px;
+        margin-inline: auto;
+    }
+
+    .ab-scope .ab-principle {
+        background: var(--pill-bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+        text-align: left;
+    }
+
+    .ab-scope .ab-principle-title {
+        margin: 0 0 10px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--ink);
+    }
+
+    .ab-scope .ab-principle p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-principles {
+            padding: 56px 0;
+        }
+
+        .ab-scope .ab-principles-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .ab-scope .ab-principles-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* EXAMPLES */
+    .ab-scope .ab-examples {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #F0F0F0;
+        color: var(--ink);
+        padding: 40px 0;
+        text-align: center;
+        overflow: hidden;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23eef2f5' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2zM36 4V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .ab-scope .ab-examples-grid {
+        display: grid;
+        gap: 16px;
+        margin-top: 24px;
+        max-width: 1100px;
+        margin-inline: auto;
+    }
+
+    .ab-scope .ab-example-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+        text-align: left;
+        box-shadow: 0 2px 8px rgba(15, 23, 32, 0.04);
+    }
+
+    .ab-scope .ab-h4 {
+        margin: 0 0 10px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--ink);
+    }
+
+    .ab-scope .ab-example-card p {
+        margin: 0 0 12px;
+        color: var(--muted);
+        line-height: 1.5;
+        font-size: 0.95rem;
+    }
+
+    .ab-scope .ab-example-card p:last-child {
+        margin-bottom: 0;
+    }
+
+    .ab-scope .ab-example-situation {
+        color: var(--ink);
+        font-weight: 500;
+    }
+
+    .ab-scope .ab-example-result {
+        color: var(--ink);
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-examples {
+            padding: 56px 0;
+        }
+
+        .ab-scope .ab-examples-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .ab-scope .ab-examples-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    /* HERO CTA & TRUST LINE */
+    .ab-scope .ab-hero-cta {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 24px 0 16px;
+    }
+
+    .ab-scope .ab-trust-line {
+        margin: 16px auto 0;
+        max-width: 60ch;
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-style: italic;
+    }
+
+    /* STORY EXAMPLE BOX */
+    .ab-scope .ab-story-example {
+        background: var(--pill-bg);
+        border-left: 4px solid var(--accent);
+        padding: 20px;
+        margin-bottom: 24px;
+        border-radius: 8px;
+    }
+
+    .ab-scope .ab-story-example p {
+        margin: 0 0 12px;
+    }
+
+    .ab-scope .ab-story-example p:last-child {
+        margin-bottom: 0;
+    }
+
+    /* STEP DELIVERABLES */
+    .ab-scope .ab-step-deliverable {
+        margin-top: 12px;
+        padding: 12px;
+        background: var(--pill-bg);
+        border-radius: 8px;
+        font-size: 0.9rem;
+        color: var(--ink);
+    }
+
+    /* WHO WE'RE A FIT FOR */
+    .ab-scope .ab-fit {
+        background: #fff;
+        color: var(--ink);
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .ab-scope .ab-fit-grid {
+        display: grid;
+        gap: 24px;
+        margin-top: 32px;
+        max-width: 1100px;
+        margin-inline: auto;
+    }
+
+    .ab-scope .ab-fit-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 28px;
+        text-align: left;
+        box-shadow: 0 2px 8px rgba(15, 23, 32, 0.04);
+    }
+
+    .ab-scope .ab-fit-good {
+        border-left: 4px solid var(--accent);
+    }
+
+    .ab-scope .ab-fit-not {
+        border-left: 4px solid #e5e7eb;
+    }
+
+    .ab-scope .ab-fit-list {
+        list-style: none;
+        margin: 16px 0 0;
+        padding: 0;
+        display: grid;
+        gap: 12px;
+    }
+
+    .ab-scope .ab-fit-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        color: var(--ink);
+        line-height: 1.5;
+    }
+
+    .ab-scope .ab-fit-good .ab-fit-list li::before {
+        content: "✓";
+        display: grid;
+        place-items: center;
+        flex: 0 0 24px;
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        background: var(--pill-bg);
+        color: var(--accent);
+        font-weight: 900;
+        margin-top: 2px;
+    }
+
+    .ab-scope .ab-fit-not .ab-fit-list li::before {
+        content: "×";
+        display: grid;
+        place-items: center;
+        flex: 0 0 24px;
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        background: #f3f4f6;
+        color: #9ca3af;
+        font-weight: 900;
+        font-size: 1.2rem;
+        margin-top: 2px;
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-fit {
+            padding: 56px 0;
+        }
+
+        .ab-scope .ab-fit-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    /* FAQ */
+    .ab-scope .ab-faq {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #f8fafc;
+        color: var(--ink);
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .ab-scope .ab-faq-list {
+        max-width: 900px;
+        margin: 24px auto 0;
+        display: grid;
+        gap: 12px;
+        text-align: left;
+    }
+
+    .ab-scope .ab-faq-item {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: box-shadow 0.2s ease;
+    }
+
+    .ab-scope .ab-faq-item[open] {
+        box-shadow: 0 4px 12px rgba(15, 23, 32, 0.08);
+    }
+
+    .ab-scope .ab-faq-q {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 20px;
+        font-weight: 600;
+        cursor: pointer;
+        color: var(--ink);
+        list-style: none;
+        user-select: none;
+    }
+
+    .ab-scope .ab-faq-q::-webkit-details-marker {
+        display: none;
+    }
+
+    .ab-scope .ab-faq-q::after {
+        content: "+";
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: var(--accent);
+        transition: transform 0.2s ease;
+    }
+
+    .ab-scope .ab-faq-item[open] .ab-faq-q::after {
+        content: "−";
+    }
+
+    .ab-scope .ab-faq-a {
+        padding: 0 20px 18px;
+        color: var(--muted);
+        line-height: 1.6;
+    }
+
+    .ab-scope .ab-faq-a p {
+        margin: 0;
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-faq {
+            padding: 56px 0;
+        }
+    }
+
+    /* BUTTONS */
+    .ab-scope .ab-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.8rem 1.2rem;
+        border-radius: 999px;
+        font-weight: 800;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    .ab-scope .ab-primary {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 10px 26px rgba(29, 185, 147, 0.28);
+    }
+
+    .ab-scope .ab-primary:hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(29, 185, 147, 0.35);
+    }
+
+    .ab-scope .ab-secondary {
+        background: transparent;
+        color: var(--accent);
+        border: 2px solid var(--accent);
+    }
+
+    .ab-scope .ab-secondary:hover {
+        background: var(--pill-bg);
+    }
+
+    /* CLOSING CTA */
+    .ab-scope .ab-cta {
+        background: #fff;
+        color: var(--ink);
+        padding: 48px 0;
+        text-align: center;
+    }
+
+    .ab-scope .ab-cta-text {
+        max-width: 70ch;
+        margin: 16px auto 24px;
+        color: var(--muted);
+        line-height: 1.6;
+    }
+
+    .ab-scope .ab-cta-actions {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .ab-scope .ab-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.8rem 1.2rem;
+        border-radius: 999px;
+        font-weight: 800;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .ab-scope .ab-primary {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 10px 26px rgba(29, 185, 147, 0.28);
+    }
+
+    .ab-scope .ab-primary:hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+    }
+
+    .ab-scope .ab-secondary {
+        background: transparent;
+        color: var(--accent);
+        border: 2px solid var(--accent);
+    }
+
+    .ab-scope .ab-secondary:hover {
+        background: var(--pill-bg);
+    }
+
+    .ab-scope .ab-cta-note {
+        margin: 16px 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-cta {
+            padding: 64px 0;
+        }
+    }
+
+    /* APPROACH INTRO */
+    .ab-scope .ab-approach-intro {
+        background: #fff;
+        color: var(--ink);
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .ab-scope .ab-intro-content {
+        max-width: 80ch;
+        margin: 24px auto 0;
+        text-align: left;
+    }
+
+    .ab-scope .ab-intro-content p {
+        margin: 0 0 1em;
+        line-height: 1.6;
+        color: var(--ink);
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-approach-intro {
+            padding: 56px 0;
+        }
+    }
+
+    /* WHAT MAKES US DIFFERENT */
+    .ab-scope .ab-different {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #f8fafc;
+        color: var(--ink);
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .ab-scope .ab-different-grid {
+        display: grid;
+        gap: 20px;
+        margin-top: 32px;
+        max-width: 1100px;
+        margin-inline: auto;
+    }
+
+    .ab-scope .ab-different-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+        text-align: left;
+    }
+
+    .ab-scope .ab-different-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-different {
+            padding: 56px 0;
+        }
+
+        .ab-scope .ab-different-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .ab-scope .ab-different-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* TIMELINE */
+    .ab-scope .ab-timeline {
+        background: #fff;
+        color: var(--ink);
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .ab-scope .ab-timeline-content {
+        max-width: 900px;
+        margin: 24px auto 0;
+    }
+
+    .ab-scope .ab-timeline-intro {
+        margin: 0 0 32px;
+        color: var(--ink);
+        text-align: left;
+    }
+
+    .ab-scope .ab-timeline-grid {
+        display: grid;
+        gap: 20px;
+        text-align: left;
+    }
+
+    .ab-scope .ab-timeline-item {
+        background: var(--pill-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 20px;
+        align-items: start;
+    }
+
+    .ab-scope .ab-timeline-week {
+        background: var(--accent);
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+
+    .ab-scope .ab-timeline-desc strong {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--ink);
+        font-weight: 700;
+    }
+
+    .ab-scope .ab-timeline-desc p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+    }
+
+    .ab-scope .ab-timeline-note {
+        margin: 24px 0 0;
+        padding: 16px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        text-align: left;
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-timeline {
+            padding: 56px 0;
+        }
+    }
+
+    /* WHAT YOU CAN EXPECT */
+    .ab-scope .ab-expect {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #f8fafc;
+        color: var(--ink);
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .ab-scope .ab-expect-grid {
+        display: grid;
+        gap: 20px;
+        margin-top: 32px;
+        max-width: 1100px;
+        margin-inline: auto;
+    }
+
+    .ab-scope .ab-expect-item {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+        text-align: left;
+    }
+
+    .ab-scope .ab-expect-item p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-expect {
+            padding: 56px 0;
+        }
+
+        .ab-scope .ab-expect-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .ab-scope .ab-expect-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+` }} />
+      <div dangerouslySetInnerHTML={{ __html: `<div class="ab-scope">
+
+    <!-- ============== HERO ============== -->
+    <section class="ab-hero" aria-labelledby="ab-hero-title">
+        <div class="ab-container">
+            <h1 id="ab-hero-title" class="ab-title">How We Work</h1>
+            <p class="ab-subtitle">Our 4-step process for delivering AI and automation projects that show value fast.
+            </p>
+        </div>
+    </section>
+
+    <!-- ============== INTRO ============== -->
+    <section class="ab-approach-intro" aria-labelledby="ab-intro-title">
+        <div class="ab-container">
+            <h2 id="ab-intro-title" class="ab-h2">Built for speed and results</h2>
+
+            <div class="ab-intro-content">
+                <p>Most AI projects fail because they're too ambitious (trying to automate everything), too slow
+                    (6-month roadmaps before anything ships), or too disconnected from reality (works in demos, breaks
+                    in production).</p>
+
+                <p>Our process is designed to show measurable value in <strong>2–4 weeks</strong>. We start with one
+                    focused
+                    workflow, prove it works with real data and real users, then scale what's successful. Every step
+                    includes
+                    clear deliverables, defined success metrics, and opportunities for feedback.</p>
+
+                <p>We integrate with your existing tools—no forced platform migrations. Human oversight stays in place
+                    for
+                    sensitive decisions. And we're transparent: if something isn't working, we tell you immediately and
+                    adjust.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== HOW WE WORK ============== -->
+    <section class="ab-how" aria-labelledby="ab-how-title">
+        <div class="ab-container">
+            <h2 id="ab-how-title" class="ab-h2">Our 4-step process</h2>
+
+            <div class="ab-steps">
+                <div class="ab-step">
+                    <div class="ab-step-num">1</div>
+                    <div class="ab-step-content">
+                        <h3 class="ab-h3">Discover & Prioritize</h3>
+                        <p>Map your workflows and pain points. Identify high-ROI use cases and confirm
+                            constraints—compliance, data access, existing tools.</p>
+                        <p class="ab-step-deliverable"><strong>You get:</strong> Workflow map + prioritized list of 3–5
+                            high-ROI use cases with estimated impact.</p>
+                    </div>
+                </div>
+
+                <div class="ab-step">
+                    <div class="ab-step-num">2</div>
+                    <div class="ab-step-content">
+                        <h3 class="ab-h3">Design & Integrate</h3>
+                        <p>Design AI agents and automations tailored to your processes. Connect into CRMs, ERPs,
+                            calendars, phone systems, and other tools. Set clear guardrails, escalation paths, and
+                            human-in-the-loop checkpoints.</p>
+                        <p class="ab-step-deliverable"><strong>You get:</strong> Proposed agent/automation designs, demo
+                            flows, simple implementation plan, and guardrails/handoff rules.</p>
+                    </div>
+                </div>
+
+                <div class="ab-step">
+                    <div class="ab-step-num">3</div>
+                    <div class="ab-step-content">
+                        <h3 class="ab-h3">Pilot & Launch</h3>
+                        <p>Start with a focused pilot—a specific team, queue, or process. Measure impact: time saved,
+                            revenue generated, errors reduced. Iterate based on real-world feedback.</p>
+                        <p class="ab-step-deliverable"><strong>You get:</strong> A small, focused pilot with clearly
+                            defined metrics and structured feedback cycles.</p>
+                    </div>
+                </div>
+
+                <div class="ab-step">
+                    <div class="ab-step-num">4</div>
+                    <div class="ab-step-content">
+                        <h3 class="ab-h3">Support & Scale</h3>
+                        <p>Provide ongoing support and performance reviews. Expand to additional teams and workflows
+                            once value is proven.</p>
+                        <p class="ab-step-deliverable"><strong>You get:</strong> Ongoing reviews, refinements, and a
+                            structured plan for expanding to additional teams/workflows.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ab-how-note">
+                <p>Most projects are designed to show value in <strong>2–4 weeks</strong>, not months. We work with your
+                    existing stack instead of forcing you to switch tools. Human oversight and control remain central
+                    for sensitive contexts.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== WHAT MAKES US DIFFERENT ============== -->
+    <section class="ab-different" aria-labelledby="ab-different-title">
+        <div class="ab-container">
+            <h2 id="ab-different-title" class="ab-h2">What makes our approach different</h2>
+
+            <div class="ab-different-grid">
+                <div class="ab-different-card">
+                    <h3 class="ab-h3">Start small, prove value</h3>
+                    <p>We don't pitch year-long transformation roadmaps. We start with a focused pilot that shows
+                        measurable impact in weeks. Once value is proven, we scale what works.</p>
+                </div>
+
+                <div class="ab-different-card">
+                    <h3 class="ab-h3">Work with your stack</h3>
+                    <p>We integrate with your existing CRMs, ERPs, calendars, and tools. No forced platform migrations,
+                        no vendor lock-in. We make your current systems work better together.</p>
+                </div>
+
+                <div class="ab-different-card">
+                    <h3 class="ab-h3">Human-in-the-loop by default</h3>
+                    <p>For sensitive decisions or complex cases, we build in human approval steps. AI handles the
+                        routine work; humans handle the judgment calls.</p>
+                </div>
+
+                <div class="ab-different-card">
+                    <h3 class="ab-h3">Clear metrics from day one</h3>
+                    <p>Every project starts with defined success metrics: time saved, revenue generated, errors reduced.
+                        We track what matters to your business, not vanity metrics.</p>
+                </div>
+
+                <div class="ab-different-card">
+                    <h3 class="ab-h3">Transparent communication</h3>
+                    <p>No surprises, no hidden costs, no vague timelines. We communicate clearly about progress,
+                        challenges, and next steps throughout the project.</p>
+                </div>
+
+                <div class="ab-different-card">
+                    <h3 class="ab-h3">Built for real-world conditions</h3>
+                    <p>We design for messy reality: legacy systems that can't be replaced, edge cases that break naive
+                        implementations, permission structures that matter, and compliance requirements that can't be
+                        ignored.
+                        Our solutions work in production, not just demos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== TYPICAL TIMELINE ============== -->
+    <section class="ab-timeline" aria-labelledby="ab-timeline-title">
+        <div class="ab-container">
+            <h2 id="ab-timeline-title" class="ab-h2">Typical project timeline</h2>
+
+            <div class="ab-timeline-content">
+                <p class="ab-timeline-intro">Here's what a typical engagement looks like from first call to live pilot:
+                </p>
+
+                <div class="ab-timeline-grid">
+                    <div class="ab-timeline-item">
+                        <div class="ab-timeline-week">Week 1</div>
+                        <div class="ab-timeline-desc">
+                            <strong>Discovery call & workflow mapping</strong>
+                            <p>Initial consultation, workflow documentation, use case prioritization, and success
+                                metrics definition.</p>
+                        </div>
+                    </div>
+
+                    <div class="ab-timeline-item">
+                        <div class="ab-timeline-week">Week 2</div>
+                        <div class="ab-timeline-desc">
+                            <strong>Design & integration planning</strong>
+                            <p>Agent/automation design, integration architecture, guardrails definition, and demo
+                                walkthrough.</p>
+                        </div>
+                    </div>
+
+                    <div class="ab-timeline-item">
+                        <div class="ab-timeline-week">Week 3</div>
+                        <div class="ab-timeline-desc">
+                            <strong>Build & test</strong>
+                            <p>Implementation, integration testing, edge case handling, and internal QA.</p>
+                        </div>
+                    </div>
+
+                    <div class="ab-timeline-item">
+                        <div class="ab-timeline-week">Week 4</div>
+                        <div class="ab-timeline-desc">
+                            <strong>Pilot launch & refinement</strong>
+                            <p>Soft launch with limited scope, real-world testing, feedback collection, and iterative
+                                improvements.</p>
+                        </div>
+                    </div>
+
+                    <div class="ab-timeline-item">
+                        <div class="ab-timeline-week">Ongoing</div>
+                        <div class="ab-timeline-desc">
+                            <strong>Support & scale</strong>
+                            <p>Performance monitoring, optimization, expansion planning, and ongoing support.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="ab-timeline-note">Timeline varies based on complexity and integrations. Simple automations
+                    (email workflows, data sync) can launch in 1-2 weeks. Complex integrations (legacy ERP connections,
+                    HIPAA-compliant voice agents) may take 4-6 weeks.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== WHAT YOU CAN EXPECT ============== -->
+    <section class="ab-expect" aria-labelledby="ab-expect-title">
+        <div class="ab-container">
+            <h2 id="ab-expect-title" class="ab-h2">What you can expect from us</h2>
+
+            <div class="ab-expect-grid">
+                <div class="ab-expect-item">
+                    <h3 class="ab-h3">Regular updates</h3>
+                    <p>Weekly check-ins during active development, with clear progress reports and next steps.</p>
+                </div>
+
+                <div class="ab-expect-item">
+                    <h3 class="ab-h3">Honest feedback</h3>
+                    <p>If something won't work or isn't worth automating, we'll tell you. We're invested in your
+                        success, not just billing hours.</p>
+                </div>
+
+                <div class="ab-expect-item">
+                    <h3 class="ab-h3">Collaborative approach</h3>
+                    <p>You're involved at every step—reviewing designs, testing prototypes, and refining behavior based
+                        on your feedback.</p>
+                </div>
+
+                <div class="ab-expect-item">
+                    <h3 class="ab-h3">Documentation</h3>
+                    <p>Clear documentation of how agents work, what they can handle, escalation paths, and how to
+                        monitor performance.</p>
+                </div>
+
+                <div class="ab-expect-item">
+                    <h3 class="ab-h3">Training & handoff</h3>
+                    <p>We train your team on how to monitor, refine, and expand the automations over time. You're not
+                        dependent on us forever.</p>
+                </div>
+
+                <div class="ab-expect-item">
+                    <h3 class="ab-h3">Ongoing support</h3>
+                    <p>Post-launch support for troubleshooting, optimization, and expansion as your needs evolve.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== CLOSING CTA ============== -->
+    <section class="ab-cta" aria-labelledby="ab-cta-title">
+        <div class="ab-container">
+            <h2 id="ab-cta-title" class="ab-h2">Ready to get started?</h2>
+
+            <p class="ab-cta-text">Book a free 20-30 minute consultation. We'll discuss your workflows, identify quick
+                wins, and outline a practical next step—no pressure, no generic slide decks.</p>
+
+            <div class="ab-cta-actions">
+                <a href="https://automate4u.co/contact/" class="ab-btn ab-primary">Book a Free Consultation</a>
+                <a href="/about/overview/" class="ab-btn ab-secondary">Learn About Our Mission</a>
+            </div>
+
+            <p class="ab-cta-note">We'll start with your workflows, not a generic slide deck.</p>
+        </div>
+    </section>
+
+</div> <!-- /ab-scope -->
+` }} />
+    </>
+  );
+}

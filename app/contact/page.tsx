@@ -1,0 +1,186 @@
+import React from 'react';
+
+export default function Page() {
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: `
+.co-scope{display:block}
+.co-scope *{box-sizing:border-box}
+
+/* Tokens */
+.co-scope{
+  --ink:#0f1720;
+  --muted:#6b7b8d;
+  --accent:#1db993;
+  --accent-hover:#169b78;
+  --accent-ink:#179c79;
+  --pill-bg:#e9f9f3;
+  --border:#E7EDF2;
+  --radius:22px;
+}
+
+/* Container */
+.co-scope .co-container{max-width:960px;margin:0 auto;padding:0 18px}
+
+/* HERO */
+.co-scope .co-hero{background:#fff;color:var(--ink);padding:44px 0;text-align:center}
+.co-scope .co-pill{display:inline-block;background:var(--pill-bg);color:#169b78;padding:.4rem .7rem;border-radius:999px;font-weight:700;letter-spacing:.05em;font-size:.72rem;white-space:nowrap}
+.co-scope .co-title{margin:12px auto 8px;font-weight:800;line-height:1.08;letter-spacing:-.01em;font-size:32px}
+.co-scope .co-sub{margin:0 auto 16px;max-width:70ch;color:var(--muted);font-size:.98rem}
+.co-scope .co-btn{display:inline-flex;align-items:center;gap:.55rem;background:var(--accent);color:#fff;text-decoration:none;padding:.8rem 1.1rem;border-radius:999px;font-weight:800;box-shadow:0 10px 26px rgba(29,185,147,.28)}
+.co-scope .co-btn:hover{background:var(--accent-hover)}
+@media (min-width:768px){ .co-scope .co-hero{padding:64px 0} .co-scope .co-title{font-size:48px} .co-scope .co-sub{font-size:1.05rem} }
+
+/* SHARED HEADINGS */
+.co-scope .co-h2{font-size:28px;line-height:1.15;letter-spacing:-.02em;margin:10px 0 6px;font-weight:800;text-wrap:balance}
+.co-scope .co-sub2{color:var(--muted);margin:0 auto 18px;max-width:70ch}
+
+/* CONTACT FORM */
+.co-scope .co-qualify{background:#fff;color:var(--ink);padding:48px 0;text-align:center}
+.co-scope .q-form{max-width:960px;margin:14px auto 0;text-align:left}
+.co-scope .q-grid{display:grid;gap:12px}
+.co-scope .q-field{display:grid;gap:6px}
+.co-scope .q-field--full{grid-column:1/-1}
+.co-scope .q-label{font-weight:600}
+.co-scope .q-form input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.co-scope .q-form select,
+.co-scope .q-form textarea{width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:#fff;color:var(--ink)}
+.co-scope .q-actions{margin-top:12px;display:grid;gap:12px;justify-content:start}
+.co-scope .q-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;font-weight:800;text-decoration:none; border:none; cursor:pointer;}
+.co-scope .q-btn svg{width:18px;height:18px}
+.co-scope .q-primary{background:var(--accent);color:#fff;box-shadow:0 8px 24px rgba(29,185,147,.22)}
+.co-scope .q-primary:hover{background:var(--accent-hover)}
+.co-scope .q-note{margin:.4rem 0 0;color:var(--muted);font-size:.9rem}
+.co-scope .q-spinner { animation: q-spin 1s linear infinite; }
+.co-scope .q-spinner circle { stroke: currentColor; stroke-linecap: round; animation: q-dash 1.5s ease-in-out infinite; }
+@keyframes q-spin { 100% { transform: rotate(360deg); } }
+@keyframes q-dash { 0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; } 50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; } 100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; } }
+@media (min-width:780px){ .co-scope .q-grid{grid-template-columns:1fr 1fr;gap:14px} }
+
+/* FAQ */
+.co-scope .co-faq{
+  width:100vw; position:relative; left:50%; transform:translateX(-50%);
+  background:#F0F0F0; color:var(--ink); padding:40px 0; text-align:center; overflow:hidden;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23eef2f5' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2zM36 4V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.co-scope .faq-pill{display:inline-block;padding:.36rem .6rem;border-radius:999px;background:var(--pill-bg);color:var(--accent-ink);font-weight:700;font-size:.72rem;letter-spacing:.06em}
+.co-scope .faq-list{max-width:880px;margin:18px auto 0;display:grid;gap:12px;text-align:left}
+.co-scope .faq-item{border:1px solid var(--border);border-radius:14px;background:#fff;transition:background .2s ease}
+.co-scope .faq-item[open]{background:#fff}
+.co-scope .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;background:transparent;border:none;border-radius:14px;padding:14px 16px;font:inherit;text-align:left;font-weight:600;cursor:pointer;color:var(--ink)}
+.co-scope .faq-q::-webkit-details-marker{display:none}
+.co-scope .faq-a{overflow:hidden;display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.co-scope .faq-item[open] .faq-a{grid-template-rows:1fr}
+.co-scope .faq-a > p{padding:2px 16px 14px;margin:0;color:var(--muted);border-top:1px solid var(--border)}
+
+` }} />
+      <div dangerouslySetInnerHTML={{ __html: `<div class="co-scope">
+
+  <!-- ============== HERO ============== -->
+  <section class="co-hero" aria-labelledby="co-hero-title">
+    <div class="co-container">
+      <span class="co-pill">Let's Connect</span>
+      <h1 id="co-hero-title" class="co-title">
+        Get in Touch
+      </h1>
+      <p class="co-sub">
+        Have a question or a project in mind? We'd love to hear from you. <br>
+        We typically respond within one business day.
+      </p>
+      <a href="#contact-form" class="co-btn" aria-label="Go to contact form">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2-8 7.227V20h24V8.227L20 6H4z" fill="currentColor"/></svg>
+        Send a Message
+      </a>
+    </div>
+  </section>
+
+  <!-- ============== CONTACT FORM ============== -->
+  <section id="contact-form" class="co-qualify" aria-labelledby="qualify-title">
+    <div class="co-container">
+      <h2 id="qualify-title" class="co-h2">Contact Us</h2>
+      <p class="co-sub2">Tell us about your goals. We’ll get back to you to schedule a call.</p>
+
+      <form class="q-form" action="https://formspree.io/f/mldplnaa" method="post">
+        <div class="q-grid">
+          <label class="q-field">
+            <span class="q-label">Work email</span>
+            <input type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+          </label>
+
+          <label class="q-field">
+            <span class="q-label">Company</span>
+            <input type="text" name="company" required placeholder="Company Inc.">
+          </label>
+
+          <label class="q-field">
+            <span class="q-label">Primary Interest</span>
+            <select name="interest" required>
+              <option value="" disabled selected>Select an interest</option>
+              <option>AI Voice Agents</option>
+              <option>AI Chatbots</option>
+              <option>Workflow Automations</option>
+              <option>AI Enablement / Transformation</option>
+              <option>General Inquiry</option>
+            </select>
+          </label>
+
+          <label class="q-field">
+            <span class="q-label">Timeline</span>
+            <select name="timeline" required>
+              <option value="" disabled selected>Select a timeline</option>
+              <option>ASAP (this month)</option>
+              <option>1–2 months</option>
+              <option>This quarter</option>
+              <option>Just exploring</option>
+            </select>
+          </label>
+
+          <label class="q-field q-field--full">
+            <span class="q-label">How can we help?</span>
+            <textarea name="message" rows="5" placeholder="e.g., We're looking to reduce manual data entry and improve customer response times..."></textarea>
+          </label>
+        </div>
+
+        <div class="q-actions" role="group" aria-label="Form submission">
+          <button class="q-btn q-primary" type="submit" id="contact-form-submit-btn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 22l20-10L2 2v7l14 3-14 3v7Z" fill="currentColor"/></svg>
+            Send Message
+          </button>
+        </div>
+        <p class="q-note">We respect your privacy. We never sell data.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============== FAQ ============== -->
+  <section id="faq" class="co-faq" aria-labelledby="faq-title">
+    <div class="co-container">
+      <span class="faq-pill">FAQ</span>
+      <h2 id="faq-title" class="co-h2">Common Questions</h2>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary class="faq-q">What happens after I submit the form?</summary>
+          <div class="faq-a"><p>Our team will review your message and get back to you within one business day to schedule a free, no-obligation consultation call.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Do you work with small businesses?</summary>
+          <div class="faq-a"><p>Yes! We work with businesses of all sizes, from startups to large enterprises. Our solutions are designed to be scalable and deliver ROI regardless of your team's size.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What are your typical project costs?</summary>
+          <div class="faq-a"><p>Costs vary depending on the project scope and complexity. We provide transparent, upfront pricing after our initial discovery call. Our goal is to provide solutions with a clear and fast return on investment.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</div> <!-- /co-scope -->
+
+<!-- ===========================
+  CONSOLIDATED SCOPED STYLES
+=========================== -->
+` }} />
+    </>
+  );
+}

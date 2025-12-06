@@ -1,115 +1,10 @@
-<!-- ===========================
-  ABOUT INDEX PAGE (SCOPED)
-  Automate4U — About Landing Page
-=========================== -->
-<div class="ab-scope">
+import React from 'react';
 
-    <!-- ============== HERO ============== -->
-    <section class="ab-hero" aria-labelledby="ab-hero-title">
-        <div class="ab-container">
-            <h1 id="ab-hero-title" class="ab-title">About Automate4U</h1>
-            <p class="ab-subtitle">AI and automation that works with your existing tools—delivering results in weeks, not months.</p>
-
-            <div class="ab-intro">
-                <p>Automate4U helps teams across North America eliminate manual work through AI voice agents, chatbots, 
-                    workflow automation, and custom integrations. Based in Miami and Toronto, we work with manufacturers, 
-                    healthcare providers, home services companies, and professional services firms who need practical 
-                    solutions that integrate with their existing CRMs, ERPs, and business tools.</p>
-
-                <p>We're not a traditional consultancy. We build, deploy, and prove value in 2-4 weeks—then scale what works. 
-                    No year-long roadmaps, no vendor lock-in, no replacing your entire tech stack.</p>
-            </div>
-
-            <div class="ab-hero-cta">
-                <a href="https://automate4u.co/contact/" class="ab-btn ab-primary">Book a Free Consultation</a>
-                <a href="/about/overview/" class="ab-btn ab-secondary">Learn More</a>
-            </div>
-
-            <p class="ab-trust-line">Serving 50+ companies across North America—from 5-person clinics to multi-site manufacturers.</p>
-        </div>
-    </section>
-
-    <!-- ============== BY THE NUMBERS ============== -->
-    <section class="ab-numbers" aria-labelledby="ab-numbers-title">
-        <div class="ab-container">
-            <h2 id="ab-numbers-title" class="ab-h2">Why teams trust Automate4U</h2>
-            <p class="ab-sub">Real outcomes from the last 12 months across our client base.</p>
-
-            <div class="ab-kpi-grid">
-                <div class="ab-kpi">
-                    <div class="ab-kpi-num">10,000+</div>
-                    <div class="ab-kpi-label">Hours of manual work saved across teams</div>
-                </div>
-                <div class="ab-kpi">
-                    <div class="ab-kpi-num">30–70%</div>
-                    <div class="ab-kpi-label">Less time spent on admin for teams using our AI agents</div>
-                </div>
-                <div class="ab-kpi">
-                    <div class="ab-kpi-num">~45%</div>
-                    <div class="ab-kpi-label">Of incoming calls automated with ~200% boost in appointments</div>
-                </div>
-                <div class="ab-kpi">
-                    <div class="ab-kpi-num">100+</div>
-                    <div class="ab-kpi-label">Tailored automations and AI agents implemented</div>
-                </div>
-                <div class="ab-kpi">
-                    <div class="ab-kpi-num">50+</div>
-                    <div class="ab-kpi-label">Companies collaborated with across North America</div>
-                </div>
-                <div class="ab-kpi">
-                    <div class="ab-kpi-num">2–4 weeks</div>
-                    <div class="ab-kpi-label">Typical time to show measurable value</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============== QUICK LINKS ============== -->
-    <section class="ab-quick-links" aria-labelledby="ab-links-title">
-        <div class="ab-container">
-            <h2 id="ab-links-title" class="ab-h2">Learn more about us</h2>
-
-            <div class="ab-links-grid">
-                <a href="/about/our-mission.html" class="ab-link-card">
-                    <h3 class="ab-h3">Our Story & Mission</h3>
-                    <p>Why we started Automate4U and the principles that guide every project we take on.</p>
-                    <span class="ab-link-arrow">→</span>
-                </a>
-
-                <a href="/about/our-team.html" class="ab-link-card">
-                    <h3 class="ab-h3">Leadership Team</h3>
-                    <p>Meet the people who map your workflows, build your systems, and ensure you see ROI.</p>
-                    <span class="ab-link-arrow">→</span>
-                </a>
-
-                <a href="/about/how-we-work.html" class="ab-link-card">
-                    <h3 class="ab-h3">How We Work</h3>
-                    <p>Our 4-step process: from discovery call to live pilot in 2-4 weeks.</p>
-                    <span class="ab-link-arrow">→</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============== CLOSING CTA ============== -->
-    <section class="ab-cta" aria-labelledby="ab-cta-title">
-        <div class="ab-container">
-            <h2 id="ab-cta-title" class="ab-h2">Ready to explore what's possible?</h2>
-
-            <p class="ab-cta-text">Book a free 20-30 minute consultation. It's exploratory, not a sales pitch. We'll
-                discuss your workflows, identify quick wins, and outline a practical next step—no pressure, no generic
-                slide decks.</p>
-
-            <div class="ab-cta-actions">
-                <a href="https://automate4u.co/contact/" class="ab-btn ab-primary">Book a Free Consultation</a>
-            </div>
-
-            <p class="ab-cta-note">We'll start with your workflows, not a generic slide deck.</p>
-        </div>
-    </section>
-
-</div> <!-- /ab-scope -->
-<style>
+export default function Page() {
+    return (
+        <>
+            <style dangerouslySetInnerHTML={{
+                __html: `
     .ab-scope {
         display: block;
     }
@@ -547,6 +442,21 @@
         color: var(--muted);
         line-height: 1.6;
         text-align: left;
+    }
+
+    .ab-scope .ab-person-linkedin {
+        display: inline-block;
+        margin-top: 16px;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: color 0.2s ease;
+    }
+
+    .ab-scope .ab-person-linkedin:hover {
+        color: var(--accent-hover);
+        text-decoration: underline;
     }
 
     @media (min-width: 768px) {
@@ -1001,15 +911,75 @@
         }
     }
 
-    /* QUICK LINKS */
-    .ab-scope .ab-quick-links {
+    /* WHY THIS TEAM */
+    .ab-scope .ab-why-team {
         background: #fff;
         color: var(--ink);
         padding: 40px 0;
         text-align: center;
     }
 
-    .ab-scope .ab-links-grid {
+    .ab-scope .ab-why-content {
+        max-width: 900px;
+        margin: 24px auto 0;
+        text-align: left;
+    }
+
+    .ab-scope .ab-why-content>p {
+        margin: 0 0 24px;
+        line-height: 1.6;
+        color: var(--ink);
+    }
+
+    .ab-scope .ab-why-grid {
+        display: grid;
+        gap: 20px;
+        margin: 24px 0;
+    }
+
+    .ab-scope .ab-why-card {
+        background: var(--pill-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+    }
+
+    .ab-scope .ab-why-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+    }
+
+    .ab-scope .ab-why-summary {
+        margin: 24px 0 0;
+        font-weight: 600;
+        color: var(--ink);
+        line-height: 1.6;
+    }
+
+    @media (min-width: 768px) {
+        .ab-scope .ab-why-team {
+            padding: 56px 0;
+        }
+
+        .ab-scope .ab-why-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* VALUES */
+    .ab-scope .ab-values {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #f8fafc;
+        color: var(--ink);
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .ab-scope .ab-values-grid {
         display: grid;
         gap: 20px;
         margin-top: 32px;
@@ -1017,51 +987,201 @@
         margin-inline: auto;
     }
 
-    .ab-scope .ab-link-card {
+    .ab-scope .ab-value {
         background: var(--card);
         border: 1px solid var(--border);
         border-radius: 16px;
-        padding: 28px;
+        padding: 24px;
         text-align: left;
-        text-decoration: none;
-        color: inherit;
-        box-shadow: 0 2px 8px rgba(15, 23, 32, 0.04);
-        transition: all 0.2s ease;
-        position: relative;
     }
 
-    .ab-scope .ab-link-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(15, 23, 32, 0.12);
-        border-color: var(--accent);
+    .ab-scope .ab-value-title {
+        margin: 0 0 10px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--ink);
     }
 
-    .ab-scope .ab-link-card p {
+    .ab-scope .ab-value p {
         margin: 0;
         color: var(--muted);
         line-height: 1.5;
     }
 
-    .ab-scope .ab-link-arrow {
-        position: absolute;
-        top: 28px;
-        right: 28px;
-        font-size: 1.5rem;
-        color: var(--accent);
-        transition: transform 0.2s ease;
-    }
-
-    .ab-scope .ab-link-card:hover .ab-link-arrow {
-        transform: translateX(4px);
-    }
-
     @media (min-width: 768px) {
-        .ab-scope .ab-quick-links {
+        .ab-scope .ab-values {
             padding: 56px 0;
         }
 
-        .ab-scope .ab-links-grid {
-            grid-template-columns: repeat(3, 1fr);
+        .ab-scope .ab-values-grid {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
-</style>
+
+    @media (min-width: 1024px) {
+        .ab-scope .ab-values-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+` }} />
+            <div dangerouslySetInnerHTML={{
+                __html: `<div class="ab-scope">
+
+    <!-- ============== HERO ============== -->
+    <section class="ab-hero" aria-labelledby="ab-hero-title">
+        <div class="ab-container">
+            <h1 id="ab-hero-title" class="ab-title">Leadership Team</h1>
+            <p class="ab-subtitle">Meet the people behind Automate4U and their experience in AI, automation, and client
+                success.</p>
+        </div>
+    </section>
+
+    <!-- ============== LEADERSHIP TEAM ============== -->
+    <section class="ab-team" aria-labelledby="ab-team-title">
+        <div class="ab-container">
+            <h2 id="ab-team-title" class="ab-h2">Our team</h2>
+
+            <div class="ab-team-grid">
+                <article class="ab-person">
+                    <div class="ab-person-image">
+                        <img src="https://via.placeholder.com/300x300/1db993/ffffff?text=DY" alt="Daniel Yoon">
+                    </div>
+                    <h3 class="ab-person-name">Daniel Yoon</h3>
+                    <p class="ab-person-title">Head of Client Experience & Data Strategy</p>
+                    <p class="ab-person-bio">Daniel has a strong background in client services and operational innovation. With nearly 20 years of experience leading and working with high-volume client service and support teams in the private sector, he brings deep expertise in helping organizations improve customer experience and operational efficiency. Throughout his career, Daniel has earned multiple awards for innovation and has been recognized repeatedly as a top performer across company-wide teams.</p>
+                    <a href="https://www.linkedin.com/in/dyoon9210/" target="_blank" rel="noopener noreferrer"
+                        class="ab-person-linkedin">View LinkedIn Profile</a>
+                </article>
+
+                <article class="ab-person">
+                    <div class="ab-person-image">
+                        <img src="https://via.placeholder.com/300x300/1db993/ffffff?text=MM" alt="Michael Mastrella">
+                    </div>
+                    <h3 class="ab-person-name">Michael Mastrella</h3>
+                    <p class="ab-person-title">Head of Engineering & AI</p>
+                    <p class="ab-person-bio">
+                        Michael is a principal-level engineer with 15+ years shipping AI products and platforms for venture-backed startups, Fortune 500 companies, and U.S. government teams. He has led engineering on systems serving tens of thousands of users, and specializes in making AI agents—chatbots, RAG systems, and voice assistants—work reliably with real-world legacy tools and complex infrastructure.
+                    </p>
+                    <a href="https://www.linkedin.com/in/michaelmastrella/" target="_blank" rel="noopener noreferrer"
+                        class="ab-person-linkedin">View LinkedIn Profile</a>
+                </article>
+
+                <article class="ab-person">
+                    <div class="ab-person-image">
+                        <img src="https://via.placeholder.com/300x300/1db993/ffffff?text=JZ" alt="Johnny Zhang">
+                    </div>
+                    <h3 class="ab-person-name">Johnny Zhang</h3>
+                    <p class="ab-person-title">Head of Marketing & Partnerships</p>
+                    <p class="ab-person-bio">Johnny led growth and marketing automation at Itipack Systems and other
+                        tech companies.
+                        He designs go-to-market strategies, builds partnerships, and helps teams understand where AI
+                        delivers
+                        real ROI versus where it's just hype.</p>
+                    <a href="https://www.linkedin.com/in/johnny-zhang-4b625176/" target="_blank"
+                        rel="noopener noreferrer" class="ab-person-linkedin">View LinkedIn Profile</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== WHY THIS TEAM ============== -->
+    <section class="ab-why-team" aria-labelledby="ab-why-title">
+        <div class="ab-container">
+            <h2 id="ab-why-title" class="ab-h2">Why this team works</h2>
+
+            <div class="ab-why-content">
+                <p>Most AI consultancies are either too technical (engineers who don't understand business) or too
+                    strategic (consultants who can't actually build). We're different.</p>
+
+                <div class="ab-why-grid">
+                    <div class="ab-why-card">
+                        <h3 class="ab-h3">We understand your operations</h3>
+                        <p>Daniel's background in large-scale operations means we map workflows the way your team
+                            actually works—
+                            not how a consultant thinks they should. We've navigated the messy reality: shared inboxes
+                            with
+                            500+ unread emails, spreadsheets as databases, and "temporary" workarounds that became
+                            permanent.</p>
+                    </div>
+
+                    <div class="ab-why-card">
+                        <h3 class="ab-h3">We build systems that scale</h3>
+                        <p>Michael's experience with government and enterprise clients means we design for reliability
+                            and security
+                            from day one. Our solutions integrate with legacy systems (yes, even that 15-year-old ERP),
+                            handle
+                            edge cases, and include proper error handling—not just happy-path demos.</p>
+                    </div>
+
+                    <div class="ab-why-card">
+                        <h3 class="ab-h3">We focus on ROI, not novelty</h3>
+                        <p>Johnny's growth background means every project targets clear business metrics: time saved,
+                            revenue
+                            generated, costs reduced. We track what matters to your P&L, not AI accuracy scores or
+                            "engagement"
+                            vanity metrics.</p>
+                    </div>
+                </div>
+
+                <p class="ab-why-summary">Together, we bring the full stack: understanding your workflows, building
+                    reliable systems, and delivering measurable business outcomes. That's why our clients see results in
+                    weeks, not months.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== VALUES ============== -->
+    <section class="ab-values" aria-labelledby="ab-values-title">
+        <div class="ab-container">
+            <h2 id="ab-values-title" class="ab-h2">What we believe</h2>
+
+            <div class="ab-values-grid">
+                <div class="ab-value">
+                    <h3 class="ab-value-title">Outcomes over outputs</h3>
+                    <p>We measure success by business impact—time saved, revenue generated, errors reduced—not by how
+                        many features we shipped.</p>
+                </div>
+
+                <div class="ab-value">
+                    <h3 class="ab-value-title">Speed with quality</h3>
+                    <p>Fast doesn't mean sloppy. We move quickly by focusing on what matters, testing rigorously, and
+                        iterating based on real feedback.</p>
+                </div>
+
+                <div class="ab-value">
+                    <h3 class="ab-value-title">Transparency always</h3>
+                    <p>No surprises, no hidden costs, no vague timelines. We communicate clearly about what's working,
+                        what's not, and what comes next.</p>
+                </div>
+
+                <div class="ab-value">
+                    <h3 class="ab-value-title">Partnership, not vendor</h3>
+                    <p>We're invested in your success. That means honest feedback, proactive suggestions, and ongoing
+                        support—not just delivering a project and disappearing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== CLOSING CTA ============== -->
+    <section class="ab-cta" aria-labelledby="ab-cta-title">
+        <div class="ab-container">
+            <h2 id="ab-cta-title" class="ab-h2">Work with our team</h2>
+
+            <p class="ab-cta-text">Book a free 20-30 minute consultation with our team. We'll discuss your workflows,
+                identify quick wins, and outline a practical next step—no pressure, no generic slide decks.</p>
+
+            <div class="ab-cta-actions">
+                <a href="https://automate4u.co/contact/" class="ab-btn ab-primary">Book a Free Consultation</a>
+                <a href="/about/approach/" class="ab-btn ab-secondary">See How We Work</a>
+            </div>
+
+            <p class="ab-cta-note">We'll start with your workflows, not a generic slide deck.</p>
+        </div>
+    </section>
+
+</div> <!-- /ab-scope -->
+` }} />
+        </>
+    );
+}
