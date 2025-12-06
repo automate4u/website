@@ -403,7 +403,7 @@ export default function Page() {
                     </ul>
                 </div>
                 <div class="hs-head-image">
-                    <img src="http://automate4u.co/wp-content/uploads/2025/11/custom-software.jpg"
+                    <img src="/images/capabilities/custom_software.jpg"
                         alt="Custom software development" />
                 </div>
             </div>

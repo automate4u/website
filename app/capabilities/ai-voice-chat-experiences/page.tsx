@@ -388,7 +388,7 @@ export default function Page() {
                     </ul>
                 </div>
                 <div class="hs-head-image">
-                    <img src="http://automate4u.co/wp-content/uploads/2025/11/voice-chat.jpg"
+                    <img src="/images/capabilities/aivoicechat.jpg""
                         alt="AI voice and chat experiences" />
                 </div>
             </div>

@@ -27,7 +27,7 @@ export default function Page() {
                     </ul>
                 </div>
                 <div class="hs-head-image">
-                    <img src="http://automate4u.co/wp-content/uploads/2025/11/analytics.jpg"
+                    <img src="/images/capabilities/operational_intelligence.jpg"
                         alt="Operational intelligence and analytics dashboard" />
                 </div>
             </div>

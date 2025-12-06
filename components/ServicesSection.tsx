@@ -18,7 +18,7 @@ export default function ServicesSection() {
         {
             title: "AI Chatbots",
             description: "From customer inquiries to email follow-ups, our chatbots can perform tedious tasks for you.",
-            image: "/images/services/chatbot.png",
+            image: "/images/services/chatbot.jpg",
             link: "https://automate4u.co/ai-chat/"
         }
     ];

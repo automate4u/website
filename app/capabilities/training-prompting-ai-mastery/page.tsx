@@ -27,7 +27,7 @@ export default function Page() {
                     </ul>
                 </div>
                 <div class="hs-head-image">
-                    <img src="http://automate4u.co/wp-content/uploads/2025/11/training.jpg"
+                    <img src="/images/capabilities/training.jpg"
                         alt="AI training and enablement" />
                 </div>
             </div>

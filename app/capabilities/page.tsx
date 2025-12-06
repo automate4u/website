@@ -6,49 +6,49 @@ const capabilities = [
         name: "AI Voice & Chat Experiences",
         description: "Conversational AI that handles calls, chats, and real tasks—not just FAQs. 24/7 coverage with seamless human handoff.",
         href: "/capabilities/ai-voice-chat-experiences",
-        image: "/images/aivoicechat.jpg",
+        image: "/images/capabilities/aivoicechat.jpg",
     },
     {
         name: "AI Agents & Workflow Automation",
         description: "Turn repetitive work into automated workflows. AI agents that work behind the scenes across your tools and systems.",
         href: "/capabilities/ai-agents-workflow-automation",
-        image: "/images/salesagent.jpg", // Best match
+        image: "/images/capabilities/ai_agents.jpg", // Best match
     },
     {
         name: "Custom Software & AI Solutions",
         description: "Purpose-built applications and AI tools when off-the-shelf solutions don't fit. Tailored to your exact workflow.",
         href: "/capabilities/custom-software-ai-solutions",
-        image: "/images/chatdevelopment.jpg", // Best match
+        image: "/images/capabilities/custom_software.jpg", // Best match
     },
     {
         name: "Data Integrations & Infrastructure",
         description: "Connect your systems, sync data in real-time, and build the infrastructure that makes automation possible.",
         href: "/capabilities/data-integrations-infrastructure",
-        image: "/images/database.jpg",
+        image: "/images/capabilities/database.jpg",
     },
     {
         name: "Operational Intelligence & Analytics",
         description: "Turn data into decisions. Dashboards, reports, and AI-powered insights that show what's working and what's not.",
         href: "/capabilities/operational-intelligence-analytics",
-        image: "/images/dashboard.jpg",
+        image: "/images/capabilities/operational_intelligence.jpg",
     },
     {
         name: "Security, Monitoring & AI Safety",
         description: "Keep your systems secure and compliant. Monitoring, guardrails, and safety controls for AI and automation.",
         href: "/capabilities/security-monitoring-ai-safety",
-        image: "/images/cybersecurity.jpg",
+        image: "/images/capabilities/security_monitoring.jpg",
     },
     {
         name: "Technology Strategy & AI Enablement",
         description: "Plan your AI transformation. We help you identify opportunities, prioritize projects, and build a roadmap.",
         href: "/capabilities/technology-strategy-ai-enablement",
-        image: "/images/discoveryphase.jpg", // Best match
+        image: "/images/capabilities/tech_strategy.jpg", // Best match
     },
     {
         name: "Training, Prompting & AI Mastery",
         description: "Empower your team to use AI effectively. Workshops, prompt engineering, and hands-on training programs.",
         href: "/capabilities/training-prompting-ai-mastery",
-        image: "/images/training.jpg",
+        image: "/images/capabilities/training.jpg",
     },
 ];
 

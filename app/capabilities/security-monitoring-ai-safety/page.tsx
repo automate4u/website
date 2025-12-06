@@ -27,7 +27,7 @@ export default function Page() {
                     </ul>
                 </div>
                 <div class="hs-head-image">
-                    <img src="http://automate4u.co/wp-content/uploads/2025/11/security.jpg"
+                    <img src="/images/capabilities/security_monitoring.jpg"
                         alt="Security monitoring and AI safety" />
                 </div>
             </div>
