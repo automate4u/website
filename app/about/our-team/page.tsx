@@ -1048,7 +1048,7 @@ export default function Page() {
                     </div>
                     <h3 class="ab-person-name">Daniel Yoon</h3>
                     <p class="ab-person-title">Head of Client Experience & Data Strategy</p>
-                    <p class="ab-person-bio">Daniel has a strong background in client services and operational innovation. With nearly 20 years of experience leading and working with high-volume client service and support teams in the private sector, he brings deep expertise in helping organizations improve customer experience and operational efficiency. Throughout his career, Daniel has earned multiple awards for innovation and has been recognized repeatedly as a top performer across company-wide teams.</p>
+                    <p class="ab-person-bio">Daniel has a strong background in client services and operational innovation. With nearly 10 years of experience leading and working with high-volume client service and support teams in the private sector, he brings deep expertise in helping organizations improve customer experience and operational efficiency. Throughout his career, Daniel has earned multiple awards for innovation and has been recognized repeatedly as a top performer across company-wide teams.</p>
                     <a href="https://www.linkedin.com/in/dyoon9210/" target="_blank" rel="noopener noreferrer"
                         class="ab-person-linkedin">View LinkedIn Profile</a>
                 </article>
