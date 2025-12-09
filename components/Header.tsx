@@ -47,6 +47,7 @@ export default function Header() {
             { name: "Security & Safety", href: "/capabilities/security-monitoring-ai-safety" },
             { name: "Strategy & Enablement", href: "/capabilities/technology-strategy-ai-enablement" },
             { name: "Training & Mastery", href: "/capabilities/training-prompting-ai-mastery" },
+            { name: "Marketing Automation", href: "/capabilities/marketing-automation" },
         ],
         about: [
             { name: "Overview", href: "/about/overview" },

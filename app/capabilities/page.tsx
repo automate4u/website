@@ -42,13 +42,19 @@ const capabilities = [
         name: "Technology Strategy & AI Enablement",
         description: "Plan your AI transformation. We help you identify opportunities, prioritize projects, and build a roadmap.",
         href: "/capabilities/technology-strategy-ai-enablement",
-        image: "/images/capabilities/tech_strategy.jpg", // Best match
+        image: "/images/capabilities/tech_strategy.jpg",
     },
     {
         name: "Training, Prompting & AI Mastery",
         description: "Empower your team to use AI effectively. Workshops, prompt engineering, and hands-on training programs.",
         href: "/capabilities/training-prompting-ai-mastery",
         image: "/images/capabilities/training.jpg",
+    },
+    {
+        name: "Marketing Automation & Strategy",
+        description: "Scale outreach without scaling headcount. CRM optimization, lead scoring, and AI-powered content engines.",
+        href: "/capabilities/marketing-automation",
+        image: "/images/capabilities/marketing_automation.png",
     },
 ];
 

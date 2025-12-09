@@ -1,9 +1,10 @@
 import React from 'react';
 
 export default function Page() {
-  return (
-    <>
-      <style dangerouslySetInnerHTML={{ __html: `
+    return (
+        <>
+            <style dangerouslySetInnerHTML={{
+                __html: `
     .ab-scope {
         display: block;
     }
@@ -98,18 +99,16 @@ export default function Page() {
         }
     }
 
-    /* BY THE NUMBERS */
-    .ab-scope .ab-numbers {
+    /* EXPERIENCE SECTION */
+    .ab-scope .ab-experience {
         width: 100vw;
         position: relative;
         left: 50%;
         transform: translateX(-50%);
-        background: #F0F0F0;
+        background: #f8fafc;
         color: var(--ink);
         padding: 40px 0;
         text-align: center;
-        overflow: hidden;
-        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23eef2f5' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2zM36 4V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
 
     .ab-scope .ab-h2 {
@@ -121,712 +120,61 @@ export default function Page() {
         text-wrap: balance;
     }
 
-    .ab-scope .ab-sub {
-        color: var(--muted);
-        margin: 0 auto 18px;
-        max-width: 70ch;
+    .ab-scope .ab-content {
+        max-width: 900px;
+        margin: 32px auto 0;
+        text-align: left;
     }
 
-    .ab-scope .ab-kpi-grid {
-        display: grid;
-        gap: 16px;
-        margin-top: 24px;
-        max-width: 1100px;
-        margin-inline: auto;
+    .ab-scope .ab-content p {
+        margin-bottom: 24px;
+        line-height: 1.7;
+        font-size: 1.05rem;
+        color: var(--ink);
     }
 
-    .ab-scope .ab-kpi {
-        background: var(--card);
+    .ab-scope .ab-highlight-box {
+        background: #fff;
         border: 1px solid var(--border);
         border-radius: 16px;
-        padding: 20px;
-        box-shadow: 0 2px 8px rgba(15, 23, 32, 0.04);
+        padding: 32px;
+        margin: 32px 0;
+        box-shadow: 0 4px 12px rgba(15, 23, 32, 0.04);
     }
 
-    .ab-scope .ab-kpi-num {
-        display: block;
-        font-weight: 800;
-        font-size: clamp(1.5rem, 4vw, 2rem);
-        line-height: 1;
-        color: var(--accent);
-        margin-bottom: 8px;
+    .ab-scope .ab-highlight-title {
+        font-weight: 700;
+        font-size: 1.2rem;
+        margin-bottom: 16px;
+        color: var(--accent-ink);
     }
 
-    .ab-scope .ab-kpi-label {
-        display: block;
-        color: var(--ink);
-        font-size: clamp(0.9rem, 2vw, 1rem);
-        line-height: 1.4;
+    .ab-scope .ab-industry-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .ab-scope .ab-industry-tag {
+        background: var(--pill-bg);
+        color: var(--accent-ink);
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 0.9rem;
     }
 
     @media (min-width: 768px) {
-        .ab-scope .ab-numbers {
-            padding: 56px 0;
+        .ab-scope .ab-experience {
+            padding: 64px 0;
         }
-
+        
         .ab-scope .ab-h2 {
             font-size: 44px;
         }
-
-        .ab-scope .ab-kpi-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (min-width: 1024px) {
-        .ab-scope .ab-kpi-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    @media (min-width: 1200px) {
-        .ab-scope .ab-h2 {
-            font-size: 50px;
-        }
-    }
-
-    /* OUR STORY */
-    .ab-scope .ab-story {
-        background: #fff;
-        color: var(--ink);
-        padding: 40px 0;
-        text-align: center;
-    }
-
-    .ab-scope .ab-story-content {
-        max-width: 80ch;
-        margin: 24px auto 0;
-        text-align: left;
-    }
-
-    .ab-scope .ab-story-content p {
-        margin: 0 0 1em;
-        line-height: 1.6;
-        color: var(--ink);
-    }
-
-    @media (min-width: 768px) {
-        .ab-scope .ab-story {
-            padding: 56px 0;
-        }
-    }
-
-    /* WHAT WE DO */
-    .ab-scope .ab-what {
-        width: 100vw;
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #f8fafc;
-        color: var(--ink);
-        padding: 40px 0;
-        text-align: center;
-    }
-
-    .ab-scope .ab-what-grid {
-        display: grid;
-        gap: 16px;
-        margin-top: 24px;
-        max-width: 1100px;
-        margin-inline: auto;
-    }
-
-    .ab-scope .ab-what-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 24px;
-        text-align: left;
-        box-shadow: 0 2px 8px rgba(15, 23, 32, 0.04);
-    }
-
-    .ab-scope .ab-h3 {
-        margin: 0 0 10px;
-        font-size: 1.15rem;
-        font-weight: 700;
-        color: var(--ink);
-    }
-
-    .ab-scope .ab-what-card p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.5;
-    }
-
-    .ab-scope .ab-what-examples {
-        max-width: 80ch;
-        margin: 32px auto 0;
-        text-align: left;
-    }
-
-    .ab-scope .ab-examples-intro {
-        font-weight: 600;
-        margin-bottom: 12px;
-        color: var(--ink);
-    }
-
-    .ab-scope .ab-list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: grid;
-        gap: 10px;
-    }
-
-    .ab-scope .ab-list li {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: var(--ink);
-        font-weight: 500;
-        font-size: 0.95rem;
-    }
-
-    .ab-scope .ab-list li::before {
-        content: "✓";
-        display: grid;
-        place-items: center;
-        flex: 0 0 24px;
-        width: 24px;
-        height: 24px;
-        border-radius: 999px;
-        background: var(--pill-bg);
-        color: var(--accent);
-        font-weight: 900;
-    }
-
-    @media (min-width: 768px) {
-        .ab-scope .ab-what {
-            padding: 56px 0;
-        }
-
-        .ab-scope .ab-what-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (min-width: 1024px) {
-        .ab-scope .ab-what-grid {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
-
-    /* HOW WE WORK */
-    .ab-scope .ab-how {
-        background: #fff;
-        color: var(--ink);
-        padding: 40px 0;
-        text-align: center;
-    }
-
-    .ab-scope .ab-steps {
-        display: grid;
-        gap: 24px;
-        margin-top: 32px;
-        max-width: 900px;
-        margin-inline: auto;
-    }
-
-    .ab-scope .ab-step {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 20px;
-        text-align: left;
-        align-items: start;
-    }
-
-    .ab-scope .ab-step-num {
-        display: grid;
-        place-items: center;
-        width: 48px;
-        height: 48px;
-        border-radius: 999px;
-        background: var(--accent);
-        color: #fff;
-        font-weight: 800;
-        font-size: 1.25rem;
-        flex-shrink: 0;
-    }
-
-    .ab-scope .ab-step-content p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.5;
-    }
-
-    .ab-scope .ab-how-note {
-        max-width: 80ch;
-        margin: 32px auto 0;
-        padding: 20px;
-        background: var(--pill-bg);
-        border-radius: 12px;
-        text-align: left;
-    }
-
-    .ab-scope .ab-how-note p {
-        margin: 0;
-        color: var(--ink);
-        line-height: 1.6;
-    }
-
-    @media (min-width: 768px) {
-        .ab-scope .ab-how {
-            padding: 56px 0;
-        }
-    }
-
-    /* LEADERSHIP TEAM */
-    .ab-scope .ab-team {
-        width: 100vw;
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #f8fafc;
-        color: var(--ink);
-        padding: 40px 0;
-        text-align: center;
-    }
-
-    .ab-scope .ab-team-grid {
-        display: grid;
-        gap: 24px;
-        margin-top: 32px;
-        max-width: 1100px;
-        margin-inline: auto;
-    }
-
-    .ab-scope .ab-person {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 28px;
-        text-align: center;
-        box-shadow: 0 2px 8px rgba(15, 23, 32, 0.04);
-    }
-
-    .ab-scope .ab-person-image {
-        width: 120px;
-        height: 120px;
-        margin: 0 auto 20px;
-        border-radius: 50%;
-        overflow: hidden;
-        border: 3px solid var(--accent);
-        box-shadow: 0 4px 12px rgba(29, 185, 147, 0.2);
-    }
-
-    .ab-scope .ab-person-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
-
-    .ab-scope .ab-person-name {
-        margin: 0 0 6px;
-        font-size: 1.25rem;
-        font-weight: 800;
-        color: var(--ink);
-    }
-
-    .ab-scope .ab-person-title {
-        margin: 0 0 16px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--accent);
-        line-height: 1.3;
-    }
-
-    .ab-scope .ab-person-bio {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.6;
-        text-align: left;
-    }
-
-    @media (min-width: 768px) {
-        .ab-scope .ab-team {
-            padding: 56px 0;
-        }
-    }
-
-    @media (min-width: 1024px) {
-        .ab-scope .ab-team-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    /* PRINCIPLES */
-    .ab-scope .ab-principles {
-        background: #fff;
-        color: var(--ink);
-        padding: 40px 0;
-        text-align: center;
-    }
-
-    .ab-scope .ab-principles-grid {
-        display: grid;
-        gap: 20px;
-        margin-top: 32px;
-        max-width: 1100px;
-        margin-inline: auto;
-    }
-
-    .ab-scope .ab-principle {
-        background: var(--pill-bg);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 24px;
-        text-align: left;
-    }
-
-    .ab-scope .ab-principle-title {
-        margin: 0 0 10px;
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: var(--ink);
-    }
-
-    .ab-scope .ab-principle p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.5;
-    }
-
-    @media (min-width: 768px) {
-        .ab-scope .ab-principles {
-            padding: 56px 0;
-        }
-
-        .ab-scope .ab-principles-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (min-width: 1024px) {
-        .ab-scope .ab-principles-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    /* EXAMPLES */
-    .ab-scope .ab-examples {
-        width: 100vw;
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #F0F0F0;
-        color: var(--ink);
-        padding: 40px 0;
-        text-align: center;
-        overflow: hidden;
-        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23eef2f5' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2zM36 4V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    }
-
-    .ab-scope .ab-examples-grid {
-        display: grid;
-        gap: 16px;
-        margin-top: 24px;
-        max-width: 1100px;
-        margin-inline: auto;
-    }
-
-    .ab-scope .ab-example-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 24px;
-        text-align: left;
-        box-shadow: 0 2px 8px rgba(15, 23, 32, 0.04);
-    }
-
-    .ab-scope .ab-h4 {
-        margin: 0 0 10px;
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: var(--ink);
-    }
-
-    .ab-scope .ab-example-card p {
-        margin: 0 0 12px;
-        color: var(--muted);
-        line-height: 1.5;
-        font-size: 0.95rem;
-    }
-
-    .ab-scope .ab-example-card p:last-child {
-        margin-bottom: 0;
-    }
-
-    .ab-scope .ab-example-situation {
-        color: var(--ink);
-        font-weight: 500;
-    }
-
-    .ab-scope .ab-example-result {
-        color: var(--ink);
-    }
-
-    @media (min-width: 768px) {
-        .ab-scope .ab-examples {
-            padding: 56px 0;
-        }
-
-        .ab-scope .ab-examples-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (min-width: 1024px) {
-        .ab-scope .ab-examples-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    /* HERO CTA & TRUST LINE */
-    .ab-scope .ab-hero-cta {
-        display: flex;
-        gap: 16px;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin: 24px 0 16px;
-    }
-
-    .ab-scope .ab-trust-line {
-        margin: 16px auto 0;
-        max-width: 60ch;
-        color: var(--muted);
-        font-size: 0.9rem;
-        font-style: italic;
-    }
-
-    /* STORY EXAMPLE BOX */
-    .ab-scope .ab-story-example {
-        background: var(--pill-bg);
-        border-left: 4px solid var(--accent);
-        padding: 20px;
-        margin-bottom: 24px;
-        border-radius: 8px;
-    }
-
-    .ab-scope .ab-story-example p {
-        margin: 0 0 12px;
-    }
-
-    .ab-scope .ab-story-example p:last-child {
-        margin-bottom: 0;
-    }
-
-    /* STEP DELIVERABLES */
-    .ab-scope .ab-step-deliverable {
-        margin-top: 12px;
-        padding: 12px;
-        background: var(--pill-bg);
-        border-radius: 8px;
-        font-size: 0.9rem;
-        color: var(--ink);
-    }
-
-    /* WHO WE'RE A FIT FOR */
-    .ab-scope .ab-fit {
-        background: #fff;
-        color: var(--ink);
-        padding: 40px 0;
-        text-align: center;
-    }
-
-    .ab-scope .ab-fit-grid {
-        display: grid;
-        gap: 24px;
-        margin-top: 32px;
-        max-width: 1100px;
-        margin-inline: auto;
-    }
-
-    .ab-scope .ab-fit-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 28px;
-        text-align: left;
-        box-shadow: 0 2px 8px rgba(15, 23, 32, 0.04);
-    }
-
-    .ab-scope .ab-fit-good {
-        border-left: 4px solid var(--accent);
-    }
-
-    .ab-scope .ab-fit-not {
-        border-left: 4px solid #e5e7eb;
-    }
-
-    .ab-scope .ab-fit-list {
-        list-style: none;
-        margin: 16px 0 0;
-        padding: 0;
-        display: grid;
-        gap: 12px;
-    }
-
-    .ab-scope .ab-fit-list li {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        color: var(--ink);
-        line-height: 1.5;
-    }
-
-    .ab-scope .ab-fit-good .ab-fit-list li::before {
-        content: "✓";
-        display: grid;
-        place-items: center;
-        flex: 0 0 24px;
-        width: 24px;
-        height: 24px;
-        border-radius: 999px;
-        background: var(--pill-bg);
-        color: var(--accent);
-        font-weight: 900;
-        margin-top: 2px;
-    }
-
-    .ab-scope .ab-fit-not .ab-fit-list li::before {
-        content: "×";
-        display: grid;
-        place-items: center;
-        flex: 0 0 24px;
-        width: 24px;
-        height: 24px;
-        border-radius: 999px;
-        background: #f3f4f6;
-        color: #9ca3af;
-        font-weight: 900;
-        font-size: 1.2rem;
-        margin-top: 2px;
-    }
-
-    @media (min-width: 768px) {
-        .ab-scope .ab-fit {
-            padding: 56px 0;
-        }
-
-        .ab-scope .ab-fit-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    /* FAQ */
-    .ab-scope .ab-faq {
-        width: 100vw;
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #f8fafc;
-        color: var(--ink);
-        padding: 40px 0;
-        text-align: center;
-    }
-
-    .ab-scope .ab-faq-list {
-        max-width: 900px;
-        margin: 24px auto 0;
-        display: grid;
-        gap: 12px;
-        text-align: left;
-    }
-
-    .ab-scope .ab-faq-item {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        overflow: hidden;
-        transition: box-shadow 0.2s ease;
-    }
-
-    .ab-scope .ab-faq-item[open] {
-        box-shadow: 0 4px 12px rgba(15, 23, 32, 0.08);
-    }
-
-    .ab-scope .ab-faq-q {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        padding: 18px 20px;
-        font-weight: 600;
-        cursor: pointer;
-        color: var(--ink);
-        list-style: none;
-        user-select: none;
-    }
-
-    .ab-scope .ab-faq-q::-webkit-details-marker {
-        display: none;
-    }
-
-    .ab-scope .ab-faq-q::after {
-        content: "+";
-        font-size: 1.5rem;
-        font-weight: 400;
-        color: var(--accent);
-        transition: transform 0.2s ease;
-    }
-
-    .ab-scope .ab-faq-item[open] .ab-faq-q::after {
-        content: "−";
-    }
-
-    .ab-scope .ab-faq-a {
-        padding: 0 20px 18px;
-        color: var(--muted);
-        line-height: 1.6;
-    }
-
-    .ab-scope .ab-faq-a p {
-        margin: 0;
-    }
-
-    @media (min-width: 768px) {
-        .ab-scope .ab-faq {
-            padding: 56px 0;
-        }
-    }
-
-    /* BUTTONS */
-    .ab-scope .ab-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.55rem;
-        padding: 0.8rem 1.2rem;
-        border-radius: 999px;
-        font-weight: 800;
-        text-decoration: none;
-        transition: all 0.2s ease;
-        border: none;
-        cursor: pointer;
-        font-size: 1rem;
-    }
-
-    .ab-scope .ab-primary {
-        background: var(--accent);
-        color: #fff;
-        box-shadow: 0 10px 26px rgba(29, 185, 147, 0.28);
-    }
-
-    .ab-scope .ab-primary:hover {
-        background: var(--accent-hover);
-        transform: translateY(-2px);
-        box-shadow: 0 12px 30px rgba(29, 185, 147, 0.35);
-    }
-
-    .ab-scope .ab-secondary {
-        background: transparent;
-        color: var(--accent);
-        border: 2px solid var(--accent);
-    }
-
-    .ab-scope .ab-secondary:hover {
-        background: var(--pill-bg);
     }
 
     /* CLOSING CTA */
@@ -882,125 +230,47 @@ export default function Page() {
     .ab-scope .ab-secondary:hover {
         background: var(--pill-bg);
     }
-
-    .ab-scope .ab-cta-note {
-        margin: 16px 0 0;
-        color: var(--muted);
-        font-size: 0.9rem;
-    }
-
-    @media (min-width: 768px) {
-        .ab-scope .ab-cta {
-            padding: 64px 0;
-        }
-    }
-
-    /* QUICK LINKS */
-    .ab-scope .ab-quick-links {
-        background: #fff;
-        color: var(--ink);
-        padding: 40px 0;
-        text-align: center;
-    }
-
-    .ab-scope .ab-links-grid {
-        display: grid;
-        gap: 20px;
-        margin-top: 32px;
-        max-width: 1100px;
-        margin-inline: auto;
-    }
-
-    .ab-scope .ab-link-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 28px;
-        text-align: left;
-        text-decoration: none;
-        color: inherit;
-        box-shadow: 0 2px 8px rgba(15, 23, 32, 0.04);
-        transition: all 0.2s ease;
-        position: relative;
-    }
-
-    .ab-scope .ab-link-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(15, 23, 32, 0.12);
-        border-color: var(--accent);
-    }
-
-    .ab-scope .ab-link-card p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.5;
-    }
-
-    .ab-scope .ab-link-arrow {
-        position: absolute;
-        top: 28px;
-        right: 28px;
-        font-size: 1.5rem;
-        color: var(--accent);
-        transition: transform 0.2s ease;
-    }
-
-    .ab-scope .ab-link-card:hover .ab-link-arrow {
-        transform: translateX(4px);
-    }
-
-    @media (min-width: 768px) {
-        .ab-scope .ab-quick-links {
-            padding: 56px 0;
-        }
-
-        .ab-scope .ab-links-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
 ` }} />
-      <div dangerouslySetInnerHTML={{ __html: `<div class="ab-scope">
+            <div dangerouslySetInnerHTML={{
+                __html: `<div class="ab-scope">
 
     <!-- ============== HERO ============== -->
     <section class="ab-hero" aria-labelledby="ab-hero-title">
         <div class="ab-container">
-            <h1 id="ab-hero-title" class="ab-title">About Automate4U</h1>
-            <p class="ab-subtitle">AI and automation that works with your existing tools—delivering results in weeks, not months.</p>
-
-            <div class="ab-intro">
-                <p>Automate4U helps teams across North America eliminate manual work through custom AI solutions, intelligent voice agents, chatbots, 
-                    workflow automations, and custom integrations.</p>
-
-                <p>Based in Miami and Toronto, we work with businesses across North America who need practical 
-                    solutions that integrate with their existing CRMs, ERPs, and business tools. We're not a traditional consultancy. We build, deploy, and prove value in 2-4 weeks—then scale what works. 
-                    No year-long roadmaps, no vendor lock-in, no replacing your entire tech stack.</p>
-            </div>
+            <h1 id="ab-hero-title" class="ab-title">Company Overview</h1>
+            <p class="ab-subtitle">Building modern, state-of-the-art enterprise systems to enhance your business.</p>
         </div>
     </section>
 
-    <!-- ============== QUICK LINKS ============== -->
-    <section class="ab-quick-links" aria-labelledby="ab-links-title">
+    <!-- ============== EXPERIENCE CONTENT ============== -->
+    <section class="ab-experience" aria-labelledby="ab-exp-title">
         <div class="ab-container">
-            <h2 id="ab-links-title" class="ab-h2">Learn more about us</h2>
+            <h2 id="ab-exp-title" class="ab-h2">Our Experience</h2>
 
-            <div class="ab-links-grid">
-                <a href="/about/our-mission" class="ab-link-card">
-                    <h3 class="ab-h3">Our Story & Mission</h3>
-                    <p>Why we started Automate4U and the principles that guide every project we take on.</p>
-                    <span class="ab-link-arrow">→</span>
-                </a>
+            <div class="ab-content">
+                <p>Our highly experienced, capable, and motivated team has worked with dozens of companies of all sizes—from Fortune 500s to mom-and-pop shops. We bring deep expertise in building modern, state-of-the-art, enterprise-grade systems directly to your operations.</p>
+                
+                <div class="ab-highlight-box">
+                    <h3 class="ab-highlight-title">Industry Expertise</h3>
+                    <p>Our business and development experience spans a wide variety of industries:</p>
+                    <ul class="ab-industry-list">
+                        <li class="ab-industry-tag">Professional Services</li>
+                        <li class="ab-industry-tag">Financial Services</li>
+                        <li class="ab-industry-tag">Industrial Manufacturing</li>
+                        <li class="ab-industry-tag">Healthcare</li>
+                        <li class="ab-industry-tag">Hospitality</li>
+                        <li class="ab-industry-tag">Restaurants</li>
+                        <li class="ab-industry-tag">Transportation</li>
+                        <li class="ab-industry-tag">Logistics</li>
+                        <li class="ab-industry-tag">Real Estate</li>
+                        <li class="ab-industry-tag">Construction</li>
+                        <li class="ab-industry-tag">Home Services</li>
+                    </ul>
+                </div>
 
-                <a href="/about/our-team" class="ab-link-card">
-                    <h3 class="ab-h3">Leadership Team</h3>
-                    <p>Meet the people who map your workflows, build your systems, and ensure you see ROI.</p>
-                    <span class="ab-link-arrow">→</span>
-                </a>
-
-                <a href="/about/how-we-work" class="ab-link-card">
-                    <h3 class="ab-h3">How We Work</h3>
-                    <p>Our 4-step process: from discovery call to live pilot in 2-4 weeks.</p>
-                    <span class="ab-link-arrow">→</span>
-                </a>
+                <p>Please see our <a href="/industries" class="ab-link">Industries page</a> to get a better idea of our past work. Even if you don't see your business type listed, please don't hesitate to reach out.</p>
+                
+                <p>We keep a focused list of our top industries online, but our experience and capabilities extend far beyond just what you see there.</p>
             </div>
         </div>
     </section>
@@ -1008,22 +278,19 @@ export default function Page() {
     <!-- ============== CLOSING CTA ============== -->
     <section class="ab-cta" aria-labelledby="ab-cta-title">
         <div class="ab-container">
-            <h2 id="ab-cta-title" class="ab-h2">Ready to explore what's possible?</h2>
+            <h2 id="ab-cta-title" class="ab-h2">Ready to scale?</h2>
 
-            <p class="ab-cta-text">Book a free 20-30 minute consultation. It's exploratory, not a sales pitch. We'll
-                discuss your workflows, identify quick wins, and outline a practical next step—no pressure, no generic
-                slide decks.</p>
+            <p class="ab-cta-text">Whether you're a Fortune 500 or a growing local business, we have the tools to help you succeed.</p>
 
             <div class="ab-cta-actions">
                 <a href="https://automate4u.co/contact/" class="ab-btn ab-primary">Book a Free Consultation</a>
+                <a href="/industries" class="ab-btn ab-secondary">View Industries</a>
             </div>
-
-            <p class="ab-cta-note">We'll start with your workflows, not a generic slide deck.</p>
         </div>
     </section>
 
 </div> <!-- /ab-scope -->
 ` }} />
-    </>
-  );
+        </>
+    );
 }
