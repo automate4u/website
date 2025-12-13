@@ -1,11 +1,8 @@
 export default function Testimonials() {
     return (
         <section className="py-10 md:py-16 bg-white text-ink" aria-labelledby="tst-title">
-            <div className="max-w-[1280px] mx-auto px-4 text-center">
-                <p className="inline-block px-2.5 py-1.5 rounded-full bg-[#e9f9f3] text-[#169b78] font-bold text-[0.72rem] tracking-wider whitespace-nowrap">
-                    Testimonials
-                </p>
-                <h2 id="tst-title" className="text-[28px] md:text-[44px] lg:text-[50px] leading-[1.15] font-extrabold my-2.5 tracking-[-0.02em]">
+            <div className="max-w-[1280px] mx-auto px-4 text-left">
+                <h2 id="tst-title" className="text-[24px] md:text-[30px] lg:text-[36px] leading-[1.1] font-bold my-4 tracking-[-0.02em]">
                     Hear it from our partners
                 </h2>
 

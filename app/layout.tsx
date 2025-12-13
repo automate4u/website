@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ChatWidget from "@/components/ChatWidget";
 
 export default function RootLayout({
   children,
@@ -20,13 +21,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} antialiased flex flex-col min-h-screen pt-[88px]`}
+        className={`${inter.className} antialiased flex flex-col min-h-screen pt-[88px] overflow-x-hidden`}
       >
         <Header />
         <main className="flex-grow">
           {children}
         </main>
         <Footer />
+        <ChatWidget />
       </body>
     </html>
   );

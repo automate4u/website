@@ -31,13 +31,13 @@ export default function ServicesSection() {
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 relative z-10">
 
                 {/* Header */}
-                <div className="text-center mb-16">
-                    <p className="inline-block px-2.5 py-1.5 rounded-full bg-[#333] text-[#1db993] font-bold text-[0.72rem] tracking-wider uppercase mb-2.5">
-                        OUR SERVICES
-                    </p>
-                    <h2 id="sol-title" className="text-[20px] md:text-[40px] lg:text-[46px] leading-[1.15] font-medium text-white">
+                <div className="text-left mb-16">
+                    <h2 id="sol-title" className="text-[24px] md:text-[30px] lg:text-[36px] leading-[1.15] font-bold text-white mb-4">
                         How Our Services Will Help
                     </h2>
+                    <p className="text-base text-white/80 max-w-[600px]">
+                        We provide comprehensive AI solutions tailored to your business needs.
+                    </p>
                 </div>
 
                 {/* Grid */}

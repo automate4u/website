@@ -50,7 +50,7 @@ export default function AIInsights() {
     return (
         <section className="relative py-8 md:py-10 bg-[#f8fafc] text-ink overflow-hidden" id="ai-insights" aria-labelledby="insights-title">
 
-            <div className="max-w-[1600px] mx-auto px-6 relative z-10 box-border text-center lg:text-left">
+            <div className="max-w-[1600px] mx-auto px-6 relative z-10 box-border text-left">
 
                 {/* Header - Stacks on top for mobile, moves to side for desktop */}
                 <div className="flex flex-col-reverse lg:flex-row gap-8 lg:gap-10 xl:gap-20 items-center">
@@ -82,13 +82,10 @@ export default function AIInsights() {
                     </div>
 
                     <div className="lg:w-1/3 mb-8 lg:mb-0 lg:sticky lg:top-[100px] text-center lg:text-left">
-                        <p className="inline-block px-3 py-1 rounded-full bg-[rgba(29,185,147,0.1)] text-accent font-semibold text-[14px] tracking-wide mb-2 uppercase">
-                            INSIGHTS
-                        </p>
-                        <h2 id="insights-title" className="text-[32px] md:text-[42px] lg:text-[48px] leading-[1.1] font-bold text-ink mb-2.5 tracking-[-0.02em]">
+                        <h2 id="insights-title" className="text-[24px] md:text-[30px] lg:text-[36px] leading-[1.1] font-bold text-ink mb-4 tracking-[-0.02em]">
                             Why AI Adoption is Important
                         </h2>
-                        <p className="text-[#6b7b8d] text-[17px] lg:text-[18px] leading-[1.6]">
+                        <p className="text-base text-muted leading-relaxed">
                             The imperative for business to implement artificial intelligence into daily operations has moved beyond strategic advantage into operational necessity. Leading consulting firms and research institutions - McKinsey, Deloitte, PwC, KPMG, Harvard Business Review, and government agencies confirm through extensive global research that organizations are experiencing measurable financial returns while companies delaying adoption face mounting competitive disadvantage.
                         </p>
                     </div>

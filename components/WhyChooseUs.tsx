@@ -32,25 +32,22 @@ export default function WhyChooseUs() {
                 <div className="hidden md:block bg-[url('/images/home/why-choose-us.jpg')] bg-cover bg-center min-h-[400px]" />
 
                 <div className="flex justify-center items-center py-4 px-4 md:p-8 lg:p-12 bg-white">
-                    <div className="w-full max-w-[520px] text-center md:text-left">
-                        <p className="inline-block px-2.5 py-1.5 rounded-full bg-[#e9f9f3] text-[#169b78] font-bold text-[0.72rem] tracking-wider mb-1 uppercase">
-                            WHY CHOOSE US
-                        </p>
-                        <h2 id="a4u-wcu-title" className="text-[20px] md:text-[28px] lg:text-[32px] leading-[1.15] font-extrabold tracking-tight mb-2 text-ink">
+                    <div className="w-full max-w-[520px] text-left">
+                        <h2 id="a4u-wcu-title" className="text-[24px] md:text-[30px] lg:text-[36px] leading-[1.1] font-bold tracking-tight mb-4 text-ink">
                             Why Choose Automate4u
                         </h2>
-                        <p className="text-muted text-[1rem] md:text-[0.85rem] mb-4 md:text-left text-center leading-relaxed">
+                        <p className="text-muted text-base mb-6 text-left leading-relaxed">
                             We bring together decades of expertise across technology, innovation, and business strategy to help businesses achieve measurable results by deploying AI-driven & automation solutions that drive scale and growth.
                         </p>
 
-                        <ul className="grid gap-0.5 mt-4 md:mt-6 pl-[60px] relative max-w-[520px] mx-auto md:mx-0">
+                        <ul className="grid gap-0.5 mt-4 md:mt-6 pl-[50px] md:pl-[60px] relative max-w-[520px] mx-auto md:mx-0">
                             {/* Vertical Line */}
                             <div className="absolute left-[20px] top-[10px] bottom-[10px] w-[2px] bg-[#d7efe7]" />
 
                             {steps.map((step, index) => (
                                 <li key={index} className="relative flex items-center gap-4 text-left p-1.5 md:p-3 bg-transparent rounded-2xl">
                                     {/* Number Bubble */}
-                                    <div className="absolute left-[-60px] flex items-center justify-center w-10 h-10 rounded-full bg-[#e9f9f3] text-[#169b78] font-extrabold text-[1rem] z-10">
+                                    <div className="absolute left-[-50px] md:left-[-60px] flex items-center justify-center w-10 h-10 rounded-full bg-[#e9f9f3] text-[#169b78] font-extrabold text-[1rem] z-10">
                                         {step.num}
                                     </div>
 

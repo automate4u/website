@@ -15,20 +15,17 @@ export default function ContactForm() {
     };
 
     return (
-        <section id="contact" className="py-12 px-4 bg-white text-ink text-center" aria-labelledby="qual-title">
+        <section id="contact" className="py-12 px-4 bg-white text-ink text-left" aria-labelledby="qual-title">
             <div className="max-w-[1280px] mx-auto">
-                <span className="inline-block bg-[#e9f9f3] text-[#167f65] px-3 py-1.5 rounded-full font-bold text-[0.72rem] tracking-wider">
-                    Let's talk
-                </span>
-                <h2 id="qual-title" className="text-[28px] leading-[1.15] tracking-[-0.02em] font-extrabold my-2.5 text-balance">
+                <h2 id="qual-title" className="text-[24px] md:text-[30px] lg:text-[36px] leading-[1.1] tracking-[-0.02em] font-bold my-4 text-balance">
                     Get a free consultation
                 </h2>
-                <p className="text-muted text-[1rem] mx-auto mb-5 max-w-[70ch]">
+                <p className="text-muted text-base mb-8 max-w-[70ch]">
                     Tell us about your goals. We’ll get back to you within one business day to schedule a call.
                 </p>
 
                 <form
-                    className="max-w-[960px] mx-auto mt-3.5 text-left grid gap-3 md:grid-cols-2 md:gap-3.5"
+                    className="max-w-[960px] mt-3.5 text-left grid gap-3 md:grid-cols-2 md:gap-3.5"
                     action="https://formspree.io/f/mldplnaa"
                     method="post"
                     onSubmit={handleSubmit}

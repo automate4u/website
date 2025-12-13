@@ -26,26 +26,23 @@ export default function HowItWorks() {
 
                 {/* Left Column (Content) */}
                 <div className="flex justify-center items-center p-4 md:p-[18px]">
-                    <div className="w-full max-w-[520px] text-center">
+                    <div className="w-full max-w-[520px] text-left">
 
-                        <p className="inline-block px-2.5 py-1.5 rounded-full bg-[#e9f9f3] text-[#169b78] font-bold text-[0.72rem] tracking-wider mb-1 uppercase">
-                            HOW IT WORKS
-                        </p>
-                        <h2 id="a4u-hw-title" className="text-[20px] md:text-[28px] lg:text-[32px] leading-[1.15] font-extrabold tracking-tight mb-2 text-ink text-left md:text-center lg:text-left">
+                        <h2 id="a4u-hw-title" className="text-[24px] md:text-[30px] lg:text-[36px] leading-[1.1] font-bold tracking-tight mb-4 text-ink text-left">
                             What Working With Us Looks Like
                         </h2>
-                        <p className="text-muted text-left md:text-center lg:text-left text-[0.9rem] mb-6">
+                        <p className="text-muted text-left text-base mb-8">
                             From idea to live automation – in 3 simple phases.
                         </p>
 
-                        <ul className="grid gap-[10px] mt-6 md:mt-6 pl-[60px] relative max-w-[520px] mx-auto text-left">
+                        <ul className="grid gap-[10px] mt-6 md:mt-6 pl-[50px] md:pl-[60px] relative max-w-[520px] mx-auto text-left">
                             {/* Vertical Line */}
                             <div className="absolute left-[20px] top-[10px] bottom-[10px] w-[2px] bg-[#d7efe7]" />
 
                             {steps.map((step, index) => (
                                 <li key={index} className="relative flex items-center gap-4 text-left p-4 md:p-4 bg-transparent rounded-2xl">
                                     {/* Number Bubble */}
-                                    <div className="absolute left-[-60px] flex items-center justify-center w-10 h-10 rounded-full bg-[#e9f9f3] text-[#169b78] font-extrabold text-[1rem] z-10">
+                                    <div className="absolute left-[-50px] md:left-[-60px] flex items-center justify-center w-10 h-10 rounded-full bg-[#e9f9f3] text-[#169b78] font-extrabold text-[1rem] z-10">
                                         {step.num}
                                     </div>
 
@@ -58,7 +55,7 @@ export default function HowItWorks() {
                         </ul>
 
                         <div className="mt-8 flex flex-col items-center gap-3">
-                            <p className="text-muted text-[0.95rem] whitespace-nowrap">
+                            <p className="text-muted text-[0.95rem] text-center">
                                 Tell us about your goals. We'll get back to you within one business day to schedule a call.
                             </p>
                             <Link

@@ -1,9 +1,10 @@
 import React from 'react';
 
 export default function Page() {
-  return (
-    <>
-      <style dangerouslySetInnerHTML={{ __html: `
+    return (
+        <>
+            <style dangerouslySetInnerHTML={{
+                __html: `
     .hs-pro-scope {
         display: block;
     }
@@ -665,7 +666,8 @@ export default function Page() {
         }
     }
 ` }} />
-      <div dangerouslySetInnerHTML={{ __html: `<div class="hs-pro-scope" data-industry="home-services">
+            <div dangerouslySetInnerHTML={{
+                __html: `<div class="hs-pro-scope" data-industry="home-services">
 
     <!-- ================= HEADER / OVERVIEW ================= -->
     <section class="hs-head" aria-labelledby="hs-head-title">
@@ -691,7 +693,7 @@ export default function Page() {
                     </ul>
                 </div>
                 <div class="hs-head-image">
-                    <img src="https://plus.unsplash.com/premium_photo-1661884973994-d7625e52631a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1171"
+                    <img src="/images/industries/home-services.avif"
                         alt="Home services illustration" />
                 </div>
             </div>
@@ -1002,6 +1004,6 @@ export default function Page() {
   SCOPED STYLES (NEUTRAL)
 ========================= -->
 ` }} />
-    </>
-  );
+        </>
+    );
 }

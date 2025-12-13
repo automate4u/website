@@ -3,17 +3,14 @@ import React from 'react';
 export default function FAQSection() {
     return (
         <section className="py-10 md:py-14 lg:py-[56px] bg-white text-ink" aria-labelledby="fq-title">
-            <div className="max-w-[1280px] mx-auto px-[18px] text-center">
+            <div className="max-w-[1280px] mx-auto px-[18px] text-left">
 
-                <p className="inline-block px-2.5 py-1.5 rounded-full bg-[#e9f9f3] text-[#169b78] font-bold text-[0.72rem] tracking-wider uppercase mb-2.5">
-                    FAQ
-                </p>
-                <h2 id="fq-title" className="text-[28px] md:text-[44px] lg:text-[50px] leading-[1.15] font-extrabold tracking-[-0.02em] mb-1.5 md:mb-6">
+                <h2 id="fq-title" className="text-[24px] md:text-[30px] lg:text-[36px] leading-[1.1] font-bold tracking-[-0.02em] mb-4 md:mb-8">
                     Key Information for Informed Decision Making
                 </h2>
                 <br className="hidden md:block" />
 
-                <div className="max-w-[960px] mx-auto grid gap-3 text-left">
+                <div className="max-w-[960px] grid gap-3 text-left">
 
                     <details className="group border border-[#E7EDF2] rounded-[20px] bg-white overflow-hidden">
                         <summary className="list-none flex items-center justify-between gap-3 p-4 md:p-[22px] cursor-pointer font-semibold text-ink [&::-webkit-details-marker]:hidden">

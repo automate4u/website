@@ -5,47 +5,47 @@ const industries = [
     {
         name: "Financial Services",
         href: "/industries/financial-services",
-        image: "/images/financialServices.jpg",
+        image: "/images/industries/financialServices.jpg",
     },
     {
         name: "Healthcare",
         href: "/industries/healthcare",
-        image: "/images/healthcare.jpg",
+        image: "/images/industries/healthcare.jpg",
     },
     {
         name: "Home Services",
         href: "/industries/home-services",
-        image: "/images/1.jpg", // Placeholder mapping
+        image: "/images/industries/home-services.avif",
     },
     {
         name: "Hospitality",
         href: "/industries/hospitality",
-        image: "/images/2.jpg", // Placeholder mapping
+        image: "/images/industries/hospitality.jpg",
     },
     {
         name: "Manufacturing",
         href: "/industries/manufacturing",
-        image: "/images/manufacturing.jpg",
+        image: "/images/industries/manufacturing.jpg",
     },
     {
         name: "Professional Services",
         href: "/industries/professional-services",
-        image: "/images/3.jpg", // Placeholder mapping
+        image: "/images/industries/professional-services.jpg",
     },
     {
         name: "Real Estate",
         href: "/industries/real-estate",
-        image: "/images/real_estate.jpg",
+        image: "/images/industries/real_estate.jpg",
     },
     {
         name: "Retail & E-commerce",
         href: "/industries/retail-ecommerce",
-        image: "/images/retail.jpg",
+        image: "/images/industries/retail.jpg",
     },
     {
         name: "Technology & Media",
         href: "/industries/technology-media",
-        image: "/images/tech.jpg",
+        image: "/images/industries/tech.jpg",
     },
 ];
 

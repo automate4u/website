@@ -1,9 +1,10 @@
 import React from 'react';
 
 export default function Page() {
-  return (
-    <>
-      <style dangerouslySetInnerHTML={{ __html: `
+    return (
+        <>
+            <style dangerouslySetInnerHTML={{
+                __html: `
     .hs-pro-scope {
         display: block;
     }
@@ -665,7 +666,8 @@ export default function Page() {
         }
     }
 ` }} />
-      <div dangerouslySetInnerHTML={{ __html: `<div class="hs-pro-scope" data-industry="professional-services">
+            <div dangerouslySetInnerHTML={{
+                __html: `<div class="hs-pro-scope" data-industry="professional-services">
 
     <!-- ================= HEADER / OVERVIEW ================= -->
     <section class="hs-head" aria-labelledby="hs-head-title">
@@ -689,7 +691,7 @@ export default function Page() {
                     </ul>
                 </div>
                 <div class="hs-head-image">
-                    <img src="http://automate4u.co/wp-content/uploads/2025/11/professionalservices.jpg"
+                    <img src="/images/industries/professional-services.jpg"
                         alt="Professional services illustration" />
                 </div>
             </div>
@@ -1004,6 +1006,6 @@ export default function Page() {
   SCOPED STYLES (NEUTRAL)
 ========================= -->
 ` }} />
-    </>
-  );
+        </>
+    );
 }

@@ -13,7 +13,7 @@ export default function Hero() {
                 <div className="flex flex-col md:flex-row md:items-center md:gap-8">
 
                     <div className="flex-1 text-left">
-                        <p className="flex justify-start items-center gap-2 text-muted text-[clamp(0.75rem,2.2vw,0.85rem)] leading-[1.3] mb-4 whitespace-nowrap">
+                        <p className="flex flex-wrap justify-start items-center gap-2 text-muted text-[clamp(0.75rem,2.2vw,0.85rem)] leading-[1.3] mb-4 whitespace-normal md:whitespace-nowrap">
                             <span className="text-[clamp(0.8rem,2.5vw,1rem)] text-[#f5b400] tracking-wide" aria-hidden="true">★★★★★</span>
                             <span className="inline">Trusted by Team Leaders Worldwide</span>
                         </p>
