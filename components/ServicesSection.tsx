@@ -7,19 +7,19 @@ export default function ServicesSection() {
             title: "AI Enablement & Workflow Automations",
             description: "Thorough audit of your current tech stack and workflows to find efficiency & automation opportunities.",
             image: "/images/services/automations.jpg",
-            link: "https://automate4u.co/ai-transformation/"
+            link: "/ai-transformation"
         },
         {
             title: "AI Voice Agents",
             description: "Answer calls, schedule bookings, and handle FAQs without human effort.",
             image: "/images/services/voice_agent.jpg",
-            link: "https://automate4u.co/ai-voice/"
+            link: "/ai-voice"
         },
         {
             title: "AI Chatbots",
             description: "From customer inquiries to email follow-ups, our chatbots can perform tedious tasks for you.",
             image: "/images/services/chatbot.jpg",
-            link: "https://automate4u.co/ai-chat/"
+            link: "/ai-chat"
         }
     ];
 
