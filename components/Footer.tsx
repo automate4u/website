@@ -4,7 +4,7 @@ export default function Footer() {
     return (
         <footer className="bg-slate-50 border-t border-card-border pt-16 pb-8 text-ink">
             <div className="max-w-[1280px] mx-auto px-6">
-                <div className="grid gap-10 md:grid-cols-4 lg:gap-16">
+                <div className="grid gap-8 md:grid-cols-5 lg:gap-12">
 
                     <div className="col-span-1 md:col-span-1 lg:col-span-1">
                         <Link href="/" className="flex items-center gap-2 mb-4">
@@ -16,6 +16,16 @@ export default function Footer() {
                         <p className="text-muted text-sm leading-relaxed mb-6">
                             Empowering businesses with AI-driven automation, custom software, and seamless integrations.
                         </p>
+                    </div>
+
+                    <div>
+                        <h4 className="font-bold mb-4">Core Services</h4>
+                        <ul className="space-y-2 text-sm text-muted">
+                            <li><Link href="/core-services/ai-agents" className="hover:text-accent">AI Agents</Link></li>
+                            <li><Link href="/core-services/ai-chat" className="hover:text-accent">AI Chat</Link></li>
+                            <li><Link href="/core-services/ai-voice" className="hover:text-accent">AI Voice</Link></li>
+                            <li><Link href="/core-services/ai-transformation" className="hover:text-accent">AI Transformation</Link></li>
+                        </ul>
                     </div>
 
                     <div>
