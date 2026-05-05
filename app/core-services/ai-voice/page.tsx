@@ -1068,8 +1068,8 @@ export default function AIVoicePage() {
                 {/* ============== FAQ ============== */}
                 <section className="ch-faq" aria-labelledby="faq-title">
                     <div className="ch-container">
-                        <p className="faq-pill">FAQ</p>
-                        <h2 id="faq-title" className="ch-h2">Key Information for Informed Decision Making</h2><br />
+                        <span className="faq-pill">FAQ</span>
+                        <h2 id="faq-title" className="ch-h2">Key Information for Informed Decision Making</h2>
 
                         <div className="faq-list">
                             <FaqItem q="Do your AI Voice Agents integrate with my CRM & Booking System?" a="Yes. Our AI Voice Agents are designed to integrate seamlessly with hundreds of popular CRMs, calendars, and booking systems like Salesforce, HubSpot, Calendly, and more. We handle the connection so your data flows exactly where it needs to go." />
