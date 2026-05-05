@@ -25,7 +25,7 @@ export default function AIInsights() {
             title: "The Structural Productivity Gap",
             description: "PwC reports that since 2022, industries adopting AI have increased productivity nearly four times faster than those that have not. Companies delaying adoption face long-term disadvantages and shrinking market share.",
             source: "Structural Productivity Gap",
-            logo: "/images/logos/PwC-logo-scaled.png",
+            logo: "/images/other-logos/PwC-logo-scaled.png",
             gradient: "before:bg-[linear-gradient(135deg,#709278_0%,#a0c2a8_100%)]",
             gridClass: "col-span-1 row-span-1",
         },
@@ -33,7 +33,7 @@ export default function AIInsights() {
             title: "Customer Service Operations",
             description: "30-45% of current function costs can be addressed through generative AI implementation. Deloitte data shows cybersecurity implementations with 44% reporting ROI exceeded expectations, the highest of any function. Additionally, AI-first customer service breaks the linear growth model, allowing organizations to scale support quality without proportional staff increases.",
             source: "Customer Experience",
-            logo: "/images/logos/Deloitte-Logo.jpg",
+            logo: "/images/other-logos/Deloitte-Logo.jpg",
             gradient: "before:bg-[linear-gradient(135deg,#2f623f_0%,#4f825f_100%)]",
             gridClass: "col-span-1 row-span-1",
         },
@@ -41,7 +41,7 @@ export default function AIInsights() {
             title: "Certain industries lag dangerously behind in adoption",
             description: "Construction, banking, supply chain management, manufacturing, tax preparation, and digital forensics are identified sectors missing AI's power. Within these industries, organizations not implementing AI are particularly vulnerable.",
             source: "Data-Driven Decisions",
-            logo: "/images/logos/logo-2.png",
+            logo: "",
             gradient: "before:bg-[linear-gradient(135deg,#202e23_0%,#404e43_100%)]",
             gridClass: "col-span-1 row-span-2 self-center",
         }
@@ -70,11 +70,13 @@ export default function AIInsights() {
 
                                     <div className="absolute bottom-2.5 right-2.5 flex items-center gap-2 z-10">
                                         <span className="text-[11px] text-[#6b7b8d] font-medium whitespace-nowrap">Source:</span>
-                                        <img
-                                            src={item.logo}
-                                            alt={item.source}
-                                            className="h-auto max-h-[20px] w-auto object-contain"
-                                        />
+                                        {item.logo && (
+                                            <img
+                                                src={item.logo}
+                                                alt={item.source}
+                                                className="h-auto max-h-[20px] w-auto object-contain"
+                                            />
+                                        )}
                                     </div>
                                 </div>
                             </article>

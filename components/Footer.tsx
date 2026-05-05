@@ -7,11 +7,8 @@ export default function Footer() {
                 <div className="grid gap-8 md:grid-cols-5 lg:gap-12">
 
                     <div className="col-span-1 md:col-span-1 lg:col-span-1">
-                        <Link href="/" className="flex items-center gap-2 mb-4">
-                            <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white font-bold text-lg">
-                                A
-                            </div>
-                            <span className="font-extrabold text-xl tracking-tight">Automate4U</span>
+                        <Link href="/" className="block mb-6">
+                            <img src="/images/logos/a4u-logo.svg" alt="Automate4U Logo" className="h-6 w-auto" />
                         </Link>
                         <p className="text-muted text-sm leading-relaxed mb-6">
                             Empowering businesses with AI-driven automation, custom software, and seamless integrations.

@@ -68,11 +68,11 @@ export default function Header() {
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2 z-50 relative">
                     <Image
-                        src="/images/logos/cropped-112.png"
+                        src="/images/logos/a4u-logo.svg"
                         alt="Automate4U Logo"
-                        width={200}
-                        height={50}
-                        className="w-auto h-10"
+                        width={180}
+                        height={40}
+                        className="w-auto h-7"
                         priority
                     />
                 </Link>
