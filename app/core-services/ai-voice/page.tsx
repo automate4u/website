@@ -1,7 +1,12 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+
+type RetellClient = {
+    on: (event: string, handler: (...args: unknown[]) => void) => void;
+    startCall: (args: { accessToken: string }) => Promise<void>;
+    stopCall: () => void;
+};
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
 
@@ -139,13 +144,13 @@ export default function AIVoicePage() {
     const [modalOpen, setModalOpen] = useState(false);
 
     // Retell state
-    const retellClientRef = useRef<any>(null);
+    const retellClientRef = useRef<RetellClient | null>(null);
     const [callActive, setCallActive] = useState(false);
     const [callStarting, setCallStarting] = useState(false);
 
     useEffect(() => {
         import('retell-client-js-sdk').then(({ RetellWebClient }) => {
-            const client = new RetellWebClient();
+            const client = new RetellWebClient() as RetellClient;
             retellClientRef.current = client;
 
             client.on('call_started', () => {
@@ -165,7 +170,7 @@ export default function AIVoicePage() {
 
         return () => {
             if (retellClientRef.current) {
-                try { retellClientRef.current.stopCall(); } catch (e) { }
+                try { retellClientRef.current.stopCall(); } catch { }
             }
         };
     }, []);
@@ -195,9 +200,10 @@ export default function AIVoicePage() {
             await retellClientRef.current.startCall({
                 accessToken: data.access_token
             });
-        } catch (e: any) {
+        } catch (e: unknown) {
+            const message = e instanceof Error ? e.message : 'Unknown error';
             console.error(e);
-            alert("Sorry—couldn't start the voice session. (" + e.message + ")");
+            alert("Sorry—couldn't start the voice session. (" + message + ")");
             setCallStarting(false);
         }
     };
@@ -233,9 +239,9 @@ export default function AIVoicePage() {
 
         /* Container */
         .ch-scope .ch-container {
-            max-width: 1280px;
+            max-width: 1360px;
             margin: 0 auto;
-            padding: 0 18px;
+            padding: 0 24px;
         }
 
         /* HERO */
@@ -248,10 +254,15 @@ export default function AIVoicePage() {
             background-size: cover;
             background-position: center;
             color: #fff;
-            padding: 44px 0;
+            padding: 56px 0 68px;
             text-align: center;
             z-index: 1;
             background-color: #111;
+        }
+
+        .ch-scope .ch-hero-inner {
+            max-width: 980px;
+            margin: 0 auto;
         }
 
         .ch-scope .ch-pill {
@@ -277,20 +288,22 @@ export default function AIVoicePage() {
         .ch-scope .ch-br { display: none; }
 
         .ch-scope .ch-sub {
-            margin: 0 auto 16px;
-            max-width: 70ch;
+            margin: 0 auto 26px;
+            max-width: 62ch;
             color: rgba(255, 255, 255, 0.9);
-            font-size: .98rem;
+            font-size: 1rem;
+            line-height: 1.7;
         }
 
         .ch-scope .ch-btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: .55rem;
             background: var(--accent);
             color: #fff;
             text-decoration: none;
-            padding: .8rem 1.1rem;
+            padding: 1rem 1.35rem;
             border-radius: 999px;
             font-weight: 800;
             box-shadow: 0 10px 26px rgba(29, 185, 147, .28);
@@ -300,14 +313,56 @@ export default function AIVoicePage() {
 
         .ch-scope .ch-btn:hover { background: var(--accent-hover); }
 
+        .ch-scope .ch-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 4px;
+        }
+
+        .ch-scope .ch-btn-secondary {
+            background: rgba(255, 255, 255, 0.14);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: none;
+        }
+
+        .ch-scope .ch-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.22);
+        }
+
+        .ch-scope .ch-btn-try {
+            background: #fff;
+            color: #0f1720;
+            box-shadow: 0 16px 34px rgba(255, 255, 255, 0.18), 0 16px 34px rgba(15, 23, 42, 0.2);
+            min-width: 220px;
+            transform: scale(1.04);
+        }
+
+        .ch-scope .ch-btn-try:hover {
+            background: #f5fffb;
+        }
+
+        .ch-scope .ch-btn-book {
+            min-width: 190px;
+        }
+
+        .ch-scope .ch-hero-note {
+            margin: 18px 0 0;
+            color: rgba(255, 255, 255, 0.76);
+            font-size: .9rem;
+            line-height: 1.6;
+        }
+
         @media (min-width:768px) {
-            .ch-scope .ch-hero { padding: 64px 0; }
+            .ch-scope .ch-hero { padding: 84px 0 96px; }
             .ch-scope .ch-title { font-size: 48px; }
-            .ch-scope .ch-sub { font-size: 1.05rem; }
+            .ch-scope .ch-sub { font-size: 1.08rem; }
         }
 
         @media (min-width:1200px) {
-            .ch-scope .ch-title { font-size: 60px; }
+            .ch-scope .ch-title { font-size: 64px; }
             .ch-scope .ch-br { display: inline; }
         }
 
@@ -315,17 +370,17 @@ export default function AIVoicePage() {
         .ch-scope .ch-intro-text { 
             background: #fff;
             color: var(--ink);
-            padding: 28px 0;
+            padding: 54px 0 42px;
             text-align: center;
         }
 
         .ch-scope .ch-intro-text p {
-            max-width: 80ch;
-            margin: 0 auto 1em;
+            max-width: 78ch;
+            margin: 0 auto 1.15em;
             text-align: left;
-            line-height: 1.6;
+            line-height: 1.85;
             color: var(--ink);
-            font-size: 1.05rem;
+            font-size: 1.08rem;
         }
 
         /* PROBLEM */
@@ -334,9 +389,11 @@ export default function AIVoicePage() {
             position: relative;
             left: 50%;
             transform: translateX(-50%);
-            background: #f8fafc;
+            background:
+                radial-gradient(circle at top left, rgba(29, 185, 147, 0.12), transparent 34%),
+                linear-gradient(180deg, #f7fbf9 0%, #eef5f2 100%);
             color: var(--ink);
-            padding: 40px 0;
+            padding: 88px 0;
             text-align: center;
             overflow: hidden;
         }
@@ -356,7 +413,7 @@ export default function AIVoicePage() {
             font-size: clamp(32px, 4vw, 42px);
             line-height: 1.15;
             letter-spacing: -.02em;
-            margin: 10px 0 6px;
+            margin: 14px 0 10px;
             font-weight: 800;
             text-wrap: balance;
             text-align: center;
@@ -364,8 +421,9 @@ export default function AIVoicePage() {
 
         .ch-scope .ch-sub2 {
             color: var(--muted);
-            margin: 0 auto 18px;
+            margin: 0 auto 26px;
             max-width: 70ch;
+            line-height: 1.7;
         }
 
         .ch-scope .pr-grid {
@@ -379,20 +437,12 @@ export default function AIVoicePage() {
             margin-inline: auto;
         }
 
-        .ch-scope .pr-visual {
-            margin-inline: auto;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         .ch-scope .pr-card {
             background: var(--card);
-            border: none;
-            border-radius: 16px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 24px;
             padding: 28px;
-            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
             text-align: left;
         }
 
@@ -428,11 +478,510 @@ export default function AIVoicePage() {
             background-repeat: no-repeat;
         }
 
+        .ch-scope .demo-shell {
+            max-width: 1180px;
+            margin: 48px auto 0;
+            scroll-margin-top: 120px;
+            position: relative;
+        }
+
+        .ch-scope .demo-shell::before {
+            content: "";
+            position: absolute;
+            inset: -20px -16px auto;
+            height: 220px;
+            border-radius: 40px;
+            background:
+                radial-gradient(circle at 15% 30%, rgba(29, 185, 147, 0.22), transparent 32%),
+                radial-gradient(circle at 85% 10%, rgba(20, 184, 166, 0.16), transparent 28%);
+            filter: blur(20px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .ch-scope .demo-card {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: 34px;
+            align-items: stretch;
+            padding: 28px;
+            border-radius: 32px;
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 252, 250, 0.96) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow:
+                0 24px 60px rgba(15, 23, 42, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(14px);
+        }
+
+        .ch-scope .demo-main {
+            display: grid;
+            gap: 28px;
+        }
+
+        .ch-scope .demo-copy {
+            display: grid;
+            gap: 16px;
+        }
+
+        .ch-scope .demo-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            padding: .44rem .82rem;
+            border-radius: 999px;
+            background: rgba(29, 185, 147, 0.12);
+            color: #13795f;
+            font-size: .76rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .ch-scope .demo-headline {
+            margin: 0;
+            font-size: clamp(1.85rem, 4vw, 3rem);
+            line-height: 1.02;
+            letter-spacing: -.035em;
+            max-width: 14ch;
+            font-weight: 800;
+            text-wrap: balance;
+        }
+
+        .ch-scope .demo-copy p {
+            margin: 0;
+            max-width: 58ch;
+            color: #5f6f81;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .ch-scope .demo-detail-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .ch-scope .demo-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: .66rem .9rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            color: #203240;
+            font-size: .86rem;
+            font-weight: 700;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+        }
+
+        .ch-scope .demo-chip::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: linear-gradient(180deg, #22c55e 0%, #1db993 100%);
+        }
+
+        .ch-scope .demo-console {
+            position: relative;
+            overflow: hidden;
+            padding: 28px;
+            border-radius: 28px;
+            background:
+                radial-gradient(circle at top right, rgba(29, 185, 147, 0.18), transparent 34%),
+                linear-gradient(160deg, #0d1720 0%, #162735 58%, #1e3741 100%);
+            color: #fff;
+            box-shadow: 0 26px 50px rgba(15, 23, 42, 0.22);
+        }
+
+        .ch-scope .demo-console::after {
+            content: "";
+            position: absolute;
+            inset: auto -30px -30px auto;
+            width: 180px;
+            height: 180px;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(29, 185, 147, 0.22), transparent 68%);
+            pointer-events: none;
+        }
+
+        .ch-scope .demo-console-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .ch-scope .demo-console-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.82);
+            font-size: .84rem;
+            font-weight: 700;
+        }
+
+        .ch-scope .demo-console-dots {
+            display: inline-flex;
+            gap: 6px;
+        }
+
+        .ch-scope .demo-console-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.38);
+        }
+
+        .ch-scope .demo-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: .48rem .74rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #d8f8ef;
+            font-size: .8rem;
+            font-weight: 700;
+            backdrop-filter: blur(8px);
+        }
+
+        .ch-scope .demo-status::before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            border-radius: 999px;
+            background: #1db993;
+            box-shadow: 0 0 0 5px rgba(29, 185, 147, 0.18);
+        }
+
+        .ch-scope .demo-console-grid {
+            display: grid;
+            gap: 22px;
+        }
+
+        .ch-scope .demo-preview {
+            display: grid;
+            gap: 18px;
+        }
+
+        .ch-scope .demo-capability-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .ch-scope .demo-capability-list .demo-chip {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.92);
+            box-shadow: none;
+        }
+
+        .ch-scope .demo-capability-list .demo-chip::before {
+            background: linear-gradient(180deg, #7bf0cf 0%, #1db993 100%);
+        }
+
+        .ch-scope .demo-call-card {
+            display: grid;
+            gap: 18px;
+            padding: 26px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+        }
+
+        .ch-scope .demo-call-head {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .ch-scope .demo-avatar-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ch-scope .demo-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #1db993 0%, #127c63 100%);
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 800;
+            box-shadow: 0 10px 24px rgba(29, 185, 147, 0.25);
+        }
+
+        .ch-scope .demo-avatar-copy strong,
+        .ch-scope .demo-avatar-copy span {
+            display: block;
+        }
+
+        .ch-scope .demo-avatar-copy strong {
+            font-size: .98rem;
+            font-weight: 800;
+        }
+
+        .ch-scope .demo-avatar-copy span {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: .84rem;
+        }
+
+        .ch-scope .demo-cta-meta {
+            margin: -4px 0 0;
+            color: rgba(255, 255, 255, 0.68);
+            font-size: .84rem;
+            line-height: 1.6;
+        }
+
+        .ch-scope .demo-wave {
+            display: flex;
+            align-items: end;
+            gap: 5px;
+            height: 64px;
+        }
+
+        .ch-scope .demo-wave span {
+            display: block;
+            flex: 1 1 0;
+            min-width: 6px;
+            border-radius: 999px;
+            background: linear-gradient(180deg, rgba(79, 236, 182, 0.95) 0%, rgba(29, 185, 147, 0.22) 100%);
+        }
+
+        .ch-scope .demo-transcript {
+            display: grid;
+            gap: 14px;
+        }
+
+        .ch-scope .demo-bubble {
+            max-width: 92%;
+            padding: 14px 16px;
+            border-radius: 16px;
+            font-size: .9rem;
+            line-height: 1.6;
+        }
+
+        .ch-scope .demo-bubble strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: .74rem;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        .ch-scope .demo-bubble-agent {
+            justify-self: start;
+            background: rgba(255, 255, 255, 0.11);
+            color: rgba(255, 255, 255, 0.96);
+        }
+
+        .ch-scope .demo-bubble-agent strong {
+            color: #9cebd5;
+        }
+
+        .ch-scope .demo-bubble-user {
+            justify-self: end;
+            background: rgba(29, 185, 147, 0.18);
+            border: 1px solid rgba(29, 185, 147, 0.16);
+            color: #f5fffb;
+        }
+
+        .ch-scope .demo-bubble-user strong {
+            color: #b7fff1;
+        }
+
+        .ch-scope .demo-console-footer {
+            display: grid;
+            gap: 20px;
+            align-content: start;
+            padding: 26px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            text-align: left;
+        }
+
+        .ch-scope .demo-console-footer h3 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .ch-scope .demo-note {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.74);
+            font-size: .88rem;
+            line-height: 1.7;
+        }
+
+        .ch-scope .demo-side {
+            display: grid;
+            gap: 20px;
+            align-content: start;
+        }
+
+        .ch-scope .demo-panel {
+            padding: 26px;
+            border-radius: 24px;
+            background: #fff;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 16px 34px rgba(15, 23, 42, 0.06);
+            text-align: left;
+        }
+
+        .ch-scope .demo-panel h3,
+        .ch-scope .demo-panel h4 {
+            margin: 0 0 12px;
+            color: var(--ink);
+        }
+
+        .ch-scope .demo-panel h3 {
+            font-size: 1.02rem;
+            font-weight: 800;
+        }
+
+        .ch-scope .demo-panel p {
+            margin: 0;
+            color: #5f6f81;
+            line-height: 1.75;
+            font-size: .94rem;
+        }
+
+        .ch-scope .demo-panel-muted {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbfa 100%);
+        }
+
+        .ch-scope .demo-feature-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 18px;
+        }
+
+        .ch-scope .demo-feature-list li {
+            display: grid;
+            gap: 6px;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .ch-scope .demo-feature-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #1db993;
+            box-shadow: 0 0 0 5px rgba(29, 185, 147, 0.12);
+        }
+
+        .ch-scope .demo-feature-list strong {
+            font-size: .94rem;
+        }
+
+        .ch-scope .demo-feature-list span {
+            color: #5f6f81;
+            line-height: 1.55;
+            font-size: .9rem;
+        }
+
+        .ch-scope .demo-stack {
+            display: grid;
+            gap: 14px;
+            margin-top: 12px;
+        }
+
+        .ch-scope .demo-stack-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: #f7faf9;
+            border: 1px solid rgba(15, 23, 42, 0.06);
+        }
+
+        .ch-scope .demo-stack-row strong {
+            font-size: .88rem;
+        }
+
+        .ch-scope .demo-stack-row span {
+            width: 12px;
+            height: 12px;
+            flex: 0 0 12px;
+            border-radius: 999px;
+            background: #1db993;
+            box-shadow: 0 0 0 6px rgba(29, 185, 147, 0.12);
+        }
+
         @media (min-width:900px) {
             .ch-scope .pr-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 40px;
                 align-items: center;
+            }
+
+            .ch-scope .demo-card {
+                grid-template-columns: 1fr;
+                padding: 42px;
+            }
+
+            .ch-scope .demo-console-grid {
+                grid-template-columns: minmax(0, 1.28fr) minmax(280px, .72fr);
+                align-items: start;
+                gap: 28px;
+            }
+
+            .ch-scope .demo-preview {
+                gap: 20px;
+            }
+
+            .ch-scope .demo-side {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+        }
+
+        @media (max-width:899px) {
+            .ch-scope .demo-headline {
+                max-width: 100%;
+            }
+
+            .ch-scope .demo-shell::before {
+                inset: -16px -8px auto;
+                height: 170px;
+            }
+
+            .ch-scope .demo-card {
+                padding: 20px;
+                gap: 24px;
+            }
+
+            .ch-scope .demo-main {
+                gap: 22px;
+            }
+
+            .ch-scope .demo-console {
+                padding: 22px;
             }
         }
         
@@ -443,7 +992,7 @@ export default function AIVoicePage() {
             left: 50%;
             transform: translateX(-50%);
             color: var(--ink);
-            padding: 40px 0;
+            padding: 76px 0;
             text-align: center;
             overflow: hidden;
             background: #fff;
@@ -460,17 +1009,17 @@ export default function AIVoicePage() {
         .ch-scope .roi-card {
             background: var(--card);
             border-radius: 16px;
-            padding: 28px;
+            padding: 34px;
             box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-            margin-top: 24px;
-            max-width: 900px;
+            margin-top: 32px;
+            max-width: 980px;
             margin-inline: auto;
         }
 
         .ch-scope .roi-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 8px;
+            gap: 12px;
             margin: 0;
             text-align: left;
         }
@@ -481,7 +1030,7 @@ export default function AIVoicePage() {
             background: #fff;
             border: 1px solid #eef3f6;
             border-radius: 8px;
-            padding: 12px;
+            padding: 16px;
         }
 
         .ch-scope .roi-label { font-weight: 600; font-size: .9rem; color: var(--ink); }
@@ -498,7 +1047,7 @@ export default function AIVoicePage() {
             border: 2px solid rgba(23, 156, 121, 0.3);
             border-radius: 12px;
             box-shadow: 0 0 20px rgba(23, 156, 121, 0.15);
-            padding: 20px;
+            padding: 26px;
             text-align: center;
         }
 
@@ -525,20 +1074,20 @@ export default function AIVoicePage() {
         .ch-scope .ch-pricing {
             background: #fff;
             color: var(--ink);
-            padding: 64px 0 48px;
+            padding: 84px 0 64px;
             text-align: center;
         }
 
-        .ch-scope .cp-heading { max-width: 720px; margin: 0 auto 40px; }
+        .ch-scope .cp-heading { max-width: 760px; margin: 0 auto 52px; }
         .ch-scope .cp-heading h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; margin: 0 0 10px; }
         .ch-scope .cp-heading p { color: var(--muted); font-size: 1rem; line-height: 1.6; margin: 0; }
 
         .ch-scope .cp-cards {
-            max-width: 985px;
+            max-width: 1120px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 28px;
+            gap: 32px;
             text-align: left;
         }
 
@@ -546,7 +1095,7 @@ export default function AIVoicePage() {
             background: var(--card);
             border-radius: 18px;
             box-shadow: 0 10px 25px rgba(15, 23, 42, .06);
-            padding: 36px 28px 28px;
+            padding: 40px 32px 32px;
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(0, 0, 0, 0.04);
@@ -563,10 +1112,10 @@ export default function AIVoicePage() {
 
         .ch-scope .cp-features {
             list-style: none;
-            margin: 0 0 24px;
+            margin: 0 0 28px;
             padding: 0;
             display: grid;
-            gap: 10px;
+            gap: 12px;
             font-size: .92rem;
         }
 
@@ -629,7 +1178,7 @@ export default function AIVoicePage() {
             transform: translateX(-50%);
             background: #fff;
             color: var(--ink);
-            padding: 44px 0;
+            padding: 76px 0;
             overflow: hidden;
         }
 
@@ -646,11 +1195,11 @@ export default function AIVoicePage() {
 
         .ch-scope .sv-grid {
             list-style: none;
-            margin: 24px auto 0;
+            margin: 34px auto 0;
             padding: 0;
             display: grid;
-            gap: 20px;
-            max-width: 1100px;
+            gap: 28px;
+            max-width: 1180px;
         }
 
         .ch-scope .sv-card {
@@ -665,7 +1214,7 @@ export default function AIVoicePage() {
 
         .ch-scope .sv-card-img {
             width: 100%;
-            height: 180px;
+            height: 220px;
             object-fit: cover;
             display: block;
         }
@@ -686,13 +1235,13 @@ export default function AIVoicePage() {
 
         .ch-scope .sv-step-content {
             flex: 1;
-            padding: 20px;
+            padding: 26px;
         }
 
         .ch-scope .sv-steps-column {
             list-style: none;
             display: grid;
-            gap: 20px;
+            gap: 24px;
             padding: 0;
         }
 
@@ -706,7 +1255,7 @@ export default function AIVoicePage() {
         .ch-scope .ch-faq {
             background: #fff;
             color: var(--ink);
-            padding: 48px 0;
+            padding: 76px 0;
             text-align: center;
         }
 
@@ -723,9 +1272,9 @@ export default function AIVoicePage() {
 
         .ch-scope .faq-list {
             max-width: 880px;
-            margin: 20px auto 0;
+            margin: 28px auto 0;
             display: grid;
-            gap: 12px;
+            gap: 14px;
             text-align: left;
         }
 
@@ -796,18 +1345,19 @@ export default function AIVoicePage() {
         .va-btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: .55rem;
-            background: #000;
+            background: linear-gradient(135deg, #0f1720 0%, #203240 100%);
             color: #fff;
-            padding: .8rem 1.1rem;
+            padding: .95rem 1.25rem;
             border-radius: 999px;
             font-weight: 800;
-            box-shadow: 0 10px 26px rgba(0,0,0,.28);
+            box-shadow: 0 16px 30px rgba(15, 23, 32, .22);
             border: none;
             cursor: pointer;
-            transition: transform .1s;
+            transition: transform .1s, box-shadow .15s;
         }
-        .va-btn:hover { transform: translateY(-1px); }
+        .va-btn:hover { transform: translateY(-1px); box-shadow: 0 20px 34px rgba(15, 23, 32, .28); }
 
         /* Animation */
         @keyframes ch-spin { to { transform:rotate(360deg); } }
@@ -859,7 +1409,7 @@ export default function AIVoicePage() {
 
                 {/* ============== HERO ============== */}
                 <section className="ch-hero" aria-labelledby="ch-hero-title">
-                    <div className="ch-container">
+                    <div className="ch-container ch-hero-inner">
                         <span className="ch-pill">AI VOICE AGENT</span>
                         <h1 id="ch-hero-title" className="ch-title">
                             Boost Your Revenue <br className="ch-br" />with AI Voice Agents
@@ -868,12 +1418,21 @@ export default function AIVoicePage() {
                             Never miss a customer again!<br />
                             Capture leads, qualify prospects, and secure more sales opportunities automatically
                         </p>
-                        <button onClick={() => setModalOpen(true)} className="ch-btn" aria-label="Book a demo">
-                            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                                <path d="M6.6 10.8c1.2 2.3 3.1 4.2 5.4 5.4l1.8-1.8a1 1 0 0 1 1.1-.22c1.2.48 2.5.74 3.8.74a1 1 0 0 1 1 1v2.9a1 1 0 0 1-1 1C11.7 20.8 3.2 12.3 3.2 1.9a1 1 0 0 1 1-1h2.9a1 1 0 0 1 1 1c0 1.3.25 2.6.74 3.8a1 1 0 0 1-.22 1.1l-1.8 1.8Z" fill="currentColor" />
-                            </svg>
-                            Book a Demo
-                        </button>
+                        <div className="ch-actions">
+                            <a href="#voice-demo" className="ch-btn ch-btn-try" aria-label="Jump to voice demo">
+                                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                                    <path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3Zm5-3h2a7 7 0 0 1-14 0h2a5 5 0 0 0 10 0Zm-7 6h4v2h-4v-2Z" />
+                                </svg>
+                                Try Now
+                            </a>
+                            <button onClick={() => setModalOpen(true)} className="ch-btn ch-btn-book" aria-label="Book a demo">
+                                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                                    <path d="M6.6 10.8c1.2 2.3 3.1 4.2 5.4 5.4l1.8-1.8a1 1 0 0 1 1.1-.22c1.2.48 2.5.74 3.8.74a1 1 0 0 1 1 1v2.9a1 1 0 0 1-1 1C11.7 20.8 3.2 12.3 3.2 1.9a1 1 0 0 1 1-1h2.9a1 1 0 0 1 1 1c0 1.3.25 2.6.74 3.8a1 1 0 0 1-.22 1.1l-1.8 1.8Z" fill="currentColor" />
+                                </svg>
+                                Book a Demo
+                            </button>
+                        </div>
+                        <p className="ch-hero-note">Start with the live voice demo, then book a consultation if you want this adapted to your workflow.</p>
                     </div>
                 </section>
 
@@ -929,36 +1488,128 @@ export default function AIVoicePage() {
                 </section>
 
                 {/* ============== DEMO ============== */}
-                <section className="ch-problem" aria-labelledby="prob-title">
+                <section className="ch-problem" aria-labelledby="prob-title" id="voice-demo">
                     <div className="ch-container">
                         <p className="eyebrow">VOICE AGENT DEMO</p>
-                        <h2 id="prob-title" className="ch-h2">Test out our basic AI Voice Agent that you could have for your business</h2>
-                        <br />
+                        <h2 id="prob-title" className="ch-h2">Experience a live AI voice workflow before you commit</h2>
+                        <p className="ch-sub2">Launch the demo to hear how a front-desk style agent can answer, qualify, and route calls with a polished customer experience.</p>
 
-                        <div className="pr-grid">
-                            <div className="pr-visual">
-                                <button className="va-btn" type="button" onClick={launchRetellVoice} disabled={callStarting} style={{ backgroundColor: callActive ? '#dc2626' : '#000' }}>
-                                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                                        <path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3Zm5-3h2a7 7 0 0 1-14 0h2a5 5 0 0 0 10 0Zm-7 6h4v2h-4v-2Z" />
-                                    </svg>
-                                    {callStarting ? 'Connecting...' : callActive ? 'End Call' : 'Try now (Call Demo)'}
-                                </button>
-                            </div>
-                            <div className="pr-cards-stack">
-                                <div className="pr-card">
-                                    <div className="pr-content-section">
-                                        <h3 className="pr-title">Our Core Capabilities</h3>
-                                        <div className="pr-body">
-                                            <ul className="pr-list pr-list--check">
-                                                <li>24/7 functioning - no after hour leads missed</li>
-                                                <li>Smart call routing - keeping sales moving</li>
-                                                <li>Positive demeanor — builds convenience with every caller</li>
-                                                <li>Automated reminders - more appointments to revenue</li>
-                                                <li>Seamless CRM &amp; Calendar integration</li>
-                                            </ul>
+                        <div className="demo-shell">
+                            <div className="demo-card">
+                                <div className="demo-main">
+                                    <div className="demo-console">
+                                        <div className="demo-console-top">
+                                            <div className="demo-console-label">
+                                                <span className="demo-console-dots" aria-hidden="true">
+                                                    <span />
+                                                    <span />
+                                                    <span />
+                                                </span>
+                                                Live Voice Preview
+                                            </div>
+                                            <span className="demo-status">{callActive ? "Live call in progress" : "Ready to connect"}</span>
+                                        </div>
+
+                                        <div className="demo-console-grid">
+                                            <div className="demo-preview">
+                                                <div className="demo-call-card">
+                                                    <div className="demo-call-head">
+                                                        <div className="demo-avatar-wrap">
+                                                            <div className="demo-avatar" aria-hidden="true">AI</div>
+                                                            <div className="demo-avatar-copy">
+                                                                <strong>Automate4u Voice Receptionist</strong>
+                                                                <span>Natural intake, qualification, and handoff</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="demo-capability-list" aria-label="Demo details">
+                                                        <span className="demo-chip">Front-desk style intake</span>
+                                                        <span className="demo-chip">Lead capture and routing</span>
+                                                        <span className="demo-chip">Built for CRM and calendar workflows</span>
+                                                    </div>
+
+                                                    <div className="demo-wave" aria-hidden="true">
+                                                        <span style={{ height: "38%" }} />
+                                                        <span style={{ height: "72%" }} />
+                                                        <span style={{ height: "52%" }} />
+                                                        <span style={{ height: "88%" }} />
+                                                        <span style={{ height: "44%" }} />
+                                                        <span style={{ height: "66%" }} />
+                                                        <span style={{ height: "94%" }} />
+                                                        <span style={{ height: "48%" }} />
+                                                        <span style={{ height: "76%" }} />
+                                                        <span style={{ height: "58%" }} />
+                                                        <span style={{ height: "84%" }} />
+                                                        <span style={{ height: "36%" }} />
+                                                    </div>
+
+                                                    <div className="demo-transcript">
+                                                        <div className="demo-bubble demo-bubble-agent">
+                                                            <strong>Agent</strong>
+                                                            Thanks for calling. I can help answer questions, collect details, and direct you to the right next step.
+                                                        </div>
+                                                        <div className="demo-bubble demo-bubble-user">
+                                                            <strong>Caller</strong>
+                                                            I want to book a consultation and check whether someone can call me back today.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="demo-console-footer">
+                                                <h3>Test the live voice demo</h3>
+                                                <p className="demo-note">Your browser will request microphone access. Once connected, speak naturally and test the live experience in real time.</p>
+                                                <button className="va-btn" type="button" onClick={launchRetellVoice} disabled={callStarting} style={{ background: callActive ? "#dc2626" : undefined }}>
+                                                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                                                        <path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3Zm5-3h2a7 7 0 0 1-14 0h2a5 5 0 0 0 10 0Zm-7 6h4v2h-4v-2Z" />
+                                                    </svg>
+                                                    {callStarting ? "Connecting..." : callActive ? "End Call" : "Try Now"}
+                                                </button>
+                                                {/* <span className="demo-cta-meta">{callActive ? "Connected now" : "Avg. answer: instant"}</span> */}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <aside className="demo-side" aria-label="Voice agent capabilities">
+                                    <div className="demo-panel demo-panel-muted">
+                                        <h3>What this interaction should communicate</h3>
+                                        <ul className="demo-feature-list">
+                                            <li>
+                                                <strong>Fast, confident first response</strong>
+                                                <span>The caller gets immediate acknowledgement instead of voicemail, hold time, or dead air.</span>
+                                            </li>
+                                            <li>
+                                                <strong>Professional intake structure</strong>
+                                                <span>Questions feel purposeful, not robotic, so the agent can qualify intent without sounding clumsy.</span>
+                                            </li>
+                                            <li>
+                                                <strong>Clear operational next step</strong>
+                                                <span>Calls end with captured details, routing, or booking readiness instead of unresolved conversation.</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div className="demo-panel">
+                                        <h4>Workflow readiness</h4>
+                                        <p>This demo is designed around the systems businesses actually care about connecting, not just a generic voice sample.</p>
+                                        <div className="demo-stack" aria-label="Workflow integrations">
+                                            <div className="demo-stack-row">
+                                                <strong>CRM updates</strong>
+                                                <span aria-label="Ready" />
+                                            </div>
+                                            <div className="demo-stack-row">
+                                                <strong>Calendar booking</strong>
+                                                <span aria-label="Ready" />
+                                            </div>
+                                            <div className="demo-stack-row">
+                                                <strong>Lead notifications</strong>
+                                                <span aria-label="Ready" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </aside>
                             </div>
                         </div>
                         <div className="cf-actions" style={{ marginTop: 32 }}>
