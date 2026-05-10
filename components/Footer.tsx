@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
     return (
@@ -8,7 +9,7 @@ export default function Footer() {
 
                     <div className="col-span-1 md:col-span-1 lg:col-span-1">
                         <Link href="/" className="block mb-6">
-                            <img src="/images/logos/a4u-logo.svg" alt="Automate4U Logo" className="h-6 w-auto" />
+                            <Image src="/images/logos/a4u-logo.svg" alt="Automate4U Logo" width={160} height={32} className="h-6 w-auto" />
                         </Link>
                         <p className="text-muted text-sm leading-relaxed mb-6">
                             Empowering businesses with AI-driven automation, custom software, and seamless integrations.

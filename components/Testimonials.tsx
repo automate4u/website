@@ -37,7 +37,7 @@ export default function Testimonials() {
                         </header>
 
                         <p className="text-muted leading-relaxed mb-6 flex-grow">
-                            "Our operations were a mess of spreadsheets and manual data entry between our ERP and supplier systems. Automate4U built a central dashboard that gives us real-time visibility and automated the entire procurement-to-payment process. We're catching issues before they happen."
+                            &quot;Our operations were a mess of spreadsheets and manual data entry between our ERP and supplier systems. Automate4U built a central dashboard that gives us real-time visibility and automated the entire procurement-to-payment process. We&apos;re catching issues before they happen.&quot;
                         </p>
 
                         <div className="flex gap-4 pt-4 border-t border-[#f0f4f8]">
@@ -81,7 +81,7 @@ export default function Testimonials() {
                         </header>
 
                         <p className="text-muted leading-relaxed mb-6 flex-grow">
-                            "We used to spend hours every week sorting through tickets manually. The AI chat implementation handled 60% of common queries instantly. It frees my team to actually solve complex problems."
+                            &quot;We used to spend hours every week sorting through tickets manually. The AI chat implementation handled 60% of common queries instantly. It frees my team to actually solve complex problems.&quot;
                         </p>
 
                         <div className="flex gap-4 pt-4 border-t border-[#f0f4f8]">

@@ -1,7 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useActionState, useState } from "react";
 import Image from "next/image";
+import { submitAssessmentLeadWithState } from "@/app/actions/assessment";
+import AttributionFields from "@/components/AttributionFields";
+import { trackEvent } from "@/lib/analytics";
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
 
@@ -25,39 +28,38 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 function QualifyForm() {
-    const [submitting, setSubmitting] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
+    const [state, formAction, pending] = useActionState(submitAssessmentLeadWithState, {
+        ok: false,
+        message: "",
+    });
+    const submitted = state.ok;
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setSubmitting(true);
-        const data = new FormData(e.currentTarget);
-        try {
-            await fetch("https://formspree.io/f/mwprqbyv", {
-                method: "POST",
-                body: data,
-                headers: { Accept: "application/json" },
-            });
-            setSubmitted(true);
-        } catch (error) {
-            console.error("Form submission error", error);
-        } finally {
-            setSubmitting(false);
-        }
-    };
+    React.useEffect(() => {
+        if (!state.message) return;
+
+        trackEvent(state.ok ? "site_assessment_form_submitted" : "site_assessment_form_failed", {
+            page: "/core-services/ai-transformation",
+            ctaLocation: "ai_transformation_inline_form",
+            serviceInterest: "ai-transformation",
+        });
+    }, [state.message, state.ok]);
 
     if (submitted) {
         return (
             <div className="ch-form-success" role="status" style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 10, padding: "48px 20px", background: "var(--card)", borderRadius: 16 }}>
                 <svg viewBox="0 0 24 24" width="48" height="48" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#e9f9f3" /><path d="M8 12l3 3 5-5" stroke="#1db993" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" /></svg>
-                <h4 style={{ margin: 0, fontSize: "1.25rem", fontWeight: 800, color: "var(--ink)" }}>Request Sent!</h4>
-                <p style={{ margin: 0, color: "var(--muted)", maxWidth: 400 }}>Your information has been received. Our team will review your details and be in touch to schedule your enablement consult.</p>
+                <h4 style={{ margin: 0, fontSize: "1.25rem", fontWeight: 800, color: "var(--ink)" }}>Assessment request received.</h4>
+                <p style={{ margin: 0, color: "var(--muted)", maxWidth: 400 }}>{state.message}</p>
             </div>
         );
     }
 
     return (
-        <form className="q-form" onSubmit={handleSubmit}>
+        <form className="q-form" action={formAction}>
+            <input type="hidden" name="sourcePage" value="/core-services/ai-transformation" />
+            <input type="hidden" name="ctaLocation" value="ai_transformation_inline_form" />
+            <input type="hidden" name="serviceInterest" value="ai-transformation" />
+            <AttributionFields />
             <div className="q-grid">
                 <label className="q-field">
                     <span className="q-label">Work email</span>
@@ -122,13 +124,23 @@ function QualifyForm() {
                 </label>
                 <label className="q-field q-field--full">
                     <span className="q-label">What does success look like?</span>
-                    <textarea name="goals" rows={4} placeholder="e.g., 60% ticket deflection, instant lead booking, weekly invoice automation, internal copilot…" />
+                    <textarea name="workflowPain" rows={4} placeholder="e.g., 60% ticket deflection, instant lead booking, weekly invoice automation, internal copilot..." />
                 </label>
             </div>
 
+            {state.message && !state.ok ? <p className="q-note" role="alert">{state.message}</p> : null}
             <div className="q-actions" role="group" aria-label="Primary calls to action">
-                <button className="q-btn q-primary" type="submit" disabled={submitting}>
-                    {submitting ? (
+                <button
+                    className="q-btn q-primary"
+                    type="submit"
+                    disabled={pending}
+                    onClick={() => trackEvent("site_assessment_cta_clicked", {
+                        page: "/core-services/ai-transformation",
+                        ctaLocation: "ai_transformation_inline_form",
+                        serviceInterest: "ai-transformation",
+                    })}
+                >
+                    {pending ? (
                         <>
                             <svg className="q-spinner" viewBox="0 0 50 50" aria-hidden="true" style={{ width: 18, height: 18, overflow: 'visible' }}>
                                 <circle cx="25" cy="25" r="20" fill="none" strokeWidth="5" />
@@ -140,7 +152,7 @@ function QualifyForm() {
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M8 7V3h2v4H8Zm4 0V3h2v4h-2Zm4 0V3h2v4h-2ZM4 21V9h16v12H4Zm2-2h12V11H6v8Z" fill="currentColor" />
                             </svg>
-                            Request Meeting
+                            Request My Assessment
                         </>
                     )}
 
@@ -1120,11 +1132,11 @@ export default function AITransformationPage() {
                             We partner with your team to evaluate, integrate, and operationalize the best AI tools for your workflows.
                             Governance-first, security-forward, and designed for real adoption.
                         </p>
-                        <a href="#qualify" className="en-btn" aria-label="Book an enablement consult">
+                        <a href="#qualify" className="en-btn" aria-label="Get a free AI workflow assessment">
                             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                                 <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 6h-2v5l4 2 .9-1.7-2.9-1.6V8Z" fill="currentColor" />
                             </svg>
-                            Book an Enablement Consult
+                            Get Free Assessment
                         </a>
                         <p className="en-note">Includes roadmap &amp; quick-win plan</p>
                     </div>
@@ -1233,8 +1245,13 @@ export default function AITransformationPage() {
                         <h2 id="govern-title" className="en-h2" style={{ color: "white" }}>Governance, Risk &amp; Compliance</h2>
                         <div className="gov-grid">
                             <figure className="gov-visual" role="img" aria-label="Policy & access control illustration">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src="/images/services/Screenshot-2025-11-01-214703-1.jpg" alt="Access control and audit visualization" />
+                                <Image
+                                    src="/images/services/Screenshot-2025-11-01-214703-1.jpg"
+                                    alt="Access control and audit visualization"
+                                    width={760}
+                                    height={480}
+                                    style={{ width: "100%", height: "auto", display: "block" }}
+                                />
                             </figure>
                             <div className="gov-card">
                                 <ul className="gov-list gov-list--check">
@@ -1261,7 +1278,7 @@ export default function AITransformationPage() {
                         <ReadinessCheck />
 
                         <div className="rd-actions">
-                            <a href="#qualify" className="rd-btn rd-primary">Book an Enablement Consult</a>
+                            <a href="#qualify" className="rd-btn rd-primary">Get Free Assessment</a>
                             <a href="#faq" className="rd-btn rd-secondary">Review FAQs</a>
                         </div>
                     </div>
@@ -1311,7 +1328,7 @@ export default function AITransformationPage() {
                                     <svg viewBox="0 0 24 24" aria-hidden="true">
                                         <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 6h-2v5l4 2 .9-1.7-2.9-1.6V8Z" fill="currentColor" />
                                     </svg>
-                                    Book an Enablement Consult
+                                    Get Free Assessment
                                 </a>
                                 <p className="cf-note">Roadmap &amp; quick wins</p>
                             </div>

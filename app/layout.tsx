@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Automate4U - Your AI Transformation Partner",
-  description: "We find the best tools for your needs, build new ones when none exist, and connect them to supercharge your existing workflows.",
-};
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
+import SiteAnalytics from "@/components/SiteAnalytics";
+import JsonLd from "@/components/JsonLd";
+import { siteConfig } from "@/data/site";
+import { createMetadata } from "@/lib/metadata";
+import { organizationSchema, websiteSchema } from "@/lib/schema";
+
+export const metadata: Metadata = createMetadata({
+  title: siteConfig.defaultTitle,
+  description: siteConfig.description,
+  path: "/",
+});
 
 export default function RootLayout({
   children,
@@ -21,14 +24,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} antialiased flex flex-col min-h-screen pt-[88px] overflow-x-hidden`}
+        className="antialiased flex flex-col min-h-screen pt-[88px] overflow-x-hidden"
       >
+        <JsonLd data={[organizationSchema(), websiteSchema()]} />
         <Header />
         <main className="flex-grow">
           {children}
         </main>
         <Footer />
         <ChatWidget />
+        <SiteAnalytics />
       </body>
     </html>
   );

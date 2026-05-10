@@ -1,6 +1,10 @@
 "use client";
 
-import React, { useState, useRef, useCallback } from "react";
+import React, { useActionState, useState, useRef, useCallback, useEffect } from "react";
+import Image from "next/image";
+import { submitAssessmentLeadWithState } from "@/app/actions/assessment";
+import AttributionFields from "@/components/AttributionFields";
+import { trackEvent } from "@/lib/analytics";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface Agent {
@@ -29,6 +33,13 @@ const AGENTS: Agent[] = [
 
 const CATEGORY_OPTIONS = ["Sales", "Support", "Operations", "HR", "Finance"];
 const TYPE_OPTIONS = ["Chat Agent", "Voice Agent", "Workflow", "RPA", "Integrator"];
+const USE_CASE_MAP: Record<string, string> = {
+    Sales: "Sales (lead capture & booking)",
+    Support: "Support (ticket deflection & triage)",
+    Operations: "Operations (docs, data, finance)",
+    HR: "Custom workflow",
+    Finance: "Custom workflow",
+};
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
 
@@ -101,21 +112,26 @@ export default function AIAgentsPage() {
 
     // Form state
     const formRef = useRef<HTMLFormElement>(null);
-    const [submitting, setSubmitting] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
+    const [leadState, formAction, pending] = useActionState(submitAssessmentLeadWithState, {
+        ok: false,
+        message: "",
+    });
+    const submitted = leadState.ok;
     const [formUseCase, setFormUseCase] = useState("");
     const [formGoals, setFormGoals] = useState("");
 
-    const useCaseMap: Record<string, string> = {
-        Sales: "Sales (lead capture & booking)",
-        Support: "Support (ticket deflection & triage)",
-        Operations: "Operations (docs, data, finance)",
-        HR: "Custom workflow",
-        Finance: "Custom workflow",
-    };
+    useEffect(() => {
+        if (!leadState.message) return;
+
+        trackEvent(leadState.ok ? "site_assessment_form_submitted" : "site_assessment_form_failed", {
+            page: "/core-services/ai-agents",
+            ctaLocation: "ai_agents_inline_form",
+            serviceInterest: "ai-agents",
+        });
+    }, [leadState.message, leadState.ok]);
 
     const handleRequestAgent = useCallback((agent: Agent) => {
-        setFormUseCase(useCaseMap[agent.category] ?? "Custom workflow");
+        setFormUseCase(USE_CASE_MAP[agent.category] ?? "Custom workflow");
         if (!formGoals) {
             setFormGoals(`Interested in: ${agent.name}. Success = measurable time saved and SLA improvements.`);
         }
@@ -125,7 +141,7 @@ export default function AIAgentsPage() {
             const top = form.getBoundingClientRect().top + window.scrollY - offset;
             window.scrollTo({ top, behavior: "smooth" });
         }
-    }, [formGoals]);
+    }, [formGoals, setFormGoals, setFormUseCase]);
 
     const scrollToDemo = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -133,21 +149,6 @@ export default function AIAgentsPage() {
         if (el) {
             const top = el.getBoundingClientRect().top + window.scrollY - 20;
             window.scrollTo({ top, behavior: "smooth" });
-        }
-    };
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setSubmitting(true);
-        const form = e.currentTarget;
-        const data = new FormData(form);
-        try {
-            await fetch("https://formspree.io/f/xzzjvgkw", { method: "POST", body: data, headers: { Accept: "application/json" } });
-            setSubmitted(true);
-        } catch {
-            // keep form open on error
-        } finally {
-            setSubmitting(false);
         }
     };
 
@@ -323,7 +324,7 @@ export default function AIAgentsPage() {
                             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                                 <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 6h-2v5l4 2 .9-1.7-2.9-1.6V8Z" fill="currentColor" />
                             </svg>
-                            Book a Demo
+                            Get Free Assessment
                         </a>
                         <p className="ag-note">35+ booked this month</p>
                     </div>
@@ -370,9 +371,11 @@ export default function AIAgentsPage() {
                         <div className="pr-grid">
                             <div className="pr-visual">
                                 <div className="ph">
-                                    <img
+                                    <Image
                                         src="/images/services/AI-Agent-Team-03.png"
                                         alt="Systems connected by AI agents"
+                                        width={760}
+                                        height={480}
                                         style={{ width: "100%", height: "auto", display: "block" }}
                                     />
                                 </div>
@@ -517,10 +520,14 @@ export default function AIAgentsPage() {
 
                         {submitted ? (
                             <div className="q-success" role="status">
-                                ✓ Thanks! We&apos;ll be in touch within 1 business day to discuss your workflow.
+                                ✓ {leadState.message}
                             </div>
                         ) : (
-                            <form id="demo" ref={formRef} className="qual-form" onSubmit={handleSubmit} noValidate>
+                            <form id="demo" ref={formRef} className="qual-form" action={formAction} noValidate>
+                                <input type="hidden" name="sourcePage" value="/core-services/ai-agents" />
+                                <input type="hidden" name="ctaLocation" value="ai_agents_inline_form" />
+                                <input type="hidden" name="serviceInterest" value="ai-agents" />
+                                <AttributionFields />
                                 <div className="q-grid">
                                     <label className="q-field">
                                         <span className="q-label">Work email</span>
@@ -561,7 +568,7 @@ export default function AIAgentsPage() {
                                     <label className="q-field q-field--full">
                                         <span className="q-label">What does success look like?</span>
                                         <textarea
-                                            name="goals"
+                                            name="workflowPain"
                                             rows={4}
                                             placeholder="e.g., 50% fewer tickets, instant lead booking, weekly invoice automation…"
                                             value={formGoals}
@@ -569,9 +576,19 @@ export default function AIAgentsPage() {
                                         />
                                     </label>
                                 </div>
+                                {leadState.message && !leadState.ok ? <p className="q-note" role="alert">{leadState.message}</p> : null}
                                 <div className="q-actions">
-                                    <button className="q-btn q-primary" type="submit" disabled={submitting}>
-                                        {submitting ? (
+                                    <button
+                                        className="q-btn q-primary"
+                                        type="submit"
+                                        disabled={pending}
+                                        onClick={() => trackEvent("site_assessment_cta_clicked", {
+                                            page: "/core-services/ai-agents",
+                                            ctaLocation: "ai_agents_inline_form",
+                                            serviceInterest: "ai-agents",
+                                        })}
+                                    >
+                                        {pending ? (
                                             <>
                                                 <svg className="spinner" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                                                     <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="40 20" />
@@ -581,7 +598,7 @@ export default function AIAgentsPage() {
                                         ) : (
                                             <>
                                                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7V3h2v4H8Zm4 0V3h2v4h-2Zm4 0V3h2v4h-2ZM4 21V9h16v12H4Zm2-2h12V11H6v8Z" fill="currentColor" /></svg>
-                                                Request Meeting
+                                                Request My Assessment
                                             </>
                                         )}
                                     </button>
@@ -619,7 +636,7 @@ export default function AIAgentsPage() {
                             <div className="cf-col">
                                 <a className="cf-btn cf-primary" href="#demo" onClick={scrollToDemo}>
                                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 6h-2v5l4 2 .9-1.7-2.9-1.6V8Z" fill="currentColor" /></svg>
-                                    Book a Demo
+                                    Get Free Assessment
                                 </a>
                                 <p className="cf-note">35+ booked this month</p>
                             </div>

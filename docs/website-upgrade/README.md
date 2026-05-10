@@ -26,27 +26,86 @@ Key decisions:
 - V1 free tools: Resend Free for notification emails, Calendly Free for the assessment booking link, PostHog Free for analytics.
 - Pricing transparency: show ranges and explain variable vendor-cost drivers without reducing Automate4U to raw API resale.
 
-## Recommended Reading Order
+## How To Use These Docs
+
+Use this README as the entry point and `04-implementation-roadmap.md` as the build sequence.
+
+The numbered files are not a strict build order. They are grouped by purpose:
+
+### 1. Decisions And Current State
+
+Read these first before implementation:
 
 1. `00-context-and-decisions.md`
 2. `01-current-site-audit.md`
-3. `02-positioning-strategy.md`
-4. `03-site-architecture-and-offers.md`
-5. `04-implementation-roadmap.md`
-6. `08-execution-contracts.md`
-7. `11-creative-experience-direction.md`
-8. `06-technical-remediation.md`
-9. `09-governance-customer-journey-and-conversion-tests.md`
-10. `10-strategic-tool-stack-taxonomy.md`
-11. `14-labor-efficiency-and-human-redeployment.md`
-12. `15-proof-inventory-checklist.md`
-13. `16-cta-lead-routing-analytics-and-pricing.md`
-14. `17-pricing-transparency-and-cost-model.md`
+3. `07-refinement-notes.md`
 
-Use the other docs as supporting references:
+Purpose:
 
-- `05-content-proof-and-wow-factor.md`
-- `07-refinement-notes.md`
+- Understand what was decided.
+- Preserve the current-site audit.
+- Avoid re-litigating settled strategy.
+
+### 2. Market, Offer, And Conversion Strategy
+
+Use these to shape pages, copy, CTAs, pricing, and proof:
+
+1. `02-positioning-strategy.md`
+2. `03-site-architecture-and-offers.md`
+3. `13-smb-spend-confidence-strategy.md`
+4. `14-labor-efficiency-and-human-redeployment.md`
+5. `16-cta-lead-routing-analytics-and-pricing.md`
+6. `17-pricing-transparency-and-cost-model.md`
+
+Purpose:
+
+- Keep AI Voice prominent without making the company voice-only.
+- Keep the offer ladder clear.
+- Make spend feel staged, transparent, and practical.
+- Keep CTA, lead routing, analytics, scheduling, and pricing consistent.
+
+### 3. Visitor Experience, Trust, And Proof
+
+Use these when designing the homepage, AI Voice page, Industry Accelerators, and proof sections:
+
+1. `05-content-proof-and-wow-factor.md`
+2. `09-governance-customer-journey-and-conversion-tests.md`
+3. `11-creative-experience-direction.md`
+4. `12-expertise-demonstration-experiences.md`
+5. `15-proof-inventory-checklist.md`
+
+Purpose:
+
+- Make the site feel like trustworthy professional services plus excellent AI systems work.
+- Show real operational pain, connected systems, measurable value, and human control.
+- Keep anonymous/representative case studies credible and NDA-safe.
+
+### 4. Engineering Contracts
+
+Use these while coding:
+
+1. `04-implementation-roadmap.md`
+2. `06-technical-remediation.md`
+3. `08-execution-contracts.md`
+4. `10-strategic-tool-stack-taxonomy.md`
+
+Purpose:
+
+- Define build phases.
+- Keep content data, metadata, forms, analytics, scripts, and components consistent.
+- Avoid one-off page implementations.
+
+## Implementation Flow
+
+Follow this practical sequence:
+
+1. Current-state code audit against `01-current-site-audit.md`.
+2. Phase 1 foundation from `04-implementation-roadmap.md` and `06-technical-remediation.md`.
+3. Shared data/component contracts from `08-execution-contracts.md`.
+4. Homepage and AI Voice rebuild using `02`, `03`, `05`, `11`, `12`, and `16`.
+5. First Industry Accelerator and proof modules using `10`, `15`, and `17`.
+6. Conversion tracking, HubSpot/Resend/Calendly, and Playwright tests using `06`, `08`, `09`, and `16`.
+7. Incremental migration of remaining pages.
 
 ## First Implementation Milestone
 
@@ -55,8 +114,16 @@ Do not try to rebuild the entire site at once.
 Codex implementation note:
 
 - These docs are the implementation source of truth for the upgrade project.
-- Do not begin code implementation until explicitly instructed.
-- When implementation begins, start from this milestone and keep app changes aligned with the docs instead of inventing a new plan in chat.
+- Code implementation began after explicit approval in this conversation.
+- Keep app changes aligned with these docs instead of inventing a new plan in chat.
+
+Current implementation status:
+
+- Technical foundation fixes are in progress.
+- Lint and production build are currently passing.
+- Metadata helper, route metadata layouts, sitemap, and robots have been added.
+- A shared Free AI Workflow Assessment Server Action and form component have been added.
+- Contact and core service lead flows now use the shared assessment path where practical.
 
 Milestone 1 should ship:
 

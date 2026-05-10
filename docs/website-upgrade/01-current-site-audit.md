@@ -83,9 +83,10 @@ Impact:
 - Visitors may not understand the single best next step.
 - Sales follow-up receives inconsistent lead context.
 
-Recommended standard CTA:
+Recommended standard CTA system:
 
-**Free AI Workflow Assessment**
+- Button label: **Get Free Assessment**
+- Offer name: **Free AI Workflow Assessment**
 
 ### 5. Trust And Proof Signals Are Thin
 
@@ -133,9 +134,9 @@ Recommended direction:
 - Create one clear flagship path for AI Voice and one clear path for broader AI operations.
 - Rebrand industry pages as Industry Accelerators.
 
-### 7. Current Lint And Build Risks
+### 7. Initial Lint And Build Risks
 
-Prior checks found lint failures, including:
+The pre-implementation Phase 1 check found `npm run lint` failed with 11 errors and 15 warnings, including:
 
 - Explicit `any` in Retell API route.
 - `@ts-ignore` in ChatWidget.
@@ -143,23 +144,49 @@ Prior checks found lint failures, including:
 - Unescaped JSX text.
 - Unused imports.
 - Raw `<img>` warnings.
+- `migrate_pages.js` is included in lint and fails modern import rules.
 
-Production build passed when network access was allowed for Google font fetching. A sandboxed build failed because Next could not fetch Google Fonts.
+The same preflight found `npm run build` failed when the environment could not fetch Google Fonts through `next/font/google`.
+
+Phase 1 implementation note:
+
+- The initial lint errors were fixed.
+- The Google Fonts build dependency was removed.
+- `npm run lint` now passes.
+- `npm run build` now passes when Turbopack is allowed to run outside the sandbox restriction that blocks local process/port binding during CSS processing.
 
 Recommended quality bar:
 
 - `npm run lint` passes with zero errors.
 - `npm run build` passes.
 - Font strategy is reliable in deployment.
+- Legacy migration scripts are excluded from normal app linting or updated to current lint rules.
+
+### 8. Content Source Of Truth Does Not Exist Yet
+
+The implementation plan calls for typed content files, but no `data/` directory currently exists.
+
+Impact:
+
+- Page copy, metadata, routes, cards, and service/industry details remain duplicated across pages.
+- It is harder to generate sitemap entries, metadata, and page sections consistently.
+- Rebuilding pages without a data layer risks repeating the current one-off page problem.
+
+Recommended direction:
+
+- Create typed content objects before or alongside the first homepage and AI Voice rebuild.
+- Use the contracts in `08-execution-contracts.md` as the starting point.
 
 ## Recommended Priorities
 
-1. Add SEO foundation and unique metadata.
-2. Standardize CTA and lead capture.
-3. Rebuild homepage and AI Voice page around the new positioning.
-4. Replace raw migrated pages with reusable React components.
-5. Optimize images and third-party scripts.
-6. Add proof, case studies, demos, and analytics.
+1. Fix lint/build blockers, including font reliability.
+2. Add SEO foundation and unique metadata.
+3. Create typed content source of truth.
+4. Standardize CTA and lead capture.
+5. Rebuild homepage and AI Voice page around the new positioning.
+6. Replace raw migrated pages with reusable React components.
+7. Optimize images and third-party scripts.
+8. Add proof, case studies, demos, and analytics.
 
 ## Related Documents
 

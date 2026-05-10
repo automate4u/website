@@ -13,8 +13,12 @@ export default function Header() {
 
     // Close mobile menu on route change
     useEffect(() => {
-        setMobileMenuOpen(false);
-        setExpandedMobileSection(null);
+        const id = window.setTimeout(() => {
+            setMobileMenuOpen(false);
+            setExpandedMobileSection(null);
+        }, 0);
+
+        return () => window.clearTimeout(id);
     }, [pathname]);
 
     // Handle scroll effect
@@ -137,7 +141,7 @@ export default function Header() {
                 {/* CTA & Mobile Toggle */}
                 <div className="flex items-center gap-4">
                     <Link href="/contact" className="hidden lg:inline-flex bg-accent hover:bg-btn-hover text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-lg shadow-accent/20">
-                        Get a Consultation
+                        Get Free Assessment
                     </Link>
 
                     <button
@@ -214,7 +218,7 @@ export default function Header() {
                         <Link href="/contact" className="block font-bold text-lg text-ink">Contact</Link>
 
                         <Link href="/contact" className="w-full bg-accent text-white py-3 rounded-full font-bold text-center mt-4">
-                            Get a Consultation
+                            Get Free Assessment
                         </Link>
                     </div>
                 </div>
@@ -223,4 +227,3 @@ export default function Header() {
         </header>
     );
 }
-

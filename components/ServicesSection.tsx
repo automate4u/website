@@ -48,9 +48,11 @@ export default function ServicesSection() {
                                 className="flex flex-col h-full rounded-[12px] bg-[#060D12] border border-[rgba(255,255,255,0.28)] overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.18)] backdrop-blur-[14px] transition-all duration-300 hover:bg-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.3)] hover:shadow-[0_20px_70px_rgba(15,23,32,0.25)] hover:-translate-y-1"
                             >
                                 <div className="h-[180px] md:h-[200px] lg:h-[220px] bg-transparent overflow-hidden rounded-t-[12px] shrink-0">
-                                    <img
+                                    <Image
                                         src={service.image}
                                         alt={service.title}
+                                        width={420}
+                                        height={260}
                                         className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
                                     />
                                 </div>

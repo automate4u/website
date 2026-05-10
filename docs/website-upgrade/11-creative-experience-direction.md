@@ -53,6 +53,26 @@ Use dark, glassy surfaces selectively:
 
 Do not make the whole site a dark glassmorphism theme unless design testing proves it improves clarity and trust.
 
+## Design Quality Rules
+
+The public website should speak directly to the buyer, not to the internal implementation team.
+
+Avoid public section copy that says what the website needs to prove, what buyers need to see, or what Automate4U is trying to demonstrate. Translate those internal goals into buyer-facing outcomes:
+
+- Instead of "The site has to prove we understand operational pain," write about the buyer losing time to routine requests.
+- Instead of "We build connected systems," write about conversations becoming CRM updates, bookings, tasks, and follow-ups.
+- Instead of "We reduce repetitive labor cost," write about lowering manual touches and freeing staff for higher-value work.
+- Instead of "Humans stay in control," write about approvals, escalation, audit logs, and staff review for sensitive cases.
+
+Visual quality standards:
+
+- Use a restrained type scale. Hero headings should feel confident, not oversized.
+- Keep section spacing generous but controlled.
+- Prefer crisp 8px-radius cards and panels over large rounded blocks.
+- Use shadows sparingly; professional-services trust should come from clarity, structure, and proof.
+- Avoid wireframe-like sections that feel like planning artifacts.
+- Every visual section should help the buyer understand pain, workflow, trust, or value.
+
 ## People And Photography Direction
 
 The upgraded site should include human imagery. Professional-services buyers need to feel that Automate4U is a team they can trust, not only a clever interface.
@@ -82,13 +102,7 @@ Avoid:
 - Dark anonymous silhouettes.
 - Images that imply a huge enterprise staff if Automate4U is selling a small expert team.
 
-When real photography is unavailable, use restrained generated or sourced imagery as the v1 bridge. The long-term goal should be authentic team and process photography, but implementation should not block on a full photo shoot.
-
-V1 image decision:
-
-- Generated or sourced people/process imagery is approved for launch if it feels professional, believable, and aligned with the trust direction.
-- Replace temporary imagery over time with real Automate4U team, process, and working-session photography.
-- Keep an internal list of temporary images so they can be swapped later without redesigning the page.
+When real photography is unavailable, use restrained generated or sourced imagery only as a temporary bridge. The long-term goal should be authentic team and process photography.
 
 ## Motion Design Principles
 
@@ -131,6 +145,20 @@ Story:
 5. The CTA appears: Get Free Assessment.
 
 This should be an "aha" moment, not a decorative animation.
+
+## Homepage Page Direction
+
+Use the Homepage v2 pass as the current quality benchmark for the main site narrative.
+
+The homepage should do five jobs quickly:
+
+- Name the operational problem in plain business language.
+- Show that Automate4U connects AI conversations to real downstream actions.
+- Explain the implementation method without sounding like a strategy deck.
+- Build trust with human/process visuals and careful governance language.
+- Give cautious buyers a clear, low-risk next step through the Free AI Workflow Assessment.
+
+Avoid internal labels such as "wedge," "proof pillars," or "what buyers need to see" in public copy. Use buyer-facing language such as "strong starting point," "what changes," "where value starts," and "what we are seeing."
 
 ## Flagship AI Voice Experience
 
@@ -203,7 +231,7 @@ Recommended line:
 
 > We automate the work that slows you down.
 
-Optional rotating footer or lower-page line:
+Optional rotating footer or lower-page line: Consider "The work we do is simple. We automate _____ for you"
 
 > We automate your calls, emails, workflows, admin, sales follow-up, support, marketing, and operations for you.
 
@@ -244,6 +272,43 @@ Use:
 Do not add fake loading states where static content could render immediately.
 
 ## Proof-First Visuals
+
+## Industry Accelerator Page Direction
+
+Industry pages should feel like premium advisory pages backed by real implementation skill, not like repeated landing-page templates.
+
+Use the Manufacturing AI Accelerator v2 page as the benchmark pattern.
+
+Each accelerator should balance:
+
+- Professional-services trust: calm pacing, clear diagnosis, practical language, and human oversight.
+- Sales clarity: one specific industry promise, one primary CTA, and an obvious first step.
+- Implementation proof: connected systems, workflow routing, auditability, and operational KPIs.
+- Buyer confidence: staged rollout, spend clarity, and safeguards for sensitive actions.
+
+Avoid:
+
+- Long walls of identical cards.
+- Generic chip lists that feel like keyword stuffing.
+- Repeating the same section shape every 600 pixels.
+- Copy that sounds like an internal strategy memo.
+- Overstating automation as if AI should independently approve risky decisions.
+
+Preferred rhythm:
+
+1. Executive hero with a specific industry outcome.
+2. Operational diagnosis that shows Automate4U understands how work actually breaks down.
+3. One end-to-end workflow story showing conversation intake, approved data access, routing, human review, follow-up, and KPI logging.
+4. Buyer-facing value patterns or representative examples that describe where clients usually see value first.
+5. Sector-thinking section that shows what is changing in the industry and how Automate4U thinks about it.
+6. Systems-of-record and integration trust.
+7. Controls by design.
+8. Spend-confidence and staged rollout.
+9. Assessment CTA.
+
+This is a stronger pattern than simply listing pain points, workflows, KPIs, and safeguards in separate card grids. The page should feel like Automate4U has walked through the buyer's operation, not like it filled out a template.
+
+Avoid labels like "anonymous engagement patterns" on public pages. That phrase is useful internally, but it makes the reader feel like they are seeing our planning notes. Use client-facing labels such as "Where value usually starts," "Common first workflows," "Representative workflows," or "What teams automate first."
 
 Every premium visual should answer one of these questions:
 

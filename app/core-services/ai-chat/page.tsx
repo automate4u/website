@@ -1,6 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useActionState, useState } from "react";
+import Image from "next/image";
+import { submitAssessmentLeadWithState } from "@/app/actions/assessment";
+import AttributionFields from "@/components/AttributionFields";
+import { trackEvent } from "@/lib/analytics";
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
 
@@ -22,24 +26,21 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 function ContactModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-    const [submitting, setSubmitting] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
+    const [state, formAction, pending] = useActionState(submitAssessmentLeadWithState, {
+        ok: false,
+        message: "",
+    });
+    const submitted = state.ok;
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setSubmitting(true);
-        const data = new FormData(e.currentTarget);
-        try {
-            await fetch("https://formspree.io/f/xzzjvgkw", {
-                method: "POST",
-                body: data,
-                headers: { Accept: "application/json" },
-            });
-            setSubmitted(true);
-        } finally {
-            setSubmitting(false);
-        }
-    };
+    React.useEffect(() => {
+        if (!state.message) return;
+
+        trackEvent(state.ok ? "site_assessment_form_submitted" : "site_assessment_form_failed", {
+            page: "/core-services/ai-chat",
+            ctaLocation: "ai_chat_modal",
+            serviceInterest: "ai-chat",
+        });
+    }, [state.message, state.ok]);
 
     if (!open) return null;
     return (
@@ -47,8 +48,8 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
             onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
             <div className="ch-popup-container">
                 <div className="ch-popup-header">
-                    <h3 id="popup-title">Start Your Chatbot Project</h3>
-                    <button onClick={() => { onClose(); setSubmitted(false); }} className="ch-popup-close" aria-label="Close">
+                    <h3 id="popup-title">Request Your AI Chat Assessment</h3>
+                    <button onClick={onClose} className="ch-popup-close" aria-label="Close">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                         </svg>
@@ -59,16 +60,20 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                         {submitted ? (
                             <div className="ch-form-success" role="status">
                                 <svg viewBox="0 0 24 24" width="40" height="40" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#e9f9f3" /><path d="M8 12l3 3 5-5" stroke="#1db993" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" /></svg>
-                                <h4>We&apos;ll be in touch within 1 business day!</h4>
-                                <p>Thanks for reaching out. Our team will review your needs and propose a tailored chatbot solution.</p>
-                                <button className="ch-form-close-btn" onClick={() => { onClose(); setSubmitted(false); }}>Close</button>
+                                <h4>We&apos;ll review your workflow within 1 business day.</h4>
+                                <p>{state.message}</p>
+                                <button className="ch-form-close-btn" onClick={onClose}>Close</button>
                             </div>
                         ) : (
                             <>
                                 <p className="ch-form-intro">
-                                    Ready to automate your customer interactions? Tell us about your needs and we&apos;ll create a tailored chatbot solution for you.
+                                    Tell us where chat and messaging slow your team down. We&apos;ll assess the workflow, likely savings, guardrails, and the best next step.
                                 </p>
-                                <form className="ch-native-form" onSubmit={handleSubmit} noValidate>
+                                <form className="ch-native-form" action={formAction} noValidate>
+                                    <input type="hidden" name="sourcePage" value="/core-services/ai-chat" />
+                                    <input type="hidden" name="ctaLocation" value="ai_chat_modal" />
+                                    <input type="hidden" name="serviceInterest" value="ai-chat" />
+                                    <AttributionFields />
                                     <div className="ch-form-grid">
                                         <label className="ch-form-field">
                                             <span className="ch-form-label">Work email *</span>
@@ -108,15 +113,25 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                                         </label>
                                         <label className="ch-form-field ch-form-field--full">
                                             <span className="ch-form-label">What does success look like?</span>
-                                            <textarea name="goals" rows={3} placeholder="e.g., answer FAQs 24/7, book more demos, reduce support tickets by 50%…" />
+                                            <textarea name="workflowPain" rows={3} placeholder="e.g., faster answers, fewer support tickets, better handoffs, more booked leads..." />
                                         </label>
                                     </div>
+                                    {state.message && !state.ok ? <p className="ch-form-note" role="alert">{state.message}</p> : null}
                                     <div className="ch-form-actions">
-                                        <button type="submit" className="ch-form-submit" disabled={submitting}>
-                                            {submitting ? (
+                                        <button
+                                            type="submit"
+                                            className="ch-form-submit"
+                                            disabled={pending}
+                                            onClick={() => trackEvent("site_assessment_cta_clicked", {
+                                                page: "/core-services/ai-chat",
+                                                ctaLocation: "ai_chat_modal",
+                                                serviceInterest: "ai-chat",
+                                            })}
+                                        >
+                                            {pending ? (
                                                 <><svg className="ch-spin" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="40 20" /></svg> Submitting…</>
                                             ) : (
-                                                <>Submit Request</>
+                                                <>Request My Assessment</>
                                             )}
                                         </button>
                                     </div>
@@ -334,7 +349,7 @@ export default function AIChatPage() {
                             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                                 <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 6h-2v5l4 2 .9-1.7-2.9-1.6V8Z" fill="currentColor" />
                             </svg>
-                            Book a Demo
+                            Get Free Assessment
                         </button>
                     </div>
                 </section>
@@ -377,7 +392,7 @@ export default function AIChatPage() {
                                 },
                             ].map((s) => (
                                 <article key={s.title} className="ch-step-card">
-                                    <img src={s.img} alt={`${s.title} phase illustration`} className="ch-step-img" />
+                                    <Image src={s.img} alt={`${s.title} phase illustration`} width={420} height={260} className="ch-step-img" />
                                     <div className="ch-step-body">
                                         <h3 className="ch-step-h3">{s.title}</h3>
                                         <p className="ch-step-text">{s.text}</p>
@@ -503,7 +518,7 @@ export default function AIChatPage() {
                                     <p className="ch-price-note">Starting at</p>
                                     <p className="ch-price-val">$300</p>
                                     <p className="ch-price-per">per site, per month</p>
-                                    <button className="ch-price-btn" onClick={() => setModalOpen(true)}>Book a Demo</button>
+                                    <button className="ch-price-btn" onClick={() => setModalOpen(true)}>Get Free Assessment</button>
                                 </div>
                             </article>
 
@@ -530,7 +545,7 @@ export default function AIChatPage() {
                                     <p className="ch-price-note">Starting at</p>
                                     <p className="ch-price-val">$399</p>
                                     <p className="ch-price-per">per site, per month</p>
-                                    <button className="ch-price-btn" onClick={() => setModalOpen(true)}>Book a Demo</button>
+                                    <button className="ch-price-btn" onClick={() => setModalOpen(true)}>Get Free Assessment</button>
                                 </div>
                             </article>
                         </div>

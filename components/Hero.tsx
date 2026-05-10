@@ -34,7 +34,7 @@ export default function Hero() {
                             href="#contact"
                             className="inline-flex items-center justify-center h-12 px-6 py-2 text-[0.95rem] md:text-[1rem] font-extrabold text-white transition-all bg-accent rounded-full hover:bg-btn-hover hover:text-white focus:outline-none focus:ring-2 focus:ring-accent/50 shadow-[rgba(0,0,0,0.05)_0_3px_5px_-1px,rgba(0,0,0,0.04)_0_6px_10px_0,rgba(0,0,0,0.03)_0_1px_18px_0]"
                         >
-                            Book a Free Consultation
+                            Get Free Assessment
                         </Link>
                     </div>
 

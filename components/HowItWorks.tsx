@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export default function HowItWorks() {
     const steps = [
@@ -56,7 +55,7 @@ export default function HowItWorks() {
 
                         <div className="mt-8 flex flex-col items-center gap-3">
                             <p className="text-muted text-[0.95rem] text-center">
-                                Tell us about your goals. We'll get back to you within one business day to schedule a call.
+                                Tell us about your goals. We&apos;ll get back to you within one business day to schedule a call.
                             </p>
                             <Link
                                 href="#contact"
@@ -65,7 +64,7 @@ export default function HowItWorks() {
                                 <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
                                     <path d="M2 22l20-10L2 2v7l14 3-14 3v7Z" />
                                 </svg>
-                                Get a Free Consultation
+                                Get Free Assessment
                             </Link>
                         </div>
 

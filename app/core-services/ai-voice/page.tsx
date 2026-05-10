@@ -1,1741 +1,571 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useActionState, useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import AttributionFields from "@/components/AttributionFields";
+import SectionHeader from "@/components/sections/SectionHeader";
+import { submitAssessmentLeadWithState } from "@/app/actions/assessment";
+import { trackEvent } from "@/lib/analytics";
 
 type RetellClient = {
-    on: (event: string, handler: (...args: unknown[]) => void) => void;
-    startCall: (args: { accessToken: string }) => Promise<void>;
-    stopCall: () => void;
+  on: (event: string, handler: (...args: unknown[]) => void) => void;
+  startCall: (args: { accessToken: string }) => Promise<void>;
+  stopCall: () => void;
 };
 
-// ─── Sub-components ──────────────────────────────────────────────────────────
+const operationsEvents = [
+  {
+    label: "Call answered",
+    detail: "AI greets caller, captures intent, and checks the request type.",
+    status: "Live",
+  },
+  {
+    label: "Intent detected",
+    detail: "Booking request, quote question, service issue, or human escalation.",
+    status: "Classified",
+  },
+  {
+    label: "Business data checked",
+    detail: "CRM, calendar, inventory, pricing rules, or knowledge base are queried.",
+    status: "Connected",
+  },
+  {
+    label: "Action created",
+    detail: "Task, booking, quote follow-up, ticket, or internal notification is created.",
+    status: "Triggered",
+  },
+  {
+    label: "Human handoff",
+    detail: "Sensitive, uncertain, or high-value requests route to staff with full context.",
+    status: "Controlled",
+  },
+  {
+    label: "KPI logged",
+    detail: "Handled minutes, outcome, escalation, and response-time metrics are recorded.",
+    status: "Measured",
+  },
+];
 
-function FaqItem({ q, a }: { q: string; a: string }) {
-    const [open, setOpen] = useState(false);
-    return (
-        <div className={`faq-item${open ? " faq-item-open" : ""}`} style={{ backgroundColor: open ? "#fff" : "#f7faf9" }}>
-            <button className="faq-q" onClick={() => setOpen((o) => !o)} aria-expanded={open}>
-                {q}
-                <span className="faq-icon" aria-hidden="true" style={{ fontSize: "1.2rem", color: "var(--accent)", flexShrink: 0 }}>
-                    {open ? "−" : "+"}
-                </span>
-            </button>
-            {open && (
-                <div className="faq-a" style={{ display: "block" }}>
-                    <p>{a}</p>
-                </div>
-            )}
-        </div>
-    );
-}
+const workflowExamples = [
+  {
+    title: "Home services dispatch",
+    pain: "Missed calls become missed jobs.",
+    workflow: "AI answers, qualifies urgency, books or routes, sends SMS, and updates CRM.",
+    kpi: "Missed calls recovered",
+  },
+  {
+    title: "Clinic or professional intake",
+    pain: "Front desk staff repeat the same questions all day.",
+    workflow: "AI collects intake details, books the next step, flags sensitive cases, and creates notes.",
+    kpi: "Admin interruptions reduced",
+  },
+  {
+    title: "Manufacturing response",
+    pain: "Customers wait for parts, quote, and order updates.",
+    workflow: "AI captures the request, checks available data, starts a quote task, and routes to sales.",
+    kpi: "Quote cycle time reduced",
+  },
+];
+
+const pricingNotes = [
+  "Voice cost depends on handled minutes, call complexity, model choices, transcription, text-to-speech, routing, and recording needs.",
+  "The platform fee covers monitoring, tuning, integration upkeep, workflow updates, support, and reliability.",
+  "High-risk workflows should keep staff approval, audit logs, and extra checks instead of being priced like routine calls.",
+];
+
+const faqs = [
+  {
+    q: "Is this only a phone answering bot?",
+    a: "No. Voice is the frontline. The value comes when the call creates a CRM update, booking, ticket, quote task, notification, audit log, or human handoff.",
+  },
+  {
+    q: "Can humans stay in control?",
+    a: "Yes. We design approval rules, escalation paths, audit logs, and handoffs for sensitive or uncertain situations.",
+  },
+  {
+    q: "Can it integrate with our CRM and calendar?",
+    a: "Yes. Common workflows include HubSpot, Google Calendar, Calendly, helpdesk tools, spreadsheets, email, SMS, and custom APIs.",
+  },
+  {
+    q: "How should we start?",
+    a: "Start with one measurable workflow. Prove value, train the team, then expand into more channels or Managed AI Operations.",
+  },
+];
 
 function ContactModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-    const [submitting, setSubmitting] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
+  const [state, formAction, pending] = useActionState(submitAssessmentLeadWithState, {
+    ok: false,
+    message: "",
+  });
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setSubmitting(true);
-        const data = new FormData(e.currentTarget);
-        try {
-            await fetch("https://formspree.io/f/xzzjvgkw", {
-                method: "POST",
-                body: data,
-                headers: { Accept: "application/json" },
-            });
-            setSubmitted(true);
-        } finally {
-            setSubmitting(false);
-        }
-    };
+  useEffect(() => {
+    if (!state.message) return;
 
-    if (!open) return null;
-    return (
-        <div className="popup-overlay active" role="dialog" aria-modal="true" aria-labelledby="popup-title"
-            onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
-            <div className="popup-container">
-                <div className="popup-header">
-                    <h3 id="popup-title">Start Your Chatbot Project</h3>
-                    <button onClick={() => { onClose(); setSubmitted(false); }} className="popup-close" aria-label="Close">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                        </svg>
-                    </button>
-                </div>
-                <div className="popup-content">
-                    <div className="form-container">
-                        {submitted ? (
-                            <div className="ch-form-success" role="status" style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 10, padding: "32px 20px" }}>
-                                <svg viewBox="0 0 24 24" width="40" height="40" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#e9f9f3" /><path d="M8 12l3 3 5-5" stroke="#1db993" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" /></svg>
-                                <h4 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 800, color: "var(--ink)" }}>We&apos;ll be in touch within 1 business day!</h4>
-                                <p style={{ margin: 0, color: "var(--muted)" }}>Thanks for reaching out. Our team will review your needs and propose a tailored chatbot solution.</p>
-                                <button className="popup-submit-btn" onClick={() => { onClose(); setSubmitted(false); }} style={{ marginTop: 8 }}>Close</button>
-                            </div>
-                        ) : (
-                            <>
-                                <p className="form-intro">
-                                    Ready to automate your customer interactions? Tell us about your needs and we&apos;ll create a tailored solution for you.
-                                </p>
-                                <form className="popup-form" onSubmit={handleSubmit} noValidate>
-                                    <div className="form-grid" style={{ display: "grid", gap: 14 }}>
-                                        <label className="form-field">
-                                            <span style={{ fontWeight: 600, fontSize: ".88rem", color: "var(--ink)" }}>Work email *</span>
-                                            <input type="email" name="email" required placeholder="you@company.com" autoComplete="email" />
-                                        </label>
-                                        <label className="form-field">
-                                            <span style={{ fontWeight: 600, fontSize: ".88rem", color: "var(--ink)" }}>Company *</span>
-                                            <input type="text" name="company" required placeholder="Company Inc." />
-                                        </label>
-                                        <label className="form-field">
-                                            <span style={{ fontWeight: 600, fontSize: ".88rem", color: "var(--ink)" }}>Team size</span>
-                                            <select name="team_size" defaultValue="">
-                                                <option value="" disabled>Select</option>
-                                                {["1–10", "11–50", "51–200", "200+"].map(o => <option key={o}>{o}</option>)}
-                                            </select>
-                                        </label>
-                                        <label className="form-field">
-                                            <span style={{ fontWeight: 600, fontSize: ".88rem", color: "var(--ink)" }}>Current channels</span>
-                                            <select name="channels" defaultValue="">
-                                                <option value="" disabled>Select</option>
-                                                {["Website only", "Website + SMS", "Website + WhatsApp", "Multiple channels"].map(o => <option key={o}>{o}</option>)}
-                                            </select>
-                                        </label>
-                                        <label className="form-field">
-                                            <span style={{ fontWeight: 600, fontSize: ".88rem", color: "var(--ink)" }}>Monthly budget (USD)</span>
-                                            <select name="budget" defaultValue="">
-                                                <option value="" disabled>Select</option>
-                                                {["Under $300", "$300–$399", "$400–$800", "$800+"].map(o => <option key={o}>{o}</option>)}
-                                            </select>
-                                        </label>
-                                        <label className="form-field">
-                                            <span style={{ fontWeight: 600, fontSize: ".88rem", color: "var(--ink)" }}>Timeline</span>
-                                            <select name="timeline" defaultValue="">
-                                                <option value="" disabled>Select</option>
-                                                {["ASAP (this month)", "1–2 months", "Quarter", "Exploring"].map(o => <option key={o}>{o}</option>)}
-                                            </select>
-                                        </label>
-                                        <label className="form-field form-field-full">
-                                            <span style={{ fontWeight: 600, fontSize: ".88rem", color: "var(--ink)" }}>What does success look like?</span>
-                                            <textarea name="goals" rows={3} placeholder="e.g., answer FAQs 24/7, book more demos, reduce support tickets by 50%…" />
-                                        </label>
-                                    </div>
-                                    <div style={{ marginTop: 18 }}>
-                                        <button type="submit" className="popup-submit-btn" disabled={submitting}>
-                                            {submitting ? (
-                                                <><svg className="ch-spin" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="40 20" /></svg> Submitting…</>
-                                            ) : (
-                                                <>Submit Request</>
-                                            )}
-                                        </button>
-                                    </div>
-                                    <p className="form-note">We never sell your data. By submitting you agree we may contact you about this request.</p>
-                                </form>
-                            </>
-                        )}
-                    </div>
-                </div>
-            </div>
+    trackEvent(state.ok ? "site_assessment_form_submitted" : "site_assessment_form_failed", {
+      page: "/core-services/ai-voice",
+      ctaLocation: "ai_voice_modal",
+      serviceInterest: "ai-voice",
+    });
+  }, [state.message, state.ok]);
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[1000] flex items-center justify-end bg-black/50 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="popup-title"
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <div className="flex h-full w-full max-w-[760px] flex-col bg-white shadow-[-20px_0_70px_rgba(0,0,0,0.22)] md:h-[88vh] md:rounded-l-2xl">
+        <div className="flex items-center justify-between border-b border-card-border px-6 py-5">
+          <h3 id="popup-title" className="text-xl font-extrabold text-ink">
+            Request Your AI Voice Assessment
+          </h3>
+          <button
+            onClick={onClose}
+            className="rounded-lg p-2 text-muted hover:bg-[#f5f8f7] hover:text-ink"
+            aria-label="Close"
+          >
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </button>
         </div>
-    );
+
+        <div className="flex-1 overflow-y-auto p-6">
+          {state.ok ? (
+            <div className="grid place-items-center gap-4 py-12 text-center" role="status">
+              <div className="grid h-12 w-12 place-items-center rounded-full bg-[#e9f9f3] text-2xl font-bold text-[#169b78]">
+                ✓
+              </div>
+              <h4 className="text-xl font-extrabold text-ink">We&apos;ll review your workflow within 1 business day.</h4>
+              <p className="max-w-[520px] text-muted">{state.message}</p>
+              <button onClick={onClose} className="mt-2 rounded-full bg-accent px-6 py-3 font-extrabold text-white hover:bg-btn-hover">
+                Close
+              </button>
+            </div>
+          ) : (
+            <>
+              <p className="mb-6 text-center leading-7 text-muted">
+                Tell us where calls slow your team down. We will assess the workflow, likely savings, guardrails, and the best next step.
+              </p>
+              <form className="grid gap-4" action={formAction} noValidate>
+                <input type="hidden" name="sourcePage" value="/core-services/ai-voice" />
+                <input type="hidden" name="ctaLocation" value="ai_voice_modal" />
+                <input type="hidden" name="serviceInterest" value="ai-voice" />
+                <AttributionFields />
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  <label className="grid gap-1.5">
+                    <span className="text-sm font-semibold text-ink">Work email *</span>
+                    <input type="email" name="email" required placeholder="you@company.com" autoComplete="email" className="rounded-xl border border-card-border px-3 py-3" />
+                  </label>
+                  <label className="grid gap-1.5">
+                    <span className="text-sm font-semibold text-ink">Company *</span>
+                    <input type="text" name="company" required placeholder="Company Inc." className="rounded-xl border border-card-border px-3 py-3" />
+                  </label>
+                  <label className="grid gap-1.5">
+                    <span className="text-sm font-semibold text-ink">Team size</span>
+                    <select name="team_size" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
+                      <option value="" disabled>Select</option>
+                      {["1-10", "11-50", "51-200", "200+"].map((option) => <option key={option}>{option}</option>)}
+                    </select>
+                  </label>
+                  <label className="grid gap-1.5">
+                    <span className="text-sm font-semibold text-ink">Current channels</span>
+                    <select name="channels" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
+                      <option value="" disabled>Select</option>
+                      {["Phone only", "Phone + email", "Phone + SMS", "Multiple channels"].map((option) => <option key={option}>{option}</option>)}
+                    </select>
+                  </label>
+                  <label className="grid gap-1.5">
+                    <span className="text-sm font-semibold text-ink">Monthly budget (USD)</span>
+                    <select name="budget" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
+                      <option value="" disabled>Select</option>
+                      {["Exploring", "$3k-$5k", "$5k-$10k", "$10k+"].map((option) => <option key={option}>{option}</option>)}
+                    </select>
+                  </label>
+                  <label className="grid gap-1.5">
+                    <span className="text-sm font-semibold text-ink">Timeline</span>
+                    <select name="timeline" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
+                      <option value="" disabled>Select</option>
+                      {["ASAP", "1-2 months", "This quarter", "Just exploring"].map((option) => <option key={option}>{option}</option>)}
+                    </select>
+                  </label>
+                  <label className="grid gap-1.5 md:col-span-2">
+                    <span className="text-sm font-semibold text-ink">What does success look like?</span>
+                    <textarea name="workflowPain" rows={4} placeholder="e.g., fewer missed calls, faster bookings, safer handoffs, less admin follow-up..." className="rounded-xl border border-card-border px-3 py-3" />
+                  </label>
+                </div>
+
+                {state.message && !state.ok ? (
+                  <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
+                    {state.message}
+                  </p>
+                ) : null}
+
+                <button
+                  type="submit"
+                  disabled={pending}
+                  onClick={() => trackEvent("site_assessment_cta_clicked", {
+                    page: "/core-services/ai-voice",
+                    ctaLocation: "ai_voice_modal",
+                    serviceInterest: "ai-voice",
+                  })}
+                  className="inline-flex justify-center rounded-full bg-accent px-6 py-3 font-extrabold text-white hover:bg-btn-hover disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                  {pending ? "Submitting..." : "Request My Assessment"}
+                </button>
+                <p className="text-center text-sm text-muted">We never sell your data. By submitting you agree we may contact you about this request.</p>
+              </form>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
-// ─── Main Page ───────────────────────────────────────────────────────────────
-export default function AIVoicePage() {
-    const [modalOpen, setModalOpen] = useState(false);
-
-    // Retell state
-    const retellClientRef = useRef<RetellClient | null>(null);
-    const [callActive, setCallActive] = useState(false);
-    const [callStarting, setCallStarting] = useState(false);
-
-    useEffect(() => {
-        import('retell-client-js-sdk').then(({ RetellWebClient }) => {
-            const client = new RetellWebClient() as RetellClient;
-            retellClientRef.current = client;
-
-            client.on('call_started', () => {
-                setCallActive(true);
-                setCallStarting(false);
-            });
-            client.on('call_ended', () => {
-                setCallActive(false);
-                setCallStarting(false);
-            });
-            client.on('error', (error) => {
-                console.error('Retell error:', error);
-                setCallActive(false);
-                setCallStarting(false);
-            });
-        }).catch(err => console.error("Could not load SDK", err));
-
-        return () => {
-            if (retellClientRef.current) {
-                try { retellClientRef.current.stopCall(); } catch { }
-            }
-        };
-    }, []);
-
-    const launchRetellVoice = async () => {
-        if (!retellClientRef.current) return;
-        if (callActive) {
-            retellClientRef.current.stopCall();
-            return;
-        }
-
-        try {
-            setCallStarting(true);
-            await navigator.mediaDevices.getUserMedia({ audio: true });
-
-            const req = await fetch('/api/retell/web-call', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ metadata: { source: 'website-voice-btn' } })
-            });
-
-            const data = await req.json();
-            if (!req.ok || !data.access_token) {
-                throw new Error(data.error || 'Failed to start call');
-            }
-
-            await retellClientRef.current.startCall({
-                accessToken: data.access_token
-            });
-        } catch (e: unknown) {
-            const message = e instanceof Error ? e.message : 'Unknown error';
-            console.error(e);
-            alert("Sorry—couldn't start the voice session. (" + message + ")");
-            setCallStarting(false);
-        }
-    };
-
-    // ROI calculator state
-    const [volume, setVolume] = useState(1500);
-    const [deflect, setDeflect] = useState(40);
-    const [cost, setCost] = useState(12);
-
-    const monthlySavings = volume * (deflect / 100) * cost;
-
-    return (
-        <>
-            <style>{`
-        /* ── Tokens ── */
-        .ch-scope {
-            --ink: #0f1720;
-            --muted: #6b7b8d;
-            --accent: #1db993;
-            --accent-hover: #169b78;
-            --accent-ink: #179c79;
-            --line: #d7efe7;
-            --pill-bg: #e9f9f3;
-            --panel: #f8fbfa;
-            --card: #ffffff;
-            --border: #E7EDF2;
-            --soft: #f6f8fb;
-            --radius: 999px;
-            display: block;
-        }
-
-        .ch-scope * { box-sizing: border-box; }
-
-        /* Container */
-        .ch-scope .ch-container {
-            max-width: 1360px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* HERO */
-        .ch-scope .ch-hero {
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/images/services/voice_agent.jpg');
-            background-size: cover;
-            background-position: center;
-            color: #fff;
-            padding: 56px 0 68px;
-            text-align: center;
-            z-index: 1;
-            background-color: #111;
-        }
-
-        .ch-scope .ch-hero-inner {
-            max-width: 980px;
-            margin: 0 auto;
-        }
-
-        .ch-scope .ch-pill {
-            display: inline-block;
-            background: var(--pill-bg);
-            color: #169b78;
-            padding: .4rem .7rem;
-            border-radius: 999px;
-            font-weight: 700;
-            letter-spacing: .05em;
-            font-size: .72rem;
-            white-space: nowrap;
-        }
-
-        .ch-scope .ch-title {
-            margin: 12px auto 8px;
-            font-weight: 800;
-            line-height: 1.08;
-            letter-spacing: -.01em;
-            font-size: 32px;
-        }
-
-        .ch-scope .ch-br { display: none; }
-
-        .ch-scope .ch-sub {
-            margin: 0 auto 26px;
-            max-width: 62ch;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        .ch-scope .ch-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: .55rem;
-            background: var(--accent);
-            color: #fff;
-            text-decoration: none;
-            padding: 1rem 1.35rem;
-            border-radius: 999px;
-            font-weight: 800;
-            box-shadow: 0 10px 26px rgba(29, 185, 147, .28);
-            border: none;
-            cursor: pointer;
-        }
-
-        .ch-scope .ch-btn:hover { background: var(--accent-hover); }
-
-        .ch-scope .ch-actions {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 14px;
-            margin-top: 4px;
-        }
-
-        .ch-scope .ch-btn-secondary {
-            background: rgba(255, 255, 255, 0.14);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: none;
-        }
-
-        .ch-scope .ch-btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.22);
-        }
-
-        .ch-scope .ch-btn-try {
-            background: #fff;
-            color: #0f1720;
-            box-shadow: 0 16px 34px rgba(255, 255, 255, 0.18), 0 16px 34px rgba(15, 23, 42, 0.2);
-            min-width: 220px;
-            transform: scale(1.04);
-        }
-
-        .ch-scope .ch-btn-try:hover {
-            background: #f5fffb;
-        }
-
-        .ch-scope .ch-btn-book {
-            min-width: 190px;
-        }
-
-        .ch-scope .ch-hero-note {
-            margin: 18px 0 0;
-            color: rgba(255, 255, 255, 0.76);
-            font-size: .9rem;
-            line-height: 1.6;
-        }
-
-        @media (min-width:768px) {
-            .ch-scope .ch-hero { padding: 84px 0 96px; }
-            .ch-scope .ch-title { font-size: 48px; }
-            .ch-scope .ch-sub { font-size: 1.08rem; }
-        }
-
-        @media (min-width:1200px) {
-            .ch-scope .ch-title { font-size: 64px; }
-            .ch-scope .ch-br { display: inline; }
-        }
-
-        /* INTRO TEXT */
-        .ch-scope .ch-intro-text { 
-            background: #fff;
-            color: var(--ink);
-            padding: 54px 0 42px;
-            text-align: center;
-        }
-
-        .ch-scope .ch-intro-text p {
-            max-width: 78ch;
-            margin: 0 auto 1.15em;
-            text-align: left;
-            line-height: 1.85;
-            color: var(--ink);
-            font-size: 1.08rem;
-        }
-
-        /* PROBLEM */
-        .ch-scope .ch-problem {
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-            background:
-                radial-gradient(circle at top left, rgba(29, 185, 147, 0.12), transparent 34%),
-                linear-gradient(180deg, #f7fbf9 0%, #eef5f2 100%);
-            color: var(--ink);
-            padding: 88px 0;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        .ch-scope .eyebrow {
-            display: inline-block;
-            padding: .35rem .6rem;
-            border-radius: 999px;
-            background: var(--pill-bg);
-            color: var(--accent-ink);
-            font-weight: 700;
-            font-size: .72rem;
-            letter-spacing: .06em;
-        }
-
-        .ch-scope .ch-h2 {
-            font-size: clamp(32px, 4vw, 42px);
-            line-height: 1.15;
-            letter-spacing: -.02em;
-            margin: 14px 0 10px;
-            font-weight: 800;
-            text-wrap: balance;
-            text-align: center;
-        }
-
-        .ch-scope .ch-sub2 {
-            color: var(--muted);
-            margin: 0 auto 26px;
-            max-width: 70ch;
-            line-height: 1.7;
-        }
-
-        .ch-scope .pr-grid {
-            display: grid;
-            gap: clamp(16px, 2vw, 32px);
-            width: 100%;
-            margin: 0;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            align-items: stretch;
-            max-width: 1100px;
-            margin-inline: auto;
-        }
-
-        .ch-scope .pr-card {
-            background: var(--card);
-            border: 1px solid rgba(15, 23, 42, 0.08);
-            border-radius: 24px;
-            padding: 28px;
-            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
-            text-align: left;
-        }
-
-        .ch-scope .pr-title {
-            margin: 0 0 10px;
-            font-size: 1.05rem;
-        }
-
-        .ch-scope .pr-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: grid;
-            gap: 10px;
-        }
-
-        .ch-scope .pr-list--check li {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--ink);
-            font-weight: 500;
-            font-size: .95rem;
-        }
-
-        .ch-scope .pr-list--check li::before {
-            content: "";
-            flex: 0 0 20px;
-            width: 20px;
-            height: 20px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%231db993" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>');
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
-
-        .ch-scope .demo-shell {
-            max-width: 1180px;
-            margin: 48px auto 0;
-            scroll-margin-top: 120px;
-            position: relative;
-        }
-
-        .ch-scope .demo-shell::before {
-            content: "";
-            position: absolute;
-            inset: -20px -16px auto;
-            height: 220px;
-            border-radius: 40px;
-            background:
-                radial-gradient(circle at 15% 30%, rgba(29, 185, 147, 0.22), transparent 32%),
-                radial-gradient(circle at 85% 10%, rgba(20, 184, 166, 0.16), transparent 28%);
-            filter: blur(20px);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .ch-scope .demo-card {
-            position: relative;
-            z-index: 1;
-            display: grid;
-            gap: 34px;
-            align-items: stretch;
-            padding: 28px;
-            border-radius: 32px;
-            background:
-                linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 252, 250, 0.96) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            box-shadow:
-                0 24px 60px rgba(15, 23, 42, 0.12),
-                inset 0 1px 0 rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(14px);
-        }
-
-        .ch-scope .demo-main {
-            display: grid;
-            gap: 28px;
-        }
-
-        .ch-scope .demo-copy {
-            display: grid;
-            gap: 16px;
-        }
-
-        .ch-scope .demo-kicker {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            width: fit-content;
-            padding: .44rem .82rem;
-            border-radius: 999px;
-            background: rgba(29, 185, 147, 0.12);
-            color: #13795f;
-            font-size: .76rem;
-            font-weight: 800;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-        }
-
-        .ch-scope .demo-headline {
-            margin: 0;
-            font-size: clamp(1.85rem, 4vw, 3rem);
-            line-height: 1.02;
-            letter-spacing: -.035em;
-            max-width: 14ch;
-            font-weight: 800;
-            text-wrap: balance;
-        }
-
-        .ch-scope .demo-copy p {
-            margin: 0;
-            max-width: 58ch;
-            color: #5f6f81;
-            line-height: 1.8;
-            font-size: 1rem;
-        }
-
-        .ch-scope .demo-detail-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .ch-scope .demo-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: .66rem .9rem;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.88);
-            border: 1px solid rgba(15, 23, 42, 0.08);
-            color: #203240;
-            font-size: .86rem;
-            font-weight: 700;
-            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
-        }
-
-        .ch-scope .demo-chip::before {
-            content: "";
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: linear-gradient(180deg, #22c55e 0%, #1db993 100%);
-        }
-
-        .ch-scope .demo-console {
-            position: relative;
-            overflow: hidden;
-            padding: 28px;
-            border-radius: 28px;
-            background:
-                radial-gradient(circle at top right, rgba(29, 185, 147, 0.18), transparent 34%),
-                linear-gradient(160deg, #0d1720 0%, #162735 58%, #1e3741 100%);
-            color: #fff;
-            box-shadow: 0 26px 50px rgba(15, 23, 42, 0.22);
-        }
-
-        .ch-scope .demo-console::after {
-            content: "";
-            position: absolute;
-            inset: auto -30px -30px auto;
-            width: 180px;
-            height: 180px;
-            border-radius: 999px;
-            background: radial-gradient(circle, rgba(29, 185, 147, 0.22), transparent 68%);
-            pointer-events: none;
-        }
-
-        .ch-scope .demo-console-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .ch-scope .demo-console-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: rgba(255, 255, 255, 0.82);
-            font-size: .84rem;
-            font-weight: 700;
-        }
-
-        .ch-scope .demo-console-dots {
-            display: inline-flex;
-            gap: 6px;
-        }
-
-        .ch-scope .demo-console-dots span {
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.38);
-        }
-
-        .ch-scope .demo-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: .48rem .74rem;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: #d8f8ef;
-            font-size: .8rem;
-            font-weight: 700;
-            backdrop-filter: blur(8px);
-        }
-
-        .ch-scope .demo-status::before {
-            content: "";
-            width: 9px;
-            height: 9px;
-            border-radius: 999px;
-            background: #1db993;
-            box-shadow: 0 0 0 5px rgba(29, 185, 147, 0.18);
-        }
-
-        .ch-scope .demo-console-grid {
-            display: grid;
-            gap: 22px;
-        }
-
-        .ch-scope .demo-preview {
-            display: grid;
-            gap: 18px;
-        }
-
-        .ch-scope .demo-capability-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .ch-scope .demo-capability-list .demo-chip {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.92);
-            box-shadow: none;
-        }
-
-        .ch-scope .demo-capability-list .demo-chip::before {
-            background: linear-gradient(180deg, #7bf0cf 0%, #1db993 100%);
-        }
-
-        .ch-scope .demo-call-card {
-            display: grid;
-            gap: 18px;
-            padding: 26px;
-            border-radius: 22px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-        }
-
-        .ch-scope .demo-call-head {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .ch-scope .demo-avatar-wrap {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .ch-scope .demo-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 16px;
-            display: grid;
-            place-items: center;
-            background: linear-gradient(135deg, #1db993 0%, #127c63 100%);
-            color: #fff;
-            font-size: 1.05rem;
-            font-weight: 800;
-            box-shadow: 0 10px 24px rgba(29, 185, 147, 0.25);
-        }
-
-        .ch-scope .demo-avatar-copy strong,
-        .ch-scope .demo-avatar-copy span {
-            display: block;
-        }
-
-        .ch-scope .demo-avatar-copy strong {
-            font-size: .98rem;
-            font-weight: 800;
-        }
-
-        .ch-scope .demo-avatar-copy span {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: .84rem;
-        }
-
-        .ch-scope .demo-cta-meta {
-            margin: -4px 0 0;
-            color: rgba(255, 255, 255, 0.68);
-            font-size: .84rem;
-            line-height: 1.6;
-        }
-
-        .ch-scope .demo-wave {
-            display: flex;
-            align-items: end;
-            gap: 5px;
-            height: 64px;
-        }
-
-        .ch-scope .demo-wave span {
-            display: block;
-            flex: 1 1 0;
-            min-width: 6px;
-            border-radius: 999px;
-            background: linear-gradient(180deg, rgba(79, 236, 182, 0.95) 0%, rgba(29, 185, 147, 0.22) 100%);
-        }
-
-        .ch-scope .demo-transcript {
-            display: grid;
-            gap: 14px;
-        }
-
-        .ch-scope .demo-bubble {
-            max-width: 92%;
-            padding: 14px 16px;
-            border-radius: 16px;
-            font-size: .9rem;
-            line-height: 1.6;
-        }
-
-        .ch-scope .demo-bubble strong {
-            display: block;
-            margin-bottom: 4px;
-            font-size: .74rem;
-            letter-spacing: .04em;
-            text-transform: uppercase;
-        }
-
-        .ch-scope .demo-bubble-agent {
-            justify-self: start;
-            background: rgba(255, 255, 255, 0.11);
-            color: rgba(255, 255, 255, 0.96);
-        }
-
-        .ch-scope .demo-bubble-agent strong {
-            color: #9cebd5;
-        }
-
-        .ch-scope .demo-bubble-user {
-            justify-self: end;
-            background: rgba(29, 185, 147, 0.18);
-            border: 1px solid rgba(29, 185, 147, 0.16);
-            color: #f5fffb;
-        }
-
-        .ch-scope .demo-bubble-user strong {
-            color: #b7fff1;
-        }
-
-        .ch-scope .demo-console-footer {
-            display: grid;
-            gap: 20px;
-            align-content: start;
-            padding: 26px;
-            border-radius: 22px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            text-align: left;
-        }
-
-        .ch-scope .demo-console-footer h3 {
-            margin: 0;
-            font-size: 1rem;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .ch-scope .demo-note {
-            margin: 0;
-            color: rgba(255, 255, 255, 0.74);
-            font-size: .88rem;
-            line-height: 1.7;
-        }
-
-        .ch-scope .demo-side {
-            display: grid;
-            gap: 20px;
-            align-content: start;
-        }
-
-        .ch-scope .demo-panel {
-            padding: 26px;
-            border-radius: 24px;
-            background: #fff;
-            border: 1px solid rgba(15, 23, 42, 0.08);
-            box-shadow: 0 16px 34px rgba(15, 23, 42, 0.06);
-            text-align: left;
-        }
-
-        .ch-scope .demo-panel h3,
-        .ch-scope .demo-panel h4 {
-            margin: 0 0 12px;
-            color: var(--ink);
-        }
-
-        .ch-scope .demo-panel h3 {
-            font-size: 1.02rem;
-            font-weight: 800;
-        }
-
-        .ch-scope .demo-panel p {
-            margin: 0;
-            color: #5f6f81;
-            line-height: 1.75;
-            font-size: .94rem;
-        }
-
-        .ch-scope .demo-panel-muted {
-            background: linear-gradient(180deg, #ffffff 0%, #f8fbfa 100%);
-        }
-
-        .ch-scope .demo-feature-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: grid;
-            gap: 18px;
-        }
-
-        .ch-scope .demo-feature-list li {
-            display: grid;
-            gap: 6px;
-            padding-left: 18px;
-            position: relative;
-        }
-
-        .ch-scope .demo-feature-list li::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 8px;
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: #1db993;
-            box-shadow: 0 0 0 5px rgba(29, 185, 147, 0.12);
-        }
-
-        .ch-scope .demo-feature-list strong {
-            font-size: .94rem;
-        }
-
-        .ch-scope .demo-feature-list span {
-            color: #5f6f81;
-            line-height: 1.55;
-            font-size: .9rem;
-        }
-
-        .ch-scope .demo-stack {
-            display: grid;
-            gap: 14px;
-            margin-top: 12px;
-        }
-
-        .ch-scope .demo-stack-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            padding: 14px 16px;
-            border-radius: 16px;
-            background: #f7faf9;
-            border: 1px solid rgba(15, 23, 42, 0.06);
-        }
-
-        .ch-scope .demo-stack-row strong {
-            font-size: .88rem;
-        }
-
-        .ch-scope .demo-stack-row span {
-            width: 12px;
-            height: 12px;
-            flex: 0 0 12px;
-            border-radius: 999px;
-            background: #1db993;
-            box-shadow: 0 0 0 6px rgba(29, 185, 147, 0.12);
-        }
-
-        @media (min-width:900px) {
-            .ch-scope .pr-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 40px;
-                align-items: center;
-            }
-
-            .ch-scope .demo-card {
-                grid-template-columns: 1fr;
-                padding: 42px;
-            }
-
-            .ch-scope .demo-console-grid {
-                grid-template-columns: minmax(0, 1.28fr) minmax(280px, .72fr);
-                align-items: start;
-                gap: 28px;
-            }
-
-            .ch-scope .demo-preview {
-                gap: 20px;
-            }
-
-            .ch-scope .demo-side {
-                grid-template-columns: 1fr 1fr;
-                gap: 24px;
-            }
-        }
-
-        @media (max-width:899px) {
-            .ch-scope .demo-headline {
-                max-width: 100%;
-            }
-
-            .ch-scope .demo-shell::before {
-                inset: -16px -8px auto;
-                height: 170px;
-            }
-
-            .ch-scope .demo-card {
-                padding: 20px;
-                gap: 24px;
-            }
-
-            .ch-scope .demo-main {
-                gap: 22px;
-            }
-
-            .ch-scope .demo-console {
-                padding: 22px;
-            }
-        }
-        
-        /* ROI */
-        .ch-scope .ch-roi {      
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--ink);
-            padding: 76px 0;
-            text-align: center;
-            overflow: hidden;
-            background: #fff;
-        }
-        
-        .ch-scope .roi-main-grid {
-            display: grid;
-            gap: 24px;
-            text-align: left;      
-            align-items: center;
-            flex-grow: 1;
-        }
-
-        .ch-scope .roi-card {
-            background: var(--card);
-            border-radius: 16px;
-            padding: 34px;
-            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-            margin-top: 32px;
-            max-width: 980px;
-            margin-inline: auto;
-        }
-
-        .ch-scope .roi-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin: 0;
-            text-align: left;
-        }
-
-        .ch-scope .roi-item {
-            display: grid;
-            gap: 4px;
-            background: #fff;
-            border: 1px solid #eef3f6;
-            border-radius: 8px;
-            padding: 16px;
-        }
-
-        .ch-scope .roi-label { font-weight: 600; font-size: .9rem; color: var(--ink); }
-        .ch-scope input[type="range"] { width: 100%; accent-color: var(--accent); }
-        .ch-scope output { font-weight: 700; color: var(--accent); }
-
-        .ch-scope .roi-result {
-            display: grid;
-            gap: 4px;
-            grid-template-columns: 1fr;
-            max-width: 760px;
-            margin: 0;
-            background: linear-gradient(180deg, #fbfdfc 0%, #f5fbf8 100%);
-            border: 2px solid rgba(23, 156, 121, 0.3);
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(23, 156, 121, 0.15);
-            padding: 26px;
-            text-align: center;
-        }
-
-        .ch-scope .rr-kicker {
-            display: block;
-            color: #167f65;
-            font-weight: 600;
-            font-size: 0.85rem;
-            margin-bottom: 4px;
-        }
-
-        .ch-scope .rr-value {
-            font-size: 2rem;
-            font-weight: 800;
-        }
-
-        @media (min-width:900px) {
-            .ch-scope .roi-main-grid { grid-template-columns: 2fr 1fr; }
-            .ch-scope .roi-result { grid-template-columns: 1fr; }
-            .ch-scope .rr-value { font-size: 2.4rem; }
-        }
-
-        /* PRICING */
-        .ch-scope .ch-pricing {
-            background: #fff;
-            color: var(--ink);
-            padding: 84px 0 64px;
-            text-align: center;
-        }
-
-        .ch-scope .cp-heading { max-width: 760px; margin: 0 auto 52px; }
-        .ch-scope .cp-heading h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; margin: 0 0 10px; }
-        .ch-scope .cp-heading p { color: var(--muted); font-size: 1rem; line-height: 1.6; margin: 0; }
-
-        .ch-scope .cp-cards {
-            max-width: 1120px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-            text-align: left;
-        }
-
-        .ch-scope .cp-card {
-            background: var(--card);
-            border-radius: 18px;
-            box-shadow: 0 10px 25px rgba(15, 23, 42, .06);
-            padding: 40px 32px 32px;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid rgba(0, 0, 0, 0.04);
-        }
-
-        .ch-scope .cp-premium {
-            background: linear-gradient(180deg, rgba(29, 185, 147, 0.08), rgba(29, 185, 147, 0.02)), var(--card);
-            border: 1px solid rgba(29, 185, 147, 0.18);
-        }
-
-        .ch-scope .cp-title { font-size: 22px; font-weight: 800; margin: 0 0 16px; }
-        .ch-scope .cp-sub { color: var(--muted); font-size: .92rem; margin: 0 0 14px; }
-        .ch-scope .cp-sub strong { color: var(--ink); }
-
-        .ch-scope .cp-features {
-            list-style: none;
-            margin: 0 0 28px;
-            padding: 0;
-            display: grid;
-            gap: 12px;
-            font-size: .92rem;
-        }
-
-        .ch-scope .cp-features li {
-            display: grid;
-            grid-template-columns: 18px 1fr;
-            align-items: start;
-            gap: 10px;
-            color: var(--ink);
-        }
-
-        .ch-scope .cp-i { width: 16px; height: 16px; display: inline-block; margin-top:2px; }
-        .ch-scope .cp-i--check { background: center/contain no-repeat url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M4.3 9.5c-.23 0-.45-.09-.62-.26L.46 6.02a.88.88 0 0 1 0-1.24.88.88 0 0 1 1.24 0l2.6 2.6L10.3 1.4a.88.88 0 0 1 1.24 0 .88.88 0 0 1 0 1.24L4.92 9.24c-.17.17-.39.26-.62.26Z" fill="%231db993"/></svg>'); }
-        .ch-scope .cp-i--plus { background: center/contain no-repeat url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10.8 6.9H1.2a.9.9 0 1 1 0-1.8h9.6a.9.9 0 1 1 0 1.8Z" fill="%23169b78"/><path d="M6.9 10.8V1.2a.9.9 0 1 0-1.8 0v9.6a.9.9 0 1 0 1.8 0Z" fill="%23169b78"/></svg>'); }
-
-        .ch-scope .cp-price {
-            margin-top: auto;
-            border-top: 1px solid rgba(0, 0, 0, 0.06);
-            padding-top: 16px;
-            text-align: center;
-        }
-
-        .ch-scope .cp-starting, .ch-scope .cp-per {
-            color: var(--muted);
-            font-size: .82rem;
-            margin: 0 0 4px;
-        }
-
-        .ch-scope .cp-now {
-            font-size: clamp(28px, 4vw, 38px);
-            font-weight: 800;
-            line-height: 1;
-            margin: 4px 0;
-            display: inline-block;
-        }
-
-        .ch-scope .cp-btn {
-            display: inline-block;
-            margin-top: 12px;
-            background: var(--accent);
-            color: #fff;
-            padding: 11px 20px;
-            border-radius: 12px;
-            font-weight: 800;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 8px 18px rgba(29, 185, 147, 0.22);
-            transition: transform .1s, background .15s;
-        }
-
-        .ch-scope .cp-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-
-        @media (max-width:880px) { .ch-scope .cp-cards { grid-template-columns: 1fr; } }
-
-        /* STEPS */
-        .ch-scope .ch-steps {
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #fff;
-            color: var(--ink);
-            padding: 76px 0;
-            overflow: hidden;
-        }
-
-        .ch-scope .sv-pill {
-            display: inline-block;
-            padding: .38rem .65rem;
-            border-radius: 999px;
-            background: var(--pill-bg);
-            color: #169b78;
-            font-weight: 700;
-            font-size: .72rem;
-            letter-spacing: .06em;
-        }
-
-        .ch-scope .sv-grid {
-            list-style: none;
-            margin: 34px auto 0;
-            padding: 0;
-            display: grid;
-            gap: 28px;
-            max-width: 1180px;
-        }
-
-        .ch-scope .sv-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            text-align: left;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .ch-scope .sv-card-img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .ch-scope .sv-h3 {
-            margin: 0 0 8px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--ink);
-        }
-
-        .ch-scope .sv-text {
-            margin: 0;
-            font-size: 0.9rem;
-            color: var(--muted);
-            line-height: 1.55;
-        }
-
-        .ch-scope .sv-step-content {
-            flex: 1;
-            padding: 26px;
-        }
-
-        .ch-scope .sv-steps-column {
-            list-style: none;
-            display: grid;
-            gap: 24px;
-            padding: 0;
-        }
-
-        @media (min-width:900px) {
-            .ch-scope .sv-steps-column {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* FAQ */
-        .ch-scope .ch-faq {
-            background: #fff;
-            color: var(--ink);
-            padding: 76px 0;
-            text-align: center;
-        }
-
-        .ch-scope .faq-pill {
-            display: inline-block;
-            padding: .36rem .7rem;
-            border-radius: 999px;
-            background: var(--pill-bg);
-            color: var(--accent-ink);
-            font-weight: 700;
-            font-size: .72rem;
-            letter-spacing: .06em;
-        }
-
-        .ch-scope .faq-list {
-            max-width: 880px;
-            margin: 28px auto 0;
-            display: grid;
-            gap: 14px;
-            text-align: left;
-        }
-
-        .ch-scope .faq-item {
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            background: #f7faf9;
-            transition: background .2s ease;
-        }
-
-        .ch-scope .faq-item-open {
-            background: #fff;
-        }
-
-        .ch-scope .faq-q {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            background: transparent;
-            border: none;
-            border-radius: 14px;
-            padding: 14px 16px;
-            font: inherit;
-            text-align: left;
-            font-weight: 600;
-            cursor: pointer;
-            color: var(--ink);
-        }
-
-        .ch-scope .faq-a {
-            overflow: hidden;
-            display: block;   
-        }
-
-        .ch-scope .faq-a > p {
-            padding: 2px 16px 14px;
-            margin: 0;
-            color: var(--muted);
-            border-top: 1px solid var(--border);
-        }
-
-        /* CTA */
-        .ch-scope .cf-actions {
-            display: flex;
-            justify-content: center;
-        }
-        .ch-scope .cf-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 20px;
-            border-radius: 999px;
-            font-weight: 800;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .ch-scope .cf-primary {
-            background: var(--accent);
-            color: #fff;
-            box-shadow: 0 8px 24px rgba(29, 185, 147, .22);
-            transition: background .15s;
-        }
-        .ch-scope .cf-primary:hover { background: var(--accent-hover); }
-
-        .va-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: .55rem;
-            background: linear-gradient(135deg, #0f1720 0%, #203240 100%);
-            color: #fff;
-            padding: .95rem 1.25rem;
-            border-radius: 999px;
-            font-weight: 800;
-            box-shadow: 0 16px 30px rgba(15, 23, 32, .22);
-            border: none;
-            cursor: pointer;
-            transition: transform .1s, box-shadow .15s;
-        }
-        .va-btn:hover { transform: translateY(-1px); box-shadow: 0 20px 34px rgba(15, 23, 32, .28); }
-
-        /* Animation */
-        @keyframes ch-spin { to { transform:rotate(360deg); } }
-        .ch-spin { animation: ch-spin 1s linear infinite; }
-        
-        /* Modal native styles built into react inline component scope below... */
-        .popup-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
-            z-index: 1000; display: flex; justify-content: flex-end; align-items: center;
-        }
-        .popup-container {
-            width: 800px; height: 85vh; background: #fff;
-            border-radius: 16px 0 0 16px; box-shadow: -10px 0 30px rgba(0,0,0,0.2);
-            display: flex; flex-direction: column;
-            animation: slideInRight .3s ease-out;
-        }
-        @keyframes slideInRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
-        .popup-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px; border-bottom: 1px solid #eef3f6;
-        }
-        .popup-header h3 { margin: 0; font-size: 1.25rem; font-weight: 800; color: var(--ink); }
-        .popup-close { background: none; border: none; cursor: pointer; padding: 8px; border-radius: 8px; color: var(--muted); }
-        .popup-close:hover { background: #f5f5f5; color: var(--ink); }
-        .popup-content { flex: 1; overflow: hidden; }
-        .form-container { padding: 20px; height: 100%; overflow-y: auto; text-align: left; }
-        .form-intro { color: var(--muted); margin: 0 0 20px 0; font-size: .95rem; line-height: 1.5; text-align: center; }
-        .popup-form { display: flex; flex-direction: column; gap: 16px; }
-        .form-field { display: flex; flex-direction: column; gap: 5px; }
-        .form-field-full { grid-column: 1/-1; }
-        .form-field input, .form-field select, .form-field textarea {
-            padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px;
-            font-size: .95rem; background: #fff; color: var(--ink); outline: 0;
-        }
-        .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(29,185,147,.12); }
-        .popup-submit-btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 12px 24px; background: var(--accent); color: white; border: none; border-radius: 999px;
-            font-weight: 800; cursor: pointer; transition: background-color .2s ease;
-        }
-        .popup-submit-btn:hover:not(:disabled) { background: var(--accent-hover); }
-        .popup-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .form-note { text-align: center; color: var(--muted); font-size: .85rem; margin: 8px 0 0 0; }
-        @media (max-width:768px) { .popup-container { width: 100%; height: 100vh; border-radius: 0; } .popup-overlay { justify-content: center; } }
-      `}</style>
-
-            <div className="ch-scope">
-
-                {/* ============== HERO ============== */}
-                <section className="ch-hero" aria-labelledby="ch-hero-title">
-                    <div className="ch-container ch-hero-inner">
-                        <span className="ch-pill">AI VOICE AGENT</span>
-                        <h1 id="ch-hero-title" className="ch-title">
-                            Boost Your Revenue <br className="ch-br" />with AI Voice Agents
-                        </h1>
-                        <p className="ch-sub">
-                            Never miss a customer again!<br />
-                            Capture leads, qualify prospects, and secure more sales opportunities automatically
-                        </p>
-                        <div className="ch-actions">
-                            <a href="#voice-demo" className="ch-btn ch-btn-try" aria-label="Jump to voice demo">
-                                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                                    <path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3Zm5-3h2a7 7 0 0 1-14 0h2a5 5 0 0 0 10 0Zm-7 6h4v2h-4v-2Z" />
-                                </svg>
-                                Try Now
-                            </a>
-                            <button onClick={() => setModalOpen(true)} className="ch-btn ch-btn-book" aria-label="Book a demo">
-                                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                                    <path d="M6.6 10.8c1.2 2.3 3.1 4.2 5.4 5.4l1.8-1.8a1 1 0 0 1 1.1-.22c1.2.48 2.5.74 3.8.74a1 1 0 0 1 1 1v2.9a1 1 0 0 1-1 1C11.7 20.8 3.2 12.3 3.2 1.9a1 1 0 0 1 1-1h2.9a1 1 0 0 1 1 1c0 1.3.25 2.6.74 3.8a1 1 0 0 1-.22 1.1l-1.8 1.8Z" fill="currentColor" />
-                                </svg>
-                                Book a Demo
-                            </button>
-                        </div>
-                        <p className="ch-hero-note">Start with the live voice demo, then book a consultation if you want this adapted to your workflow.</p>
-                    </div>
-                </section>
-
-                {/* ============== INTRO TEXT ============== */}
-                <section className="ch-intro-text">
-                    <div className="ch-container">
-                        <span className="sv-pill">INSIGHTS &amp; VALUE</span>
-                        <br /><br />
-                        <p>
-                            As businesses increasingly recognize AI chatbots as an operational necessity rather than a discretionary innovation, many continue to face challenges in scaling beyond initial pilots. Research from McKinsey, Deloitte, and BCG highlights a persistent gap between ambition and execution—leading to delayed returns and higher costs than anticipated.
-                            These challenges often stem from rushed deployment, insufficient AI design and training, and limited institutional AI expertise. In many cases, businesses are tempted by &quot;quick ROI&quot; promises that fail to deliver sustainable impact.
-                        </p>
-                        <p>
-                            Automate4u partners with businesses to close this gap—guiding teams from concept to implementation and capability building. Our collaborative approach ensures AI solutions are strategically aligned, technically sound, and embedded for long-term value creation.
-                        </p>
-                    </div>
-                </section>
-
-                {/* ============== PROCESS ============== */}
-                <section className="ch-steps" aria-labelledby="steps-title">
-                    <div className="ch-container" style={{ textAlign: "center" }}>
-                        <span className="sv-pill">HOW IT WORKS</span>
-                        <h2 id="steps-title" className="ch-h2">How We Help Clients</h2>
-                        <div className="sv-grid">
-                            <ol className="sv-steps-column">
-                                <li className="sv-card">
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img className="sv-card-img" src="/images/services/discoveryphase.jpg" alt="Illustration of the chatbot implementation process." />
-                                    <div className="sv-step-content">
-                                        <h3 className="sv-h3">Discover</h3>
-                                        <p className="sv-text">We help businesses assess their AI readiness and capability to execute transformation at scale. We begin by mapping key business intents—whether to improve conversion, elevate customer satisfaction, or extend support coverage. Alongside, we conduct structured requirements-gathering sessions to capture functional, technical, and compliance needs that will guide design decisions. We also assess the existing tech stack, integration landscape, and governance practices to ensure your solution is both scalable and sustainable.</p>
-                                    </div>
-                                </li>
-                                <li className="sv-card">
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img className="sv-card-img" src="/images/services/voiceagents1.webp" alt="Illustration of the chatbot implementation process." />
-                                    <div className="sv-step-content">
-                                        <h3 className="sv-h3">Development &amp; Design</h3>
-                                        <p className="sv-text">We translate strategic objectives and requirements into a scalable AI framework. Our approach includes architecting optimal conversational flows, enabling seamless integrations, and prioritizing user experience and compliance. A key focus during this phase is the rigorous training of AI models, leveraging curated datasets and ongoing refinement processes to ensure the agent delivers consistent, accurate, and adaptive responses over time. By validating design decisions through iterative prototyping, we build solutions that are resilient.</p>
-                                    </div>
-                                </li>
-                                <li className="sv-card">
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img className="sv-card-img" src="/images/services/voiceag.png" alt="Illustration of the chatbot implementation process." />
-                                    <div className="sv-step-content">
-                                        <h3 className="sv-h3">Deploy &amp; Improve</h3>
-                                        <p className="sv-text">We focus on seamless rollout and operational stabilization. Our team executes a rigorous deployment plan, including end-to-end integration, quality assurance, and user acceptance testing to minimize disruption and maximize adoption. Post-launch, our warranty program offers proactive support and ongoing performance monitoring to address any issues promptly. Equally important is our commitment to capability building—equipping your teams with best practices, troubleshooting skills, and upgrade paths to sustain efficacy.</p>
-                                    </div>
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </section>
-
-                {/* ============== DEMO ============== */}
-                <section className="ch-problem" aria-labelledby="prob-title" id="voice-demo">
-                    <div className="ch-container">
-                        <p className="eyebrow">VOICE AGENT DEMO</p>
-                        <h2 id="prob-title" className="ch-h2">Experience a live AI voice workflow before you commit</h2>
-                        <p className="ch-sub2">Launch the demo to hear how a front-desk style agent can answer, qualify, and route calls with a polished customer experience.</p>
-
-                        <div className="demo-shell">
-                            <div className="demo-card">
-                                <div className="demo-main">
-                                    <div className="demo-console">
-                                        <div className="demo-console-top">
-                                            <div className="demo-console-label">
-                                                <span className="demo-console-dots" aria-hidden="true">
-                                                    <span />
-                                                    <span />
-                                                    <span />
-                                                </span>
-                                                Live Voice Preview
-                                            </div>
-                                            <span className="demo-status">{callActive ? "Live call in progress" : "Ready to connect"}</span>
-                                        </div>
-
-                                        <div className="demo-console-grid">
-                                            <div className="demo-preview">
-                                                <div className="demo-call-card">
-                                                    <div className="demo-call-head">
-                                                        <div className="demo-avatar-wrap">
-                                                            <div className="demo-avatar" aria-hidden="true">AI</div>
-                                                            <div className="demo-avatar-copy">
-                                                                <strong>Automate4u Voice Receptionist</strong>
-                                                                <span>Natural intake, qualification, and handoff</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="demo-capability-list" aria-label="Demo details">
-                                                        <span className="demo-chip">Front-desk style intake</span>
-                                                        <span className="demo-chip">Lead capture and routing</span>
-                                                        <span className="demo-chip">Built for CRM and calendar workflows</span>
-                                                    </div>
-
-                                                    <div className="demo-wave" aria-hidden="true">
-                                                        <span style={{ height: "38%" }} />
-                                                        <span style={{ height: "72%" }} />
-                                                        <span style={{ height: "52%" }} />
-                                                        <span style={{ height: "88%" }} />
-                                                        <span style={{ height: "44%" }} />
-                                                        <span style={{ height: "66%" }} />
-                                                        <span style={{ height: "94%" }} />
-                                                        <span style={{ height: "48%" }} />
-                                                        <span style={{ height: "76%" }} />
-                                                        <span style={{ height: "58%" }} />
-                                                        <span style={{ height: "84%" }} />
-                                                        <span style={{ height: "36%" }} />
-                                                    </div>
-
-                                                    <div className="demo-transcript">
-                                                        <div className="demo-bubble demo-bubble-agent">
-                                                            <strong>Agent</strong>
-                                                            Thanks for calling. I can help answer questions, collect details, and direct you to the right next step.
-                                                        </div>
-                                                        <div className="demo-bubble demo-bubble-user">
-                                                            <strong>Caller</strong>
-                                                            I want to book a consultation and check whether someone can call me back today.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="demo-console-footer">
-                                                <h3>Test the live voice demo</h3>
-                                                <p className="demo-note">Your browser will request microphone access. Once connected, speak naturally and test the live experience in real time.</p>
-                                                <button className="va-btn" type="button" onClick={launchRetellVoice} disabled={callStarting} style={{ background: callActive ? "#dc2626" : undefined }}>
-                                                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                                                        <path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3Zm5-3h2a7 7 0 0 1-14 0h2a5 5 0 0 0 10 0Zm-7 6h4v2h-4v-2Z" />
-                                                    </svg>
-                                                    {callStarting ? "Connecting..." : callActive ? "End Call" : "Try Now"}
-                                                </button>
-                                                {/* <span className="demo-cta-meta">{callActive ? "Connected now" : "Avg. answer: instant"}</span> */}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <aside className="demo-side" aria-label="Voice agent capabilities">
-                                    <div className="demo-panel demo-panel-muted">
-                                        <h3>What this interaction should communicate</h3>
-                                        <ul className="demo-feature-list">
-                                            <li>
-                                                <strong>Fast, confident first response</strong>
-                                                <span>The caller gets immediate acknowledgement instead of voicemail, hold time, or dead air.</span>
-                                            </li>
-                                            <li>
-                                                <strong>Professional intake structure</strong>
-                                                <span>Questions feel purposeful, not robotic, so the agent can qualify intent without sounding clumsy.</span>
-                                            </li>
-                                            <li>
-                                                <strong>Clear operational next step</strong>
-                                                <span>Calls end with captured details, routing, or booking readiness instead of unresolved conversation.</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div className="demo-panel">
-                                        <h4>Workflow readiness</h4>
-                                        <p>This demo is designed around the systems businesses actually care about connecting, not just a generic voice sample.</p>
-                                        <div className="demo-stack" aria-label="Workflow integrations">
-                                            <div className="demo-stack-row">
-                                                <strong>CRM updates</strong>
-                                                <span aria-label="Ready" />
-                                            </div>
-                                            <div className="demo-stack-row">
-                                                <strong>Calendar booking</strong>
-                                                <span aria-label="Ready" />
-                                            </div>
-                                            <div className="demo-stack-row">
-                                                <strong>Lead notifications</strong>
-                                                <span aria-label="Ready" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </aside>
-                            </div>
-                        </div>
-                        <div className="cf-actions" style={{ marginTop: 32 }}>
-                            <button className="cf-btn cf-primary" onClick={() => setModalOpen(true)}>
-                                <svg viewBox="0 0 24 24" aria-hidden="true" width="16" height="16">
-                                    <path d="M6.6 10.8c1.2 2.3 3.1 4.2 5.4 5.4l1.8-1.8a1 1 0 0 1 1.1-.22c1.2.48 2.5.74 3.8.74a1 1 0 0 1 1 1v2.9a1 1 0 0 1-1 1C11.7 20.8 3.2 12.3 3.2 1.9a1 1 0 0 1 1-1h2.9a1 1 0 0 1 1 1c0 1.3.25 2.6.74 3.8a1 1 0 0 1-.22 1.1l-1.8 1.8Z" fill="currentColor" />
-                                </svg>
-                                Add your own voice agent today
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                {/* ============== ROI CALCULATOR ============== */}
-                <section className="ch-roi" aria-labelledby="roi-title">
-                    <div className="ch-container">
-                        <p className="eyebrow">VOICE ROI</p>
-                        <h2 id="roi-title" className="ch-h2">How Much Could AI Voice Agent Save You?</h2>
-                        <p className="ch-sub2">Use our calculator to estimate your potential monthly savings by deflecting repetitive support calls with AI.</p>
-                        <div className="roi-card">
-                            <div className="roi-main-grid">
-                                <div className="roi-grid" aria-describedby="roi-note">
-                                    <label className="roi-item">
-                                        <span className="roi-label">Tickets / Calls per month</span>
-                                        <input type="range" min="200" max="10000" value={volume} step="100" aria-label="Monthly volume" onChange={(e) => setVolume(Number(e.target.value))} />
-                                        <output>{volume.toLocaleString()}</output>
-                                    </label>
-                                    <label className="roi-item">
-                                        <span className="roi-label">Deflection rate</span>
-                                        <input type="range" min="10" max="80" value={deflect} step="5" aria-label="Deflection rate" onChange={(e) => setDeflect(Number(e.target.value))} />
-                                        <output>{deflect}%</output>
-                                    </label>
-                                    <label className="roi-item">
-                                        <span className="roi-label">Cost per human ticket (USD)</span>
-                                        <input type="range" min="4" max="40" value={cost} step="1" aria-label="Cost per ticket" onChange={(e) => setCost(Number(e.target.value))} />
-                                        <output>${cost}</output>
-                                    </label>
-                                </div>
-                                <div className="roi-result" role="status" aria-live="polite">
-                                    <span className="rr-kicker">Projected Monthly Savings</span>
-                                    <div className="rr-value">
-                                        {monthlySavings.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* ============== PRICING ============== */}
-                <section className="ch-pricing" aria-labelledby="pricing-title">
-                    <div className="ch-container">
-                        <p className="eyebrow">PRICING</p>
-                        <div className="cp-heading">
-                            <h2 id="pricing-title">What Your Investment Will Be</h2>
-                            <p>Understanding that the first chatbot implementation is a pivotal decision point, we provide differentiated solutions designed to minimize upfront commitments while maximizing flexibility.</p>
-                        </div>
-
-                        <div className="cp-cards">
-                            <article className="cp-card">
-                                <h3 className="cp-title">Standard</h3>
-                                <ul className="cp-features">
-                                    <li><span className="cp-i cp-i--check" aria-hidden="true" />Agent assigned local phone number</li>
-                                    <li><span className="cp-i cp-i--check" />Instant response to FAQs and common requests</li>
-                                    <li><span className="cp-i cp-i--check" />Lead capture with name, email, and phone</li>
-                                    <li><span className="cp-i cp-i--check" />Business hours routing &amp; away message</li>
-                                    <li><span className="cp-i cp-i--check" />Basic integration (Google Sheets, Webhooks)</li>
-                                    <li><span className="cp-i cp-i--check" />Analytics dashboard (conversations, leads)</li>
-                                    <li><span className="cp-i cp-i--check" />SMS & Email transcript delivery</li>
-                                </ul>
-                                <div className="cp-price">
-                                    <p className="cp-starting">Starting at</p>
-                                    <div className="cp-price-row">
-                                        <span className="cp-now">$300</span>
-                                    </div>
-                                    <p className="cp-per">per site, per month</p>
-                                    <button onClick={() => setModalOpen(true)} className="cp-btn">Book a Demo</button>
-                                </div>
-                            </article>
-
-                            <article className="cp-card cp-premium">
-                                <h3 className="cp-title">Premium</h3>
-                                <p className="cp-sub">Everything in <strong>Standard</strong>, plus:</p>
-                                <ul className="cp-features">
-                                    <li><span className="cp-i cp-i--plus" />Outbound calling capabilities</li>
-                                    <li><span className="cp-i cp-i--plus" />Calendar &amp; booking integration</li>
-                                    <li><span className="cp-i cp-i--plus" />CRM sync (HubSpot, Pipedrive, Zapier)</li>
-                                    <li><span className="cp-i cp-i--plus" />Advanced routing &amp; conditional workflows</li>
-                                    <li><span className="cp-i cp-i--plus" />Smart handoff with chat history &amp; transcript</li>
-                                    <li><span className="cp-i cp-i--plus" />Sentiment detection &amp; escalation rules</li>
-                                    <li><span className="cp-i cp-i--plus" />API access &amp; custom actions</li>
-                                    <li><span className="cp-i cp-i--plus" />Priority support &amp; optimization reviews</li>
-                                </ul>
-                                <div className="cp-price">
-                                    <p className="cp-starting">Starting at</p>
-                                    <div className="cp-price-row">
-                                        <span className="cp-now">$399</span>
-                                    </div>
-                                    <p className="cp-per">per site, per month</p>
-                                    <button onClick={() => setModalOpen(true)} className="cp-btn">Book a Demo</button>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                </section>
-
-                {/* ============== FAQ ============== */}
-                <section className="ch-faq" aria-labelledby="faq-title">
-                    <div className="ch-container">
-                        <span className="faq-pill">FAQ</span>
-                        <h2 id="faq-title" className="ch-h2">Key Information for Informed Decision Making</h2>
-
-                        <div className="faq-list">
-                            <FaqItem q="Do your AI Voice Agents integrate with my CRM & Booking System?" a="Yes. Our AI Voice Agents are designed to integrate seamlessly with hundreds of popular CRMs, calendars, and booking systems like Salesforce, HubSpot, Calendly, and more. We handle the connection so your data flows exactly where it needs to go." />
-                            <FaqItem q="Does it Sound Human-Like?" a="Absolutely. We use state-of-the-art, low-latency voice technology that sounds remarkably human. The agents have natural pacing, intonation, and can even understand and respond to interruptions, ensuring a smooth and positive experience for your customers." />
-                            <FaqItem q="Can You Trust The AI?" a="Yes. We build our agents with strict 'guardrails' to ensure they stick to their script, follow your business rules, and only perform the tasks they are designed for. All conversations are logged, and we can implement fallback flows to transfer to a human agent if needed." />
-                            <FaqItem q="How Long Does Development Take?" a="Most of our AI Voice Agent solutions are designed and launched in under 3 weeks. We prioritize a fast, iterative process so you can start seeing results and a return on your investment as quickly as possible." />
-                            <FaqItem q="Do You Offer Support?" a="Yes, we provide ongoing support and optimization for all our agents. We monitor performance, make adjustments based on real-world data, and are available to help you scale or modify your agent's capabilities as your business grows." />
-                            <FaqItem q="Can You Make Edits to the Agents?" a="Definitely. Your business needs can change, and your agent should adapt. We can easily update scripts, change workflows, or adjust integrations. Most changes can be deployed quickly without any downtime." />
-                            <FaqItem q="How Much Does Development Cost?" a="Pricing depends on the complexity of the agent and the call volume. We offer transparent, flexible pricing with a clear breakdown for the initial build and ongoing service. Contact us for a free consultation and a detailed quote tailored to your needs." />
-                        </div>
-                    </div>
-                </section>
+function EventLog({ callActive }: { callActive: boolean }) {
+  return (
+    <div className="rounded-lg border border-white/12 bg-white/[0.07] p-5 text-white shadow-[0_18px_55px_rgba(0,0,0,0.18)]">
+      <div className="mb-5 flex items-center justify-between gap-4">
+        <div>
+          <p className="text-xs font-extrabold uppercase tracking-[0.12em] text-[#7df0d1]">Back-office event log</p>
+          <h3 className="mt-2 text-2xl font-extrabold">What happens after the call</h3>
+        </div>
+        <span className="rounded-full border border-white/12 bg-white/10 px-3 py-1 text-xs font-bold text-white/80">
+          {callActive ? "Live call" : "Demo workflow"}
+        </span>
+      </div>
+
+      <div className="grid gap-3">
+        {operationsEvents.map((event, index) => (
+          <div key={event.label} className="grid gap-3 rounded-lg border border-white/10 bg-[#0d1720]/70 p-4 md:grid-cols-[auto_1fr_auto] md:items-center">
+            <div className="grid h-9 w-9 place-items-center rounded-full bg-[#1db993] text-sm font-extrabold text-[#05251d]">
+              {index + 1}
             </div>
+            <div>
+              <h4 className="font-extrabold text-white">{event.label}</h4>
+              <p className="mt-1 text-sm leading-6 text-white/68">{event.detail}</p>
+            </div>
+            <span className="w-fit rounded-full bg-white px-3 py-1 text-xs font-extrabold text-ink">{event.status}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
-            <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} />
-        </>
-    );
+export default function AIVoicePage() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const retellClientRef = useRef<RetellClient | null>(null);
+  const [callActive, setCallActive] = useState(false);
+  const [callStarting, setCallStarting] = useState(false);
+
+  useEffect(() => {
+    import("retell-client-js-sdk").then(({ RetellWebClient }) => {
+      const client = new RetellWebClient() as RetellClient;
+      retellClientRef.current = client;
+
+      client.on("call_started", () => {
+        trackEvent("site_voice_demo_started", {
+          page: "/core-services/ai-voice",
+          ctaLocation: "voice_demo",
+          serviceInterest: "ai-voice",
+        });
+        setCallActive(true);
+        setCallStarting(false);
+      });
+
+      client.on("call_ended", () => {
+        trackEvent("site_voice_demo_completed", {
+          page: "/core-services/ai-voice",
+          ctaLocation: "voice_demo",
+          serviceInterest: "ai-voice",
+        });
+        setCallActive(false);
+        setCallStarting(false);
+      });
+
+      client.on("error", (error) => {
+        console.error("Retell error:", error);
+        trackEvent("site_voice_demo_failed", {
+          page: "/core-services/ai-voice",
+          ctaLocation: "voice_demo",
+          serviceInterest: "ai-voice",
+        });
+        setCallActive(false);
+        setCallStarting(false);
+      });
+    }).catch((error) => console.error("Could not load Retell SDK", error));
+
+    return () => {
+      if (retellClientRef.current) {
+        try {
+          retellClientRef.current.stopCall();
+        } catch {
+          // Ignore teardown errors from a closed demo session.
+        }
+      }
+    };
+  }, []);
+
+  const launchRetellVoice = async () => {
+    if (!retellClientRef.current) return;
+
+    if (callActive) {
+      retellClientRef.current.stopCall();
+      return;
+    }
+
+    try {
+      setCallStarting(true);
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+
+      const response = await fetch("/api/retell/web-call", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ metadata: { source: "website-voice-btn" } }),
+      });
+
+      const data = await response.json();
+      if (!response.ok || !data.access_token) {
+        throw new Error(data.error || "Failed to start call");
+      }
+
+      await retellClientRef.current.startCall({
+        accessToken: data.access_token,
+      });
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : "Unknown error";
+      console.error(error);
+      trackEvent("site_voice_demo_failed", {
+        page: "/core-services/ai-voice",
+        ctaLocation: "voice_demo",
+        serviceInterest: "ai-voice",
+      });
+      alert(`Sorry, couldn't start the voice session. (${message})`);
+      setCallStarting(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-white">
+      <section className="relative overflow-hidden bg-[#051C2C] px-4 py-12 text-white md:py-[72px]" aria-labelledby="voice-hero-title">
+        <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div>
+            <p className="mb-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">
+              AI Voice Agents
+            </p>
+            <h1 id="voice-hero-title" className="max-w-[760px] text-[36px] font-extrabold leading-[1.06] tracking-[-0.02em] md:text-[54px]">
+              AI voice that answers calls and moves the work forward.
+            </h1>
+            <p className="mt-5 max-w-[650px] text-base leading-8 text-white/74 md:text-[17px]">
+              Your voice agent should not stop at a conversation. It should qualify the caller, check business context, trigger follow-up, update systems, and hand off to humans when the request needs judgment.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="#voice-demo" className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb]">
+                Try Now
+              </a>
+              <button onClick={() => setModalOpen(true)} className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
+                Get Free Assessment
+              </button>
+            </div>
+            <p className="mt-5 text-sm leading-6 text-white/58">
+              Start with one routine call workflow, prove value, then expand into connected agents across chat, email, operations, and support.
+            </p>
+          </div>
+
+          <div className="relative rounded-lg border border-white/12 bg-white/[0.07] p-4 shadow-[0_18px_55px_rgba(0,0,0,0.20)]">
+            <Image
+              src="/images/services/voice_agent.jpg"
+              alt="AI voice agent interface connected to business workflow actions"
+              width={900}
+              height={700}
+              priority
+              className="rounded-lg object-cover"
+            />
+            <div className="absolute bottom-8 left-8 right-8 rounded-lg border border-white/30 bg-[#06131d]/88 p-4 text-white shadow-[0_12px_34px_rgba(0,0,0,0.22)] backdrop-blur">
+              <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Voice to operations</p>
+              <div className="mt-3 grid gap-2 text-sm font-semibold sm:grid-cols-3">
+                <span className="rounded-md bg-white/10 px-3 py-2">Intent captured</span>
+                <span className="rounded-md bg-white/10 px-3 py-2">Action routed</span>
+                <span className="rounded-md bg-white/10 px-3 py-2">KPI logged</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="voice-proof-title">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Why voice first"
+            title="Stop letting important calls interrupt your team or disappear."
+            description="Missed calls, repetitive questions, booking friction, quote requests, urgent escalations, and after-hours inquiries are visible problems. Voice is the starting point; the bigger win is connecting those calls to the workflows behind them."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {[
+              ["Immediate coverage", "Answer routine calls instantly without forcing staff to stop deep work."],
+              ["Structured intake", "Collect the right details and classify intent before the handoff."],
+              ["Downstream action", "Update systems, notify staff, create tasks, and record outcomes."],
+            ].map(([title, text]) => (
+              <article key={title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <h3 className="text-xl font-extrabold text-ink">{title}</h3>
+                <p className="mt-4 text-sm leading-6 text-muted">{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="voice-demo" className="scroll-mt-28 bg-[#051C2C] px-4 py-14 text-white md:py-20" aria-labelledby="voice-demo-title">
+        <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+          <div>
+            <p className="mb-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">
+              Live demo
+            </p>
+            <h2 id="voice-demo-title" className="text-[30px] font-extrabold leading-[1.1] tracking-[-0.01em] md:text-[40px]">
+              Test the voice experience, then inspect the operational workflow.
+            </h2>
+            <p className="mt-5 text-base leading-7 text-white/70">
+              The live demo proves call quality. The event log proves the business model: every conversation should become structured data, workflow action, human handoff, and measurable outcome.
+            </p>
+
+            <div className="mt-8 rounded-lg border border-white/12 bg-white/[0.07] p-5">
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-sm font-bold text-white/60">Demo status</p>
+                  <p className="mt-1 text-2xl font-extrabold">{callActive ? "Live call in progress" : "Ready to connect"}</p>
+                </div>
+                <span className={`h-3 w-3 rounded-full ${callActive ? "bg-red-400" : "bg-[#1db993]"}`} aria-hidden="true" />
+              </div>
+
+              <div className="mt-6 rounded-lg border border-white/12 bg-[#0d1720]/70 p-5">
+                <div className="mb-5 flex items-center gap-3">
+                  <div className="grid h-12 w-12 place-items-center rounded-lg bg-[#1db993] text-lg font-extrabold text-[#05251d]">AI</div>
+                  <div>
+                    <h3 className="font-extrabold text-white">Automate4U Voice Receptionist</h3>
+                    <p className="text-sm text-white/60">Natural intake, qualification, and handoff</p>
+                  </div>
+                </div>
+                <div className="grid gap-3">
+                  <div className="rounded-lg bg-white/10 p-4 text-sm leading-6 text-white/78">
+                    <strong className="block text-white">Agent</strong>
+                    Thanks for calling. I can help answer questions, collect details, and direct you to the right next step.
+                  </div>
+                  <div className="ml-auto max-w-[88%] rounded-lg bg-[#1db993] p-4 text-sm leading-6 font-semibold text-[#05251d]">
+                    <strong className="block">Caller</strong>
+                    I want to book a consultation and check whether someone can call me back today.
+                  </div>
+                </div>
+              </div>
+
+              <button
+                className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb] disabled:cursor-not-allowed disabled:opacity-70"
+                type="button"
+                onClick={launchRetellVoice}
+                disabled={callStarting}
+              >
+                {callStarting ? "Connecting..." : callActive ? "End Call" : "Try Now"}
+              </button>
+              <p className="mt-3 text-sm leading-6 text-white/58">
+                Your browser will request microphone access. If the demo cannot start, the assessment path still works.
+              </p>
+            </div>
+          </div>
+
+          <EventLog callActive={callActive} />
+        </div>
+      </section>
+
+      <section className="bg-[#f8fbfa] px-4 py-14 md:py-20" aria-labelledby="workflow-examples-title">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Workflow examples"
+            title="Voice becomes valuable when it connects to the work behind the phone call."
+            description="The same frontline pattern can support home services, manufacturing, education, professional services, clinics, ecommerce, and other operations-heavy teams."
+          />
+          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+            {workflowExamples.map((example) => (
+              <article key={example.title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <h3 className="text-xl font-extrabold text-ink">{example.title}</h3>
+                <p className="mt-4 text-sm leading-6 text-muted"><strong className="text-ink">Pain:</strong> {example.pain}</p>
+                <p className="mt-3 text-sm leading-6 text-muted"><strong className="text-ink">Workflow:</strong> {example.workflow}</p>
+                <p className="mt-5 rounded-lg bg-[#e9f9f3] px-4 py-3 text-sm font-bold text-[#169b78]">{example.kpi}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="pricing-confidence-title">
+        <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <SectionHeader
+            eyebrow="Pricing confidence"
+            title="Voice automation pricing should be transparent, but not reduced to raw API cost."
+            description="Voice automation should feel financially clear before you commit. We explain the cost drivers, start with a useful pilot, and tie expansion to volume, risk, reliability, and measurable value."
+          />
+          <div className="grid gap-4">
+            {pricingNotes.map((note) => (
+              <div key={note} className="rounded-lg border border-card-border bg-[#f8fbfa] p-5 text-sm leading-6 text-muted">
+                {note}
+              </div>
+            ))}
+            <div className="rounded-lg border border-[#1db993]/30 bg-[#e9f9f3] p-5">
+              <h3 className="text-xl font-extrabold text-ink">Recommended buying path</h3>
+              <p className="mt-3 text-sm leading-6 text-muted">
+                Free assessment, then either a paid AI Blueprint Sprint or a pilot project. Production systems can expand into Managed AI Operations once usage and value are clear.
+              </p>
+              <button onClick={() => setModalOpen(true)} className="mt-5 rounded-full bg-accent px-6 py-3 font-extrabold text-white hover:bg-btn-hover">
+                Get Free Assessment
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#f8fbfa] px-4 py-14 md:py-20" aria-labelledby="voice-faq-title">
+        <div className="mx-auto max-w-[980px]">
+          <SectionHeader
+            eyebrow="FAQ"
+            title="What teams usually need to know before starting."
+            align="center"
+          />
+          <div className="mt-8 grid gap-4">
+            {faqs.map((faq) => (
+              <details key={faq.q} className="rounded-lg border border-card-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <summary className="cursor-pointer text-lg font-extrabold text-ink">{faq.q}</summary>
+                <p className="mt-4 text-sm leading-6 text-muted">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#051C2C] px-4 py-14 text-white md:py-20" aria-labelledby="voice-final-title">
+        <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.1em] text-[#7df0d1]">Free AI Workflow Assessment</p>
+            <h2 id="voice-final-title" className="text-[30px] font-extrabold leading-tight tracking-[-0.01em] md:text-[40px]">
+              Find the first call workflow worth automating.
+            </h2>
+            <p className="mt-4 max-w-[720px] text-base leading-7 text-white/70">
+              We will help you identify the call flow, integrations, human controls, and KPI target that make sense as a first step.
+            </p>
+          </div>
+          <button onClick={() => setModalOpen(true)} className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
+            Get Free Assessment
+          </button>
+        </div>
+      </section>
+
+      <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} />
+    </div>
+  );
 }

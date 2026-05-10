@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from "next/image";
 
 export default function AIInsights() {
@@ -71,9 +70,11 @@ export default function AIInsights() {
                                     <div className="absolute bottom-2.5 right-2.5 flex items-center gap-2 z-10">
                                         <span className="text-[11px] text-[#6b7b8d] font-medium whitespace-nowrap">Source:</span>
                                         {item.logo && (
-                                            <img
+                                            <Image
                                                 src={item.logo}
                                                 alt={item.source}
+                                                width={item.width ?? 120}
+                                                height={32}
                                                 className="h-auto max-h-[20px] w-auto object-contain"
                                             />
                                         )}
