@@ -66,6 +66,12 @@ Recommended homepage flow:
    - Reinforce the deliverables of the free assessment.
    - Button label: Get Free Assessment.
 
+11. **Footer Brand Memory Line**
+   - Use a restrained line that reinforces Automate4U's name.
+   - Recommended: "We automate the work that slows you down."
+   - Optional rotating lower-page/footer phrase: "We automate your calls, emails, workflows, admin, sales follow-up, support, marketing, and operations for you."
+   - Do not use this as a gimmicky hero headline.
+
 ## Core Service Pages
 
 ### AI Voice

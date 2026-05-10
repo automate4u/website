@@ -17,10 +17,14 @@ Key decisions:
 - Primary CTA button label: Get Free Assessment.
 - Proof model: anonymous case studies with concrete metrics.
 - Positioning: automation-led, with AI Voice as the flagship demo and sales wedge.
+- Creative direction: trustworthy professional-services credibility plus precise AI operations interfaces.
 - Strategic layer: Digital Workforce, Value Realization, AI maturity, Managed AI Operations.
 - Technical layer: typed content, Server Actions, lazy third-party scripts, Playwright conversion tests.
 - Trust layer: governance, human-in-the-loop safeguards, first-7-days follow-up journey.
 - Lead routing: HubSpot as source of truth, with email notifications to Johnny, Michael, and hello@automate4u.ca.
+- HubSpot v1 model: basic contact plus assessment context; deal/ticket modeling deferred until setup.
+- V1 free tools: Resend Free for notification emails, Calendly Free for the assessment booking link, PostHog Free for analytics.
+- Pricing transparency: show ranges and explain variable vendor-cost drivers without reducing Automate4U to raw API resale.
 
 ## Recommended Reading Order
 
@@ -37,6 +41,7 @@ Key decisions:
 11. `14-labor-efficiency-and-human-redeployment.md`
 12. `15-proof-inventory-checklist.md`
 13. `16-cta-lead-routing-analytics-and-pricing.md`
+14. `17-pricing-transparency-and-cost-model.md`
 
 Use the other docs as supporting references:
 
@@ -47,12 +52,19 @@ Use the other docs as supporting references:
 
 Do not try to rebuild the entire site at once.
 
+Codex implementation note:
+
+- These docs are the implementation source of truth for the upgrade project.
+- Do not begin code implementation until explicitly instructed.
+- When implementation begins, start from this milestone and keep app changes aligned with the docs instead of inventing a new plan in chat.
+
 Milestone 1 should ship:
 
 - Technical foundation fixes: lint/build, metadata helper, sitemap, robots.
 - Typed content source of truth for core services, workflows, accelerators, and case studies.
 - Shared Free AI Workflow Assessment form using a Server Action where practical.
 - HubSpot lead routing plus email notifications.
+- Basic HubSpot contact model, Resend notification emails, and Calendly assessment booking link.
 - PostHog event analytics for assessment, demo, and workflow engagement.
 - Homepage rebuilt around the new positioning.
 - AI Voice flagship page rebuilt enough to show the voice-to-operations story.
@@ -64,11 +76,13 @@ Milestone 1 should ship:
 - AI Voice is the flagship wedge, not the whole business.
 - The site must support chat, email, marketing, operational, and integration automations.
 - The design should feel premium and engineered, not like a generic AI template.
+- The design should include real people, process, collaboration, and professional-services trust cues, not only dashboards and abstract AI visuals.
 - The homepage should demonstrate expertise through interactive systems, especially the Automation Simulator, Voice Demo plus Back-Office Event Log, and Automation Ideas Library.
 - Proof must be concrete, truthful, and tied to real workflows.
 - Under NDA constraints, public case studies must be anonymous, sanitized, or representative enough to protect client identity while staying truthful.
 - Case studies and proof modules should not be written until the proof inventory is collected.
 - SMB buyers fear spend itself, so the site must show a staged path: start small, prove value, then expand.
+- The site can explain raw cost drivers transparently, but pricing must stay tied to reliability, workflow design, monitoring, risk, and support.
 - The CTA is "Get Free Assessment"; the offer is "Free AI Workflow Assessment"; paid follow-ons are the AI Blueprint Sprint or pilot project.
 - Labor savings should be framed as automating repetitive hours and redeploying humans to higher-value work, not careless employee replacement.
 - Governance and human handoff are part of the sales story.

@@ -378,7 +378,10 @@ Submission:
 - Prefer a Next.js Server Action.
 - Hidden UTM fields should be included.
 - The Server Action should post to HubSpot as the primary CRM.
+- V1 HubSpot model: create/update a contact and store assessment context as properties/notes.
+- Defer deal/ticket object modeling until the HubSpot workspace is configured.
 - The Server Action should send notification emails to `johnny@automate4u.ca`, `michael@automate4u.ca`, and `hello@automate4u.ca`.
+- Use Resend Free as the default notification email provider unless HubSpot-native notifications cover the final submission path.
 - Formspree or a generic webhook should only be used as a fallback or temporary bridge.
 
 ## Post-Submission Wow Experience
@@ -472,9 +475,9 @@ Rules:
 
 ## Open Decisions Before Implementation
 
-- Exact HubSpot object model: contact only, contact plus deal, or contact plus ticket.
-- Email notification provider or automation route.
-- Calendar tool for the success state.
+- Whether to evolve HubSpot beyond the basic contact-plus-notes model into contact plus deal or contact plus ticket.
+- Whether HubSpot-native notifications are enough after setup, or Resend remains the notification path.
+- Calendly Free is the v1 scheduling placeholder; decide later whether multiple event types, routing, or HubSpot integration require an upgrade.
 - Whether Google Analytics 4 is needed in addition to PostHog for ad/Search Console workflows.
 - Whether the maturity assessment is static in v1 or interactive.
 - Whether `Managed AI Operations` gets its own page in v1 or appears as a section first.

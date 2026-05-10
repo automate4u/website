@@ -41,7 +41,8 @@ Goals:
 - Make the strongest first impression.
 - Show AI Voice as the flagship wedge.
 - Make the broader AI operations capability clear.
-- Establish the premium "High-Precision AI Operations" creative direction.
+- Establish the premium "Professional AI Operations" creative direction.
+- Balance technical interface proof with professional-services trust cues and real human collaboration.
 
 Steps:
 
@@ -55,11 +56,12 @@ Steps:
 - Add an AI Capability Maturity Assessment section: Manual, Digitized, Automated, AI-Native.
 - Add Industry Accelerator preview cards.
 - Add proof section with anonymous case summaries.
+- Add real people/process visuals where available: team collaboration, workflow mapping, implementation, support, and client-style problem solving.
 - Add Digital Workforce framing that explains how AI agents and human teams work together.
 - Add people/process adoption section.
 - Add a 30/60/90-day Value Realization roadmap.
 - Add Managed AI Operations section.
-- Add a concise pricing-confidence section that explains staged buying and usage-based pricing without exposing raw vendor-cost math.
+- Add a concise pricing-confidence section that explains staged buying, usage-based pricing, and variable vendor-cost drivers.
 - Rebuild the AI Voice page as the flagship proof page.
 - Add a voice demo plus back-office event log to show downstream operational actions.
 - Add a builder credibility section only when real architecture/workflow details can be shown truthfully.
@@ -70,7 +72,7 @@ Acceptance criteria:
 - The site does not imply Automate4U only sells voice.
 - Visitors can understand the connection between AI conversations and backend operations.
 - Free AI Workflow Assessment is the dominant conversion path.
-- Pricing does not make Automate4U look cheap, vague, or like a raw API reseller.
+- Pricing is transparent about cost drivers without making Automate4U look cheap, vague, or like a raw API reseller.
 - Motion and premium visuals clarify workflow instead of becoming decoration.
 
 ## Phase 3: Create The Reusable React Section System
@@ -229,3 +231,4 @@ Acceptance criteria:
 - `11-creative-experience-direction.md`: premium visual and interaction direction.
 - `12-expertise-demonstration-experiences.md`: interactive proof experiences that demonstrate engineering skill.
 - `16-cta-lead-routing-analytics-and-pricing.md`: final CTA, CRM/email routing, analytics, and pricing guidance.
+- `17-pricing-transparency-and-cost-model.md`: detailed pricing transparency and variable cost model.

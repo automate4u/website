@@ -317,7 +317,7 @@ Show:
 3. Launch one automation.
 4. Measure and expand what works.
 
-For pricing guidance, use `16-cta-lead-routing-analytics-and-pricing.md`. Public pricing should show simple ranges and usage-based categories, not raw vendor/API micro-cost tables.
+For pricing guidance, use `16-cta-lead-routing-analytics-and-pricing.md` and `17-pricing-transparency-and-cost-model.md`. Public pricing should show simple ranges, usage-based categories, and a clear explanation that raw vendor/API costs vary by provider, model, security needs, usage volume, and workflow complexity.
 
 ## First 7 Days Follow-Up Experience
 
@@ -394,3 +394,4 @@ Priority proof modules:
 - `13-smb-spend-confidence-strategy.md`: reducing spend anxiety for SMB buyers.
 - `14-labor-efficiency-and-human-redeployment.md`: labor savings and human redeployment messaging.
 - `15-proof-inventory-checklist.md`: proof collection requirements before publishing claims.
+- `17-pricing-transparency-and-cost-model.md`: pricing transparency and variable cost logic.

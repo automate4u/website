@@ -127,15 +127,17 @@ Avoid:
 - Inflated ROI percentages.
 - Implied certainty before seeing their process.
 
-### 8. Show Pricing Ranges Without Exposing Raw Vendor Costs
+### 8. Show Pricing Ranges And Cost Drivers Transparently
 
-SMB buyers need realistic expectations. Show pricing ranges when possible, but avoid publishing raw API and vendor-cost math.
+SMB buyers need realistic expectations. Show pricing ranges when possible, and explain the cost drivers behind production AI systems.
 
 Recommended public framing:
 
 - A platform/support fee covers hosting, monitoring, integrations, security maintenance, AI tuning, workflow updates, and staff support.
 - Usage-based fees cover handled voice minutes, completed workflows, messaging, and high-risk safeguards.
 - The first project can be bounded so buyers are not forced into a large transformation immediately.
+- Raw vendor/API costs vary by model, provider, call volume, region, security needs, and integration complexity.
+- Cost transparency should make the system easier to understand, not reduce Automate4U to a pass-through vendor reseller.
 
 Suggested public ranges to validate before launch:
 
@@ -147,6 +149,8 @@ Suggested public ranges to validate before launch:
 - High-risk workflows: `$10-$25` per workflow.
 
 These ranges should be positioned as planning guidance, not a universal quote.
+
+For the detailed pricing transparency model, use `17-pricing-transparency-and-cost-model.md`.
 
 ## Offer Copy Implications
 
@@ -259,3 +263,4 @@ This helps Automate4U avoid selling oversized projects to buyers who need confid
 - `12-expertise-demonstration-experiences.md`: demos that prove value before purchase.
 - `14-labor-efficiency-and-human-redeployment.md`: labor-efficiency and human redeployment messaging.
 - `16-cta-lead-routing-analytics-and-pricing.md`: final CTA and pricing guidance.
+- `17-pricing-transparency-and-cost-model.md`: variable cost model and public pricing transparency guidance.

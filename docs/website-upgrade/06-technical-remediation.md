@@ -154,7 +154,10 @@ Hidden fields:
 Destination:
 
 - HubSpot is the primary CRM/source of truth.
+- Use a basic HubSpot v1 model: create or update contacts and store assessment context as properties/notes.
+- Defer contact-plus-deal or contact-plus-ticket modeling until HubSpot is fully configured.
 - Send notification emails to `johnny@automate4u.ca`, `michael@automate4u.ca`, and `hello@automate4u.ca`.
+- Use Resend Free as the default v1 email notification provider unless HubSpot-native notifications cover the final form path.
 - Keep the integration behind the Server Action so CRM and email credentials never reach the browser.
 - Store page source, CTA location, service interest, workflow interest, industry interest, and UTM fields with the HubSpot record.
 
@@ -169,6 +172,12 @@ Behavior:
 - Work without client-side JavaScript where practical.
 - If HubSpot fails but email notification succeeds, show success and log the CRM failure for manual follow-up.
 - If all destinations fail, preserve entered data and show a retryable error.
+
+Scheduling:
+
+- Use Calendly Free for the initial assessment booking link if one event type and one connected calendar are enough.
+- Place the link in the success state and follow-up email.
+- Upgrade scheduling only when multiple event types, routing, round-robin assignment, or deeper HubSpot automation is required.
 
 ## Analytics Events
 

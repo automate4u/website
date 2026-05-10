@@ -6,20 +6,32 @@ The goal is not decorative flash. The goal is for the website itself to feel lik
 
 ## Creative Thesis
 
-The site should feel like a **high-precision AI operations console**:
+The site should feel like a **high-precision AI operations console inside a trustworthy professional-services firm**:
 
 - Clear enough for SMB owners.
 - Sophisticated enough for mid-market buyers.
 - Technical enough to prove Automate4U are real builders.
 - Warm enough to avoid feeling like a faceless enterprise platform.
+- Human enough to make buyers trust the team with important business workflows.
 
-Avoid a generic "AI agency" look. The design should not rely on random gradient blobs, vague robot imagery, or stock futuristic visuals.
+Avoid a generic "AI agency" look. The design should not rely on random gradient blobs, vague robot imagery, or stock futuristic visuals. It should also avoid feeling like a faceless SaaS product when the real offer is expert implementation, workflow design, and ongoing operations.
+
+The right reference set is not only modern SaaS. It should borrow trust cues from professional services firms, including consulting, IT services, accounting, legal, and transformation advisory firms:
+
+- Real people working through problems.
+- Calm, confident layouts.
+- Clear service explanations.
+- Strong proof and process.
+- Practical thought leadership.
+- Minimal hype.
+
+Do not copy the visual identity of firms like BCG, McKinsey, Bain, Deloitte, Accenture, or law/accounting firms. Use the same trust principles, translated into Automate4U's smaller, builder-led identity.
 
 ## Recommended Aesthetic
 
 Name:
 
-**High-Precision AI Operations**
+**Professional AI Operations**
 
 Visual language:
 
@@ -29,6 +41,8 @@ Visual language:
 - Surfaces: crisp panels, workflow rails, system nodes, logs, transcripts, KPI cards.
 - Depth: subtle shadows and translucent panels only where they clarify system layers.
 - Typography: modern sans-serif, tight hierarchy, strong scannability.
+- Photography: real people, real collaboration, real work environments, and believable professional settings.
+- Image tone: bright, capable, focused, and human; not generic futuristic stock imagery.
 
 Use dark, glassy surfaces selectively:
 
@@ -38,6 +52,43 @@ Use dark, glassy surfaces selectively:
 - Technical deep dives.
 
 Do not make the whole site a dark glassmorphism theme unless design testing proves it improves clarity and trust.
+
+## People And Photography Direction
+
+The upgraded site should include human imagery. Professional-services buyers need to feel that Automate4U is a team they can trust, not only a clever interface.
+
+Use people-focused visuals for:
+
+- Homepage credibility and process sections.
+- Team/about sections.
+- Process and discovery sections.
+- Case-study or representative workflow sections.
+- Managed AI Operations and adoption/training sections.
+
+Preferred image types:
+
+- Real Automate4U team photos when available.
+- Behind-the-scenes working sessions.
+- Whiteboarding or workflow mapping.
+- Developers reviewing systems or dashboards.
+- Professional client-style collaboration scenes.
+- Clean desk, laptop, and meeting-room moments only when they feel real and specific.
+
+Avoid:
+
+- Fake corporate handshakes.
+- Overly polished stock photos that could belong to any consulting firm.
+- Robot, circuit-board, or abstract AI imagery as primary proof.
+- Dark anonymous silhouettes.
+- Images that imply a huge enterprise staff if Automate4U is selling a small expert team.
+
+When real photography is unavailable, use restrained generated or sourced imagery as the v1 bridge. The long-term goal should be authentic team and process photography, but implementation should not block on a full photo shoot.
+
+V1 image decision:
+
+- Generated or sourced people/process imagery is approved for launch if it feels professional, believable, and aligned with the trust direction.
+- Replace temporary imagery over time with real Automate4U team, process, and working-session photography.
+- Keep an internal list of temporary images so they can be swapped later without redesigning the page.
 
 ## Motion Design Principles
 
@@ -144,6 +195,40 @@ Use carefully:
 - The post-submit and sales process can say the assessment may recommend a paid "AI Blueprint" for the first automation opportunity.
 - Avoid trademark-style language unless the brand intends to formalize it.
 
+## Memorable Brand Line
+
+Automate4U can use a short brand-memory line that reinforces the company name.
+
+Recommended line:
+
+> We automate the work that slows you down.
+
+Optional rotating footer or lower-page line:
+
+> We automate your calls, emails, workflows, admin, sales follow-up, support, marketing, and operations for you.
+
+Guidance:
+
+- Keep the hero serious and outcome-focused.
+- Use the rotating "for you" idea in the footer, final CTA band, or a lower homepage section.
+- Do not make it too cute in the first viewport.
+- Rotate concrete business nouns, not gimmicky words.
+
+Good rotating words:
+
+- calls
+- emails
+- workflows
+- admin
+- sales follow-up
+- support
+- marketing
+- operations
+- reporting
+- customer questions
+
+Use "headaches" sparingly. It is memorable but more casual. It may fit a footer or social caption better than a serious service page hero.
+
 ## Perceived Performance
 
 The site should feel fast, not just test fast.
@@ -173,9 +258,11 @@ Visuals that do not answer one of those questions should be removed.
 ## Creative Guardrails
 
 - Premium does not mean complicated.
+- Professional does not mean generic.
 - Motion must clarify workflow.
 - Dark surfaces should highlight flagship systems, not bury the whole site.
 - AI visuals should be operational, not sci-fi.
+- Real people and process visuals should be part of the trust system.
 - Use tool logos only according to the tool taxonomy and brand guidance.
 - Keep text readable and layouts stable on mobile.
 

@@ -135,14 +135,17 @@ Server Actions and explicit script strategies are also the right technical move.
 These decisions supersede the earlier open questions:
 
 - Lead destination: HubSpot, plus internal email notifications.
+- HubSpot v1 model: basic contact plus assessment context, with contact-plus-deal or contact-plus-ticket deferred until setup.
+- Notification email provider: Resend Free for v1, unless HubSpot-native notifications cover the final form path.
+- Scheduling: Calendly Free for the initial assessment booking link if one event type and one connected calendar are enough.
 - Analytics tool: PostHog for v1, with Google Analytics 4 optional if Google Ads/Search Console workflows require it.
 - Primary CTA button label: Get Free Assessment.
 - Offer name: Free AI Workflow Assessment.
 
 Remaining open decisions:
 
-- Exact HubSpot object model: contact only, contact plus deal, or contact plus ticket.
-- Email notification provider or automation route.
+- Whether HubSpot should evolve from contact-plus-context into deal or ticket objects.
+- Whether Resend remains the notification path after HubSpot is fully configured.
 - Whether Botpress should load globally after idle or only on specific high-intent pages.
 - Whether the AI maturity assessment is a static section, interactive quiz, or lead-capture pre-step.
-- Whether the post-submit calendar link should point to Calendly, another scheduler, or stay as a one-business-day response promise for v1.
+- Whether Calendly Free is enough long-term, or scheduling needs round-robin routing, multiple event types, or deeper HubSpot automation.

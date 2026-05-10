@@ -142,7 +142,8 @@ Recommended implementation:
 
 - Use a Next.js Server Action as the form submission boundary.
 - Server Action posts to HubSpot first.
-- Server Action sends notification email through a transactional email provider or a reliable automation webhook.
+- Use a basic HubSpot model for v1: create/update a contact, attach submission context as notes/properties, and defer the exact deal/ticket object model until HubSpot is fully configured.
+- Server Action sends notification email through Resend on the free tier for v1, unless HubSpot-native notifications are enough after setup.
 - Server Action optionally posts to a fallback webhook or logs non-sensitive failure details.
 - Never expose HubSpot private app tokens or email provider keys client-side.
 
@@ -179,13 +180,42 @@ Rules:
 
 ## Public Pricing Guidance
 
-The website should show pricing ranges, but not raw vendor/API micro-costs.
+The website should show pricing ranges and can explain raw vendor-cost logic when it helps buyers understand why production AI systems cost more than a personal AI subscription.
 
 Why:
 
 - SMB buyers fear spend and need realistic expectations.
 - Transparent ranges filter out buyers expecting enterprise-grade production AI for a personal-subscription budget.
-- Publishing raw API costs makes the work look like commodity markup instead of systems design, monitoring, reliability, risk management, and support.
+- Showing cost drivers can build trust when paired with clear explanation of platform reliability, monitoring, workflow design, risk management, and support.
+- Vendor costs vary by model, provider, region, security needs, latency requirements, workflow volume, and integrations, so exact figures must be framed as planning estimates.
+
+See `17-pricing-transparency-and-cost-model.md` for the detailed cost model.
+
+## Scheduling Recommendation
+
+Use Calendly Free for v1 if the workflow only needs one assessment event type and one connected calendar.
+
+Recommended setup:
+
+- One event type: Free AI Workflow Assessment.
+- Duration: 20-30 minutes.
+- Add the Calendly link to the form success state, final CTA sections, and follow-up email.
+- Upgrade only if Automate4U needs multiple event types, round-robin routing, HubSpot-native scheduling automation, advanced reminders, or lead routing.
+
+## Free Tool Recommendations
+
+For v1:
+
+- **CRM:** HubSpot Free CRM as the lead source of truth.
+- **Notification email:** Resend Free for Server Action-triggered internal notifications.
+- **Scheduling:** Calendly Free for one assessment booking link.
+- **Analytics:** PostHog Free for funnels, demos, and behavior tracking.
+
+Notes:
+
+- Resend's free tier is appropriate for low-volume internal notifications, but lead notification emails should be monitored because each recipient counts toward send volume.
+- Brevo Free is a reasonable alternative if Automate4U wants broader email marketing/CRM-style tooling, but Resend is simpler for developer-triggered transactional emails.
+- HubSpot-native form notifications can be used if the final implementation uses HubSpot forms directly, but the custom Server Action path still needs a reliable email sender.
 
 Recommended public pricing sections:
 
@@ -231,6 +261,7 @@ Use simple public language:
 - Completed workflow fees may apply when calls trigger summaries, CRM updates, notifications, audit logs, or confirmations.
 - High-risk workflows require extra safeguards and may be priced separately.
 - SMS, WhatsApp, and similar messaging fees may be pass-through or included up to a fair monthly limit.
+- Raw vendor/API costs can be explained as variable cost drivers, not as the full value of the system.
 
 Suggested public ranges to validate before publishing:
 
@@ -265,11 +296,30 @@ Do:
 
 Do not:
 
-- Publish internal raw vendor-cost estimates.
+- Publish raw vendor-cost estimates without clear context that they are variable planning assumptions.
 - Promise guaranteed savings without evidence.
 - Make exact claims using vendor prices unless current pricing has been verified.
 - Position production systems as comparable to a `$20-$200/month` AI subscription.
 - Let pricing pages make the team look like a low-cost commodity automation shop.
+
+## Pricing Placement Psychology
+
+Pricing should appear where buyer curiosity naturally spikes, not only on a standalone pricing page.
+
+Good placements:
+
+- AI Voice page after the voice-to-operations demo, because buyers will wonder what a live voice system costs.
+- Free assessment page near the offer ladder, so buyers understand what comes after the free step.
+- Industry Accelerator pages after the example workflow, because the cost question is easier to understand once the workflow is concrete.
+- Managed AI Operations section, because ongoing monitoring and support need pricing context.
+- FAQ or expandable "How pricing works" panels for buyers who want detail without forcing everyone through dense pricing content.
+
+Recommended interaction:
+
+- Use concise pricing cards for public ranges.
+- Use expandable details for cost drivers and raw vendor-cost logic.
+- Use tooltips or small info panels for terms like "handled voice minute," "completed workflow," and "high-risk workflow."
+- Avoid hover-only pricing details on mobile; every pricing explanation must be tappable and accessible.
 
 ## Related Documents
 
@@ -279,3 +329,4 @@ Do not:
 - `13-smb-spend-confidence-strategy.md`: spend anxiety and staged buying path.
 - `14-labor-efficiency-and-human-redeployment.md`: labor-efficiency messaging.
 - `15-proof-inventory-checklist.md`: NDA-safe proof requirements.
+- `17-pricing-transparency-and-cost-model.md`: detailed pricing transparency and variable cost model.
