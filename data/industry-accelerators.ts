@@ -1,5 +1,6 @@
 export type IndustryAcceleratorSlug =
   | "home-services"
+  | "education-childcare"
   | "manufacturing"
   | "retail-ecommerce"
   | "professional-services"
@@ -26,6 +27,16 @@ export const industryAccelerators: IndustryAcceleratorSummary[] = [
       "AI voice, dispatch, booking, follow-up, and CRM workflows for home service and HVAC businesses.",
     primaryKpi: "Missed calls recovered and booked jobs increased",
     commonWorkflows: ["Missed-call recovery", "Booking", "Dispatch notification", "Quote follow-up"],
+  },
+  {
+    slug: "education-childcare",
+    href: "/industries/education-childcare",
+    title: "Education & Childcare Operations",
+    metaTitle: "AI Automation for Education and Childcare | Automate4U",
+    metaDescription:
+      "AI voice and workflow automation for childcare, daycare, prep school, and education teams managing parent communication and admin work.",
+    primaryKpi: "Admin interruptions reduced",
+    commonWorkflows: ["Parent calls", "Enrollment inquiries", "Tour scheduling", "Staff handoff"],
   },
   {
     slug: "manufacturing",

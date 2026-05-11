@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { routeMetadata } from "@/data/metadata";
 import { industryAccelerators } from "@/data/industry-accelerators";
 import { services } from "@/data/services";
+import { solutions } from "@/data/solutions";
 import { createMetadata } from "@/lib/metadata";
 
 export function metadataForPath(path: string): Metadata {
   const route = routeMetadata.find((item) => item.path === path);
   const service = services.find((item) => item.href === path);
   const accelerator = industryAccelerators.find((item) => item.href === path);
+  const solution = solutions.find((item) => item.href === path);
 
   if (service) {
     return createMetadata({
@@ -22,6 +24,14 @@ export function metadataForPath(path: string): Metadata {
       title: accelerator.metaTitle,
       description: accelerator.metaDescription,
       path: accelerator.href,
+    });
+  }
+
+  if (solution) {
+    return createMetadata({
+      title: solution.metaTitle,
+      description: solution.metaDescription,
+      path: solution.href,
     });
   }
 

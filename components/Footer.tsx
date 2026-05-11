@@ -23,6 +23,7 @@ export default function Footer() {
                             <li><Link href="/core-services/ai-chat" className="hover:text-accent">AI Chat</Link></li>
                             <li><Link href="/core-services/ai-voice" className="hover:text-accent">AI Voice</Link></li>
                             <li><Link href="/core-services/ai-transformation" className="hover:text-accent">AI Transformation</Link></li>
+                            <li className="pt-2"><Link href="/solutions" className="hover:text-accent font-semibold flex items-center gap-1">See solutions <span aria-hidden="true">&rarr;</span></Link></li>
                         </ul>
                     </div>
                     <div>
@@ -39,6 +40,7 @@ export default function Footer() {
                         <h4 className="font-bold mb-4">Industries</h4>
                         <ul className="space-y-2 text-sm text-muted">
                             <li><Link href="/industries/home-services" className="hover:text-accent">Home Services</Link></li>
+                            <li><Link href="/industries/education-childcare" className="hover:text-accent">Education & Childcare</Link></li>
                             <li><Link href="/industries/manufacturing" className="hover:text-accent">Manufacturing</Link></li>
                             <li><Link href="/industries/professional-services" className="hover:text-accent">Professional Services</Link></li>
                             <li><Link href="/industries/hospitality" className="hover:text-accent">Hospitality</Link></li>

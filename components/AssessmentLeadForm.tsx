@@ -130,6 +130,19 @@ export default function AssessmentLeadForm({
       </label>
 
       <label className="grid gap-1.5">
+        <span className="text-sm font-semibold text-ink">Budget range</span>
+        <select name="budget" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
+          <option value="" disabled>Select a budget range</option>
+          <option>Exploring fit first</option>
+          <option>Under $3k/month</option>
+          <option>$3k-$5k/month</option>
+          <option>$5k-$10k/month</option>
+          <option>$10k+/month</option>
+          <option>Project budget, not monthly</option>
+        </select>
+      </label>
+
+      <label className="grid gap-1.5">
         <span className="text-sm font-semibold text-ink">Timeline</span>
         <select name="timeline" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
           <option value="" disabled>Select a timeline</option>

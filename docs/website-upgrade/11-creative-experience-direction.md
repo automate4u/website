@@ -277,6 +277,8 @@ Do not add fake loading states where static content could render immediately.
 
 Industry pages should feel like premium advisory pages backed by real implementation skill, not like repeated landing-page templates.
 
+The `/industries` index should function as a guided map, not a simple image directory. It should explain that industry pages show the operating environment, while solution pages show specific implementations. This helps buyers understand why a broad page like Education & Childcare can link to a focused page like Daycare Voice Agent without confusing the taxonomy.
+
 Use the Manufacturing AI Accelerator v2 page as the benchmark pattern.
 
 Each accelerator should balance:
@@ -309,6 +311,28 @@ Preferred rhythm:
 This is a stronger pattern than simply listing pain points, workflows, KPIs, and safeguards in separate card grids. The page should feel like Automate4U has walked through the buyer's operation, not like it filled out a template.
 
 Avoid labels like "anonymous engagement patterns" on public pages. That phrase is useful internally, but it makes the reader feel like they are seeing our planning notes. Use client-facing labels such as "Where value usually starts," "Common first workflows," "Representative workflows," or "What teams automate first."
+
+## Solution Landing Page Direction
+
+Solution pages are not industry pages. They should describe one specific implementation, use case, or workflow package for a clearly defined buyer.
+
+The `/solutions` index should stay practical and focused. It should not become a long product catalog before enough solution pages exist. Its job is to explain the implementation pattern, feature available solution pages, and preview the future library in a way that feels credible.
+
+Do not put `Solutions` in the primary top navigation until there are enough strong solution pages to justify it. For now, solution pages should be discovered contextually from relevant industry pages, core service pages, homepage sections, and the footer. This keeps the top navigation focused on broad buyer paths instead of making the business look narrower than it is.
+
+Use `/solutions/daycare-voice-agent` as the first solution-page pattern:
+
+- Keep the page narrower than an industry page.
+- Lead with the use case and buyer context.
+- Show the operational reality behind the need.
+- Explain how the solution supports the team.
+- Show example scenarios or demo moments.
+- Reinforce control, policies, escalation, and human oversight.
+- Explain a practical rollout.
+- Handle objections clearly.
+- End with a low-pressure solution-specific CTA.
+
+Solutions should be linked from relevant industry pages and core service pages. For example, Daycare Voice Agent belongs under the broader Education & Childcare industry context and AI Voice service context.
 
 Every premium visual should answer one of these questions:
 

@@ -18,6 +18,12 @@ export const routeMetadata: RouteMetadata[] = [
       "Explore Automate4U Industry Accelerators for home services, manufacturing, retail ecommerce, professional services, healthcare, and real estate.",
   },
   {
+    path: "/solutions",
+    title: "AI Automation Solutions | Automate4U",
+    description:
+      "Explore focused AI automation solutions for voice, chat, email, operations, marketing, workflow handoffs, and managed AI operations.",
+  },
+  {
     path: "/industries/financial-services",
     title: "AI Automation for Financial Services | Automate4U",
     description:

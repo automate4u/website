@@ -1,6 +1,7 @@
 import { industryAccelerators } from "@/data/industry-accelerators";
 import { services } from "@/data/services";
 import { siteConfig } from "@/data/site";
+import { solutions } from "@/data/solutions";
 
 function absoluteUrl(path = "/") {
   return new URL(path, siteConfig.url).toString();
@@ -64,8 +65,9 @@ export function breadcrumbSchema(path: string, title: string) {
 export function routeSchema(path: string) {
   const service = services.find((item) => item.href === path);
   const accelerator = industryAccelerators.find((item) => item.href === path);
-  const title = service?.title ?? accelerator?.title;
-  const description = service?.metaDescription ?? accelerator?.metaDescription;
+  const solution = solutions.find((item) => item.href === path);
+  const title = service?.title ?? accelerator?.title ?? solution?.title;
+  const description = service?.metaDescription ?? accelerator?.metaDescription ?? solution?.metaDescription;
 
   if (!title || !description) {
     return null;
@@ -91,6 +93,20 @@ export function routeSchema(path: string) {
       areaServed: "North America",
       offers: offer,
     }
+    : solution
+      ? {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": absoluteUrl(`${path}#solution`),
+        name: solution.title,
+        url: absoluteUrl(path),
+        description: solution.metaDescription,
+        provider: {
+          "@id": absoluteUrl("/#organization"),
+        },
+        serviceType: "AI automation solution",
+        offers: offer,
+      }
     : {
       "@context": "https://schema.org",
       "@type": "Service",

@@ -33,6 +33,7 @@ export default function Header() {
     const menus = {
         industries: [
             { name: "Financial Services", href: "/industries/financial-services" },
+            { name: "Education & Childcare", href: "/industries/education-childcare" },
             { name: "Healthcare", href: "/industries/healthcare" },
             { name: "Manufacturing", href: "/industries/manufacturing" },
             { name: "Retail & Ecommerce", href: "/industries/retail-ecommerce" },

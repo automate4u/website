@@ -2,10 +2,12 @@
 
 import React, { useActionState, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import AttributionFields from "@/components/AttributionFields";
 import SectionHeader from "@/components/sections/SectionHeader";
 import { submitAssessmentLeadWithState } from "@/app/actions/assessment";
 import { trackEvent } from "@/lib/analytics";
+import { solutions } from "@/data/solutions";
 
 type RetellClient = {
   on: (event: string, handler: (...args: unknown[]) => void) => void;
@@ -54,10 +56,11 @@ const workflowExamples = [
     kpi: "Missed calls recovered",
   },
   {
-    title: "Clinic or professional intake",
-    pain: "Front desk staff repeat the same questions all day.",
-    workflow: "AI collects intake details, books the next step, flags sensitive cases, and creates notes.",
+    title: "Daycare front desk",
+    pain: "Staff juggle enrollment calls, parent questions, tour requests, and sensitive handoffs.",
+    workflow: "AI captures intake details, routes by location, supports approved responses, and escalates sensitive cases to staff.",
     kpi: "Admin interruptions reduced",
+    href: "/solutions/daycare-voice-agent",
   },
   {
     title: "Manufacturing response",
@@ -65,7 +68,13 @@ const workflowExamples = [
     workflow: "AI captures the request, checks available data, starts a quote task, and routes to sales.",
     kpi: "Quote cycle time reduced",
   },
-];
+] satisfies Array<{
+  title: string;
+  pain: string;
+  workflow: string;
+  kpi: string;
+  href?: string;
+}>;
 
 const pricingNotes = [
   "Voice cost depends on handled minutes, call complexity, model choices, transcription, text-to-speech, routing, and recording needs.",
@@ -89,6 +98,10 @@ const faqs = [
   {
     q: "How should we start?",
     a: "Start with one measurable workflow. Prove value, train the team, then expand into more channels or Managed AI Operations.",
+  },
+  {
+    q: "Is voice the only thing Automate4U builds?",
+    a: "No. Voice is often the easiest frontline experience to understand, but most real deployments connect voice to chat, email, CRM, calendars, task routing, reporting, and other operational agents.",
   },
 ];
 
@@ -266,6 +279,7 @@ export default function AIVoicePage() {
   const retellClientRef = useRef<RetellClient | null>(null);
   const [callActive, setCallActive] = useState(false);
   const [callStarting, setCallStarting] = useState(false);
+  const daycareSolution = solutions.find((solution) => solution.slug === "daycare-voice-agent");
 
   useEffect(() => {
     import("retell-client-js-sdk").then(({ RetellWebClient }) => {
@@ -370,7 +384,7 @@ export default function AIVoicePage() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a href="#voice-demo" className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb]">
-                Try Now
+                Try Voice Demo
               </a>
               <button onClick={() => setModalOpen(true)} className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
                 Get Free Assessment
@@ -498,11 +512,44 @@ export default function AIVoicePage() {
                 <p className="mt-4 text-sm leading-6 text-muted"><strong className="text-ink">Pain:</strong> {example.pain}</p>
                 <p className="mt-3 text-sm leading-6 text-muted"><strong className="text-ink">Workflow:</strong> {example.workflow}</p>
                 <p className="mt-5 rounded-lg bg-[#e9f9f3] px-4 py-3 text-sm font-bold text-[#169b78]">{example.kpi}</p>
+                {example.href ? (
+                  <Link href={example.href} className="mt-5 inline-flex text-sm font-extrabold text-[#169b78]">
+                    See focused solution <span className="ml-1" aria-hidden="true">-&gt;</span>
+                  </Link>
+                ) : null}
               </article>
             ))}
           </div>
         </div>
       </section>
+
+      {daycareSolution ? (
+        <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="focused-solution-title">
+          <div className="mx-auto grid max-w-[1180px] gap-10 rounded-lg border border-card-border bg-[#f8fbfa] p-6 shadow-[0_12px_36px_rgba(15,23,32,0.05)] md:p-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Focused implementation</p>
+              <h2 id="focused-solution-title" className="mt-3 text-[28px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[38px]">
+                See how voice works when it is designed for one real operating environment.
+              </h2>
+              <p className="mt-5 text-base leading-8 text-muted">
+                The Daycare Voice Agent page shows the calmer, more specific version of the voice story: enrollment calls, parent questions, location routing, approved responses, sensitive handoffs, and a practical rollout for busy childcare teams.
+              </p>
+            </div>
+            <div className="rounded-lg border border-card-border bg-white p-6">
+              <h3 className="text-2xl font-extrabold leading-tight text-ink">{daycareSolution.title}</h3>
+              <p className="mt-4 text-sm leading-6 text-muted">{daycareSolution.metaDescription}</p>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <Link href={daycareSolution.href} className="inline-flex h-11 items-center justify-center rounded-full bg-accent px-5 text-sm font-extrabold text-white hover:bg-btn-hover">
+                  View Solution
+                </Link>
+                <Link href="/industries/education-childcare" className="inline-flex h-11 items-center justify-center rounded-full border border-card-border px-5 text-sm font-extrabold text-ink hover:border-[#1db993]/45 hover:text-[#167f65]">
+                  Education Context
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="pricing-confidence-title">
         <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">

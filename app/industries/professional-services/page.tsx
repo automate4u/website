@@ -1,1011 +1,360 @@
-import React from 'react';
-
-export default function Page() {
-    return (
-        <>
-            <style dangerouslySetInnerHTML={{
-                __html: `
-    .hs-pro-scope {
-        display: block;
-    }
-
-    .hs-pro-scope * {
-        box-sizing: border-box;
-    }
-
-    /* Tokens */
-    .hs-pro-scope {
-        --ink: #0e1520;
-        --muted: #6a7786;
-        --accent: #1db993;
-        --accent-2: #159a78;
-        --bg: #ffffff;
-        --panel: #f7f9fb;
-        --border: #e5edf2;
-        --pill: #e9f9f3;
-        --radius: 18px;
-    }
-
-    /* Layout */
-    .hs-pro-scope .hs-container {
-        max-width: 1120px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-
-    /* Type */
-    .hs-pro-scope .hs-h1 {
-        margin: 8px 0 8px;
-        font-size: 40px;
-        line-height: 1.08;
-        letter-spacing: -.01em;
-        font-weight: 700;
-    }
-
-    .hs-pro-scope .hs-h2 {
-        margin: 10px 0 6px;
-        font-size: 28px;
-        line-height: 1.15;
-        letter-spacing: -.01em;
-        font-weight: 700;
-    }
-
-    .hs-pro-scope .hs-h3 {
-        margin: 0 0 6px;
-        font-size: 1.05rem;
-        font-weight: 600;
-    }
-
-    .hs-pro-scope .hs-h4 {
-        margin: 0 0 6px;
-        font-size: 1rem;
-        font-weight: 600;
-    }
-
-    .hs-pro-scope .hs-p {
-        margin: 0 0 8px;
-        color: var(--ink);
-    }
-
-    .hs-pro-scope .hs-lead {
-        color: var(--muted);
-        max-width: 75ch;
-        margin: 0 0 12px;
-    }
-
-    /* Buttons */
-    .hs-pro-scope .hs-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: .55rem;
-        padding: .7rem 1rem;
-        border-radius: 999px;
-        font-weight: 600;
-        text-decoration: none;
-        border: 1px solid transparent;
-    }
-
-    .hs-pro-scope .hs-primary {
-        background: linear-gradient(180deg, var(--accent), var(--accent-2));
-        color: #fff;
-        box-shadow: 0 8px 22px rgba(29, 185, 147, .18);
-    }
-
-    .hs-pro-scope .hs-primary:hover {
-        filter: brightness(.98);
-    }
-
-    /* Header */
-    .hs-pro-scope .hs-head {
-        background: var(--bg);
-        padding: 48px 0 28px;
-    }
-
-    .hs-pro-scope .hs-head-grid {
-        display: grid;
-        gap: 40px;
-        align-items: center;
-    }
-
-    .hs-pro-scope .hs-head-content {
-        max-width: 100%;
-    }
-
-    .hs-pro-scope .hs-head-image {
-        display: none;
-    }
-
-    .hs-pro-scope .hs-head-image img {
-        width: 100%;
-        height: auto;
-        border-radius: var(--radius);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    @media (min-width: 920px) {
-        .hs-pro-scope .hs-head-grid {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .hs-pro-scope .hs-head-image {
-            display: block;
-        }
-    }
-
-    .hs-pro-scope .hs-meta-list {
-        display: flex;
-        gap: 10px 12px;
-        flex-wrap: wrap;
-        margin: 12px 0 0;
-        padding: 0;
-        list-style: none;
-    }
-
-    .hs-pro-scope .hs-meta-list li {
-        background: #eef5f8;
-        color: #415467;
-        border: 1px solid var(--border);
-        border-radius: 999px;
-        padding: .28rem .6rem;
-        font-weight: 600;
-        font-size: .8rem;
-    }
-
-    /* Dynamics */
-    .hs-pro-scope .hs-dynamics {
-        background: #fff;
-        padding: 22px 0 14px;
-    }
-
-    .hs-pro-scope .hs-columns {
-        display: grid;
-        gap: 24px;
-        margin-top: 16px;
-    }
-
-    .hs-pro-scope .hs-panel {
-        background: transparent;
-        border: none;
-        padding: 0;
-    }
-
-    .hs-pro-scope .hs-list {
-        margin: 8px 0 0;
-        padding-left: 20px;
-        color: var(--ink);
-        list-style: disc;
-    }
-
-    .hs-pro-scope .hs-list li {
-        margin: 8px 0;
-        line-height: 1.5;
-    }
-
-    @media (min-width:880px) {
-        .hs-pro-scope .hs-columns {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    /* Capabilities */
-    .hs-pro-scope .hs-capabilities {
-        background: #fff;
-        padding: 28px 0;
-    }
-
-    .hs-pro-scope .hs-cap-accordion {
-        margin-top: 16px;
-        border-top: 1px solid var(--border);
-    }
-
-    .hs-pro-scope .hs-cap-detail {
-        border-bottom: 1px solid var(--border);
-    }
-
-    .hs-pro-scope .hs-cap-summary {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding: 20px 0;
-        cursor: pointer;
-        list-style: none;
-        user-select: none;
-    }
-
-    .hs-pro-scope .hs-cap-summary::-webkit-details-marker {
-        display: none;
-    }
-
-    .hs-pro-scope .hs-cap-title {
-        font-size: 1.15rem;
-        font-weight: 600;
-        color: var(--ink);
-    }
-
-    .hs-pro-scope .hs-cap-icon {
-        width: 24px;
-        height: 24px;
-        position: relative;
-        flex-shrink: 0;
-    }
-
-    .hs-pro-scope .hs-cap-icon::before,
-    .hs-pro-scope .hs-cap-icon::after {
-        content: '';
-        position: absolute;
-        background: var(--ink);
-        transition: transform 0.3s ease;
-    }
-
-    .hs-pro-scope .hs-cap-icon::before {
-        width: 16px;
-        height: 2px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .hs-pro-scope .hs-cap-icon::after {
-        width: 2px;
-        height: 16px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .hs-pro-scope .hs-cap-detail[open] .hs-cap-icon::after {
-        transform: translate(-50%, -50%) rotate(90deg);
-        opacity: 0;
-    }
-
-    .hs-pro-scope .hs-cap-content {
-        padding: 0 0 24px 0;
-        max-width: 900px;
-    }
-
-    .hs-pro-scope .hs-bullets {
-        margin: 12px 0 0;
-        padding-left: 20px;
-        color: var(--ink);
-        list-style: disc;
-    }
-
-    .hs-pro-scope .hs-bullets li {
-        margin: 8px 0;
-        line-height: 1.5;
-    }
-
-    @media (min-width:880px) {
-        .hs-pro-scope .hs-cap-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    /* Impact */
-    .hs-pro-scope .hs-impact {
-        background: #fff;
-        padding: 22px 0 10px;
-        text-align: center;
-    }
-
-    .hs-pro-scope .hs-kpi-rail {
-        display: grid;
-        gap: 10px;
-        margin-top: 10px;
-    }
-
-    .hs-pro-scope .hs-kpi {
-        background: linear-gradient(180deg, #fbfdfc 0%, #f5fbf8 100%);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 16px;
-    }
-
-    .hs-pro-scope .hs-kpi-num {
-        font-size: 28px;
-        font-weight: 700;
-        color: #0f1b25;
-    }
-
-    .hs-pro-scope .hs-kpi-lbl {
-        color: #415467;
-        margin-top: 6px;
-    }
-
-    .hs-pro-scope .hs-method-note {
-        margin: 10px auto 0;
-        max-width: 70ch;
-        text-align: left;
-    }
-
-    .hs-pro-scope .hs-method-note summary {
-        cursor: pointer;
-        font-weight: 600;
-    }
-
-    @media (min-width:880px) {
-        .hs-pro-scope .hs-kpi-rail {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    /* Cases */
-    .hs-pro-scope .hs-cases {
-        background: #fff;
-        padding: 26px 0;
-    }
-
-    .hs-pro-scope .hs-case-grid {
-        display: grid;
-        gap: 24px;
-        margin-top: 16px;
-    }
-
-    .hs-pro-scope .hs-case {
-        background: transparent;
-        border: none;
-        padding: 0;
-    }
-
-    @media (min-width:880px) {
-        .hs-pro-scope .hs-case-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    /* Approach */
-    .hs-pro-scope .hs-approach {
-        background: #fff;
-        padding: 26px 0;
-    }
-
-    .hs-pro-scope .hs-approach-intro {
-        color: var(--muted);
-        max-width: 75ch;
-        margin: 8px 0 24px;
-    }
-
-    .hs-pro-scope .hs-approach-grid {
-        display: grid;
-        gap: 48px;
-        align-items: start;
-        margin-top: 24px;
-    }
-
-    .hs-pro-scope .hs-approach-image {
-        display: none;
-    }
-
-    .hs-pro-scope .hs-approach-image img {
-        width: 100%;
-        height: auto;
-        border-radius: var(--radius);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        position: sticky;
-        top: 20px;
-    }
-
-    @media (min-width: 920px) {
-        .hs-pro-scope .hs-approach-grid {
-            grid-template-columns: 1.2fr 1fr;
-        }
-
-        .hs-pro-scope .hs-approach-image {
-            display: block;
-        }
-    }
-
-    .hs-pro-scope .hs-steps-wrapper {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-    }
-
-    .hs-pro-scope .hs-step {
-        display: flex;
-        gap: 20px;
-        align-items: start;
-    }
-
-    .hs-pro-scope .hs-step-number {
-        flex-shrink: 0;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--accent), var(--accent-2));
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 1rem;
-        box-shadow: 0 4px 12px rgba(29, 185, 147, 0.2);
-    }
-
-    .hs-pro-scope .hs-step-content {
-        flex: 1;
-        padding-top: 4px;
-    }
-
-    .hs-pro-scope .hs-step-content .hs-h3 {
-        margin-bottom: 8px;
-    }
-
-    .hs-pro-scope .hs-step-content .hs-p {
-        color: var(--muted);
-        line-height: 1.6;
-    }
-
-    /* Tech */
-    .hs-pro-scope .hs-tech {
-        background: #fff;
-        padding: 28px 0;
-    }
-
-    .hs-pro-scope .hs-tech-intro {
-        color: var(--muted);
-        max-width: 75ch;
-        margin: 8px 0 24px;
-    }
-
-    .hs-pro-scope .hs-tech-categories {
-        display: grid;
-        gap: 24px;
-        margin-top: 20px;
-    }
-
-    @media (min-width: 768px) {
-        .hs-pro-scope .hs-tech-categories {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    .hs-pro-scope .hs-tech-category {
-        background: var(--panel);
-        border-radius: 12px;
-        padding: 20px;
-    }
-
-    .hs-pro-scope .hs-tech-cat-title {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--muted);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin: 0 0 12px;
-    }
-
-    .hs-pro-scope .hs-logo-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .hs-pro-scope .hs-logo {
-        color: var(--ink);
-        font-size: .95rem;
-        padding: 10px 14px;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        background: #fff;
-        text-align: left;
-        font-weight: 500;
-    }
-
-    .hs-pro-scope .hs-arch {
-        margin: 32px 0 0;
-        padding: 20px;
-        background: var(--panel);
-        border-radius: 12px;
-        border: 1px solid var(--border);
-    }
-
-    .hs-pro-scope .hs-arch summary {
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 1.05rem;
-        color: var(--ink);
-        list-style: none;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .hs-pro-scope .hs-arch summary::-webkit-details-marker {
-        display: none;
-    }
-
-    .hs-pro-scope .hs-arch summary::before {
-        content: '+';
-        font-size: 1.3rem;
-        font-weight: 400;
-        color: var(--accent);
-        line-height: 1;
-    }
-
-    .hs-pro-scope .hs-arch[open] summary::before {
-        content: '−';
-    }
-
-    .hs-pro-scope .hs-arch-content {
-        margin-top: 16px;
-        padding-top: 16px;
-        border-top: 1px solid var(--border);
-    }
-
-    .hs-pro-scope .hs-arch-list {
-        margin: 12px 0 0;
-        padding-left: 20px;
-        list-style: none;
-    }
-
-    .hs-pro-scope .hs-arch-list li {
-        margin: 12px 0;
-        line-height: 1.6;
-        position: relative;
-        padding-left: 0;
-    }
-
-    .hs-pro-scope .hs-arch-list li strong {
-        color: var(--accent-2);
-        font-weight: 600;
-    }
-
-    /* Governance */
-    .hs-pro-scope .hs-governance {
-        background: #fff;
-        padding: 24px 0;
-    }
-
-    .hs-pro-scope .hs-governance .hs-columns {
-        gap: 24px;
-    }
-
-    .hs-pro-scope .hs-governance .hs-panel {
-        margin-bottom: 0;
-    }
-
-    /* Insights */
-    .hs-pro-scope .hs-insights {
-        background: #fff;
-        padding: 24px 0;
-    }
-
-    .hs-pro-scope .hs-insight-list {
-        margin: 16px 0 0;
-        padding-left: 20px;
-        list-style: disc;
-    }
-
-    .hs-pro-scope .hs-insight-list li {
-        margin: 10px 0;
-        line-height: 1.5;
-    }
-
-    /* Contact */
-    .hs-pro-scope .hs-contact {
-        background: #fff;
-        padding: 26px 0 34px;
-    }
-
-    .hs-pro-scope .hs-form {
-        max-width: 880px;
-        margin: 10px auto 0;
-    }
-
-    .hs-pro-scope .hs-form-grid {
-        display: grid;
-        gap: 12px;
-    }
-
-    .hs-pro-scope .hs-field {
-        display: grid;
-        gap: 6px;
-    }
-
-    .hs-pro-scope .hs-field--full {
-        grid-column: 1/-1;
-    }
-
-    .hs-pro-scope .hs-label {
-        font-weight: 600;
-        color: #16212b;
-    }
-
-    .hs-pro-scope input,
-    .hs-pro-scope select,
-    .hs-pro-scope textarea {
-        width: 100%;
-        padding: 12px;
-        border-radius: 12px;
-        border: 1px solid var(--border);
-        background: #fff;
-        color: #0f1520;
-    }
-
-    .hs-pro-scope .hs-actions {
-        margin-top: 12px;
-        display: flex;
-        gap: 12px;
-        align-items: center;
-    }
-
-    .hs-pro-scope .hs-small {
-        margin: 0;
-        color: var(--muted);
-        font-size: .9rem;
-    }
-
-    /* Footer tag */
-    .hs-pro-scope .hs-foot {
-        background: #fff;
-        padding: 12px 0 36px;
-        text-align: center;
-    }
-
-    .hs-pro-scope .hs-mark {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        color: #365160;
-        background: var(--pill);
-        padding: .36rem .62rem;
-        border-radius: 999px;
-        font-weight: 600;
-        font-size: .84rem;
-    }
-
-    /* Responsive headings */
-    @media (min-width:920px) {
-        .hs-pro-scope .hs-h1 {
-            font-size: 48px;
-        }
-
-        .hs-pro-scope .hs-h2 {
-            font-size: 32px;
-        }
-    }
-` }} />
-            <div dangerouslySetInnerHTML={{
-                __html: `<div class="hs-pro-scope" data-industry="professional-services">
-
-    <!-- ================= HEADER / OVERVIEW ================= -->
-    <section class="hs-head" aria-labelledby="hs-head-title">
-        <div class="hs-container">
-            <div class="hs-head-grid">
-                <div class="hs-head-content">
-                    <h1 id="hs-head-title" class="hs-h1">Professional Services</h1>
-                    <p class="hs-lead">
-                        Professional services firms face pressure to maximize billable hours, deliver consistent client
-                        experiences, and manage complex project workflows.
-                        We help teams automate administrative tasks, streamline client communications, and improve
-                        resource utilization through intelligent automation and workflow orchestration.
-                    </p>
-                    <ul class="hs-meta-list" aria-label="Sector coverage">
-                        <li>Consulting</li>
-                        <li>Legal Services</li>
-                        <li>Accounting</li>
-                        <li>Architecture</li>
-                        <li>Engineering</li>
-                        <li>Marketing Agencies</li>
-                    </ul>
-                </div>
-                <div class="hs-head-image">
-                    <img src="/images/industries/professional-services.jpg"
-                        alt="Professional services illustration" />
-                </div>
+import Image from "next/image";
+import Link from "next/link";
+import AssessmentCTA from "@/components/sections/AssessmentCTA";
+import SectionHeader from "@/components/sections/SectionHeader";
+
+const frictionAreas = [
+  {
+    title: "Intake takes longer than the actual first step",
+    text: "Teams lose time collecting contact details, service needs, appointment preferences, eligibility notes, documents, forms, and missing context before a professional can help.",
+  },
+  {
+    title: "Follow-up depends on busy staff remembering",
+    text: "Prospects, clients, patients, or members may need reminders, next steps, document requests, booking links, payment prompts, or post-visit follow-up at the right moment.",
+  },
+  {
+    title: "Sensitive requests need clean escalation",
+    text: "Some questions need a licensed professional, manager, practitioner, or office lead. Automation should identify those moments and hand off with context.",
+  },
+];
+
+const workflowPath = [
+  {
+    step: "01",
+    title: "Capture the inquiry",
+    text: "AI handles calls, forms, chat, or email and collects the service need, urgency, preferred appointment time, contact details, and missing intake information.",
+  },
+  {
+    step: "02",
+    title: "Check approved rules",
+    text: "The workflow references approved service descriptions, booking rules, eligibility questions, document checklists, reminders, and escalation criteria.",
+  },
+  {
+    step: "03",
+    title: "Prepare the handoff",
+    text: "The system books or routes the request, creates the right task, sends the next-step message, and gives staff a concise summary before they respond.",
+  },
+  {
+    step: "04",
+    title: "Keep the record clean",
+    text: "CRM notes, appointment context, document status, follow-up actions, and KPI events are logged so the team can see what happened and what remains.",
+  },
+];
+
+const valuePatterns = [
+  {
+    label: "Client and patient intake",
+    outcome: "Collect the details staff ask for repeatedly, route requests to the right person, and reduce back-and-forth before the first appointment or consultation.",
+  },
+  {
+    label: "Appointment scheduling",
+    outcome: "Support booking, rescheduling, reminders, confirmations, cancellation handling, and follow-up while respecting staff availability and office rules.",
+  },
+  {
+    label: "Document and next-step follow-up",
+    outcome: "Request missing forms, send instructions, remind clients of next steps, and escalate unanswered or sensitive cases before they stall.",
+  },
+];
+
+const servicePaths = [
+  {
+    title: "AI Voice intake",
+    description:
+      "A voice-led starting point for routine appointment calls, service questions, intake capture, and front-office routing.",
+    href: "/core-services/ai-voice",
+    cta: "Explore AI Voice",
+  },
+  {
+    title: "AI Agents for workflow routing",
+    description:
+      "Agents that turn calls, emails, forms, and chat into CRM updates, booking tasks, document requests, reminders, and staff handoffs.",
+    href: "/core-services/ai-agents",
+    cta: "Explore AI Agents",
+  },
+  {
+    title: "Document follow-up agent",
+    description:
+      "A future solution pattern for recurring paperwork, intake forms, reminders, approvals, and client-status visibility.",
+    cta: "Planned solution pattern",
+  },
+];
+
+const sectorShifts = [
+  {
+    title: "Clients expect faster response",
+    text: "Appointment-driven businesses can lose trust before the first visit if inquiries, booking requests, or follow-up messages sit unanswered.",
+  },
+  {
+    title: "Admin work is hard to scale",
+    text: "Adding more clients often creates more scheduling, reminders, intake, documentation, billing questions, and status updates for the same small team.",
+  },
+  {
+    title: "Professional judgment must stay protected",
+    text: "Automation should not make regulated, clinical, legal, financial, or sensitive decisions. It should collect context and route the right case to the right person.",
+  },
+];
+
+const systemGroups = [
+  {
+    title: "Client channels",
+    items: ["Phone", "Email", "Website forms", "Chat", "SMS reminders"],
+  },
+  {
+    title: "Practice systems",
+    items: ["CRM", "Calendar", "Booking tools", "Forms", "Payment links"],
+  },
+  {
+    title: "Team workflow",
+    items: ["Intake task", "Document request", "Staff handoff", "Follow-up queue", "KPI reporting"],
+  },
+];
+
+const controls = [
+  "Approved response rules keep the agent aligned with your services, policies, appointment rules, and communication standards.",
+  "Sensitive, regulated, urgent, or unclear situations can route to a human instead of being answered automatically.",
+  "Role-based handoffs can separate front desk, practitioner, manager, sales, and administrative responsibilities.",
+  "Audit logs can preserve the inquiry, source, routing decision, owner, follow-up, and final outcome.",
+];
+
+const rollout = [
+  ["Start", "Choose one repeatable workflow, such as new client intake, appointment requests, document collection, or follow-up reminders."],
+  ["Pilot", "Run real inquiries with staff review, measure response time, booking completion, missing-info reduction, and escalation quality."],
+  ["Expand", "Add more channels, follow-up workflows, document reminders, reporting, or specialized routing once the first workflow is trusted."],
+];
+
+const confidenceNotes = [
+  "Start with operational support before automating sensitive advice or professional judgment.",
+  "Measure appointment conversion, response time, admin touches reduced, and follow-up completion.",
+  "Keep clear handoff rules for anything urgent, regulated, emotional, financial, clinical, or legally sensitive.",
+];
+
+export default function ProfessionalServicesPage() {
+  return (
+    <div className="min-h-screen bg-white">
+      <section className="relative overflow-hidden bg-white px-4 py-12 md:py-[72px]" aria-labelledby="professional-services-title">
+        <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <div>
+            <p className="mb-4 inline-flex rounded-full bg-[#e9f9f3] px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">
+              Professional Services
+            </p>
+            <h1 id="professional-services-title" className="max-w-[780px] text-[34px] font-extrabold leading-[1.08] tracking-[-0.01em] text-ink md:text-[52px]">
+              AI intake and follow-up systems for appointment-driven service teams.
+            </h1>
+            <p className="mt-5 max-w-[700px] text-base leading-8 text-muted md:text-[17px]">
+              We help professional practices, clinics, wellness teams, advisory firms, and client-service businesses reduce repetitive intake, scheduling, document follow-up, and front-office routing while keeping judgment with the right people.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="/core-services/ai-agents" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white shadow-[0_10px_28px_rgba(29,185,147,0.22)] hover:bg-btn-hover">
+                Explore AI Agents
+              </Link>
+              <Link href="#contact" className="inline-flex h-12 items-center justify-center rounded-full border border-card-border px-6 text-base font-extrabold text-ink hover:border-[#1db993]/45 hover:text-[#167f65]">
+                Get Free Assessment
+              </Link>
             </div>
-        </div>
-    </section>
+          </div>
 
-    <!-- ================= SECTOR DYNAMICS ================= -->
-    <section class="hs-dynamics" aria-labelledby="hs-dyn-title">
-        <div class="hs-container">
-            <h2 id="hs-dyn-title" class="hs-h2">What's shaping the sector</h2>
-
-            <div class="hs-columns">
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Operational realities</h3>
-                    <ul class="hs-list">
-                        <li>Administrative tasks consume 30-40% of billable time across client intake, scheduling, and
-                            documentation.</li>
-                        <li>Manual proposal generation, contract management, and invoicing create bottlenecks.</li>
-                        <li>Inconsistent client communication and project status updates impact satisfaction.</li>
-                    </ul>
-                </article>
-
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Client expectations</h3>
-                    <ul class="hs-list">
-                        <li>Rapid response times for inquiries and clear project timelines.</li>
-                        <li>Transparent billing, real-time project visibility, and proactive updates.</li>
-                        <li>Seamless digital experiences for document sharing, approvals, and payments.</li>
-                    </ul>
-                </article>
-
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Technology enablers</h3>
-                    <ul class="hs-list">
-                        <li>Intelligent document processing for contracts, proposals, and deliverables.</li>
-                        <li>Automated client communications with project milestones and billing updates.</li>
-                        <li>Workflow orchestration across CRM, project management, and accounting systems.</li>
-                    </ul>
-                </article>
+          <div className="relative overflow-hidden rounded-lg border border-card-border bg-[#f8fbfa] shadow-[0_16px_48px_rgba(15,23,32,0.08)]">
+            <Image
+              src="/images/home/how-it-works.jpg"
+              alt="Professional services team reviewing client intake and workflow information"
+              width={900}
+              height={700}
+              priority
+              className="aspect-[1.22] w-full object-cover"
+            />
+            <div className="absolute inset-x-4 bottom-4 rounded-lg border border-white/70 bg-white/94 p-4 shadow-[0_12px_34px_rgba(15,23,32,0.12)] backdrop-blur">
+              <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Typical request</p>
+              <p className="mt-2 text-sm font-semibold leading-6 text-ink">
+                &quot;Can I book an appointment, and what information do you need from me first?&quot;
+              </p>
             </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- ================= CAPABILITIES ================= -->
-    <section class="hs-capabilities" aria-labelledby="hs-cap-title">
-        <div class="hs-container">
-            <h2 id="hs-cap-title" class="hs-h2">Capabilities tailored to professional services</h2>
+      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-12 md:py-16" aria-labelledby="diagnosis-title">
+        <div className="mx-auto max-w-[1180px]">
+          <div className="max-w-[800px]">
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Operational diagnosis</p>
+            <h2 id="diagnosis-title" className="mt-3 text-[28px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[38px]">
+              Professional service teams lose capacity when every inquiry needs manual intake, routing, and follow-up.
+            </h2>
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {frictionAreas.map((area) => (
+              <article key={area.title} className="border-l-2 border-[#1db993] bg-white px-5 py-5 shadow-[0_8px_24px_rgba(15,23,32,0.035)]">
+                <h3 className="text-base font-extrabold leading-6 text-ink">{area.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-muted">{area.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <div class="hs-cap-accordion">
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Client intake & qualification</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Automate initial client inquiries, qualification, and scheduling through
-                            intelligent voice and chat interfaces with seamless CRM integration.</p>
-                        <ul class="hs-bullets">
-                            <li>24/7 inquiry handling with intelligent routing to appropriate specialists</li>
-                            <li>Automated conflict checks and preliminary scope assessment</li>
-                            <li>Calendar integration for consultation scheduling and meeting coordination</li>
-                        </ul>
-                    </div>
-                </details>
+      <section id="workflow" className="scroll-mt-28 bg-white px-4 py-14 md:py-20" aria-labelledby="workflow-title">
+        <div className="mx-auto max-w-[1180px]">
+          <SectionHeader
+            eyebrow="Connected workflow"
+            title="Intake should become a booked next step, clean handoff, or documented follow-up."
+            description="A useful professional services automation captures context, applies approved rules, routes the request, and keeps sensitive cases with people who are qualified to decide."
+          />
+          <div className="mt-10 grid gap-4 lg:grid-cols-4">
+            {workflowPath.map((item) => (
+              <article key={item.step} className="relative rounded-lg border border-card-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <p className="text-xs font-extrabold tracking-[0.08em] text-[#167f65]">{item.step}</p>
+                <h3 className="mt-3 text-lg font-extrabold leading-6 text-ink">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-muted">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Document automation</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Generate proposals, contracts, and deliverables from templates and project data;
-                            automate review cycles and approval workflows.</p>
-                        <ul class="hs-bullets">
-                            <li>Proposal generation from scope notes and historical data</li>
-                            <li>Contract assembly with clause libraries and compliance checks</li>
-                            <li>Automated document routing, version control, and e-signature collection</li>
-                        </ul>
-                    </div>
-                </details>
+      <section className="bg-[#051C2C] px-4 py-14 text-white md:py-20" aria-labelledby="value-title">
+        <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#87e6ce]">Where value usually starts</p>
+            <h2 id="value-title" className="mt-3 text-[28px] font-extrabold leading-tight tracking-[-0.01em] md:text-[38px]">
+              Start with the repetitive admin work that slows the client experience.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-white/72">
+              The first useful automation is usually a narrow intake, scheduling, or follow-up workflow where better consistency can save staff time and improve conversion.
+            </p>
+          </div>
+          <div className="grid gap-4">
+            {valuePatterns.map((pattern) => (
+              <article key={pattern.label} className="rounded-lg border border-white/14 bg-white/[0.06] p-5">
+                <p className="text-sm font-bold text-[#87e6ce]">{pattern.label}</p>
+                <p className="mt-2 text-sm leading-6 text-white/82">{pattern.outcome}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Project & time management</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Streamline time tracking, project status updates, and resource allocation with
-                            automated workflows and intelligent reminders.</p>
-                        <ul class="hs-bullets">
-                            <li>Automated time entry prompts and validation</li>
-                            <li>Project milestone tracking and client notifications</li>
-                            <li>Resource utilization analysis and capacity planning</li>
-                        </ul>
-                    </div>
-                </details>
+      <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="services-title">
+        <div className="mx-auto max-w-[1180px]">
+          <SectionHeader
+            eyebrow="Relevant service paths"
+            title="Connect the first client touchpoint to the workflow that follows."
+            description="Professional services automation often starts with intake and then expands into scheduling, documents, reminders, reporting, and managed operations."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {servicePaths.map((path) => (
+              <article key={path.title} className="rounded-lg border border-card-border bg-[#f8fbfa] p-6">
+                <h3 className="text-xl font-extrabold leading-tight text-ink">{path.title}</h3>
+                <p className="mt-4 text-sm leading-6 text-muted">{path.description}</p>
+                {path.href ? (
+                  <Link href={path.href} className="mt-6 inline-flex text-sm font-extrabold text-[#167f65]">
+                    {path.cta}
+                  </Link>
+                ) : (
+                  <p className="mt-6 text-sm font-extrabold text-muted">{path.cta}</p>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Billing & collections</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Automate invoice generation, payment processing, and collections follow-up to
-                            accelerate cash flow and reduce DSO.</p>
-                        <ul class="hs-bullets">
-                            <li>Automated invoice generation from time entries and expenses</li>
-                            <li>Payment reminders and digital payment link distribution</li>
-                            <li>Collections workflows with escalation protocols</li>
-                        </ul>
-                    </div>
-                </details>
+      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20" aria-labelledby="sector-title">
+        <div className="mx-auto max-w-[1180px]">
+          <SectionHeader
+            eyebrow="What is shaping the sector"
+            title="Service quality now depends on how quickly the team can move from inquiry to next step."
+            description="The useful shift is not replacing professionals. It is creating a reliable support layer around the administrative work that surrounds their expertise."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {sectorShifts.map((shift) => (
+              <article key={shift.title} className="rounded-lg border border-card-border bg-white p-6">
+                <h3 className="text-lg font-extrabold leading-6 text-ink">{shift.title}</h3>
+                <p className="mt-4 text-sm leading-6 text-muted">{shift.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="systems-title">
+        <div className="mx-auto max-w-[1180px]">
+          <SectionHeader
+            eyebrow="Systems we connect"
+            title="The agent should support the tools your staff already uses."
+            description="The first workflow can connect intake channels to CRM records, calendars, booking tools, forms, payment links, reminders, staff tasks, and reporting."
+          />
+          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+            {systemGroups.map((group) => (
+              <article key={group.title} className="rounded-lg border border-card-border bg-[#f8fbfa] p-6">
+                <h3 className="text-lg font-extrabold text-ink">{group.title}</h3>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <span key={item} className="rounded-full border border-card-border bg-white px-3 py-1.5 text-sm font-semibold text-muted">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20" aria-labelledby="controls-title">
+        <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <SectionHeader
+            eyebrow="Controls by design"
+            title="Keep advice, judgment, and sensitive decisions with the right people."
+            description="Professional services workflows often involve trust, privacy, expectations, and sometimes regulation. Automation should reduce admin load while protecting boundaries."
+          />
+          <div className="rounded-lg border border-card-border bg-white p-6 shadow-[0_10px_30px_rgba(15,23,32,0.04)]">
+            <div className="grid gap-5">
+              {controls.map((item) => (
+                <div key={item} className="flex gap-4 border-b border-card-border pb-5 last:border-b-0 last:pb-0">
+                  <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#1db993]" aria-hidden="true" />
+                  <p className="text-sm font-semibold leading-6 text-ink">{item}</p>
+                </div>
+              ))}
             </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- ================= CASE SNAPSHOTS ================= -->
-    <section class="hs-cases" aria-labelledby="hs-cases-title">
-        <div class="hs-container">
-            <h2 id="hs-cases-title" class="hs-h2">Previous engagements</h2>
-
-            <div class="hs-case-grid">
-                <article class="hs-case">
-                    <h3 class="hs-h4">Management Consulting — 25 consultants</h3>
-                    <ul class="hs-list">
-                        <li>Automated proposal generation and client intake workflows</li>
-                        <li>Proposal turnaround time reduced from 3 days to 6 hours</li>
-                        <li>Billable utilization increased 18% through admin automation</li>
-                    </ul>
+      <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="rollout-title">
+        <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-start">
+          <div>
+            <SectionHeader
+              eyebrow="Start small, prove value"
+              title="A practical rollout protects client experience while reducing admin load."
+              description="The first milestone should be narrow enough to review closely, valuable enough to measure, and clear enough that staff know when the system acts or escalates."
+            />
+            <div className="mt-8 grid gap-4">
+              {rollout.map(([title, text]) => (
+                <article key={title} className="grid gap-2 rounded-lg border border-card-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,32,0.04)] sm:grid-cols-[110px_1fr]">
+                  <h3 className="text-lg font-extrabold text-[#167f65]">{title}</h3>
+                  <p className="text-sm leading-6 text-muted">{text}</p>
                 </article>
-
-                <article class="hs-case">
-                    <h3 class="hs-h4">Law Firm — 15 attorneys</h3>
-                    <ul class="hs-list">
-                        <li>Document automation for contracts and client communications</li>
-                        <li>Administrative time reduced 52%</li>
-                        <li>Client satisfaction scores improved to 4.7/5</li>
-                    </ul>
-                </article>
-
-                <article class="hs-case">
-                    <h3 class="hs-h4">Accounting Firm — 30 staff</h3>
-                    <ul class="hs-list">
-                        <li>Automated client onboarding and document collection</li>
-                        <li>Onboarding time reduced 65%</li>
-                        <li>DSO improved by 28 days through automated billing workflows</li>
-                    </ul>
-                </article>
+              ))}
             </div>
-        </div>
-    </section>
+          </div>
 
-    <!-- ================= TECHNOLOGY & INTEGRATIONS ================= -->
-    <section class="hs-tech" aria-labelledby="hs-tech-title">
-        <div class="hs-container">
-            <h2 id="hs-tech-title" class="hs-h2">Platforms we commonly integrate</h2>
-            <p class="hs-tech-intro">We connect with the tools you already use, creating seamless workflows across your
-                practice management, CRM, accounting, and communication platforms.</p>
-
-            <div class="hs-tech-categories">
-                <div class="hs-tech-category">
-                    <h3 class="hs-tech-cat-title">Practice Management</h3>
-                    <div class="hs-logo-group">
-                        <span class="hs-logo">Clio</span>
-                        <span class="hs-logo">Monday.com</span>
-                        <span class="hs-logo">Asana</span>
-                        <span class="hs-logo">ClickUp</span>
-                    </div>
-                </div>
-
-                <div class="hs-tech-category">
-                    <h3 class="hs-tech-cat-title">CRM & Accounting</h3>
-                    <div class="hs-logo-group">
-                        <span class="hs-logo">Salesforce</span>
-                        <span class="hs-logo">HubSpot</span>
-                        <span class="hs-logo">QuickBooks</span>
-                        <span class="hs-logo">Xero</span>
-                    </div>
-                </div>
-
-                <div class="hs-tech-category">
-                    <h3 class="hs-tech-cat-title">Communications & Automation</h3>
-                    <div class="hs-logo-group">
-                        <span class="hs-logo">Twilio</span>
-                        <span class="hs-logo">Zapier</span>
-                        <span class="hs-logo">Make</span>
-                        <span class="hs-logo">n8n</span>
-                    </div>
-                </div>
+          <aside className="rounded-lg border border-card-border bg-[#f8fbfa] p-6">
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Spend confidence</p>
+            <h3 className="mt-3 text-2xl font-extrabold leading-tight text-ink">The first project should make the buying decision easier, not bigger.</h3>
+            <p className="mt-4 text-sm leading-6 text-muted">
+              We recommend starting with one intake or follow-up workflow, tracking staff time saved and conversion impact, then expanding after the system earns trust.
+            </p>
+            <div className="mt-5 grid gap-3">
+              {confidenceNotes.map((note) => (
+                <p key={note} className="rounded-lg border border-card-border bg-white px-4 py-3 text-sm font-semibold leading-6 text-ink">
+                  {note}
+                </p>
+              ))}
             </div>
-
-            <details class="hs-arch">
-                <summary>How integration works</summary>
-                <div class="hs-arch-content">
-                    <p class="hs-p">Our integration approach follows a layered architecture designed for reliability and
-                        maintainability:</p>
-                    <ul class="hs-arch-list">
-                        <li><strong>Client interactions:</strong> Inbound inquiries via voice and chat are processed
-                            through intelligent routing that qualifies leads, checks conflicts, and schedules
-                            consultations directly in your calendar.</li>
-                        <li><strong>Document workflows:</strong> Automated pipelines generate proposals and contracts
-                            from templates, route them for internal approval, collect e-signatures, and sync final
-                            versions to your document management system.</li>
-                        <li><strong>Project orchestration:</strong> Time entries, milestone updates, and deliverable
-                            submissions trigger automated client notifications, invoice generation, and project status
-                            dashboards.</li>
-                        <li><strong>Data synchronization:</strong> Bi-directional sync ensures client records, project
-                            data, and financial information remain consistent across CRM, practice management, and
-                            accounting platforms.</li>
-                    </ul>
-                </div>
-            </details>
+          </aside>
         </div>
-    </section>
+      </section>
 
-    <!-- ================= GOVERNANCE ================= -->
-    <section class="hs-governance" aria-labelledby="hs-gov-title">
-        <div class="hs-container">
-            <h2 id="hs-gov-title" class="hs-h2">Controls by design</h2>
-            <div class="hs-columns">
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Confidentiality</h3>
-                    <p class="hs-p">Client data protection with role-based access controls, encryption, and audit
-                        trails. Conflict checks and ethical walls enforced at the system level.</p>
-                </article>
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Quality assurance</h3>
-                    <p class="hs-p">Document review workflows with approval hierarchies. Version control and change
-                        tracking for all client deliverables and contracts.</p>
-                </article>
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Change management</h3>
-                    <p class="hs-p">Phased rollout with team training and feedback loops. Clear escalation paths for
-                        edge cases and human oversight requirements.</p>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= INSIGHTS (PLACEHOLDER LINKS) ================= -->
-    <section class="hs-insights" aria-labelledby="hs-insights-title">
-        <div class="hs-container">
-            <h2 id="hs-insights-title" class="hs-h2">Insights & tools</h2>
-
-            <ul class="hs-insight-list">
-                <li><a href="#0">Calculating the true cost of administrative overhead in professional services</a></li>
-                <li><a href="#0">Building client trust while automating intake and communications</a></li>
-                <li><a href="#0">From proposal to payment: streamlining the professional services lifecycle</a></li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- ================= CONTACT (DISCREET CTA) ================= -->
-    <section id="hs-contact" class="hs-contact" aria-labelledby="hs-contact-title">
-        <div class="hs-container">
-            <h2 id="hs-contact-title" class="hs-h2">Discuss your practice</h2>
-
-            <form class="hs-form" action="https://formspree.io/f/xzzjvgkw" method="post">
-                <div class="hs-form-grid">
-                    <label class="hs-field">
-                        <span class="hs-label">Work email</span>
-                        <input type="email" name="email" required placeholder="you@company.com" autocomplete="email">
-                    </label>
-                    <label class="hs-field">
-                        <span class="hs-label">Firm</span>
-                        <input type="text" name="company" required placeholder="Professional Services Firm">
-                    </label>
-                    <label class="hs-field">
-                        <span class="hs-label">Practice area</span>
-                        <select name="practice" required>
-                            <option value="" disabled selected>Select</option>
-                            <option>Consulting</option>
-                            <option>Legal Services</option>
-                            <option>Accounting</option>
-                            <option>Architecture</option>
-                            <option>Engineering</option>
-                            <option>Marketing Agency</option>
-                            <option>Other</option>
-                        </select>
-                    </label>
-                    <label class="hs-field hs-field--full">
-                        <span class="hs-label">Focus areas</span>
-                        <textarea name="focus" rows="4"
-                            placeholder="e.g., client intake; document automation; project management; billing"></textarea>
-                    </label>
-                    <input type="hidden" name="industry" value="Professional Services">
-                </div>
-                <div class="hs-actions">
-                    <button class="hs-btn hs-primary" type="submit" id="hs-submit">
-                        Submit
-                    </button>
-                    <p class="hs-small">We’ll reply with a short agenda and proposed next steps.</p>
-                </div>
-            </form>
-        </div>
-    </section>
-
-    <!-- ================= FOOTER TAG ================= -->
-    <section class="hs-foot" aria-hidden="true">
-        <div class="hs-container">
-            <span class="hs-mark">
-                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                    <circle cx="12" cy="12" r="9" fill="#1db993" />
-                </svg>
-                Automate4U — Professional Services
-            </span>
-        </div>
-    </section>
-</div> <!-- /hs-pro-scope -->
-
-<!-- =========================
-  SCOPED STYLES (NEUTRAL)
-========================= -->
-` }} />
-        </>
-    );
+      <AssessmentCTA sourcePage="/industries/professional-services" ctaLocation="professional_services_assessment" />
+    </div>
+  );
 }
