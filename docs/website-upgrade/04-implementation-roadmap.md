@@ -17,14 +17,15 @@ Use `README.md` for the full doc map. Use this file as the active task sequence.
 
 ## Current Implementation Status
 
-Last updated: after the Healthcare v2 accelerator pass.
+Last updated: after the true How We Build detail-page rebuilds.
 
 | Area | Status | Notes |
 | --- | --- | --- |
 | Phase 1: Foundation | In progress | Lint/build, metadata, sitemap, robots, typed data scaffolding, Server Action lead capture, core service form migration, attribution capture, optional PostHog loader, first conversion events, first schema pass, first Playwright conversion tests, and active core-service image cleanup are complete. Remaining work includes legacy page replacement planning. |
 | Phase 2: Homepage + AI Voice | In progress | Homepage v2 and AI Voice flagship v1 have been rebuilt around the approved positioning, connected-systems story, assessment CTA, maturity path, value realization, voice-to-operations event log, workflow examples, pricing confidence, accelerators, and Managed AI Operations. Homepage v2 now includes stronger operational diagnosis, implementation-method trust, sector-thinking notes, human/process imagery, and cleaner buyer-facing language. AI Voice now links more clearly into focused solution pages such as Daycare Voice Agent. Shared assessment forms now capture budget range. |
 | Phase 3: Reusable React system | Started | Shared homepage sections now exist for section headers, workflow map, maturity curve, value realization roadmap, accelerator preview, and assessment CTA. AI Voice now uses the shared section header pattern and a cleaner React structure; reusable accelerator/proof modules remain next. |
-| Phase 4: Industry Accelerators | Started | Manufacturing AI Accelerator v2, Education & Childcare v2, Home Services v2, Professional Services v2, Retail & Ecommerce v2, and Healthcare v2 now establish the industry-page pattern: diagnosis, connected workflow, where value starts, relevant service/solution paths, sector context, systems, controls, spend confidence, and CTA. The `/industries` index now explains the difference between broad industry context and focused solution implementations. Daycare Voice Agent lives under `/solutions/` as the first focused voice-led solution landing page. Solutions are intentionally contextual/secondary navigation for now, not a primary top-nav item. Remaining accelerators should use the stronger advisory model rather than the earlier repetitive card-grid version. |
+| Phase 4: Industry Accelerators | In progress | All currently listed industry pages have been rebuilt from migrated HTML into React accelerator pages: Manufacturing, Education & Childcare, Home Services, Professional Services, Retail & Ecommerce, Healthcare, Real Estate, Financial Services, Hospitality, and Technology & Media. The `/industries` index explains the difference between broad industry context and focused solution implementations. Daycare Voice Agent lives under `/solutions/` as the first focused voice-led solution landing page. Solutions are intentionally contextual/secondary navigation for now, not a primary top-nav item. Remaining work is quality review, proof integration, and deciding whether to refactor older hand-built accelerator pages onto the reusable component where useful. |
+| Phase 4B: Services + How We Build | Started | A dedicated taxonomy and implementation plan now exists in `18-services-and-capabilities-plan.md`. Shared service-offer and How We Build pillar data has been added, the header/footer now expose Services and How We Build separately, `/capabilities` has been rebuilt as a trust-building How We Build overview, and the six true How We Build detail pages have been rebuilt as native React pages: Security, Data & Integrations, Operational Intelligence, Staff Training & Adoption, Technology Strategy & Enablement, and Workflow & Systems Architecture. Next: rebuild the non-AI-Voice service pages, especially the planned service destinations for Marketing Automation, Managed AI Operations, and Custom AI Software. AI Voice should remain mostly stable until cofounder review of optional refinements. |
 | Phase 5: Proof + trust assets | Not started | Requires proof inventory before final case study copy is written. |
 | Phase 6: Analytics + iteration | Started | Optional PostHog loading, attribution capture, first event tracking, and first conversion-path tests are implemented. Full funnel reporting and iteration dashboards still need setup after PostHog credentials are available. |
 | Phase 7: Remaining migration | Not started | Migrated HTML pages still contain `dangerouslySetInnerHTML`, raw images, and legacy Formspree forms. |
@@ -62,20 +63,35 @@ Completed in the first implementation pass:
 - Professional Services industry page rebuilt from migrated HTML into an intake-and-follow-up accelerator page for appointment-driven service teams, with scheduling, document follow-up, sensitive handoff, systems, controls, and spend-confidence messaging.
 - Retail & Ecommerce industry page rebuilt from migrated HTML into a support, product guidance, operations, and marketing workflow accelerator page with commerce systems, brand controls, content approvals, and spend-confidence messaging.
 - Healthcare industry page rebuilt from migrated HTML into a conservative front-desk support accelerator page for routine healthcare communication, appointment reminders, administrative intake, routing, safety boundaries, escalation, privacy-aware controls, and spend-confidence messaging.
+- Real Estate industry page rebuilt from migrated HTML into a lead response, showing, qualification, CRM follow-up, and property management routing accelerator page.
+- Financial Services industry page rebuilt from migrated HTML into a conservative intake, document follow-up, support routing, review, and traceability accelerator page.
+- Hospitality industry page rebuilt from migrated HTML into a guest response, booking support, request routing, service recovery, and review/follow-up accelerator page.
+- Technology & Media industry page rebuilt from migrated HTML into a support triage, content operations, workflow routing, drafting, review, and reporting accelerator page.
+- Shared `IndustryAcceleratorPage` component added for the final four industry pages to reduce duplication while keeping copy, controls, and workflows industry-specific.
+- Industry review pass promoted Financial Services, Hospitality, and Technology & Media into the typed Industry Accelerator data source, removed the old legacy index list, and refreshed the `/industries` metadata description.
 - Shared assessment intake forms now include a budget range field so sales follow-up has spend context without forcing buyers into an exact quote request.
 - Industries index rebuilt as a buyer-facing navigation page that explains how industry pages differ from solution pages, shows industry contexts with common starting workflows and KPIs, and routes users toward focused solution examples.
 - Solutions index added as the home for specific implementations such as Daycare Voice Agent, with future solution categories for manufacturing response, home services dispatch, professional services intake, retail support, and marketing workflow agents.
 - Solutions removed from the primary top navigation because the current solution library is intentionally specific and should be discovered from related industry/service pages until the library is larger.
 - Design-quality pass completed across homepage, AI Voice, Manufacturing, and shared sections: tightened type scale, spacing, card styling, shadows, and buyer-facing copy rules.
+- Services and Capabilities review completed. The next plan is to separate direct Services from the trust/delivery capability layer, reframe Capabilities as How We Build, keep Security visible, and rebuild the remaining service/capability pages without legacy migrated page patterns.
+- Services and How We Build navigation/data slice completed: `Services` now appears in primary navigation, `Capabilities` has been reframed as `How We Build`, the footer uses the same taxonomy, and `/capabilities` now functions as a trust overview instead of a mixed service/capability card grid.
+- Security, Monitoring & AI Safety detail page rebuilt from migrated HTML into a native React trust page with buyer concerns, control layers, automation boundaries, client artifacts, related services, related capabilities, and the shared assessment CTA.
+- Data & Integrations detail page rebuilt from migrated HTML into a native React trust page with buyer concerns, integration patterns, system maps, source-of-truth language, failure-handling guidance, related services, related capabilities, and the shared assessment CTA.
+- Operational Intelligence & Value Realization detail page rebuilt from migrated HTML into a native React trust page with buyer concerns, KPI categories, 30/60/90-day value review, implementation evidence, related services, related capabilities, and the shared assessment CTA.
+- Staff Training & Adoption detail page rebuilt from migrated HTML into a native React trust page with adoption concerns, role-based training, rollout support, implementation evidence, related services, related capabilities, and the shared assessment CTA.
+- Technology Strategy & Enablement detail page rebuilt from migrated HTML into a native React trust page with maturity assessment, roadmap planning, build-versus-buy thinking, risk planning, related services, related capabilities, and the shared assessment CTA.
+- Workflow & Systems Architecture detail page rebuilt from the overlapping custom-software capability route into a native React trust page that explains workflow design, system boundaries, handoffs, custom build patterns, client artifacts, related services, related capabilities, and the shared assessment CTA.
 - Retell API route hardened.
 - Botpress script injection typed and lazy-loaded.
 - Several raw image, unused import, and JSX lint issues fixed.
 
 Next recommended implementation slice:
 
-1. Extract the Manufacturing v2 section pattern into reusable accelerator components where it reduces duplication without flattening every industry page into the same rhythm.
-2. Rebuild the next highest-value Industry Accelerator page using the Manufacturing v2 model.
-3. Add stronger anonymous proof once the proof inventory is collected.
+1. Rebuild the remaining non-AI-Voice service pages using the service-page model in `18-services-and-capabilities-plan.md`.
+2. Create proper service destinations for Marketing Automation & Content Agents, Managed AI Operations, and Custom AI Software so those offers do not depend on legacy capability URLs.
+3. Resolve overlapping legacy capability URLs after service pages exist using redirects, canonicals, or short bridge pages. Do not rebuild duplicate full pages under old service-like capability labels.
+4. Review optional AI Voice refinements with the cofounder before changing that page flow.
 
 ## Phase-To-Document Map
 
@@ -85,6 +101,7 @@ Next recommended implementation slice:
 | Phase 2: Homepage + AI Voice | `02`, `03`, `05`, `11`, `12`, `16`, `17` | Build the first high-converting experience around positioning, proof, creative direction, demos, CTA, and pricing. |
 | Phase 3: Reusable React system | `06`, `08`, `10`, `11` | Keep pages data-driven, consistent, accessible, and maintainable. |
 | Phase 4: Industry Accelerators | `03`, `05`, `08`, `10`, `15`, `17` | Turn vertical pages into repeatable, proof-backed offers. |
+| Phase 4B: Services + How We Build | `03`, `08`, `11`, `16`, `18` | Make direct offers easy to understand while keeping security, integrations, analytics, monitoring, and adoption visible as trust builders. |
 | Phase 5: Proof + trust assets | `05`, `09`, `12`, `14`, `15` | Add credibility, governance, human control, and NDA-safe proof. |
 | Phase 6: Analytics + iteration | `06`, `08`, `09`, `16` | Track revenue-critical behavior and protect conversion paths. |
 | Phase 7: Remaining migration | `01`, `03`, `06`, `08` | Replace legacy pages without losing routes, SEO, or consistency. |

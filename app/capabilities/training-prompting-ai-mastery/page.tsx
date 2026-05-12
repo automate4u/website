@@ -1,228 +1,266 @@
-import React from 'react';
+import Link from "next/link";
+import AssessmentCTA from "@/components/sections/AssessmentCTA";
+import SectionHeader from "@/components/sections/SectionHeader";
+import { howWeBuildPillars } from "@/data/how-we-build";
+import { serviceOffers } from "@/data/service-offers";
 
-export default function Page() {
+const adoptionConcerns = [
+  {
+    title: "Staff worry the AI will replace them",
+    text: "Adoption improves when the system is framed as operational support: it handles repetitive work, creates cleaner handoffs, and keeps humans responsible for judgment-heavy cases.",
+  },
+  {
+    title: "People do not know when to trust it",
+    text: "Teams need practical rules for when the AI can answer, when it drafts, when it escalates, and when staff should review before action.",
+  },
+  {
+    title: "New workflows fail because nobody owns them",
+    text: "A workflow needs clear roles: who reviews exceptions, who updates approved answers, who watches reports, and who decides what expands next.",
+  },
+  {
+    title: "Training is too generic to change behavior",
+    text: "Staff need scenarios from their real work: customer calls, quote requests, parent communication, support tickets, scheduling, content review, and internal handoffs.",
+  },
+];
+
+const adoptionLayers = [
+  {
+    label: "Role clarity",
+    detail: "Define what the AI handles, what staff approve, and who owns follow-up when exceptions occur.",
+  },
+  {
+    label: "Workflow practice",
+    detail: "Train the team on realistic scenarios, escalation paths, approved responses, and handoff expectations.",
+  },
+  {
+    label: "Feedback loop",
+    detail: "Collect staff feedback after launch so prompts, policies, automations, and handoffs can be tuned.",
+  },
+  {
+    label: "Operating rhythm",
+    detail: "Use review meetings, reporting, and Managed AI Operations to keep adoption from fading after go-live.",
+  },
+];
+
+const trainingModules = [
+  {
+    title: "Frontline staff",
+    topics: ["How calls/messages are handled", "What gets escalated", "How to review summaries", "How to correct issues"],
+  },
+  {
+    title: "Managers",
+    topics: ["Workflow ownership", "Exception review", "KPI interpretation", "Approved-answer updates"],
+  },
+  {
+    title: "Operations teams",
+    topics: ["System handoffs", "Failed-sync review", "Data quality", "Process changes"],
+  },
+  {
+    title: "Leadership",
+    topics: ["Spend confidence", "Value review", "Expansion decisions", "Governance expectations"],
+  },
+];
+
+const rollout = [
+  {
+    step: "Before launch",
+    title: "Prepare the team",
+    text: "Introduce the workflow, explain what stays human, and review the first escalation and approval rules.",
+  },
+  {
+    step: "Launch period",
+    title: "Practice real scenarios",
+    text: "Walk through common and edge cases so staff know how to interpret summaries, handoffs, alerts, and review tasks.",
+  },
+  {
+    step: "After launch",
+    title: "Tune with feedback",
+    text: "Review staff feedback, customer outcomes, handoff quality, KPI signals, and policy changes before expanding the workflow.",
+  },
+];
+
+const deliverables = [
+  "Role and handoff guide",
+  "Staff scenario training",
+  "Escalation playbook",
+  "Approved-answer update process",
+  "Launch feedback loop",
+  "Adoption review cadence",
+];
+
+const relatedPillars = howWeBuildPillars.filter(
+  (pillar) => pillar.href !== "/capabilities/training-prompting-ai-mastery"
+);
+
+export default function TrainingPromptingAIMasteryPage() {
   return (
-    <>
-      <style dangerouslySetInnerHTML={{ __html: `
-.hs-pro-scope{display:block}.hs-pro-scope *{box-sizing:border-box}.hs-pro-scope{--ink:#0e1520;--muted:#6a7786;--accent:#1db993;--accent-2:#159a78;--bg:#fff;--panel:#f7f9fb;--border:#e5edf2;--pill:#e9f9f3;--radius:18px}.hs-pro-scope .hs-container{max-width:1120px;margin:0 auto;padding:0 20px}.hs-pro-scope .hs-h1{margin:8px 0;font-size:40px;line-height:1.08;letter-spacing:-.01em;font-weight:700}.hs-pro-scope .hs-h2{margin:10px 0 6px;font-size:28px;line-height:1.15;letter-spacing:-.01em;font-weight:700}.hs-pro-scope .hs-h3{margin:0 0 6px;font-size:1.05rem;font-weight:600}.hs-pro-scope .hs-h4{margin:0 0 6px;font-size:1rem;font-weight:600}.hs-pro-scope .hs-p{margin:0 0 8px;color:var(--ink)}.hs-pro-scope .hs-lead{color:var(--muted);max-width:75ch;margin:0 0 12px}.hs-pro-scope .hs-btn{display:inline-flex;align-items:center;gap:.55rem;padding:.7rem 1rem;border-radius:999px;font-weight:600;text-decoration:none;border:1px solid transparent}.hs-pro-scope .hs-primary{background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 8px 22px rgba(29,185,147,.18)}.hs-pro-scope .hs-primary:hover{filter:brightness(.98)}.hs-pro-scope .hs-head{background:var(--bg);padding:48px 0 28px}.hs-pro-scope .hs-head-grid{display:grid;gap:40px;align-items:center}.hs-pro-scope .hs-head-content{max-width:100%}.hs-pro-scope .hs-head-image{display:none}.hs-pro-scope .hs-head-image img{width:100%;height:auto;border-radius:var(--radius);box-shadow:0 4px 20px rgba(0,0,0,.08)}@media (min-width:920px){.hs-pro-scope .hs-head-grid{grid-template-columns:1fr 1fr}.hs-pro-scope .hs-head-image{display:block}.hs-pro-scope .hs-h1{font-size:48px}.hs-pro-scope .hs-h2{font-size:32px}}.hs-pro-scope .hs-meta-list{display:flex;gap:10px 12px;flex-wrap:wrap;margin:12px 0 0;padding:0;list-style:none}.hs-pro-scope .hs-meta-list li{background:#eef5f8;color:#415467;border:1px solid var(--border);border-radius:999px;padding:.28rem .6rem;font-weight:600;font-size:.8rem}.hs-pro-scope .hs-dynamics{background:#fff;padding:22px 0 14px}.hs-pro-scope .hs-columns{display:grid;gap:24px;margin-top:16px}.hs-pro-scope .hs-panel{background:transparent;border:none;padding:0}.hs-pro-scope .hs-list{margin:8px 0 0;padding-left:20px;color:var(--ink);list-style:disc}.hs-pro-scope .hs-list li{margin:8px 0;line-height:1.5}@media (min-width:880px){.hs-pro-scope .hs-columns{grid-template-columns:repeat(3,1fr)}.hs-pro-scope .hs-case-grid{grid-template-columns:repeat(3,1fr)}}.hs-pro-scope .hs-capabilities{background:#fff;padding:28px 0}.hs-pro-scope .hs-cap-accordion{margin-top:16px;border-top:1px solid var(--border)}.hs-pro-scope .hs-cap-detail{border-bottom:1px solid var(--border)}.hs-pro-scope .hs-cap-summary{display:flex;align-items:center;gap:16px;padding:20px 0;cursor:pointer;list-style:none;user-select:none}.hs-pro-scope .hs-cap-summary::-webkit-details-marker{display:none}.hs-pro-scope .hs-cap-title{font-size:1.15rem;font-weight:600;color:var(--ink)}.hs-pro-scope .hs-cap-icon{width:24px;height:24px;position:relative;flex-shrink:0}.hs-pro-scope .hs-cap-icon::before,.hs-pro-scope .hs-cap-icon::after{content:'';position:absolute;background:var(--ink);transition:transform .3s ease}.hs-pro-scope .hs-cap-icon::before{width:16px;height:2px;top:50%;left:50%;transform:translate(-50%,-50%)}.hs-pro-scope .hs-cap-icon::after{width:2px;height:16px;top:50%;left:50%;transform:translate(-50%,-50%)}.hs-pro-scope .hs-cap-detail[open] .hs-cap-icon::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}.hs-pro-scope .hs-cap-content{padding:0 0 24px;max-width:900px}.hs-pro-scope .hs-bullets{margin:12px 0 0;padding-left:20px;color:var(--ink);list-style:disc}.hs-pro-scope .hs-bullets li{margin:8px 0;line-height:1.5}.hs-pro-scope .hs-cases{background:#fff;padding:26px 0}.hs-pro-scope .hs-case-grid{display:grid;gap:24px;margin-top:16px}.hs-pro-scope .hs-case{background:transparent;border:none;padding:0}.hs-pro-scope .hs-contact{background:#fff;padding:26px 0 34px}.hs-pro-scope .hs-form{max-width:880px;margin:10px auto 0}.hs-pro-scope .hs-form-grid{display:grid;gap:12px}.hs-pro-scope .hs-field{display:grid;gap:6px}.hs-pro-scope .hs-field--full{grid-column:1/-1}.hs-pro-scope .hs-label{font-weight:600;color:#16212b}.hs-pro-scope input,.hs-pro-scope select,.hs-pro-scope textarea{width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:#fff;color:#0f1520}.hs-pro-scope .hs-actions{margin-top:12px;display:flex;gap:12px;align-items:center}.hs-pro-scope .hs-small{margin:0;color:var(--muted);font-size:.9rem}.hs-pro-scope .hs-foot{background:#fff;padding:12px 0 36px;text-align:center}.hs-pro-scope .hs-mark{display:inline-flex;align-items:center;gap:8px;color:#365160;background:var(--pill);padding:.36rem .62rem;border-radius:999px;font-weight:600;font-size:.84rem}
-` }} />
-      <div dangerouslySetInnerHTML={{ __html: `<div class="hs-pro-scope" data-capability="training">
-
-    <!-- ================= HEADER / OVERVIEW ================= -->
-    <section class="hs-head" aria-labelledby="hs-head-title">
-        <div class="hs-container">
-            <div class="hs-head-grid">
-                <div class="hs-head-content">
-                    <h1 id="hs-head-title" class="hs-h1">Training, Prompting & AI Mastery</h1>
-                    <p class="hs-lead">
-                        Help your team master AI, not just use it once in a while.
-                        We teach teams how to use and build with AI effectively, creating internal champions
-                        instead of dependence on external vendors.
-                    </p>
-                    <ul class="hs-meta-list" aria-label="What we teach">
-                        <li>AI Mastery Training</li>
-                        <li>Prompting & Context Design</li>
-                        <li>Team Enablement</li>
-                        <li>Applied Training</li>
-                    </ul>
-                </div>
-                <div class="hs-head-image">
-                    <img src="/images/capabilities/training.jpg"
-                        alt="AI training and enablement" />
-                </div>
+    <div className="min-h-screen bg-white">
+      <section className="bg-[#051C2C] px-4 py-12 text-white md:py-[72px]">
+        <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <div>
+            <p className="mb-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">
+              Staff Training & Adoption
+            </p>
+            <h1 className="max-w-[760px] text-[36px] font-extrabold leading-[1.06] tracking-[-0.02em] md:text-[54px]">
+              Help your team use AI workflows with confidence.
+            </h1>
+            <p className="mt-5 max-w-[690px] text-base leading-8 text-white/74 md:text-[17px]">
+              AI implementation succeeds when people understand the workflow around it. We help teams learn what the system handles, what stays human, how exceptions are reviewed, and how the process improves after launch.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="#contact" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
+                Get Free Assessment
+              </Link>
+              <Link href="/capabilities" className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb]">
+                How We Build
+              </Link>
             </div>
-        </div>
-    </section>
+          </div>
 
-    <!-- ================= PROBLEMS WE SOLVE ================= -->
-    <section class="hs-dynamics" aria-labelledby="hs-dyn-title">
-        <div class="hs-container">
-            <h2 id="hs-dyn-title" class="hs-h2">Problems we solve</h2>
-
-            <div class="hs-columns">
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Skills gap</h3>
-                    <ul class="hs-list">
-                        <li>Staff unsure how to use AI effectively or safely.</li>
-                        <li>Wasted time on low-quality prompts and trial-and-error.</li>
-                        <li>No internal expertise to guide AI adoption.</li>
-                    </ul>
-                </article>
-
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Vendor dependence</h3>
-                    <ul class="hs-list">
-                        <li>Reliance on outside vendors for every small change.</li>
-                        <li>No ability to iterate or improve AI systems internally.</li>
-                        <li>High ongoing costs for basic updates.</li>
-                    </ul>
-                </article>
-
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Inconsistent usage</h3>
-                    <ul class="hs-list">
-                        <li>Some team members get great results, others struggle.</li>
-                        <li>No standardized approach or best practices.</li>
-                        <li>AI tools underutilized across the organization.</li>
-                    </ul>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= CAPABILITIES ================= -->
-    <section class="hs-capabilities" aria-labelledby="hs-cap-title">
-        <div class="hs-container">
-            <h2 id="hs-cap-title" class="hs-h2">What we teach</h2>
-
-            <div class="hs-cap-accordion">
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">AI Mastery Training</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">How to build digital tools and automations with AI assistance, from ideation to implementation.</p>
-                        <ul class="hs-bullets">
-                            <li>Using AI to write code (web, backend, scripts)</li>
-                            <li>Building websites, mobile, and PC applications with AI</li>
-                            <li>"Building with AI" workflows: spec → implementation → testing</li>
-                        </ul>
-                    </div>
-                </details>
-
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Prompting & Context Design</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">AI prompting best practices, context optimization, and role-specific training.</p>
-                        <ul class="hs-bullets">
-                            <li>Effective prompt structure and techniques</li>
-                            <li>Context optimization (instructions, examples, policies)</li>
-                            <li>Role-specific training (ops, support, sales, devs)</li>
-                        </ul>
-                    </div>
-                </details>
-
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Team Enablement Programs</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Workshops, bootcamps, ongoing coaching, and train-the-trainer programs to create internal AI champions.</p>
-                        <ul class="hs-bullets">
-                            <li>Technical and non-technical workshops</li>
-                            <li>Ongoing coaching and office-hours support</li>
-                            <li>Train-the-trainer programs for scale</li>
-                        </ul>
-                    </div>
-                </details>
-
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Applied Training Around Your Stack</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Training that uses your real tools (CRMs, ERPs, support tools) as the sandbox with scenario-based exercises.</p>
-                        <ul class="hs-bullets">
-                            <li>Hands-on training with your actual systems</li>
-                            <li>Scenario-based exercises using your workflows and data</li>
-                            <li>Custom training materials and playbooks</li>
-                        </ul>
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= TRAINING FORMATS ================= -->
-    <section class="hs-cases" aria-labelledby="hs-cases-title">
-        <div class="hs-container">
-            <h2 id="hs-cases-title" class="hs-h2">Training formats and outcomes</h2>
-
-            <div class="hs-case-grid">
-                <article class="hs-case">
-                    <h3 class="hs-h4">AI Fundamentals Workshop (1 day)</h3>
-                    <ul class="hs-list">
-                        <li>Introduction to AI capabilities and limitations</li>
-                        <li>Hands-on prompting exercises</li>
-                        <li>Identifying use cases in your workflows</li>
-                    </ul>
-                </article>
-
-                <article class="hs-case">
-                    <h3 class="hs-h4">Building with AI Bootcamp (3 days)</h3>
-                    <ul class="hs-list">
-                        <li>Using AI to build web apps and automations</li>
-                        <li>From idea to working prototype</li>
-                        <li>Best practices and common pitfalls</li>
-                    </ul>
-                </article>
-
-                <article class="hs-case">
-                    <h3 class="hs-h4">Ongoing Enablement Program (3 months)</h3>
-                    <ul class="hs-list">
-                        <li>Weekly office hours and coaching</li>
-                        <li>Custom training materials and playbooks</li>
-                        <li>Train-the-trainer for internal champions</li>
-                    </ul>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= CONTACT ================= -->
-    <section id="hs-contact" class="hs-contact" aria-labelledby="hs-contact-title">
-        <div class="hs-container">
-            <h2 id="hs-contact-title" class="hs-h2">Plan an AI training program</h2>
-
-            <form class="hs-form" action="https://formspree.io/f/xzzjvgkw" method="post">
-                <div class="hs-form-grid">
-                    <label class="hs-field">
-                        <span class="hs-label">Work email</span>
-                        <input type="email" name="email" required placeholder="you@company.com"
-                            autocomplete="email">
-                    </label>
-                    <label class="hs-field">
-                        <span class="hs-label">Company</span>
-                        <input type="text" name="company" required placeholder="Your company name">
-                    </label>
-                    <label class="hs-field hs-field--full">
-                        <span class="hs-label">Who needs training and what are the goals?</span>
-                        <textarea name="focus" rows="4"
-                            placeholder="e.g., train developers to build with AI; teach ops team prompting; create internal AI champions"></textarea>
-                    </label>
-                    <input type="hidden" name="capability" value="Training, Prompting & AI Mastery">
+          <div className="rounded-lg border border-white/12 bg-white/[0.07] p-5 shadow-[0_18px_55px_rgba(0,0,0,0.20)]">
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Adoption model</p>
+            <div className="mt-5 grid gap-3">
+              {adoptionLayers.map((layer, index) => (
+                <div key={layer.label} className="grid gap-3 rounded-lg border border-white/10 bg-[#0d1720]/70 p-4 sm:grid-cols-[auto_1fr] sm:items-start">
+                  <div className="grid h-9 w-9 place-items-center rounded-full bg-[#1db993] text-sm font-extrabold text-[#05251d]">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <h2 className="font-extrabold text-white">{layer.label}</h2>
+                    <p className="mt-1 text-sm leading-6 text-white/68">{layer.detail}</p>
+                  </div>
                 </div>
-                <div class="hs-actions">
-                    <button class="hs-btn hs-primary" type="submit">
-                        Submit
-                    </button>
-                    <p class="hs-small">We'll reply with a short agenda and proposed next steps.</p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Buyer concerns"
+            title="AI adoption is a people and process problem as much as a technology problem."
+            description="The best automation still fails if staff do not understand it, trust it, or know how to operate around it."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            {adoptionConcerns.map((concern) => (
+              <article key={concern.title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <h2 className="text-xl font-extrabold leading-tight text-ink">{concern.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{concern.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Training by role"
+            title="Different teams need different guidance."
+            description="Training should match what each person actually does in the workflow, not a generic AI presentation."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {trainingModules.map((module) => (
+              <article key={module.title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <h2 className="text-lg font-extrabold text-ink">{module.title}</h2>
+                <div className="mt-5 grid gap-2">
+                  {module.topics.map((topic) => (
+                    <span key={topic} className="rounded-md bg-[#f8fbfa] px-3 py-2 text-sm font-semibold leading-5 text-muted">
+                      {topic}
+                    </span>
+                  ))}
                 </div>
-            </form>
+              </article>
+            ))}
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- ================= FOOTER TAG ================= -->
-    <section class="hs-foot" aria-hidden="true">
-        <div class="hs-container">
-            <span class="hs-mark">
-                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                    <circle cx="12" cy="12" r="9" fill="#1db993" />
-                </svg>
-                Automate4U — Training, Prompting & AI Mastery
-            </span>
+      <section className="bg-white px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Rollout support"
+            title="Adoption should be designed before launch and improved after launch."
+            description="We treat adoption as part of the operating system: training, role clarity, feedback, reporting, and workflow tuning."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {rollout.map((item) => (
+              <article key={item.step} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">{item.step}</p>
+                <h2 className="mt-3 text-xl font-extrabold leading-tight text-ink">{item.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{item.text}</p>
+              </article>
+            ))}
+          </div>
         </div>
-    </section>
-</div>
+      </section>
 
+      <section className="bg-[#051C2C] px-4 py-14 text-white md:py-20">
+        <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Implementation evidence</p>
+            <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] md:text-[42px]">
+              Clients should know how the team will operate with the AI after launch.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-white/72">
+              Training should leave behind practical guidance: who reviews exceptions, how approved answers change, when staff intervene, and how feedback turns into better automation.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {deliverables.map((deliverable) => (
+              <p key={deliverable} className="rounded-lg border border-white/14 bg-white/[0.06] px-4 py-3 text-sm font-semibold leading-6 text-white/84">
+                {deliverable}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
 
-` }} />
-    </>
+      <section className="bg-white px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Where this matters"
+            title="Every service needs adoption support when the workflow changes how staff work."
+            description="Voice, agents, chat, marketing automation, strategy, and custom software all work better when staff understand the new operating model."
+          />
+          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+            {serviceOffers.slice(0, 6).map((service) => (
+              <Link
+                key={service.href}
+                href={service.href}
+                className="group rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1db993]/45 hover:shadow-[0_16px_38px_rgba(15,23,32,0.08)]"
+              >
+                <h2 className="text-xl font-extrabold leading-tight text-ink">{service.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{service.description}</p>
+                <span className="mt-5 inline-flex text-sm font-extrabold text-[#167f65]">
+                  View service <span className="ml-1 transition-transform group-hover:translate-x-1" aria-hidden="true">-&gt;</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Related capabilities"
+            title="Adoption depends on safety, integrations, measurement, and a clear strategy."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {relatedPillars.slice(0, 5).map((pillar) => (
+              <Link key={pillar.href} href={pillar.href} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1db993]/45">
+                <h2 className="text-lg font-extrabold leading-tight text-ink">{pillar.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{pillar.description}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <AssessmentCTA sourcePage="/capabilities/training-prompting-ai-mastery" ctaLocation="training_adoption_assessment" />
+    </div>
   );
 }

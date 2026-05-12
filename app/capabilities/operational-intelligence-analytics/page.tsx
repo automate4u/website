@@ -1,228 +1,266 @@
-import React from 'react';
+import Link from "next/link";
+import AssessmentCTA from "@/components/sections/AssessmentCTA";
+import SectionHeader from "@/components/sections/SectionHeader";
+import { howWeBuildPillars } from "@/data/how-we-build";
+import { serviceOffers } from "@/data/service-offers";
 
-export default function Page() {
+const measurementProblems = [
+  {
+    title: "Automation value is hard to prove",
+    text: "If hours saved, response time, cost per request, handoff quality, and conversion impact are not tracked, buyers are left guessing whether the system is worth expanding.",
+  },
+  {
+    title: "Reports lag behind operations",
+    text: "Manual reporting often arrives after the problem has already affected customers, staff, or revenue.",
+  },
+  {
+    title: "Different teams use different definitions",
+    text: "A lead, ticket, completed workflow, escalation, or saved hour needs a shared definition before dashboards can guide decisions.",
+  },
+  {
+    title: "AI activity is not connected to business outcomes",
+    text: "Call minutes, chats, and agent actions only matter when they connect to operational KPIs and financial outcomes.",
+  },
+];
+
+const valueLayers = [
+  {
+    label: "Baseline",
+    detail: "Define current volume, time spent, response speed, handoffs, cost per request, and operational bottlenecks.",
+  },
+  {
+    label: "Instrument",
+    detail: "Log workflow events such as calls handled, tasks created, escalations, bookings, follow-ups, and failed actions.",
+  },
+  {
+    label: "Review",
+    detail: "Use 30/60/90-day value reviews to compare performance against the baseline and decide what should expand.",
+  },
+  {
+    label: "Optimize",
+    detail: "Tune workflows, prompts, handoff rules, integrations, and staffing practices based on real operating data.",
+  },
+];
+
+const kpiGroups = [
+  {
+    title: "Customer response",
+    metrics: ["Response time", "Missed-call recovery", "First-contact resolution", "Follow-up completion"],
+  },
+  {
+    title: "Operational workload",
+    metrics: ["Manual touches avoided", "Admin hours reduced", "Escalation rate", "Backlog volume"],
+  },
+  {
+    title: "Revenue workflow",
+    metrics: ["Qualified leads captured", "Bookings created", "Quote cycle time", "Pipeline tasks completed"],
+  },
+  {
+    title: "Quality and control",
+    metrics: ["Handoff quality", "Exception rate", "Audit completeness", "Staff review outcomes"],
+  },
+];
+
+const roadmap = [
+  {
+    period: "First 30 days",
+    title: "Establish the baseline",
+    text: "Confirm what is being measured, capture early workflow events, and review where the system is reducing manual work or creating friction.",
+  },
+  {
+    period: "First 60 days",
+    title: "Tune the workflow",
+    text: "Refine handoffs, prompts, routing, integrations, staff process, and reporting based on real usage patterns.",
+  },
+  {
+    period: "First 90 days",
+    title: "Decide the expansion path",
+    text: "Compare value against the baseline and decide whether to add channels, workflows, reporting, or Managed AI Operations.",
+  },
+];
+
+const deliverables = [
+  "KPI baseline and measurement plan",
+  "Workflow event taxonomy",
+  "Dashboard or reporting view",
+  "30/60/90-day review cadence",
+  "Automation value summary",
+  "Expansion recommendation",
+];
+
+const relatedPillars = howWeBuildPillars.filter(
+  (pillar) => pillar.href !== "/capabilities/operational-intelligence-analytics"
+);
+
+export default function OperationalIntelligenceAnalyticsPage() {
   return (
-    <>
-      <style dangerouslySetInnerHTML={{ __html: `
-.hs-pro-scope{display:block}.hs-pro-scope *{box-sizing:border-box}.hs-pro-scope{--ink:#0e1520;--muted:#6a7786;--accent:#1db993;--accent-2:#159a78;--bg:#fff;--panel:#f7f9fb;--border:#e5edf2;--pill:#e9f9f3;--radius:18px}.hs-pro-scope .hs-container{max-width:1120px;margin:0 auto;padding:0 20px}.hs-pro-scope .hs-h1{margin:8px 0;font-size:40px;line-height:1.08;letter-spacing:-.01em;font-weight:700}.hs-pro-scope .hs-h2{margin:10px 0 6px;font-size:28px;line-height:1.15;letter-spacing:-.01em;font-weight:700}.hs-pro-scope .hs-h3{margin:0 0 6px;font-size:1.05rem;font-weight:600}.hs-pro-scope .hs-h4{margin:0 0 6px;font-size:1rem;font-weight:600}.hs-pro-scope .hs-p{margin:0 0 8px;color:var(--ink)}.hs-pro-scope .hs-lead{color:var(--muted);max-width:75ch;margin:0 0 12px}.hs-pro-scope .hs-btn{display:inline-flex;align-items:center;gap:.55rem;padding:.7rem 1rem;border-radius:999px;font-weight:600;text-decoration:none;border:1px solid transparent}.hs-pro-scope .hs-primary{background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 8px 22px rgba(29,185,147,.18)}.hs-pro-scope .hs-primary:hover{filter:brightness(.98)}.hs-pro-scope .hs-head{background:var(--bg);padding:48px 0 28px}.hs-pro-scope .hs-head-grid{display:grid;gap:40px;align-items:center}.hs-pro-scope .hs-head-content{max-width:100%}.hs-pro-scope .hs-head-image{display:none}.hs-pro-scope .hs-head-image img{width:100%;height:auto;border-radius:var(--radius);box-shadow:0 4px 20px rgba(0,0,0,.08)}@media (min-width:920px){.hs-pro-scope .hs-head-grid{grid-template-columns:1fr 1fr}.hs-pro-scope .hs-head-image{display:block}.hs-pro-scope .hs-h1{font-size:48px}.hs-pro-scope .hs-h2{font-size:32px}}.hs-pro-scope .hs-meta-list{display:flex;gap:10px 12px;flex-wrap:wrap;margin:12px 0 0;padding:0;list-style:none}.hs-pro-scope .hs-meta-list li{background:#eef5f8;color:#415467;border:1px solid var(--border);border-radius:999px;padding:.28rem .6rem;font-weight:600;font-size:.8rem}.hs-pro-scope .hs-dynamics{background:#fff;padding:22px 0 14px}.hs-pro-scope .hs-columns{display:grid;gap:24px;margin-top:16px}.hs-pro-scope .hs-panel{background:transparent;border:none;padding:0}.hs-pro-scope .hs-list{margin:8px 0 0;padding-left:20px;color:var(--ink);list-style:disc}.hs-pro-scope .hs-list li{margin:8px 0;line-height:1.5}@media (min-width:880px){.hs-pro-scope .hs-columns{grid-template-columns:repeat(3,1fr)}.hs-pro-scope .hs-case-grid{grid-template-columns:repeat(3,1fr)}}.hs-pro-scope .hs-capabilities{background:#fff;padding:28px 0}.hs-pro-scope .hs-cap-accordion{margin-top:16px;border-top:1px solid var(--border)}.hs-pro-scope .hs-cap-detail{border-bottom:1px solid var(--border)}.hs-pro-scope .hs-cap-summary{display:flex;align-items:center;gap:16px;padding:20px 0;cursor:pointer;list-style:none;user-select:none}.hs-pro-scope .hs-cap-summary::-webkit-details-marker{display:none}.hs-pro-scope .hs-cap-title{font-size:1.15rem;font-weight:600;color:var(--ink)}.hs-pro-scope .hs-cap-icon{width:24px;height:24px;position:relative;flex-shrink:0}.hs-pro-scope .hs-cap-icon::before,.hs-pro-scope .hs-cap-icon::after{content:'';position:absolute;background:var(--ink);transition:transform .3s ease}.hs-pro-scope .hs-cap-icon::before{width:16px;height:2px;top:50%;left:50%;transform:translate(-50%,-50%)}.hs-pro-scope .hs-cap-icon::after{width:2px;height:16px;top:50%;left:50%;transform:translate(-50%,-50%)}.hs-pro-scope .hs-cap-detail[open] .hs-cap-icon::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}.hs-pro-scope .hs-cap-content{padding:0 0 24px;max-width:900px}.hs-pro-scope .hs-bullets{margin:12px 0 0;padding-left:20px;color:var(--ink);list-style:disc}.hs-pro-scope .hs-bullets li{margin:8px 0;line-height:1.5}.hs-pro-scope .hs-cases{background:#fff;padding:26px 0}.hs-pro-scope .hs-case-grid{display:grid;gap:24px;margin-top:16px}.hs-pro-scope .hs-case{background:transparent;border:none;padding:0}.hs-pro-scope .hs-contact{background:#fff;padding:26px 0 34px}.hs-pro-scope .hs-form{max-width:880px;margin:10px auto 0}.hs-pro-scope .hs-form-grid{display:grid;gap:12px}.hs-pro-scope .hs-field{display:grid;gap:6px}.hs-pro-scope .hs-field--full{grid-column:1/-1}.hs-pro-scope .hs-label{font-weight:600;color:#16212b}.hs-pro-scope input,.hs-pro-scope select,.hs-pro-scope textarea{width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:#fff;color:#0f1520}.hs-pro-scope .hs-actions{margin-top:12px;display:flex;gap:12px;align-items:center}.hs-pro-scope .hs-small{margin:0;color:var(--muted);font-size:.9rem}.hs-pro-scope .hs-foot{background:#fff;padding:12px 0 36px;text-align:center}.hs-pro-scope .hs-mark{display:inline-flex;align-items:center;gap:8px;color:#365160;background:var(--pill);padding:.36rem .62rem;border-radius:999px;font-weight:600;font-size:.84rem}
-` }} />
-      <div dangerouslySetInnerHTML={{ __html: `<div class="hs-pro-scope" data-capability="operational-intelligence">
-
-    <!-- ================= HEADER / OVERVIEW ================= -->
-    <section class="hs-head" aria-labelledby="hs-head-title">
-        <div class="hs-container">
-            <div class="hs-head-grid">
-                <div class="hs-head-content">
-                    <h1 id="hs-head-title" class="hs-h1">Operational Intelligence & Analytics</h1>
-                    <p class="hs-lead">
-                        Turn operational data into actionable insights.
-                        We build dashboards, reporting systems, and AI-powered analytics that help you
-                        understand what's happening, why it's happening, and what to do about it.
-                    </p>
-                    <ul class="hs-meta-list" aria-label="What we deliver">
-                        <li>Real-Time Dashboards</li>
-                        <li>Automated Reporting</li>
-                        <li>Predictive Analytics</li>
-                        <li>Performance Monitoring</li>
-                    </ul>
-                </div>
-                <div class="hs-head-image">
-                    <img src="/images/capabilities/operational_intelligence.jpg"
-                        alt="Operational intelligence and analytics dashboard" />
-                </div>
+    <div className="min-h-screen bg-white">
+      <section className="bg-[#051C2C] px-4 py-12 text-white md:py-[72px]">
+        <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <div>
+            <p className="mb-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">
+              Operational Intelligence & Value Realization
+            </p>
+            <h1 className="max-w-[760px] text-[36px] font-extrabold leading-[1.06] tracking-[-0.02em] md:text-[54px]">
+              Measure whether AI automation is actually improving the business.
+            </h1>
+            <p className="mt-5 max-w-[690px] text-base leading-8 text-white/74 md:text-[17px]">
+              A useful AI system should make work easier to see, not harder to inspect. We connect automation activity to KPIs, workflow events, dashboards, and review rhythms so clients can decide what to keep, tune, or expand.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="#contact" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
+                Get Free Assessment
+              </Link>
+              <Link href="/capabilities" className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb]">
+                How We Build
+              </Link>
             </div>
-        </div>
-    </section>
+          </div>
 
-    <!-- ================= PROBLEMS WE SOLVE ================= -->
-    <section class="hs-dynamics" aria-labelledby="hs-dyn-title">
-        <div class="hs-container">
-            <h2 id="hs-dyn-title" class="hs-h2">Problems we solve</h2>
-
-            <div class="hs-columns">
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Data blindness</h3>
-                    <ul class="hs-list">
-                        <li>Data exists but no one can easily access or understand it.</li>
-                        <li>Decisions made on gut feel instead of data.</li>
-                        <li>No visibility into operational performance or trends.</li>
-                    </ul>
-                </article>
-
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Manual reporting</h3>
-                    <ul class="hs-list">
-                        <li>Hours spent pulling data from multiple systems.</li>
-                        <li>Reports that are outdated by the time they're finished.</li>
-                        <li>Inconsistent metrics and definitions across teams.</li>
-                    </ul>
-                </article>
-
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Reactive operations</h3>
-                    <ul class="hs-list">
-                        <li>Problems discovered too late to prevent impact.</li>
-                        <li>No early warning system for issues.</li>
-                        <li>Unable to identify patterns or predict outcomes.</li>
-                    </ul>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= CAPABILITIES ================= -->
-    <section class="hs-capabilities" aria-labelledby="hs-cap-title">
-        <div class="hs-container">
-            <h2 id="hs-cap-title" class="hs-h2">What we build</h2>
-
-            <div class="hs-cap-accordion">
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Real-Time Dashboards</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Live operational dashboards that surface key metrics, trends, and alerts across your business.</p>
-                        <ul class="hs-bullets">
-                            <li>Executive dashboards with high-level KPIs</li>
-                            <li>Department-specific operational views</li>
-                            <li>Drill-down capabilities for root cause analysis</li>
-                        </ul>
-                    </div>
-                </details>
-
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Automated Reporting</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Scheduled reports that automatically pull, format, and distribute data to stakeholders.</p>
-                        <ul class="hs-bullets">
-                            <li>Daily, weekly, monthly automated reports</li>
-                            <li>AI-generated summaries and insights</li>
-                            <li>Distribution via email, Slack, Teams, or dashboards</li>
-                        </ul>
-                    </div>
-                </details>
-
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Predictive Analytics & Forecasting</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">AI-powered models that predict trends, identify risks, and recommend actions before problems occur.</p>
-                        <ul class="hs-bullets">
-                            <li>Demand forecasting and capacity planning</li>
-                            <li>Churn prediction and retention modeling</li>
-                            <li>Anomaly detection and early warning systems</li>
-                        </ul>
-                    </div>
-                </details>
-
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Performance Monitoring & Alerts</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Continuous monitoring with intelligent alerting that notifies the right people at the right time.</p>
-                        <ul class="hs-bullets">
-                            <li>Threshold-based and AI-driven alerts</li>
-                            <li>SLA monitoring and compliance tracking</li>
-                            <li>Multi-channel notifications (email, SMS, Slack)</li>
-                        </ul>
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= EXAMPLE IMPLEMENTATIONS ================= -->
-    <section class="hs-cases" aria-labelledby="hs-cases-title">
-        <div class="hs-container">
-            <h2 id="hs-cases-title" class="hs-h2">Example implementations</h2>
-
-            <div class="hs-case-grid">
-                <article class="hs-case">
-                    <h3 class="hs-h4">Operations Dashboard</h3>
-                    <ul class="hs-list">
-                        <li>Real-time view of orders, fulfillment, and inventory</li>
-                        <li>Automated alerts for bottlenecks and delays</li>
-                        <li>Reduced response time to issues by 65%</li>
-                    </ul>
-                </article>
-
-                <article class="hs-case">
-                    <h3 class="hs-h4">Sales Performance Analytics</h3>
-                    <ul class="hs-list">
-                        <li>Automated weekly reports with AI-generated insights</li>
-                        <li>Pipeline forecasting and deal risk scoring</li>
-                        <li>Improved forecast accuracy by 40%</li>
-                    </ul>
-                </article>
-
-                <article class="hs-case">
-                    <h3 class="hs-h4">Customer Health Monitoring</h3>
-                    <ul class="hs-list">
-                        <li>Predictive churn model with early warning alerts</li>
-                        <li>Automated outreach to at-risk accounts</li>
-                        <li>Reduced churn by 28% in first quarter</li>
-                    </ul>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= CONTACT ================= -->
-    <section id="hs-contact" class="hs-contact" aria-labelledby="hs-contact-title">
-        <div class="hs-container">
-            <h2 id="hs-contact-title" class="hs-h2">Discuss your analytics needs</h2>
-
-            <form class="hs-form" action="https://formspree.io/f/xzzjvgkw" method="post">
-                <div class="hs-form-grid">
-                    <label class="hs-field">
-                        <span class="hs-label">Work email</span>
-                        <input type="email" name="email" required placeholder="you@company.com"
-                            autocomplete="email">
-                    </label>
-                    <label class="hs-field">
-                        <span class="hs-label">Company</span>
-                        <input type="text" name="company" required placeholder="Your company name">
-                    </label>
-                    <label class="hs-field hs-field--full">
-                        <span class="hs-label">What insights do you need?</span>
-                        <textarea name="focus" rows="4"
-                            placeholder="e.g., operational dashboards; automated reporting; predictive analytics; performance monitoring"></textarea>
-                    </label>
-                    <input type="hidden" name="capability" value="Operational Intelligence & Analytics">
+          <div className="rounded-lg border border-white/12 bg-white/[0.07] p-5 shadow-[0_18px_55px_rgba(0,0,0,0.20)]">
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Value realization model</p>
+            <div className="mt-5 grid gap-3">
+              {valueLayers.map((layer, index) => (
+                <div key={layer.label} className="grid gap-3 rounded-lg border border-white/10 bg-[#0d1720]/70 p-4 sm:grid-cols-[auto_1fr] sm:items-start">
+                  <div className="grid h-9 w-9 place-items-center rounded-full bg-[#1db993] text-sm font-extrabold text-[#05251d]">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <h2 className="font-extrabold text-white">{layer.label}</h2>
+                    <p className="mt-1 text-sm leading-6 text-white/68">{layer.detail}</p>
+                  </div>
                 </div>
-                <div class="hs-actions">
-                    <button class="hs-btn hs-primary" type="submit">
-                        Submit
-                    </button>
-                    <p class="hs-small">We'll reply with a short agenda and proposed next steps.</p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Buyer concerns"
+            title="AI spend feels risky when value is not measured."
+            description="The safest way to reduce spend anxiety is to start with a clear baseline, track the first workflow honestly, and expand only when the operating data supports it."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            {measurementProblems.map((problem) => (
+              <article key={problem.title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <h2 className="text-xl font-extrabold leading-tight text-ink">{problem.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{problem.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Measurement design"
+            title="The right dashboard starts with the right operating questions."
+            description="We do not start by adding charts everywhere. We decide which actions, handoffs, and outcomes matter for the first workflow."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {kpiGroups.map((group) => (
+              <article key={group.title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <h2 className="text-lg font-extrabold text-ink">{group.title}</h2>
+                <div className="mt-5 grid gap-2">
+                  {group.metrics.map((metric) => (
+                    <span key={metric} className="rounded-md bg-[#f8fbfa] px-3 py-2 text-sm font-semibold leading-5 text-muted">
+                      {metric}
+                    </span>
+                  ))}
                 </div>
-            </form>
+              </article>
+            ))}
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- ================= FOOTER TAG ================= -->
-    <section class="hs-foot" aria-hidden="true">
-        <div class="hs-container">
-            <span class="hs-mark">
-                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                    <circle cx="12" cy="12" r="9" fill="#1db993" />
-                </svg>
-                Automate4U — Operational Intelligence & Analytics
-            </span>
+      <section className="bg-white px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="30 / 60 / 90"
+            title="Value realization should be reviewed, not assumed."
+            description="A practical review cadence gives buyers confidence that the first workflow is being measured before they commit to more automation."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {roadmap.map((item) => (
+              <article key={item.period} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">{item.period}</p>
+                <h2 className="mt-3 text-xl font-extrabold leading-tight text-ink">{item.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{item.text}</p>
+              </article>
+            ))}
+          </div>
         </div>
-    </section>
-</div>
+      </section>
 
+      <section className="bg-[#051C2C] px-4 py-14 text-white md:py-20">
+        <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Implementation evidence</p>
+            <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] md:text-[42px]">
+              Clients should see what is working, what needs tuning, and what should happen next.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-white/72">
+              Reporting should make the next decision easier: keep the workflow, tune it, pause it, or expand into adjacent work with clearer confidence.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {deliverables.map((deliverable) => (
+              <p key={deliverable} className="rounded-lg border border-white/14 bg-white/[0.06] px-4 py-3 text-sm font-semibold leading-6 text-white/84">
+                {deliverable}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
 
-` }} />
-    </>
+      <section className="bg-white px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Where this matters"
+            title="Every service should be tied to measurable business outcomes."
+            description="Measurement helps buyers understand whether voice, agents, chat, marketing automation, strategy, or custom software are reducing repetitive work and improving the workflows that matter."
+          />
+          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+            {serviceOffers.slice(0, 6).map((service) => (
+              <Link
+                key={service.href}
+                href={service.href}
+                className="group rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1db993]/45 hover:shadow-[0_16px_38px_rgba(15,23,32,0.08)]"
+              >
+                <h2 className="text-xl font-extrabold leading-tight text-ink">{service.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{service.description}</p>
+                <span className="mt-5 inline-flex text-sm font-extrabold text-[#167f65]">
+                  View service <span className="ml-1 transition-transform group-hover:translate-x-1" aria-hidden="true">-&gt;</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Related capabilities"
+            title="Value realization depends on integrations, safety, adoption, and ongoing operations."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {relatedPillars.slice(0, 5).map((pillar) => (
+              <Link key={pillar.href} href={pillar.href} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1db993]/45">
+                <h2 className="text-lg font-extrabold leading-tight text-ink">{pillar.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{pillar.description}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <AssessmentCTA sourcePage="/capabilities/operational-intelligence-analytics" ctaLocation="operational_intelligence_assessment" />
+    </div>
   );
 }

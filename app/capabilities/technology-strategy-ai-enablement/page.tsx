@@ -1,607 +1,220 @@
-import React from 'react';
+import Link from "next/link";
+import AssessmentCTA from "@/components/sections/AssessmentCTA";
+import SectionHeader from "@/components/sections/SectionHeader";
+import { howWeBuildPillars } from "@/data/how-we-build";
+import { serviceOffers } from "@/data/service-offers";
 
-export default function Page() {
+const strategyProblems = [
+  {
+    title: "Too many possible AI projects",
+    text: "Teams see dozens of automation opportunities but need a practical way to decide what should happen first, what should wait, and what should not be automated yet.",
+  },
+  {
+    title: "Tools are chosen before workflows are understood",
+    text: "AI strategy works best when it starts with operating pain, systems, people, risk, and value instead of chasing whichever platform is loudest this month.",
+  },
+  {
+    title: "Leadership needs spend confidence",
+    text: "A roadmap should show the smallest useful first step, what value it should prove, and what expansion should depend on.",
+  },
+  {
+    title: "Governance arrives too late",
+    text: "Data access, approval rules, sensitive workflows, monitoring, and staff adoption should be planned before pilots become production systems.",
+  },
+];
+
+const strategyLayers = [
+  {
+    label: "Diagnose",
+    detail: "Map workflow pain, manual effort, systems, data quality, risk, and places where customers or staff wait too long.",
+  },
+  {
+    label: "Prioritize",
+    detail: "Rank opportunities by business value, complexity, risk, adoption effort, and speed to a useful pilot.",
+  },
+  {
+    label: "Design",
+    detail: "Define the pilot scope, success metric, handoffs, integrations, safety controls, and implementation path.",
+  },
+  {
+    label: "Scale",
+    detail: "Use results from the first workflow to decide whether to expand into adjacent workflows or Managed AI Operations.",
+  },
+];
+
+const maturityStages = [
+  {
+    stage: "Manual",
+    description: "Work depends on people copying, checking, replying, and routing across disconnected tools.",
+  },
+  {
+    stage: "Digitized",
+    description: "Core data is in systems, but staff still bridge gaps between inboxes, CRMs, spreadsheets, calendars, and documents.",
+  },
+  {
+    stage: "Automated",
+    description: "Routine actions are triggered consistently, with human review for exceptions and sensitive decisions.",
+  },
+  {
+    stage: "AI-Native",
+    description: "AI agents support frontline and back-office workflows, with measurement, governance, adoption, and continuous improvement.",
+  },
+];
+
+const roadmapArtifacts = [
+  "AI opportunity inventory",
+  "Workflow value and risk ranking",
+  "Pilot scope recommendation",
+  "Build-versus-buy guidance",
+  "Integration and data assumptions",
+  "Governance and adoption plan",
+];
+
+const relatedPillars = howWeBuildPillars.filter(
+  (pillar) => pillar.href !== "/capabilities/technology-strategy-ai-enablement"
+);
+
+export default function TechnologyStrategyAIEnablementPage() {
   return (
-    <>
-      <style dangerouslySetInnerHTML={{ __html: `
-    .hs-pro-scope {
-        display: block;
-    }
-
-    .hs-pro-scope * {
-        box-sizing: border-box;
-    }
-
-    /* Tokens */
-    .hs-pro-scope {
-        --ink: #0e1520;
-        --muted: #6a7786;
-        --accent: #1db993;
-        --accent-2: #159a78;
-        --bg: #ffffff;
-        --panel: #f7f9fb;
-        --border: #e5edf2;
-        --pill: #e9f9f3;
-        --radius: 18px;
-    }
-
-    /* Layout */
-    .hs-pro-scope .hs-container {
-        max-width: 1120px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-
-    /* Type */
-    .hs-pro-scope .hs-h1 {
-        margin: 8px 0 8px;
-        font-size: 40px;
-        line-height: 1.08;
-        letter-spacing: -.01em;
-        font-weight: 700;
-    }
-
-    .hs-pro-scope .hs-h2 {
-        margin: 10px 0 6px;
-        font-size: 28px;
-        line-height: 1.15;
-        letter-spacing: -.01em;
-        font-weight: 700;
-    }
-
-    .hs-pro-scope .hs-h3 {
-        margin: 0 0 6px;
-        font-size: 1.05rem;
-        font-weight: 600;
-    }
-
-    .hs-pro-scope .hs-h4 {
-        margin: 0 0 6px;
-        font-size: 1rem;
-        font-weight: 600;
-    }
-
-    .hs-pro-scope .hs-p {
-        margin: 0 0 8px;
-        color: var(--ink);
-    }
-
-    .hs-pro-scope .hs-lead {
-        color: var(--muted);
-        max-width: 75ch;
-        margin: 0 0 12px;
-    }
-
-    /* Buttons */
-    .hs-pro-scope .hs-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: .55rem;
-        padding: .7rem 1rem;
-        border-radius: 999px;
-        font-weight: 600;
-        text-decoration: none;
-        border: 1px solid transparent;
-    }
-
-    .hs-pro-scope .hs-primary {
-        background: linear-gradient(180deg, var(--accent), var(--accent-2));
-        color: #fff;
-        box-shadow: 0 8px 22px rgba(29, 185, 147, .18);
-    }
-
-    .hs-pro-scope .hs-primary:hover {
-        filter: brightness(.98);
-    }
-
-    /* Header */
-    .hs-pro-scope .hs-head {
-        background: var(--bg);
-        padding: 48px 0 28px;
-    }
-
-    .hs-pro-scope .hs-head-grid {
-        display: grid;
-        gap: 40px;
-        align-items: center;
-    }
-
-    .hs-pro-scope .hs-head-content {
-        max-width: 100%;
-    }
-
-    .hs-pro-scope .hs-head-image {
-        display: none;
-    }
-
-    .hs-pro-scope .hs-head-image img {
-        width: 100%;
-        height: auto;
-        border-radius: var(--radius);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, .08);
-    }
-
-    @media (min-width:920px) {
-        .hs-pro-scope .hs-head-grid {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .hs-pro-scope .hs-head-image {
-            display: block;
-        }
-    }
-
-    .hs-pro-scope .hs-meta-list {
-        display: flex;
-        gap: 10px 12px;
-        flex-wrap: wrap;
-        margin: 12px 0 0;
-        padding: 0;
-        list-style: none;
-    }
-
-    .hs-pro-scope .hs-meta-list li {
-        background: #eef5f8;
-        color: #415467;
-        border: 1px solid var(--border);
-        border-radius: 999px;
-        padding: .28rem .6rem;
-        font-weight: 600;
-        font-size: .8rem;
-    }
-
-    /* Dynamics */
-    .hs-pro-scope .hs-dynamics {
-        background: #fff;
-        padding: 22px 0 14px;
-    }
-
-    .hs-pro-scope .hs-columns {
-        display: grid;
-        gap: 24px;
-        margin-top: 16px;
-    }
-
-    .hs-pro-scope .hs-panel {
-        background: transparent;
-        border: none;
-        padding: 0;
-    }
-
-    .hs-pro-scope .hs-list {
-        margin: 8px 0 0;
-        padding-left: 20px;
-        color: var(--ink);
-        list-style: disc;
-    }
-
-    .hs-pro-scope .hs-list li {
-        margin: 8px 0;
-        line-height: 1.5;
-    }
-
-    @media (min-width:880px) {
-        .hs-pro-scope .hs-columns {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    /* Capabilities */
-    .hs-pro-scope .hs-capabilities {
-        background: #fff;
-        padding: 28px 0;
-    }
-
-    .hs-pro-scope .hs-cap-accordion {
-        margin-top: 16px;
-        border-top: 1px solid var(--border);
-    }
-
-    .hs-pro-scope .hs-cap-detail {
-        border-bottom: 1px solid var(--border);
-    }
-
-    .hs-pro-scope .hs-cap-summary {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding: 20px 0;
-        cursor: pointer;
-        list-style: none;
-        user-select: none;
-    }
-
-    .hs-pro-scope .hs-cap-summary::-webkit-details-marker {
-        display: none;
-    }
-
-    .hs-pro-scope .hs-cap-title {
-        font-size: 1.15rem;
-        font-weight: 600;
-        color: var(--ink);
-    }
-
-    .hs-pro-scope .hs-cap-icon {
-        width: 24px;
-        height: 24px;
-        position: relative;
-        flex-shrink: 0;
-    }
-
-    .hs-pro-scope .hs-cap-icon::before,
-    .hs-pro-scope .hs-cap-icon::after {
-        content: '';
-        position: absolute;
-        background: var(--ink);
-        transition: transform .3s ease;
-    }
-
-    .hs-pro-scope .hs-cap-icon::before {
-        width: 16px;
-        height: 2px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .hs-pro-scope .hs-cap-icon::after {
-        width: 2px;
-        height: 16px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .hs-pro-scope .hs-cap-detail[open] .hs-cap-icon::after {
-        transform: translate(-50%, -50%) rotate(90deg);
-        opacity: 0;
-    }
-
-    .hs-pro-scope .hs-cap-content {
-        padding: 0 0 24px 0;
-        max-width: 900px;
-    }
-
-    .hs-pro-scope .hs-bullets {
-        margin: 12px 0 0;
-        padding-left: 20px;
-        color: var(--ink);
-        list-style: disc;
-    }
-
-    .hs-pro-scope .hs-bullets li {
-        margin: 8px 0;
-        line-height: 1.5;
-    }
-
-    /* Cases */
-    .hs-pro-scope .hs-cases {
-        background: #fff;
-        padding: 26px 0;
-    }
-
-    .hs-pro-scope .hs-case-grid {
-        display: grid;
-        gap: 24px;
-        margin-top: 16px;
-    }
-
-    .hs-pro-scope .hs-case {
-        background: transparent;
-        border: none;
-        padding: 0;
-    }
-
-    @media (min-width:880px) {
-        .hs-pro-scope .hs-case-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    /* Contact */
-    .hs-pro-scope .hs-contact {
-        background: #fff;
-        padding: 26px 0 34px;
-    }
-
-    .hs-pro-scope .hs-form {
-        max-width: 880px;
-        margin: 10px auto 0;
-    }
-
-    .hs-pro-scope .hs-form-grid {
-        display: grid;
-        gap: 12px;
-    }
-
-    .hs-pro-scope .hs-field {
-        display: grid;
-        gap: 6px;
-    }
-
-    .hs-pro-scope .hs-field--full {
-        grid-column: 1/-1;
-    }
-
-    .hs-pro-scope .hs-label {
-        font-weight: 600;
-        color: #16212b;
-    }
-
-    .hs-pro-scope input,
-    .hs-pro-scope select,
-    .hs-pro-scope textarea {
-        width: 100%;
-        padding: 12px;
-        border-radius: 12px;
-        border: 1px solid var(--border);
-        background: #fff;
-        color: #0f1520;
-    }
-
-    .hs-pro-scope .hs-actions {
-        margin-top: 12px;
-        display: flex;
-        gap: 12px;
-        align-items: center;
-    }
-
-    .hs-pro-scope .hs-small {
-        margin: 0;
-        color: var(--muted);
-        font-size: .9rem;
-    }
-
-    /* Footer tag */
-    .hs-pro-scope .hs-foot {
-        background: #fff;
-        padding: 12px 0 36px;
-        text-align: center;
-    }
-
-    .hs-pro-scope .hs-mark {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        color: #365160;
-        background: var(--pill);
-        padding: .36rem .62rem;
-        border-radius: 999px;
-        font-weight: 600;
-        font-size: .84rem;
-    }
-
-    /* Responsive headings */
-    @media (min-width:920px) {
-        .hs-pro-scope .hs-h1 {
-            font-size: 48px;
-        }
-
-        .hs-pro-scope .hs-h2 {
-            font-size: 32px;
-        }
-    }
-` }} />
-      <div dangerouslySetInnerHTML={{ __html: `<div class="hs-pro-scope" data-capability="tech-strategy">
-
-    <!-- ================= HEADER / OVERVIEW ================= -->
-    <section class="hs-head" aria-labelledby="hs-head-title">
-        <div class="hs-container">
-            <div class="hs-head-grid">
-                <div class="hs-head-content">
-                    <h1 id="hs-head-title" class="hs-h1">Technology Strategy & AI Enablement</h1>
-                    <p class="hs-lead">
-                        Most companies know they're behind on technology but don't know where to start.
-                        We audit your entire tech stack, identify opportunities, and design a practical roadmap
-                        for modern tools and AI that actually ships.
-                    </p>
-                    <ul class="hs-meta-list" aria-label="Who this is for">
-                        <li>Tech Stack Audits</li>
-                        <li>AI Opportunity Assessment</li>
-                        <li>Modernization Roadmaps</li>
-                        <li>Model & Platform Strategy</li>
-                    </ul>
-                </div>
-                <div class="hs-head-image">
-                    <img src="/images/capabilities/tech_strategy.jpg"
-                        alt="Technology strategy planning session" />
-                </div>
+    <div className="min-h-screen bg-white">
+      <section className="bg-[#051C2C] px-4 py-12 text-white md:py-[72px]">
+        <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <div>
+            <p className="mb-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">
+              Technology Strategy & Enablement
+            </p>
+            <h1 className="max-w-[760px] text-[36px] font-extrabold leading-[1.06] tracking-[-0.02em] md:text-[54px]">
+              Turn AI interest into a practical operating roadmap.
+            </h1>
+            <p className="mt-5 max-w-[690px] text-base leading-8 text-white/74 md:text-[17px]">
+              The right AI strategy is not a giant transformation deck. It is a clear sequence of useful workflows, safe pilots, measurable outcomes, adoption steps, and expansion decisions.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="#contact" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
+                Get Free Assessment
+              </Link>
+              <Link href="/capabilities" className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb]">
+                How We Build
+              </Link>
             </div>
-        </div>
-    </section>
+          </div>
 
-    <!-- ================= PROBLEMS WE SOLVE ================= -->
-    <section class="hs-dynamics" aria-labelledby="hs-dyn-title">
-        <div class="hs-container">
-            <h2 id="hs-dyn-title" class="hs-h2">Problems we solve</h2>
-
-            <div class="hs-columns">
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Fragmented tools</h3>
-                    <ul class="hs-list">
-                        <li>Overlapping SaaS subscriptions and disconnected systems.</li>
-                        <li>Manual workflows that waste time and create errors.</li>
-                        <li>No clear picture of what you're paying for or what's working.</li>
-                    </ul>
-                </article>
-
-                <article class="hs-panel">
-                    <h3 class="hs-h3">AI uncertainty</h3>
-                    <ul class="hs-list">
-                        <li>"We want to use AI, but we don't know where, how, or which models."</li>
-                        <li>Fear of big, risky "digital transformation" projects that never ship.</li>
-                        <li>Unclear ROI and no prioritization framework.</li>
-                    </ul>
-                </article>
-
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Modernization paralysis</h3>
-                    <ul class="hs-list">
-                        <li>Legacy systems holding back new capabilities.</li>
-                        <li>Teams unsure which tools to consolidate or replace.</li>
-                        <li>No roadmap for phased, low-risk improvements.</li>
-                    </ul>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= CAPABILITIES ================= -->
-    <section class="hs-capabilities" aria-labelledby="hs-cap-title">
-        <div class="hs-container">
-            <h2 id="hs-cap-title" class="hs-h2">What we deliver</h2>
-
-            <div class="hs-cap-accordion">
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Tech Stack Audits</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Review current systems (CRM, ERP, HRIS, marketing tools, internal apps) to identify gaps, redundancies, and opportunities.</p>
-                        <ul class="hs-bullets">
-                            <li>Complete inventory of tools, licenses, and integrations</li>
-                            <li>Cost analysis and consolidation opportunities</li>
-                            <li>Productivity impact assessment and quick-win identification</li>
-                        </ul>
-                    </div>
-                </details>
-
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">AI Opportunity Assessment</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Identify high-impact workflows for AI (voice, chat, agents, RAG, internal tools) and show where AI is not a good fit yet.</p>
-                        <ul class="hs-bullets">
-                            <li>Workflow analysis and AI suitability scoring</li>
-                            <li>ROI estimation by use case (complexity, impact, risk)</li>
-                            <li>Prioritized roadmap with 2–4 week pilot cycles</li>
-                        </ul>
-                    </div>
-                </details>
-
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Modernization & Tool Strategy</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Recommend newer or better-suited tools, suggest consolidation, and map where integrations will have the biggest impact.</p>
-                        <ul class="hs-bullets">
-                            <li>Platform selection and migration planning</li>
-                            <li>Integration architecture and data flow design</li>
-                            <li>Change management and team adoption strategy</li>
-                        </ul>
-                    </div>
-                </details>
-
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Model & Platform Strategy</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Guidance on when and why to use different models (OpenAI, Anthropic, Gemini, Claude, DeepSeek, Llama, Kimi, Qwen, ElevenLabs, etc.).</p>
-                        <ul class="hs-bullets">
-                            <li>Model selection by use case (cost, latency, accuracy)</li>
-                            <li>RAG vs direct model usage architecture</li>
-                            <li>Governance, guardrails, and oversight frameworks</li>
-                        </ul>
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= ENGAGEMENT TYPES ================= -->
-    <section class="hs-cases" aria-labelledby="hs-cases-title">
-        <div class="hs-container">
-            <h2 id="hs-cases-title" class="hs-h2">Typical engagements</h2>
-
-            <div class="hs-case-grid">
-                <article class="hs-case">
-                    <h3 class="hs-h4">Tech Stack Audit (2 weeks)</h3>
-                    <ul class="hs-list">
-                        <li>Complete system inventory and cost analysis</li>
-                        <li>Integration map and data flow documentation</li>
-                        <li>Prioritized recommendations with ROI estimates</li>
-                    </ul>
-                </article>
-
-                <article class="hs-case">
-                    <h3 class="hs-h4">AI Readiness Assessment (3 weeks)</h3>
-                    <ul class="hs-list">
-                        <li>Workflow analysis across departments</li>
-                        <li>AI opportunity scoring and use case prioritization</li>
-                        <li>Phased roadmap with pilot project recommendations</li>
-                    </ul>
-                </article>
-
-                <article class="hs-case">
-                    <h3 class="hs-h4">Modernization Roadmap (4–6 weeks)</h3>
-                    <ul class="hs-list">
-                        <li>Current-state assessment and future-state design</li>
-                        <li>Platform selection and migration strategy</li>
-                        <li>Quarterly implementation plan with milestones</li>
-                    </ul>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= CONTACT ================= -->
-    <section id="hs-contact" class="hs-contact" aria-labelledby="hs-contact-title">
-        <div class="hs-container">
-            <h2 id="hs-contact-title" class="hs-h2">Book a Strategy Session</h2>
-
-            <form class="hs-form" action="https://formspree.io/f/xzzjvgkw" method="post">
-                <div class="hs-form-grid">
-                    <label class="hs-field">
-                        <span class="hs-label">Work email</span>
-                        <input type="email" name="email" required placeholder="you@company.com"
-                            autocomplete="email">
-                    </label>
-                    <label class="hs-field">
-                        <span class="hs-label">Company</span>
-                        <input type="text" name="company" required placeholder="Your company name">
-                    </label>
-                    <label class="hs-field hs-field--full">
-                        <span class="hs-label">What are you looking to improve?</span>
-                        <textarea name="focus" rows="4"
-                            placeholder="e.g., audit our tech stack; identify AI opportunities; modernize legacy systems; build an AI roadmap"></textarea>
-                    </label>
-                    <input type="hidden" name="capability" value="Technology Strategy & AI Enablement">
+          <div className="rounded-lg border border-white/12 bg-white/[0.07] p-5 shadow-[0_18px_55px_rgba(0,0,0,0.20)]">
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Strategy model</p>
+            <div className="mt-5 grid gap-3">
+              {strategyLayers.map((layer, index) => (
+                <div key={layer.label} className="grid gap-3 rounded-lg border border-white/10 bg-[#0d1720]/70 p-4 sm:grid-cols-[auto_1fr] sm:items-start">
+                  <div className="grid h-9 w-9 place-items-center rounded-full bg-[#1db993] text-sm font-extrabold text-[#05251d]">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <h2 className="font-extrabold text-white">{layer.label}</h2>
+                    <p className="mt-1 text-sm leading-6 text-white/68">{layer.detail}</p>
+                  </div>
                 </div>
-                <div class="hs-actions">
-                    <button class="hs-btn hs-primary" type="submit">
-                        Submit
-                    </button>
-                    <p class="hs-small">We'll reply with a short agenda and proposed next steps.</p>
-                </div>
-            </form>
+              ))}
+            </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- ================= FOOTER TAG ================= -->
-    <section class="hs-foot" aria-hidden="true">
-        <div class="hs-container">
-            <span class="hs-mark">
-                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                    <circle cx="12" cy="12" r="9" fill="#1db993" />
-                </svg>
-                Automate4U — Technology Strategy & AI Enablement
-            </span>
+      <section className="bg-white px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Buyer concerns"
+            title="A good AI roadmap protects the team from scattered experiments."
+            description="Strategy should make the next build easier to approve, easier to measure, and safer to launch."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            {strategyProblems.map((problem) => (
+              <article key={problem.title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <h2 className="text-xl font-extrabold leading-tight text-ink">{problem.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{problem.text}</p>
+              </article>
+            ))}
+          </div>
         </div>
-    </section>
-</div>
+      </section>
 
+      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="AI maturity"
+            title="Meet the business where it is, then move one level at a time."
+            description="Most SMB and mid-market teams do not need to become AI-native overnight. They need the right next workflow."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {maturityStages.map((stage, index) => (
+              <article key={stage.stage} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <span className="grid h-10 w-10 place-items-center rounded-full bg-[#1db993] text-sm font-extrabold text-[#05251d]">{index + 1}</span>
+                <h2 className="mt-5 text-lg font-extrabold text-ink">{stage.stage}</h2>
+                <p className="mt-3 text-sm leading-6 text-muted">{stage.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-<!-- =========================
-  SCOPED STYLES
-========================= -->
-` }} />
-    </>
+      <section className="bg-[#051C2C] px-4 py-14 text-white md:py-20">
+        <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Implementation evidence</p>
+            <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] md:text-[42px]">
+              The roadmap should produce a buildable next step, not just recommendations.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-white/72">
+              Strategy work should clarify what to build first, what value it should prove, what risks need controls, and what expansion depends on.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {roadmapArtifacts.map((artifact) => (
+              <p key={artifact} className="rounded-lg border border-white/14 bg-white/[0.06] px-4 py-3 text-sm font-semibold leading-6 text-white/84">
+                {artifact}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Where this matters"
+            title="Strategy should point directly into the services buyers can act on."
+            description="The goal is to identify the right starting point: voice, agents, chat, marketing automation, custom software, or managed operations."
+          />
+          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+            {serviceOffers.slice(0, 6).map((service) => (
+              <Link key={service.href} href={service.href} className="group rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1db993]/45">
+                <h2 className="text-xl font-extrabold leading-tight text-ink">{service.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{service.description}</p>
+                <span className="mt-5 inline-flex text-sm font-extrabold text-[#167f65]">
+                  View service <span className="ml-1 transition-transform group-hover:translate-x-1" aria-hidden="true">-&gt;</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Related capabilities"
+            title="Strategy depends on safety, integrations, measurement, architecture, and adoption."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {relatedPillars.slice(0, 5).map((pillar) => (
+              <Link key={pillar.href} href={pillar.href} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1db993]/45">
+                <h2 className="text-lg font-extrabold leading-tight text-ink">{pillar.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{pillar.description}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <AssessmentCTA sourcePage="/capabilities/technology-strategy-ai-enablement" ctaLocation="technology_strategy_assessment" />
+    </div>
   );
 }

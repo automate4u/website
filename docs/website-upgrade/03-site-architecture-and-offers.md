@@ -6,12 +6,28 @@ The site should guide visitors from clear pain to a high-value assessment, while
 
 Primary navigation:
 
-- AI Voice
-- AI Agents
-- Industry Accelerators
-- Process
-- Case Studies
-- Free AI Assessment
+- Services
+- Industries
+- How We Build
+- About
+- Contact
+- Get Free Assessment
+
+Use three clear layers:
+
+1. **Services**
+   - What buyers can purchase from Automate4U.
+   - Examples: AI Voice Agents, AI Agents & Workflow Automation, AI Chat & Customer Messaging, Marketing Automation & Content Agents, AI Operations Strategy, Managed AI Operations, and Custom AI Software.
+
+2. **Industries**
+   - Where those services are applied.
+   - Examples: Manufacturing, Education & Childcare, Home Services, Professional Services, Retail & Ecommerce, Healthcare, Real Estate, Financial Services, Hospitality, and Technology & Media.
+
+3. **How We Build**
+   - The trust and delivery capability layer.
+   - Examples: Security, Monitoring & AI Safety; Data & Integrations; Operational Intelligence & Value Realization; Workflow & Systems Architecture; Staff Training & Adoption; Technology Strategy & Enablement.
+
+`Solutions` should remain contextual for now. Specific implementations such as Daycare Voice Agent should be linked from relevant service and industry pages, not promoted as a primary top-nav item until the solution library is large enough.
 
 The header CTA should consistently point to the Free AI Workflow Assessment using this button label:
 
@@ -74,6 +90,16 @@ Recommended homepage flow:
 
 ## Core Service Pages
 
+Core service pages should be commercially clear. They should answer:
+
+- What business problem this solves.
+- What workflows it can handle.
+- What systems it connects to.
+- Where humans stay in control.
+- What implementation looks like.
+- What affects budget.
+- Which trust capabilities make the service safe and reliable.
+
 ### AI Voice
 
 The flagship page.
@@ -88,6 +114,12 @@ Should include:
 - KPI examples.
 - Free assessment CTA.
 
+Current status:
+
+- The AI Voice page largely matches the intended service model.
+- It should not be substantially changed without cofounder review because the current page flow was influenced by cofounder direction.
+- Potential future refinements are documented in `18-services-and-capabilities-plan.md`.
+
 ### AI Agents
 
 Should cover chat, email, internal agents, and workflow agents.
@@ -100,6 +132,30 @@ Examples:
 - CRM update agent.
 - Marketing content production agent.
 - Reporting and admin agent.
+
+### How We Build / Capabilities
+
+Capabilities should not compete with services. They should prove delivery quality.
+
+The `Capabilities` section should be reframed as **How We Build** or **Trust & Capabilities**.
+
+Each capability page should show:
+
+- Why the capability matters.
+- Where it appears in real projects.
+- What Automate4U actually builds or configures.
+- How it reduces buyer risk.
+- What artifacts the client receives.
+- Which services depend on it.
+
+Security should remain highly visible:
+
+- Top navigation under How We Build.
+- Footer.
+- Homepage trust section.
+- AI Voice page trust strip.
+- Every service page capability strip.
+- Relevant Industry Accelerator pages.
 
 ### Industry Accelerators
 
@@ -273,3 +329,4 @@ Recommended approach:
 - `06-technical-remediation.md`: metadata, routing, and technical implementation.
 - `13-smb-spend-confidence-strategy.md`: reducing SMB spend anxiety.
 - `16-cta-lead-routing-analytics-and-pricing.md`: CTA labels, lead routing, analytics, and pricing.
+- `18-services-and-capabilities-plan.md`: detailed Services vs How We Build taxonomy and implementation plan.

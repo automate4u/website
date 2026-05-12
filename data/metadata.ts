@@ -7,15 +7,15 @@ export type RouteMetadata = {
 export const routeMetadata: RouteMetadata[] = [
   {
     path: "/capabilities",
-    title: "AI Automation Capabilities | Automate4U",
+    title: "How We Build Reliable AI Automation | Automate4U",
     description:
-      "Explore Automate4U capabilities across AI agents, voice, chat, workflow automation, integrations, strategy, security, and operational intelligence.",
+      "See how Automate4U builds reliable AI automation with security, monitoring, integrations, operational intelligence, staff adoption, and practical governance.",
   },
   {
     path: "/industries",
     title: "AI Industry Accelerators | Automate4U",
     description:
-      "Explore Automate4U Industry Accelerators for home services, manufacturing, retail ecommerce, professional services, healthcare, and real estate.",
+      "Explore Automate4U Industry Accelerators for manufacturing, education, home services, professional services, retail ecommerce, healthcare, real estate, financial services, hospitality, and technology teams.",
   },
   {
     path: "/solutions",
@@ -55,9 +55,9 @@ export const routeMetadata: RouteMetadata[] = [
   },
   {
     path: "/capabilities/custom-software-ai-solutions",
-    title: "Custom AI Software Solutions | Automate4U",
+    title: "Workflow and Systems Architecture | Automate4U",
     description:
-      "Custom AI software and automation systems for teams that need tailored workflows, integrations, and business-specific AI tools.",
+      "Workflow and systems architecture for AI automation projects that need clear process design, handoffs, integrations, internal tools, and support boundaries.",
   },
   {
     path: "/capabilities/data-integrations-infrastructure",

@@ -5,7 +5,10 @@ export type IndustryAcceleratorSlug =
   | "retail-ecommerce"
   | "professional-services"
   | "healthcare"
-  | "real-estate";
+  | "real-estate"
+  | "financial-services"
+  | "hospitality"
+  | "technology-media";
 
 export interface IndustryAcceleratorSummary {
   slug: IndustryAcceleratorSlug;
@@ -87,5 +90,35 @@ export const industryAccelerators: IndustryAcceleratorSummary[] = [
       "AI voice, chat, and follow-up workflows for real estate lead response, qualification, booking, and CRM updates.",
     primaryKpi: "Speed to lead improved",
     commonWorkflows: ["Lead qualification", "Showing booking", "CRM update", "Follow-up"],
+  },
+  {
+    slug: "financial-services",
+    href: "/industries/financial-services",
+    title: "Financial Services Operations",
+    metaTitle: "AI Intake Automation for Financial Services | Automate4U",
+    metaDescription:
+      "AI-assisted intake, document workflows, support routing, human review, and traceable escalation for financial service teams.",
+    primaryKpi: "Intake and support cycle time reduced",
+    commonWorkflows: ["Client intake", "Document follow-up", "Support routing", "Advisor handoff"],
+  },
+  {
+    slug: "hospitality",
+    href: "/industries/hospitality",
+    title: "Hospitality Guest Response",
+    metaTitle: "AI Guest Response Automation for Hospitality | Automate4U",
+    metaDescription:
+      "AI voice, chat, booking support, guest response, request routing, review workflows, and operations automation for hospitality teams.",
+    primaryKpi: "Guest response speed improved",
+    commonWorkflows: ["Booking questions", "Guest requests", "Review follow-up", "Staff routing"],
+  },
+  {
+    slug: "technology-media",
+    href: "/industries/technology-media",
+    title: "Technology & Media Operations",
+    metaTitle: "AI Workflow Automation for Technology and Media | Automate4U",
+    metaDescription:
+      "AI workflow automation for support triage, content operations, customer response, reporting, and internal routing for technology and media teams.",
+    primaryKpi: "Content and support backlog reduced",
+    commonWorkflows: ["Support triage", "Content workflow", "Customer updates", "Reporting"],
   },
 ];

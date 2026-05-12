@@ -18,40 +18,7 @@ const industryImages: Record<string, string> = {
   "technology-media": "/images/industries/tech.jpg",
 };
 
-const legacyIndustries = [
-  {
-    slug: "financial-services",
-    href: "/industries/financial-services",
-    title: "Financial Services Operations",
-    metaDescription:
-      "AI-assisted intake, document workflows, support routing, and human-controlled escalation for financial service teams.",
-    primaryKpi: "Intake and support cycle time reduced",
-    commonWorkflows: ["Client intake", "Document follow-up", "Support routing", "Advisor handoff"],
-  },
-  {
-    slug: "hospitality",
-    href: "/industries/hospitality",
-    title: "Hospitality Guest Response",
-    metaDescription:
-      "AI voice, chat, booking, guest response, and operations workflows for hospitality businesses that need faster service without losing warmth.",
-    primaryKpi: "Guest response speed improved",
-    commonWorkflows: ["Booking questions", "Guest requests", "Follow-up", "Staff routing"],
-  },
-  {
-    slug: "technology-media",
-    href: "/industries/technology-media",
-    title: "Technology & Media Operations",
-    metaDescription:
-      "AI automation for content operations, customer response, metadata, support routing, reporting, and internal team workflows.",
-    primaryKpi: "Content and support backlog reduced",
-    commonWorkflows: ["Content workflow", "Support triage", "Customer updates", "Reporting"],
-  },
-];
-
-const industryCards = [
-  ...industryAccelerators,
-  ...legacyIndustries,
-].sort((a, b) => a.title.localeCompare(b.title));
+const industryCards = [...industryAccelerators].sort((a, b) => a.title.localeCompare(b.title));
 
 const operatingPatterns = [
   {

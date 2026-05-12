@@ -1,233 +1,273 @@
-import React from 'react';
+import Link from "next/link";
+import AssessmentCTA from "@/components/sections/AssessmentCTA";
+import SectionHeader from "@/components/sections/SectionHeader";
+import { howWeBuildPillars } from "@/data/how-we-build";
+import { serviceOffers } from "@/data/service-offers";
 
-export default function Page() {
+const integrationProblems = [
+  {
+    title: "The answer lives outside the conversation",
+    text: "Customers ask simple questions, but the useful answer may sit in a CRM, calendar, ERP, inventory file, order tracker, document folder, or internal spreadsheet.",
+  },
+  {
+    title: "Staff bridge systems by hand",
+    text: "Teams waste time copying details between inboxes, forms, calendars, CRMs, spreadsheets, and task systems just to keep operations moving.",
+  },
+  {
+    title: "AI cannot act without context",
+    text: "A voice, chat, or email agent becomes much more useful when it can read approved data, create records, trigger workflows, and route exceptions.",
+  },
+  {
+    title: "Failed syncs create silent risk",
+    text: "Good automation needs retries, error handling, fallback paths, and visibility when a downstream system does not accept an update.",
+  },
+];
+
+const connectionLayers = [
+  {
+    label: "Approved sources",
+    detail: "CRM, calendar, email, forms, documents, ERP, inventory, ecommerce, helpdesk, database, or policy records.",
+  },
+  {
+    label: "Structured action",
+    detail: "Create a lead, book an appointment, update a ticket, draft a quote task, send a follow-up, or log a KPI event.",
+  },
+  {
+    label: "System of record",
+    detail: "Decide where each field belongs so automation strengthens the source of truth instead of creating another data silo.",
+  },
+  {
+    label: "Failure handling",
+    detail: "Retries, alerts, human review, conflict resolution, and manual fallback paths when an integration fails.",
+  },
+];
+
+const integrationPatterns = [
+  {
+    title: "Voice to CRM and calendar",
+    flow: ["Call captured", "Intent classified", "CRM record updated", "Calendar booking created", "Confirmation sent"],
+  },
+  {
+    title: "Email to quote workflow",
+    flow: ["Email parsed", "Customer matched", "Parts or service details extracted", "Quote task created", "Sales team notified"],
+  },
+  {
+    title: "Support chat to helpdesk",
+    flow: ["Question answered", "Exception detected", "Ticket created", "Transcript attached", "SLA event logged"],
+  },
+  {
+    title: "Ecommerce support to operations",
+    flow: ["Order checked", "Return or product question routed", "Customer follow-up sent", "Issue tagged", "Report updated"],
+  },
+];
+
+const deliverables = [
+  "Current-system inventory",
+  "Integration and data-flow map",
+  "System-of-record decisions",
+  "Field mapping and transformation notes",
+  "Retry and failure-handling plan",
+  "Launch monitoring checklist",
+];
+
+const systems = [
+  {
+    title: "Customer systems",
+    items: ["HubSpot", "Salesforce", "Pipedrive", "GoHighLevel", "Helpdesks", "Support inboxes"],
+  },
+  {
+    title: "Operations systems",
+    items: ["Calendars", "Forms", "Spreadsheets", "ERPs", "Inventory data", "Databases"],
+  },
+  {
+    title: "Communication systems",
+    items: ["Email", "SMS", "WhatsApp", "Voice platforms", "Team notifications", "Internal task tools"],
+  },
+  {
+    title: "AI and automation layer",
+    items: ["Retell", "Botpress", "OpenAI", "Make", "n8n", "Custom APIs"],
+  },
+];
+
+const relatedPillars = howWeBuildPillars.filter(
+  (pillar) => pillar.href !== "/capabilities/data-integrations-infrastructure"
+);
+
+export default function DataIntegrationsInfrastructurePage() {
   return (
-    <>
-      <style dangerouslySetInnerHTML={{ __html: `
-.hs-pro-scope{display:block}.hs-pro-scope *{box-sizing:border-box}.hs-pro-scope{--ink:#0e1520;--muted:#6a7786;--accent:#1db993;--accent-2:#159a78;--bg:#fff;--panel:#f7f9fb;--border:#e5edf2;--pill:#e9f9f3;--radius:18px}.hs-pro-scope .hs-container{max-width:1120px;margin:0 auto;padding:0 20px}.hs-pro-scope .hs-h1{margin:8px 0;font-size:40px;line-height:1.08;letter-spacing:-.01em;font-weight:700}.hs-pro-scope .hs-h2{margin:10px 0 6px;font-size:28px;line-height:1.15;letter-spacing:-.01em;font-weight:700}.hs-pro-scope .hs-h3{margin:0 0 6px;font-size:1.05rem;font-weight:600}.hs-pro-scope .hs-h4{margin:0 0 6px;font-size:1rem;font-weight:600}.hs-pro-scope .hs-p{margin:0 0 8px;color:var(--ink)}.hs-pro-scope .hs-lead{color:var(--muted);max-width:75ch;margin:0 0 12px}.hs-pro-scope .hs-btn{display:inline-flex;align-items:center;gap:.55rem;padding:.7rem 1rem;border-radius:999px;font-weight:600;text-decoration:none;border:1px solid transparent}.hs-pro-scope .hs-primary{background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 8px 22px rgba(29,185,147,.18)}.hs-pro-scope .hs-primary:hover{filter:brightness(.98)}.hs-pro-scope .hs-head{background:var(--bg);padding:48px 0 28px}.hs-pro-scope .hs-head-grid{display:grid;gap:40px;align-items:center}.hs-pro-scope .hs-head-content{max-width:100%}.hs-pro-scope .hs-head-image{display:none}.hs-pro-scope .hs-head-image img{width:100%;height:auto;border-radius:var(--radius);box-shadow:0 4px 20px rgba(0,0,0,.08)}@media (min-width:920px){.hs-pro-scope .hs-head-grid{grid-template-columns:1fr 1fr}.hs-pro-scope .hs-head-image{display:block}.hs-pro-scope .hs-h1{font-size:48px}.hs-pro-scope .hs-h2{font-size:32px}}.hs-pro-scope .hs-meta-list{display:flex;gap:10px 12px;flex-wrap:wrap;margin:12px 0 0;padding:0;list-style:none}.hs-pro-scope .hs-meta-list li{background:#eef5f8;color:#415467;border:1px solid var(--border);border-radius:999px;padding:.28rem .6rem;font-weight:600;font-size:.8rem}.hs-pro-scope .hs-dynamics{background:#fff;padding:22px 0 14px}.hs-pro-scope .hs-columns{display:grid;gap:24px;margin-top:16px}.hs-pro-scope .hs-panel{background:transparent;border:none;padding:0}.hs-pro-scope .hs-list{margin:8px 0 0;padding-left:20px;color:var(--ink);list-style:disc}.hs-pro-scope .hs-list li{margin:8px 0;line-height:1.5}@media (min-width:880px){.hs-pro-scope .hs-columns{grid-template-columns:repeat(3,1fr)}.hs-pro-scope .hs-case-grid{grid-template-columns:repeat(3,1fr)}}
-.hs-pro-scope .hs-capabilities{background:#fff;padding:28px 0}.hs-pro-scope .hs-cap-accordion{margin-top:16px;border-top:1px solid var(--border)}.hs-pro-scope .hs-cap-detail{border-bottom:1px solid var(--border)}.hs-pro-scope .hs-cap-summary{display:flex;align-items:center;gap:16px;padding:20px 0;cursor:pointer;list-style:none;user-select:none}.hs-pro-scope .hs-cap-summary::-webkit-details-marker{display:none}.hs-pro-scope .hs-cap-title{font-size:1.15rem;font-weight:600;color:var(--ink)}.hs-pro-scope .hs-cap-icon{width:24px;height:24px;position:relative;flex-shrink:0}.hs-pro-scope .hs-cap-icon::before,.hs-pro-scope .hs-cap-icon::after{content:'';position:absolute;background:var(--ink);transition:transform .3s ease}.hs-pro-scope .hs-cap-icon::before{width:16px;height:2px;top:50%;left:50%;transform:translate(-50%,-50%)}.hs-pro-scope .hs-cap-icon::after{width:2px;height:16px;top:50%;left:50%;transform:translate(-50%,-50%)}.hs-pro-scope .hs-cap-detail[open] .hs-cap-icon::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}.hs-pro-scope .hs-cap-content{padding:0 0 24px;max-width:900px}.hs-pro-scope .hs-bullets{margin:12px 0 0;padding-left:20px;color:var(--ink);list-style:disc}.hs-pro-scope .hs-bullets li{margin:8px 0;line-height:1.5}.hs-pro-scope .hs-cases{background:#fff;padding:26px 0}.hs-pro-scope .hs-case-grid{display:grid;gap:24px;margin-top:16px}.hs-pro-scope .hs-case{background:transparent;border:none;padding:0}.hs-pro-scope .hs-contact{background:#fff;padding:26px 0 34px}.hs-pro-scope .hs-form{max-width:880px;margin:10px auto 0}.hs-pro-scope .hs-form-grid{display:grid;gap:12px}.hs-pro-scope .hs-field{display:grid;gap:6px}.hs-pro-scope .hs-field--full{grid-column:1/-1}.hs-pro-scope .hs-label{font-weight:600;color:#16212b}.hs-pro-scope input,.hs-pro-scope select,.hs-pro-scope textarea{width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:#fff;color:#0f1520}.hs-pro-scope .hs-actions{margin-top:12px;display:flex;gap:12px;align-items:center}.hs-pro-scope .hs-small{margin:0;color:var(--muted);font-size:.9rem}.hs-pro-scope .hs-foot{background:#fff;padding:12px 0 36px;text-align:center}.hs-pro-scope .hs-mark{display:inline-flex;align-items:center;gap:8px;color:#365160;background:var(--pill);padding:.36rem .62rem;border-radius:999px;font-weight:600;font-size:.84rem}
-` }} />
-      <div dangerouslySetInnerHTML={{ __html: `<div class="hs-pro-scope" data-capability="data-integrations">
-
-    <!-- ================= HEADER / OVERVIEW ================= -->
-    <section class="hs-head" aria-labelledby="hs-head-title">
-        <div class="hs-container">
-            <div class="hs-head-grid">
-                <div class="hs-head-content">
-                    <h1 id="hs-head-title" class="hs-h1">Data, Integrations & Infrastructure</h1>
-                    <p class="hs-lead">
-                        We make your tools and data work together so AI can do its job.
-                        From data migration to API orchestration, we connect disconnected systems
-                        and build the infrastructure that makes automation and AI possible.
-                    </p>
-                    <ul class="hs-meta-list" aria-label="What we connect">
-                        <li>Data Migration</li>
-                        <li>API Integration</li>
-                        <li>Platform Connections</li>
-                        <li>AI Infrastructure</li>
-                    </ul>
-                </div>
-                <div class="hs-head-image">
-                    <img src="/images/capabilities/database.jpg"
-                        alt="Data integrations and infrastructure" />
-                </div>
+    <div className="min-h-screen bg-white">
+      <section className="bg-[#051C2C] px-4 py-12 text-white md:py-[72px]">
+        <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <div>
+            <p className="mb-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">
+              Data & Integrations
+            </p>
+            <h1 className="max-w-[760px] text-[36px] font-extrabold leading-[1.06] tracking-[-0.02em] md:text-[54px]">
+              Connect AI to the systems that actually run the business.
+            </h1>
+            <p className="mt-5 max-w-[690px] text-base leading-8 text-white/74 md:text-[17px]">
+              Useful AI needs approved context and reliable handoffs. We connect voice, chat, email, and workflow agents to CRMs, calendars, documents, databases, reporting, and operational systems so automation can create real business outcomes.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="#contact" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
+                Get Free Assessment
+              </Link>
+              <Link href="/capabilities" className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb]">
+                How We Build
+              </Link>
             </div>
-        </div>
-    </section>
+          </div>
 
-    <!-- ================= PROBLEMS WE SOLVE ================= -->
-    <section class="hs-dynamics" aria-labelledby="hs-dyn-title">
-        <div class="hs-container">
-            <h2 id="hs-dyn-title" class="hs-h2">Problems we solve</h2>
-
-            <div class="hs-columns">
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Data silos</h3>
-                    <ul class="hs-list">
-                        <li>Data living in multiple tools without a single source of truth.</li>
-                        <li>Manual exporting/importing between systems (CSV hell).</li>
-                        <li>Inconsistent data across platforms.</li>
-                    </ul>
-                </article>
-
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Integration bottlenecks</h3>
-                    <ul class="hs-list">
-                        <li>APIs that are underused, misconfigured, or not documented.</li>
-                        <li>No clear integration strategy or architecture.</li>
-                        <li>Integration work blocking AI and automation projects.</li>
-                    </ul>
-                </article>
-
-                <article class="hs-panel">
-                    <h3 class="hs-h3">Infrastructure gaps</h3>
-                    <ul class="hs-list">
-                        <li>No reliable deployment pipeline for AI systems.</li>
-                        <li>Performance and reliability concerns.</li>
-                        <li>Lack of observability and monitoring.</li>
-                    </ul>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= CAPABILITIES ================= -->
-    <section class="hs-capabilities" aria-labelledby="hs-cap-title">
-        <div class="hs-container">
-            <h2 id="hs-cap-title" class="hs-h2">What we deliver</h2>
-
-            <div class="hs-cap-accordion">
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Data Migration & Preparation</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Data cleansing, normalization, transformation, and migration for one-time moves or ongoing sync.</p>
-                        <ul class="hs-bullets">
-                            <li>Data cleansing and quality improvement</li>
-                            <li>Format transformation and normalization</li>
-                            <li>One-time migrations and ongoing synchronization</li>
-                        </ul>
-                    </div>
-                </details>
-
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">API & Integration Expertise</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Designing, consuming, and orchestrating APIs with event-based and scheduled integrations.</p>
-                        <ul class="hs-bullets">
-                            <li>RESTful and GraphQL API design and implementation</li>
-                            <li>Event-driven architecture and webhooks</li>
-                            <li>Scheduled sync and batch processing</li>
-                        </ul>
-                    </div>
-                </details>
-
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Platform Integrations</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Deep expertise connecting CRMs, ERPs, HRIS, cloud platforms, communication tools, and AI services.</p>
-                        <ul class="hs-bullets">
-                            <li>CRMs: Salesforce, HubSpot, Pipedrive</li>
-                            <li>ERPs & HRIS: SAP, PeopleSoft, Workday</li>
-                            <li>Cloud: AWS, GCP, Firebase, Vercel, Render</li>
-                            <li>Comms: Slack, Twilio, SendGrid, Microsoft Teams</li>
-                            <li>AI: OpenAI, Anthropic, Amazon Connect, ElevenLabs</li>
-                            <li>Payments: Stripe, PayPal</li>
-                            <li>Monitoring: Sentry, Skylight, Datadog</li>
-                        </ul>
-                    </div>
-                </details>
-
-                <details class="hs-cap-detail">
-                    <summary class="hs-cap-summary">
-                        <span class="hs-cap-icon" aria-hidden="true"></span>
-                        <span class="hs-cap-title">Infrastructure for AI & Automation</span>
-                    </summary>
-                    <div class="hs-cap-content">
-                        <p class="hs-p">Deployment pipelines, observability, logging, and performance tuning for AI systems.</p>
-                        <ul class="hs-bullets">
-                            <li>CI/CD pipelines and environment management</li>
-                            <li>Containerization with Docker and Kubernetes</li>
-                            <li>Monitoring, logging, and alerting</li>
-                        </ul>
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= EXAMPLE INTEGRATIONS ================= -->
-    <section class="hs-cases" aria-labelledby="hs-cases-title">
-        <div class="hs-container">
-            <h2 id="hs-cases-title" class="hs-h2">Example integration stories</h2>
-
-            <div class="hs-case-grid">
-                <article class="hs-case">
-                    <h3 class="hs-h4">CRM + Phone + Calendar</h3>
-                    <ul class="hs-list">
-                        <li>AI voice agent answers calls and qualifies leads</li>
-                        <li>Creates CRM records and books calendar appointments</li>
-                        <li>Sends confirmation emails and SMS reminders</li>
-                    </ul>
-                </article>
-
-                <article class="hs-case">
-                    <h3 class="hs-h4">ERP + Document Processing</h3>
-                    <ul class="hs-list">
-                        <li>Invoices extracted from email and PDFs</li>
-                        <li>Data validated and posted to ERP</li>
-                        <li>Exceptions routed to accounting team</li>
-                    </ul>
-                </article>
-
-                <article class="hs-case">
-                    <h3 class="hs-h4">Multi-Platform Data Sync</h3>
-                    <ul class="hs-list">
-                        <li>Customer data synced across CRM, support, and billing</li>
-                        <li>Real-time updates via webhooks</li>
-                        <li>Conflict resolution and audit logging</li>
-                    </ul>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= CONTACT ================= -->
-    <section id="hs-contact" class="hs-contact" aria-labelledby="hs-contact-title">
-        <div class="hs-container">
-            <h2 id="hs-contact-title" class="hs-h2">Review your integrations with us</h2>
-
-            <form class="hs-form" action="https://formspree.io/f/xzzjvgkw" method="post">
-                <div class="hs-form-grid">
-                    <label class="hs-field">
-                        <span class="hs-label">Work email</span>
-                        <input type="email" name="email" required placeholder="you@company.com"
-                            autocomplete="email">
-                    </label>
-                    <label class="hs-field">
-                        <span class="hs-label">Company</span>
-                        <input type="text" name="company" required placeholder="Your company name">
-                    </label>
-                    <label class="hs-field hs-field--full">
-                        <span class="hs-label">What systems need to connect?</span>
-                        <textarea name="focus" rows="4"
-                            placeholder="e.g., CRM + phone system; ERP + document processing; data migration from legacy system"></textarea>
-                    </label>
-                    <input type="hidden" name="capability" value="Data, Integrations & Infrastructure">
+          <div className="rounded-lg border border-white/12 bg-white/[0.07] p-5 shadow-[0_18px_55px_rgba(0,0,0,0.20)]">
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Integration model</p>
+            <div className="mt-5 grid gap-3">
+              {connectionLayers.map((layer, index) => (
+                <div key={layer.label} className="grid gap-3 rounded-lg border border-white/10 bg-[#0d1720]/70 p-4 sm:grid-cols-[auto_1fr] sm:items-start">
+                  <div className="grid h-9 w-9 place-items-center rounded-full bg-[#1db993] text-sm font-extrabold text-[#05251d]">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <h2 className="font-extrabold text-white">{layer.label}</h2>
+                    <p className="mt-1 text-sm leading-6 text-white/68">{layer.detail}</p>
+                  </div>
                 </div>
-                <div class="hs-actions">
-                    <button class="hs-btn hs-primary" type="submit">
-                        Submit
-                    </button>
-                    <p class="hs-small">We'll reply with a short agenda and proposed next steps.</p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Buyer concerns"
+            title="AI projects stall when the systems underneath are disconnected."
+            description="The hard part is rarely just generating a response. The real value comes when the right information is read, the right record is updated, and the right person is notified when the workflow needs judgment."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            {integrationProblems.map((problem) => (
+              <article key={problem.title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <h2 className="text-xl font-extrabold leading-tight text-ink">{problem.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{problem.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Common patterns"
+            title="Every integration should turn an AI interaction into a clean operational handoff."
+            description="The first version does not need to connect every system. It should connect the minimum systems required to make one workflow useful, measurable, and safe."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            {integrationPatterns.map((pattern) => (
+              <article key={pattern.title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <h2 className="text-xl font-extrabold leading-tight text-ink">{pattern.title}</h2>
+                <div className="mt-5 grid gap-3">
+                  {pattern.flow.map((step, index) => (
+                    <div key={step} className="grid gap-3 rounded-lg bg-[#f8fbfa] px-4 py-3 sm:grid-cols-[auto_1fr] sm:items-center">
+                      <span className="grid h-8 w-8 place-items-center rounded-full bg-[#1db993] text-xs font-extrabold text-[#05251d]">{index + 1}</span>
+                      <span className="text-sm font-semibold leading-6 text-muted">{step}</span>
+                    </div>
+                  ))}
                 </div>
-            </form>
+              </article>
+            ))}
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- ================= FOOTER TAG ================= -->
-    <section class="hs-foot" aria-hidden="true">
-        <div class="hs-container">
-            <span class="hs-mark">
-                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                    <circle cx="12" cy="12" r="9" fill="#1db993" />
-                </svg>
-                Automate4U — Data, Integrations & Infrastructure
-            </span>
+      <section className="bg-white px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="System map"
+            title="We design around the tools your team already depends on."
+            description="A good integration plan names the approved systems, the direction of data flow, the fields that matter, the failure cases, and the source of truth for each workflow."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {systems.map((group) => (
+              <article key={group.title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <h2 className="text-lg font-extrabold text-ink">{group.title}</h2>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <span key={item} className="rounded-full bg-[#e9f9f3] px-3 py-1 text-xs font-bold text-[#167f65]">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
-    </section>
-</div>
+      </section>
 
+      <section className="bg-[#051C2C] px-4 py-14 text-white md:py-20">
+        <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Implementation evidence</p>
+            <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] md:text-[42px]">
+              Clients should know where data comes from, where it goes, and what happens when it fails.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-white/72">
+              This is how AI moves from impressive demo to operational system. We define the handoff points, field mappings, source-of-truth decisions, monitoring signals, and failure paths before expanding automation.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {deliverables.map((deliverable) => (
+              <p key={deliverable} className="rounded-lg border border-white/14 bg-white/[0.06] px-4 py-3 text-sm font-semibold leading-6 text-white/84">
+                {deliverable}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
 
-` }} />
-    </>
+      <section className="bg-white px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Where this matters"
+            title="Every service becomes stronger when the integration path is clear."
+            description="Voice, chat, agents, marketing workflows, strategy, and custom software all depend on approved data sources and reliable operational handoffs."
+          />
+          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+            {serviceOffers.slice(0, 6).map((service) => (
+              <Link
+                key={service.href}
+                href={service.href}
+                className="group rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1db993]/45 hover:shadow-[0_16px_38px_rgba(15,23,32,0.08)]"
+              >
+                <h2 className="text-xl font-extrabold leading-tight text-ink">{service.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{service.description}</p>
+                <span className="mt-5 inline-flex text-sm font-extrabold text-[#167f65]">
+                  View service <span className="ml-1 transition-transform group-hover:translate-x-1" aria-hidden="true">-&gt;</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Related capabilities"
+            title="Reliable integrations need safety, measurement, adoption, and ongoing operations."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {relatedPillars.slice(0, 5).map((pillar) => (
+              <Link key={pillar.href} href={pillar.href} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1db993]/45">
+                <h2 className="text-lg font-extrabold leading-tight text-ink">{pillar.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{pillar.description}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <AssessmentCTA sourcePage="/capabilities/data-integrations-infrastructure" ctaLocation="data_integrations_assessment" />
+    </div>
   );
 }

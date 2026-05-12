@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { howWeBuildPillars } from "@/data/how-we-build";
+import { serviceOffers } from "@/data/service-offers";
 
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -31,6 +33,11 @@ export default function Header() {
     }, []);
 
     const menus = {
+        services: serviceOffers.map((item) => ({
+            name: item.title,
+            href: item.href,
+            description: item.description,
+        })),
         industries: [
             { name: "Financial Services", href: "/industries/financial-services" },
             { name: "Education & Childcare", href: "/industries/education-childcare" },
@@ -43,16 +50,12 @@ export default function Header() {
             { name: "Professional Services", href: "/industries/professional-services" },
             { name: "Real Estate", href: "/industries/real-estate" },
         ],
-        capabilities: [
-            { name: "AI Agents & Automation", href: "/capabilities/ai-agents-workflow-automation" },
-            { name: "AI Voice & Chat", href: "/capabilities/ai-voice-chat-experiences" },
-            { name: "Custom Software", href: "/capabilities/custom-software-ai-solutions" },
-            { name: "Data & Integrations", href: "/capabilities/data-integrations-infrastructure" },
-            { name: "Operational Intelligence", href: "/capabilities/operational-intelligence-analytics" },
-            { name: "Security & Safety", href: "/capabilities/security-monitoring-ai-safety" },
-            { name: "Strategy & Enablement", href: "/capabilities/technology-strategy-ai-enablement" },
-            { name: "Training & Mastery", href: "/capabilities/training-prompting-ai-mastery" },
-            { name: "Marketing Automation", href: "/capabilities/marketing-automation" },
+        howWeBuild: [
+            { name: "Overview", href: "/capabilities" },
+            ...howWeBuildPillars.map((item) => ({
+                name: item.shortTitle,
+                href: item.href,
+            })),
         ],
         about: [
             { name: "Overview", href: "/about/overview" },
@@ -87,6 +90,23 @@ export default function Header() {
 
                     <div className="group relative">
                         <button className="flex items-center gap-1 font-semibold text-ink hover:text-accent py-2">
+                            Services
+                            <svg className="w-4 h-4 transition-transform group-hover:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
+                        </button>
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2 w-[680px]">
+                            <div className="bg-white rounded-2xl shadow-xl border border-card-border p-6 grid grid-cols-2 gap-3">
+                                {menus.services.map((item) => (
+                                    <Link key={item.href} href={item.href} className="block rounded-lg px-3 py-3 transition-colors hover:bg-green-50">
+                                        <span className="block text-sm font-bold text-ink group-hover:text-accent">{item.name}</span>
+                                        <span className="mt-1 line-clamp-2 block text-xs leading-5 text-muted">{item.description}</span>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="group relative">
+                        <button className="flex items-center gap-1 font-semibold text-ink hover:text-accent py-2">
                             Industries
                             <svg className="w-4 h-4 transition-transform group-hover:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
                         </button>
@@ -103,12 +123,12 @@ export default function Header() {
 
                     <div className="group relative">
                         <button className="flex items-center gap-1 font-semibold text-ink hover:text-accent py-2">
-                            Capabilities
+                            How We Build
                             <svg className="w-4 h-4 transition-transform group-hover:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
                         </button>
                         <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2 w-[600px]">
                             <div className="bg-white rounded-2xl shadow-xl border border-card-border p-6 grid grid-cols-2 gap-x-8 gap-y-3">
-                                {menus.capabilities.map((item) => (
+                                {menus.howWeBuild.map((item) => (
                                     <Link key={item.href} href={item.href} className="block text-sm font-medium text-muted hover:text-accent hover:bg-green-50 px-3 py-2 rounded-lg transition-colors">
                                         {item.name}
                                     </Link>
@@ -165,6 +185,24 @@ export default function Header() {
                         {/* Industries Mobile */}
                         <div>
                             <button
+                                onClick={() => toggleMobileSection('services')}
+                                className="flex items-center justify-between w-full font-bold text-lg mb-3 text-ink"
+                            >
+                                Services
+                                <svg className={`w-5 h-5 transition-transform duration-200 ${expandedMobileSection === 'services' ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
+                            </button>
+                            <div className={`grid gap-3 pl-4 border-l-2 border-slate-100 overflow-hidden transition-all duration-300 ${expandedMobileSection === 'services' ? 'max-h-[620px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                                {menus.services.map((item) => (
+                                    <Link key={item.href} href={item.href} className="block text-muted py-1">
+                                        <span className="block font-semibold text-ink">{item.name}</span>
+                                        <span className="mt-1 block text-xs leading-5 text-muted">{item.description}</span>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div>
+                            <button
                                 onClick={() => toggleMobileSection('industries')}
                                 className="flex items-center justify-between w-full font-bold text-lg mb-3 text-ink"
                             >
@@ -180,17 +218,17 @@ export default function Header() {
                             </div>
                         </div>
 
-                        {/* Capabilities Mobile */}
+                        {/* How We Build Mobile */}
                         <div>
                             <button
-                                onClick={() => toggleMobileSection('capabilities')}
+                                onClick={() => toggleMobileSection('howWeBuild')}
                                 className="flex items-center justify-between w-full font-bold text-lg mb-3 text-ink"
                             >
-                                Capabilities
-                                <svg className={`w-5 h-5 transition-transform duration-200 ${expandedMobileSection === 'capabilities' ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
+                                How We Build
+                                <svg className={`w-5 h-5 transition-transform duration-200 ${expandedMobileSection === 'howWeBuild' ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
                             </button>
-                            <div className={`grid gap-2 pl-4 border-l-2 border-slate-100 overflow-hidden transition-all duration-300 ${expandedMobileSection === 'capabilities' ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                                {menus.capabilities.map((item) => (
+                            <div className={`grid gap-2 pl-4 border-l-2 border-slate-100 overflow-hidden transition-all duration-300 ${expandedMobileSection === 'howWeBuild' ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                                {menus.howWeBuild.map((item) => (
                                     <Link key={item.href} href={item.href} className="block text-muted py-1">
                                         {item.name}
                                     </Link>

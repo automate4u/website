@@ -8,6 +8,21 @@ const nextConfig: NextConfig = {
         destination: "/solutions/daycare-voice-agent",
         permanent: true,
       },
+      {
+        source: "/ai-voice",
+        destination: "/core-services/ai-voice",
+        permanent: true,
+      },
+      {
+        source: "/ai-agents",
+        destination: "/core-services/ai-agents",
+        permanent: true,
+      },
+      {
+        source: "/ai-chat",
+        destination: "/core-services/ai-chat",
+        permanent: true,
+      },
     ];
   },
 };

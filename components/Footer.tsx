@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import { howWeBuildPillars } from "@/data/how-we-build";
+import { serviceOffers } from "@/data/service-offers";
 
 export default function Footer() {
     return (
@@ -17,23 +19,21 @@ export default function Footer() {
                     </div>
 
                     <div>
-                        <h4 className="font-bold mb-4">Primary Offering</h4>
+                        <h4 className="font-bold mb-4">Services</h4>
                         <ul className="space-y-2 text-sm text-muted">
-                            <li><Link href="/core-services/ai-agents" className="hover:text-accent">AI Agents</Link></li>
-                            <li><Link href="/core-services/ai-chat" className="hover:text-accent">AI Chat</Link></li>
-                            <li><Link href="/core-services/ai-voice" className="hover:text-accent">AI Voice</Link></li>
-                            <li><Link href="/core-services/ai-transformation" className="hover:text-accent">AI Transformation</Link></li>
+                            {serviceOffers.slice(0, 5).map((service) => (
+                                <li key={service.href}><Link href={service.href} className="hover:text-accent">{service.shortTitle}</Link></li>
+                            ))}
                             <li className="pt-2"><Link href="/solutions" className="hover:text-accent font-semibold flex items-center gap-1">See solutions <span aria-hidden="true">&rarr;</span></Link></li>
                         </ul>
                     </div>
                     <div>
-                        <h4 className="font-bold mb-4">Full Capabilities</h4>
+                        <h4 className="font-bold mb-4">How We Build</h4>
                         <ul className="space-y-2 text-sm text-muted">
-                            <li><Link href="/capabilities/custom-software-ai-solutions" className="hover:text-accent">Custom AI Solutions</Link></li>
-                            <li><Link href="/capabilities/ai-agents-workflow-automation" className="hover:text-accent">AI Agents &amp; Automation</Link></li>
-                            <li><Link href="/capabilities/data-integrations-infrastructure" className="hover:text-accent">Data &amp; Integrations</Link></li>
-                            <li><Link href="/capabilities/technology-strategy-ai-enablement" className="hover:text-accent">Tech Strategy</Link></li>
-                            <li className="pt-2"><Link href="/capabilities" className="hover:text-accent font-semibold flex items-center gap-1">See all capabilities <span aria-hidden="true">&rarr;</span></Link></li>
+                            {howWeBuildPillars.slice(0, 5).map((pillar) => (
+                                <li key={pillar.href}><Link href={pillar.href} className="hover:text-accent">{pillar.shortTitle}</Link></li>
+                            ))}
+                            <li className="pt-2"><Link href="/capabilities" className="hover:text-accent font-semibold flex items-center gap-1">See how we build <span aria-hidden="true">&rarr;</span></Link></li>
                         </ul>
                     </div>
                     <div>

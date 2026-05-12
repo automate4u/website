@@ -52,14 +52,17 @@ Use these to shape pages, copy, CTAs, pricing, and proof:
 
 1. `02-positioning-strategy.md`
 2. `03-site-architecture-and-offers.md`
-3. `13-smb-spend-confidence-strategy.md`
-4. `14-labor-efficiency-and-human-redeployment.md`
-5. `16-cta-lead-routing-analytics-and-pricing.md`
-6. `17-pricing-transparency-and-cost-model.md`
+3. `18-services-and-capabilities-plan.md`
+4. `13-smb-spend-confidence-strategy.md`
+5. `14-labor-efficiency-and-human-redeployment.md`
+6. `16-cta-lead-routing-analytics-and-pricing.md`
+7. `17-pricing-transparency-and-cost-model.md`
 
 Purpose:
 
 - Keep AI Voice prominent without making the company voice-only.
+- Keep Services, Industries, and How We Build clearly separated.
+- Keep security and trust capabilities visible without confusing them with direct offers.
 - Keep the offer ladder clear.
 - Make spend feel staged, transparent, and practical.
 - Keep CTA, lead routing, analytics, scheduling, and pricing consistent.
@@ -104,8 +107,9 @@ Follow this practical sequence:
 3. Shared data/component contracts from `08-execution-contracts.md`.
 4. Homepage and AI Voice rebuild using `02`, `03`, `05`, `11`, `12`, and `16`.
 5. First Industry Accelerator and proof modules using `10`, `15`, and `17`.
-6. Conversion tracking, HubSpot/Resend/Calendly, and Playwright tests using `06`, `08`, `09`, and `16`.
-7. Incremental migration of remaining pages.
+6. Services and capabilities taxonomy/rebuild using `03`, `04`, `08`, `11`, and `18`.
+7. Conversion tracking, HubSpot/Resend/Calendly, and Playwright tests using `06`, `08`, `09`, and `16`.
+8. Incremental migration of remaining pages.
 
 ## First Implementation Milestone
 
@@ -153,6 +157,7 @@ Milestone 1 should ship:
 - The CTA is "Get Free Assessment"; the offer is "Free AI Workflow Assessment"; paid follow-ons are the AI Blueprint Sprint or pilot project.
 - Labor savings should be framed as automating repetitive hours and redeploying humans to higher-value work, not careless employee replacement.
 - Governance and human handoff are part of the sales story.
+- Direct services should be easy to find. Capabilities should prove how Automate4U builds safely, securely, and reliably.
 - A broken assessment form is a deployment blocker.
 
 ## Anti-Overbuild Rule
