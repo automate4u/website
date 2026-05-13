@@ -23,6 +23,21 @@ const nextConfig: NextConfig = {
         destination: "/core-services/ai-chat",
         permanent: true,
       },
+      {
+        source: "/capabilities/ai-agents-workflow-automation",
+        destination: "/core-services/ai-agents",
+        permanent: true,
+      },
+      {
+        source: "/capabilities/ai-voice-chat-experiences",
+        destination: "/core-services/ai-voice",
+        permanent: true,
+      },
+      {
+        source: "/capabilities/marketing-automation",
+        destination: "/core-services/marketing-automation",
+        permanent: true,
+      },
     ];
   },
 };

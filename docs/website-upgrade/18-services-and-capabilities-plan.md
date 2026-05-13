@@ -128,6 +128,60 @@ Every service page should answer these buyer questions:
    - Link to relevant `How We Build` pages.
    - Every service page should show a trust strip or section featuring Security, Integrations, Monitoring, Analytics, and Training/Adoption.
 
+## Flexible Service-Specific Sales Assets
+
+Service pages can share a consistent strategic structure, but they should not feel like cloned templates. Each direct service page needs a flexible proof stack that makes the offer tangible and helps a buyer picture the system in their own business.
+
+The rule is not "one proof module per page." The rule is:
+
+**Use as many proof blocks as the offer needs to feel real, credible, and worth discussing.**
+
+Some services may only need one strong proof section. Higher-value, higher-risk, or more abstract services may need two to four proof sections, such as a demo, workflow map, dashboard mock, architecture diagram, operating report, calculator, or scenario library.
+
+Required service-specific assets:
+
+- **AI Voice Agents**
+  - Keep the voice demo, back-office event log, workflow examples, and focused solution links.
+  - This page should remain the flagship wedge and should not be heavily revised until cofounder review is complete.
+
+- **AI Agents & Workflow Automation**
+  - Show an agent-pattern library with concrete roles such as sales rep, manufacturing response agent, support triage agent, admin intake agent, finance inbox agent, and marketing content agent.
+  - The buyer should see that agents are not generic chatbots; they are role-based workflow operators connected to tools, records, and handoffs.
+  - Add an agent operating loop showing trigger, context, action, review, and record.
+
+- **AI Chat & Customer Messaging**
+  - Preserve a real chatbot demo or interactive chat surface.
+  - Pair the visible chat with downstream actions: intent capture, CRM/ticket/task creation, booking, follow-up, and human handoff.
+  - Do not remove the demo just to make the page fit the shared service template.
+  - Add conversation scenarios so buyers see how lead qualification, support intake, booking, product guidance, and human handoff differ.
+
+- **AI Operations Strategy**
+  - Include a readiness check or maturity assessment that helps buyers decide whether they need discovery, a paid blueprint, a pilot, or a broader roadmap.
+  - This page should feel consultative and diagnostic, not like a generic strategy brochure.
+  - Include a value roadmap that connects 30/60/90-day activity to spending confidence and measurable outcomes.
+
+- **Marketing Automation & Content Agents**
+  - Show an idea-to-review-to-schedule workflow that protects brand quality while reducing coordination work.
+  - Include approval queues, brand rules, campaign follow-up, CRM segmentation, reporting, and content operations.
+  - Show brand/control proof so buyers know the system will not publish random or risky content.
+
+- **Managed AI Operations**
+  - Show an operations dashboard or monitoring view that makes ongoing support tangible.
+  - Buyers should understand what Automate4U watches, reviews, tunes, fixes, reports, and improves after launch.
+  - Include a monthly operating review preview covering quality, reliability, cost, and value realization.
+
+- **Custom AI Software**
+  - Show an operating surface or interface snapshot with queues, AI summaries, staff actions, system updates, and audit trails.
+  - This page should prove Automate4U can design useful internal software, not just connect tools together.
+  - Include a system architecture proof block showing sources, AI layer, human layer, and systems layer.
+
+Design rule:
+
+- Keep the shared page model for trust, consistency, SEO, and maintainability.
+- Add flexible, service-specific proof blocks for engagement, memorability, and sales conversion.
+- If a useful demo, interface, calculator, workflow preview, or artifact already exists, preserve and improve it instead of removing it during templating.
+- Add a tailored "first pilot proof" band near the top of each service page. It should answer: what will the first engagement prove, how will the team know it worked, and where does human control remain?
+
 ## Service Page Recommended Flow
 
 Use this as the default structure. Individual pages can vary, but should not omit the trust fundamentals.
@@ -236,12 +290,12 @@ The related How We Build capability should not use the same buyer-facing label b
 
 Legacy overlap decision:
 
-- `/capabilities/ai-agents-workflow-automation` overlaps with the AI Agents service.
-- `/capabilities/ai-voice-chat-experiences` overlaps with AI Voice and AI Chat services.
-- `/capabilities/marketing-automation` should move toward a direct service page if Automate4U wants to sell it directly.
-- `/capabilities/custom-software-ai-solutions` currently overlaps with the Custom AI Software service label and should be repurposed as **Workflow & Systems Architecture**, canonicalized, redirected, or replaced once the final route strategy is implemented.
+- `/capabilities/ai-agents-workflow-automation` overlaps with the AI Agents service and should redirect to `/core-services/ai-agents`.
+- `/capabilities/ai-voice-chat-experiences` overlaps with AI Voice and AI Chat services and should redirect to the strongest service destination, currently `/core-services/ai-voice`.
+- `/capabilities/marketing-automation` overlaps with the direct Marketing Automation service and should redirect to `/core-services/marketing-automation`.
+- `/capabilities/custom-software-ai-solutions` has been repurposed as **Workflow & Systems Architecture** in the How We Build layer. It should remain a trust page, not a duplicate Custom AI Software service page.
 
-Do not rebuild these overlapping legacy capability pages as full competing pages under the old labels. Build the direct service pages first, then decide whether each legacy URL should redirect, canonicalize, or become a short bridge page based on analytics and SEO risk.
+Do not rebuild these overlapping legacy capability pages as full competing pages under the old labels. Direct services should live under `/core-services/`; How We Build pages should explain delivery capability and risk reduction.
 
 ## Capability Page Model
 
@@ -403,12 +457,13 @@ Recommended AI Voice decision:
    - AI Operations Strategy.
    - Marketing Automation & Content Agents.
    - Custom AI Software.
-   - Managed AI Operations if treated as a standalone page in v1.
+   - Managed AI Operations.
+   - Current implementation note: these pages should use the shared native service-page model and the shared Free AI Workflow Assessment CTA.
 
-6a. **Resolve overlapping legacy capability URLs after service pages exist**
-   - Do not keep duplicate full pages for the same buyer intent.
-   - Use redirects, canonicals, or bridge pages after the stronger destination pages are available.
-   - Prioritize buyer clarity over preserving old labels.
+6a. **Resolve overlapping legacy capability URLs**
+   - Redirect AI Agents, AI Voice/Chat, and Marketing Automation capability URLs to the correct service destinations.
+   - Keep `/capabilities/custom-software-ai-solutions` as Workflow & Systems Architecture in the How We Build layer.
+   - Do not create duplicate full pages for AI Agents, AI Voice/Chat, Marketing Automation, or Custom Software under both Services and How We Build.
 
 7. **Add service-to-capability cross-links**
    - Every service page should link to the capability pillars that make it safe and reliable.

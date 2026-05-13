@@ -42,17 +42,25 @@ export const serviceOffers: ServiceOffer[] = [
   {
     title: "Marketing Automation & Content Agents",
     shortTitle: "Marketing Automation",
-    href: "/capabilities/marketing-automation",
+    href: "/core-services/marketing-automation",
     description:
       "Content, approval, campaign, CRM, lead nurturing, follow-up, and reporting workflows for teams that need more output with control.",
-    status: "planned-route",
+    status: "active",
+  },
+  {
+    title: "Managed AI Operations",
+    shortTitle: "Managed AI Ops",
+    href: "/core-services/managed-ai-operations",
+    description:
+      "Ongoing monitoring, tuning, issue response, KPI reporting, governance reviews, and continuous improvement for deployed AI systems.",
+    status: "active",
   },
   {
     title: "Custom AI Software",
     shortTitle: "Custom AI Software",
-    href: "/capabilities/custom-software-ai-solutions",
+    href: "/core-services/custom-ai-software",
     description:
       "Purpose-built AI tools, portals, dashboards, internal systems, and workflow software when off-the-shelf tools do not fit.",
-    status: "planned-route",
+    status: "active",
   },
 ];

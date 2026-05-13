@@ -1,8 +1,8 @@
 import ServiceOfferPage from "@/components/services/ServiceOfferPage";
 import { servicePageBySlug } from "@/data/service-pages";
 
-export default function AIAgentsPage() {
-  const service = servicePageBySlug("ai-agents");
+export default function MarketingAutomationPage() {
+  const service = servicePageBySlug("marketing-automation");
 
   if (!service) return null;
 

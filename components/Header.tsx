@@ -33,11 +33,18 @@ export default function Header() {
     }, []);
 
     const menus = {
-        services: serviceOffers.map((item) => ({
-            name: item.title,
-            href: item.href,
-            description: item.description,
-        })),
+        services: [
+            {
+                name: "Services Overview",
+                href: "/core-services",
+                description: "See how Automate4U services fit together across voice, agents, chat, strategy, operations, marketing, and custom software.",
+            },
+            ...serviceOffers.map((item) => ({
+                name: item.title,
+                href: item.href,
+                description: item.description,
+            })),
+        ],
         industries: [
             { name: "Financial Services", href: "/industries/financial-services" },
             { name: "Education & Childcare", href: "/industries/education-childcare" },
@@ -60,7 +67,6 @@ export default function Header() {
         about: [
             { name: "Overview", href: "/about/overview" },
             { name: "Our Mission", href: "/about/our-mission" },
-            { name: "Our Team", href: "/about/our-team" },
             { name: "How We Work", href: "/about/how-we-work" },
         ]
     };

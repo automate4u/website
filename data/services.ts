@@ -2,7 +2,10 @@ export type ServiceSlug =
   | "ai-voice"
   | "ai-agents"
   | "ai-chat"
-  | "ai-transformation";
+  | "ai-transformation"
+  | "marketing-automation"
+  | "managed-ai-operations"
+  | "custom-ai-software";
 
 export interface ServiceSummary {
   slug: ServiceSlug;
@@ -52,12 +55,45 @@ export const services: ServiceSummary[] = [
   {
     slug: "ai-transformation",
     href: "/core-services/ai-transformation",
-    title: "AI Workflow Automation",
-    shortTitle: "AI Automation",
+    title: "AI Operations Strategy",
+    shortTitle: "AI Strategy",
     metaTitle: "AI Workflow Automation and Strategy | Automate4U",
     metaDescription:
       "Workflow automation planning and implementation for teams that want to reduce manual work, connect systems, and measure AI value.",
     positioning: "core",
+    primaryCtaLabel: "Get Free Assessment",
+  },
+  {
+    slug: "marketing-automation",
+    href: "/core-services/marketing-automation",
+    title: "Marketing Automation and Content Agents",
+    shortTitle: "Marketing Automation",
+    metaTitle: "Marketing Automation and Content Agents | Automate4U",
+    metaDescription:
+      "AI marketing automation for content production, approvals, scheduling, campaign workflows, CRM follow-up, reporting, and content operations.",
+    positioning: "supporting",
+    primaryCtaLabel: "Get Free Assessment",
+  },
+  {
+    slug: "managed-ai-operations",
+    href: "/core-services/managed-ai-operations",
+    title: "Managed AI Operations",
+    shortTitle: "Managed AI Ops",
+    metaTitle: "Managed AI Operations | Automate4U",
+    metaDescription:
+      "Managed AI operations for monitoring, prompt and workflow tuning, governance reviews, integration health, KPI reporting, and continuous improvement.",
+    positioning: "supporting",
+    primaryCtaLabel: "Get Free Assessment",
+  },
+  {
+    slug: "custom-ai-software",
+    href: "/core-services/custom-ai-software",
+    title: "Custom AI Software",
+    shortTitle: "Custom AI Software",
+    metaTitle: "Custom AI Software for Business Workflows | Automate4U",
+    metaDescription:
+      "Purpose-built AI tools, portals, dashboards, internal systems, and workflow software for teams that need more than off-the-shelf automation.",
+    positioning: "supporting",
     primaryCtaLabel: "Get Free Assessment",
   },
 ];

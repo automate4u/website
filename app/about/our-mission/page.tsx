@@ -969,56 +969,56 @@ export default function Page() {
 
             <div class="ab-what-grid">
                 <div class="ab-what-card">
-                    <h3 class="ab-h3"><a href="/capabilities/ai-voice-chat-experiences.html"
+                    <h3 class="ab-h3"><a href="/core-services/ai-voice"
                             style="color: inherit; text-decoration: none;">AI Voice & Chat →</a></h3>
                     <p>Phone agents and chatbots that handle calls, book appointments, and answer questions 24/7.
                         Turn missed calls into revenue.</p>
                 </div>
 
                 <div class="ab-what-card">
-                    <h3 class="ab-h3"><a href="/capabilities/ai-agents-workflow-automation.html"
+                    <h3 class="ab-h3"><a href="/core-services/ai-agents"
                             style="color: inherit; text-decoration: none;">Workflow Automation →</a></h3>
                     <p>AI agents that work behind the scenes—qualifying leads, updating CRMs, generating reports,
                         and eliminating copy-paste work.</p>
                 </div>
 
                 <div class="ab-what-card">
-                    <h3 class="ab-h3"><a href="/capabilities/custom-software-ai-solutions.html"
+                    <h3 class="ab-h3"><a href="/core-services/custom-ai-software"
                             style="color: inherit; text-decoration: none;">Custom Software →</a></h3>
                     <p>Purpose-built applications, internal tools, and AI-powered features when off-the-shelf
                         solutions don't fit your workflow.</p>
                 </div>
 
                 <div class="ab-what-card">
-                    <h3 class="ab-h3"><a href="/capabilities/data-integrations-infrastructure.html"
+                    <h3 class="ab-h3"><a href="/capabilities/data-integrations-infrastructure"
                             style="color: inherit; text-decoration: none;">Data & Integrations →</a></h3>
                     <p>Connect your tools, sync data in real-time, and build the infrastructure that makes
                         automation possible.</p>
                 </div>
 
                 <div class="ab-what-card">
-                    <h3 class="ab-h3"><a href="/capabilities/operational-intelligence-analytics.html"
+                    <h3 class="ab-h3"><a href="/capabilities/operational-intelligence-analytics"
                             style="color: inherit; text-decoration: none;">Analytics & Intelligence →</a></h3>
                     <p>Dashboards, automated reporting, and predictive analytics that turn operational data
                         into actionable insights.</p>
                 </div>
 
                 <div class="ab-what-card">
-                    <h3 class="ab-h3"><a href="/capabilities/security-monitoring-ai-safety.html"
+                    <h3 class="ab-h3"><a href="/capabilities/security-monitoring-ai-safety"
                             style="color: inherit; text-decoration: none;">Security & Monitoring →</a></h3>
                     <p>AI Observer, guardrails, compliance alignment, and monitoring to keep your automation
                         secure and controlled.</p>
                 </div>
 
                 <div class="ab-what-card">
-                    <h3 class="ab-h3"><a href="/capabilities/technology-strategy-ai-enablement.html"
+                    <h3 class="ab-h3"><a href="/capabilities/technology-strategy-ai-enablement"
                             style="color: inherit; text-decoration: none;">Strategy & Enablement →</a></h3>
                     <p>Tech stack audits, AI opportunity assessments, and roadmaps that identify where to
                         invest for maximum ROI.</p>
                 </div>
 
                 <div class="ab-what-card">
-                    <h3 class="ab-h3"><a href="/capabilities/training-prompting-ai-mastery.html"
+                    <h3 class="ab-h3"><a href="/capabilities/training-prompting-ai-mastery"
                             style="color: inherit; text-decoration: none;">Training & AI Mastery →</a></h3>
                     <p>Teach your team to build with AI, master prompting, and create internal champions
                         instead of vendor dependence.</p>

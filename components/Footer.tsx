@@ -21,7 +21,7 @@ export default function Footer() {
                     <div>
                         <h4 className="font-bold mb-4">Services</h4>
                         <ul className="space-y-2 text-sm text-muted">
-                            {serviceOffers.slice(0, 5).map((service) => (
+                            {serviceOffers.map((service) => (
                                 <li key={service.href}><Link href={service.href} className="hover:text-accent">{service.shortTitle}</Link></li>
                             ))}
                             <li className="pt-2"><Link href="/solutions" className="hover:text-accent font-semibold flex items-center gap-1">See solutions <span aria-hidden="true">&rarr;</span></Link></li>

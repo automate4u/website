@@ -30,6 +30,10 @@ Key decisions:
 
 Use this README as the entry point and `04-implementation-roadmap.md` as the build sequence.
 
+For a quick team-review snapshot of what has been implemented so far, read:
+
+- `19-team-handoff-status.md`
+
 The numbered files are not a strict build order. They are grouped by purpose:
 
 ### 1. Decisions And Current State

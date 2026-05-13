@@ -110,7 +110,7 @@ async function sendNotification(data: Record<string, string>) {
     `UTM content: ${data.utmContent}`,
   ].join("\n");
 
-  await fetch("https://api.resend.com/emails", {
+  const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -123,6 +123,10 @@ async function sendNotification(data: Record<string, string>) {
       text: body,
     }),
   });
+
+  if (!response.ok) {
+    throw new Error("Assessment notification email failed.");
+  }
 }
 
 export async function submitAssessmentLead(formData: FormData) {
@@ -130,6 +134,15 @@ export async function submitAssessmentLead(formData: FormData) {
 
   if (!getField(formData, "email")) {
     throw new Error("Email is required.");
+  }
+
+  if (
+    process.env.NODE_ENV === "production" &&
+    process.env.A4U_E2E_TEST_MODE !== "1" &&
+    !process.env.HUBSPOT_PRIVATE_APP_TOKEN &&
+    !process.env.RESEND_API_KEY
+  ) {
+    throw new Error("No assessment lead destination is configured.");
   }
 
   const results = await Promise.allSettled([

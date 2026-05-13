@@ -34,7 +34,7 @@ export default function TechnologyMediaPage() {
       serviceDescription="Technology and media automation can start with support, content production, operational reporting, or internal workflow agents."
       servicePaths={[
         { title: "AI Agents for workflow automation", description: "Agents that classify, summarize, route, draft, update tickets, create tasks, and report on workflow status.", href: "/core-services/ai-agents", cta: "Explore AI Agents" },
-        { title: "Marketing automation", description: "Content drafting, approval, scheduling, campaign reporting, and social or email production workflows.", href: "/capabilities/marketing-automation", cta: "Explore Marketing Automation" },
+        { title: "Marketing automation", description: "Content drafting, approval, scheduling, campaign reporting, and social or email production workflows.", href: "/core-services/marketing-automation", cta: "Explore Marketing Automation" },
         { title: "Operational intelligence", description: "Reporting workflows that turn support, content, product, or campaign events into usable management visibility.", href: "/capabilities/operational-intelligence-analytics", cta: "Explore Operational Intelligence" },
       ]}
       sectorTitle="AI is useful when it improves throughput without lowering quality."

@@ -68,7 +68,7 @@ const servicePaths = [
     title: "Marketing automation",
     description:
       "Content, campaign, review, approval, and reporting workflows that help small teams publish and follow up more consistently.",
-    href: "/capabilities/marketing-automation",
+    href: "/core-services/marketing-automation",
     cta: "Explore Marketing Automation",
   },
   {

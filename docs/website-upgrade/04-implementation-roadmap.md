@@ -17,7 +17,7 @@ Use `README.md` for the full doc map. Use this file as the active task sequence.
 
 ## Current Implementation Status
 
-Last updated: after the true How We Build detail-page rebuilds.
+Last updated: after the direct service-page rebuilds.
 
 | Area | Status | Notes |
 | --- | --- | --- |
@@ -25,7 +25,7 @@ Last updated: after the true How We Build detail-page rebuilds.
 | Phase 2: Homepage + AI Voice | In progress | Homepage v2 and AI Voice flagship v1 have been rebuilt around the approved positioning, connected-systems story, assessment CTA, maturity path, value realization, voice-to-operations event log, workflow examples, pricing confidence, accelerators, and Managed AI Operations. Homepage v2 now includes stronger operational diagnosis, implementation-method trust, sector-thinking notes, human/process imagery, and cleaner buyer-facing language. AI Voice now links more clearly into focused solution pages such as Daycare Voice Agent. Shared assessment forms now capture budget range. |
 | Phase 3: Reusable React system | Started | Shared homepage sections now exist for section headers, workflow map, maturity curve, value realization roadmap, accelerator preview, and assessment CTA. AI Voice now uses the shared section header pattern and a cleaner React structure; reusable accelerator/proof modules remain next. |
 | Phase 4: Industry Accelerators | In progress | All currently listed industry pages have been rebuilt from migrated HTML into React accelerator pages: Manufacturing, Education & Childcare, Home Services, Professional Services, Retail & Ecommerce, Healthcare, Real Estate, Financial Services, Hospitality, and Technology & Media. The `/industries` index explains the difference between broad industry context and focused solution implementations. Daycare Voice Agent lives under `/solutions/` as the first focused voice-led solution landing page. Solutions are intentionally contextual/secondary navigation for now, not a primary top-nav item. Remaining work is quality review, proof integration, and deciding whether to refactor older hand-built accelerator pages onto the reusable component where useful. |
-| Phase 4B: Services + How We Build | Started | A dedicated taxonomy and implementation plan now exists in `18-services-and-capabilities-plan.md`. Shared service-offer and How We Build pillar data has been added, the header/footer now expose Services and How We Build separately, `/capabilities` has been rebuilt as a trust-building How We Build overview, and the six true How We Build detail pages have been rebuilt as native React pages: Security, Data & Integrations, Operational Intelligence, Staff Training & Adoption, Technology Strategy & Enablement, and Workflow & Systems Architecture. Next: rebuild the non-AI-Voice service pages, especially the planned service destinations for Marketing Automation, Managed AI Operations, and Custom AI Software. AI Voice should remain mostly stable until cofounder review of optional refinements. |
+| Phase 4B: Services + How We Build | In progress | A dedicated taxonomy and implementation plan now exists in `18-services-and-capabilities-plan.md`. Shared service-offer and How We Build pillar data has been added, the header/footer now expose Services and How We Build separately, `/capabilities` has been rebuilt as a trust-building How We Build overview, and the six true How We Build detail pages have been rebuilt as native React pages: Security, Data & Integrations, Operational Intelligence, Staff Training & Adoption, Technology Strategy & Enablement, and Workflow & Systems Architecture. The non-AI-Voice service pages now use a shared native service-page model, and direct service destinations now exist for Marketing Automation, Managed AI Operations, and Custom AI Software. AI Voice should remain mostly stable until cofounder review of optional refinements. |
 | Phase 5: Proof + trust assets | Not started | Requires proof inventory before final case study copy is written. |
 | Phase 6: Analytics + iteration | Started | Optional PostHog loading, attribution capture, first event tracking, and first conversion-path tests are implemented. Full funnel reporting and iteration dashboards still need setup after PostHog credentials are available. |
 | Phase 7: Remaining migration | Not started | Migrated HTML pages still contain `dangerouslySetInnerHTML`, raw images, and legacy Formspree forms. |
@@ -82,16 +82,23 @@ Completed in the first implementation pass:
 - Staff Training & Adoption detail page rebuilt from migrated HTML into a native React trust page with adoption concerns, role-based training, rollout support, implementation evidence, related services, related capabilities, and the shared assessment CTA.
 - Technology Strategy & Enablement detail page rebuilt from migrated HTML into a native React trust page with maturity assessment, roadmap planning, build-versus-buy thinking, risk planning, related services, related capabilities, and the shared assessment CTA.
 - Workflow & Systems Architecture detail page rebuilt from the overlapping custom-software capability route into a native React trust page that explains workflow design, system boundaries, handoffs, custom build patterns, client artifacts, related services, related capabilities, and the shared assessment CTA.
+- Shared service-page renderer and typed service-page content added for direct service offers.
+- AI Agents & Workflow Automation, AI Chat & Customer Messaging, and AI Operations Strategy rebuilt from older one-off CSS/client pages into native service pages with operational reality, workflow examples, connected systems, human controls, rollout, budget confidence, FAQ, trust-capability links, and the shared assessment CTA.
+- Marketing Automation & Content Agents, Managed AI Operations, and Custom AI Software direct service pages added under `/core-services/`.
+- Flexible service-specific proof stacks added so the direct service pages do not rely only on a shared template: AI Chat has a chatbot demo, downstream action explanation, and conversation scenarios; AI Agents has a searchable agent-pattern library and operating-loop proof; AI Operations Strategy has a readiness check and 30/60/90 value roadmap; Marketing Automation has an idea-to-approval workflow preview and approval-control proof; Managed AI Operations has an operating dashboard mock and monthly review preview; Custom AI Software has an interface snapshot and architecture proof block.
+- Direct service pages now include a tailored "first pilot proof" band near the top of the page so each service quickly explains what the first engagement should validate before a client expands spend.
+- Service navigation, service metadata, sitemap routes, and structured-data source entries updated for the expanded direct service set.
+- Overlapping legacy capability URLs for AI Agents, AI Voice/Chat, and Marketing Automation now redirect to the correct service destinations instead of competing as duplicate full pages.
 - Retell API route hardened.
 - Botpress script injection typed and lazy-loaded.
 - Several raw image, unused import, and JSX lint issues fixed.
 
 Next recommended implementation slice:
 
-1. Rebuild the remaining non-AI-Voice service pages using the service-page model in `18-services-and-capabilities-plan.md`.
-2. Create proper service destinations for Marketing Automation & Content Agents, Managed AI Operations, and Custom AI Software so those offers do not depend on legacy capability URLs.
-3. Resolve overlapping legacy capability URLs after service pages exist using redirects, canonicals, or short bridge pages. Do not rebuild duplicate full pages under old service-like capability labels.
-4. Review optional AI Voice refinements with the cofounder before changing that page flow.
+1. Visually review every service-specific proof stack across desktop and mobile, especially the AI Chat demo iframe, AI Agents operating loop, Managed AI Operations dashboard, and Custom AI Software architecture section.
+2. Review Services navigation order and footer density now that all seven service destinations exist.
+3. Review optional AI Voice refinements with the cofounder before changing that page flow.
+4. Continue Phase 5 proof and trust assets: NDA-safe case study patterns, demo assets, pricing transparency, and stronger proof modules.
 
 ## Phase-To-Document Map
 
