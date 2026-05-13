@@ -128,6 +128,8 @@ Show:
 
 Route assessment leads to HubSpot as the primary source of truth.
 
+For the production setup checklist, environment variables, team-owned credentials, and HubSpot/Resend/Calendly/PostHog ownership split, see `20-production-lead-routing-setup.md`.
+
 Required destinations:
 
 - Create or update a HubSpot contact.

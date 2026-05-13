@@ -82,6 +82,7 @@ export default function RealEstatePage() {
         "Measure response time, booked showings, CRM completeness, recovered leads, and follow-up completion.",
         "Keep licensed advice, negotiation, pricing, and contract-related decisions with agents.",
       ]}
+      proofStorySlugs={["real-estate-lead-response", "managed-ai-operations-rhythm"]}
       sourcePage="/industries/real-estate"
       ctaLocation="real_estate_assessment"
     />

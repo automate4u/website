@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ProofStorySection from "@/components/proof/ProofStorySection";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import SectionHeader from "@/components/sections/SectionHeader";
 
@@ -353,6 +354,15 @@ export default function ProfessionalServicesPage() {
           </aside>
         </div>
       </section>
+
+      <ProofStorySection
+        storySlugs={["professional-services-intake", "healthcare-front-desk"]}
+        eyebrow="Representative proof patterns"
+        title="Professional services proof should show faster intake with judgment protected."
+        description="These examples focus on appointment-driven workflows where AI captures context, prepares the handoff, and keeps regulated or sensitive decisions with qualified people."
+        compact
+        className="border-y border-card-border bg-[#f8fbfa]"
+      />
 
       <AssessmentCTA sourcePage="/industries/professional-services" ctaLocation="professional_services_assessment" />
     </div>

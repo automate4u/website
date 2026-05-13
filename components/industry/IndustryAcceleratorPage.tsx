@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ProofStorySection from "@/components/proof/ProofStorySection";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import SectionHeader from "@/components/sections/SectionHeader";
 
@@ -76,6 +77,7 @@ type IndustryAcceleratorPageProps = {
   confidenceTitle: string;
   confidenceDescription: string;
   confidenceNotes: string[];
+  proofStorySlugs?: string[];
   sourcePage: string;
   ctaLocation: string;
 };
@@ -114,6 +116,7 @@ export default function IndustryAcceleratorPage({
   confidenceTitle,
   confidenceDescription,
   confidenceNotes,
+  proofStorySlugs,
   sourcePage,
   ctaLocation,
 }: IndustryAcceleratorPageProps) {
@@ -232,6 +235,17 @@ export default function IndustryAcceleratorPage({
           </div>
         </div>
       </section>
+
+      {proofStorySlugs?.length ? (
+        <ProofStorySection
+          storySlugs={proofStorySlugs}
+          eyebrow="Representative proof patterns"
+          title="The first win should connect the conversation to a measurable operating outcome."
+          description="These examples show the kind of workflow evidence we look for during an assessment: what gets captured, which systems are touched, where humans stay in control, and how value is measured."
+          compact
+          className="border-y border-card-border bg-[#f8fbfa]"
+        />
+      ) : null}
 
       <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20" aria-labelledby="sector-title">
         <div className="mx-auto max-w-[1180px]">

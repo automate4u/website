@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ProofStorySection from "@/components/proof/ProofStorySection";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import SectionHeader from "@/components/sections/SectionHeader";
 import ServiceProofModules from "@/components/services/ServiceProofModule";
@@ -195,6 +196,15 @@ const presentationBySlug: Record<string, ServicePresentation> = {
   },
 };
 
+const proofStoriesByServiceSlug: Record<string, string[]> = {
+  "ai-agents": ["manufacturing-response-agent", "professional-services-intake"],
+  "ai-chat": ["retail-support-order-agent", "manufacturing-response-agent"],
+  "ai-transformation": ["ai-roadmap-value-realization"],
+  "marketing-automation": ["marketing-content-operations", "retail-support-order-agent"],
+  "managed-ai-operations": ["managed-ai-operations-rhythm", "daycare-front-desk-voice"],
+  "custom-ai-software": ["custom-operations-workbench", "manufacturing-response-agent"],
+};
+
 export default function ServiceOfferPage({ service }: ServiceOfferPageProps) {
   const presentation = presentationBySlug[service.slug] ?? presentationBySlug["ai-agents"];
   const relatedCapabilities = service.capabilityHrefs
@@ -276,6 +286,15 @@ export default function ServiceOfferPage({ service }: ServiceOfferPageProps) {
       </section>
 
       <ServiceProofModules slug={service.slug} />
+
+      <ProofStorySection
+        storySlugs={proofStoriesByServiceSlug[service.slug]}
+        eyebrow="Representative proof patterns"
+        title="What this looks like in real operating workflows."
+        description="These examples are written to be specific enough to evaluate while protecting client confidentiality. The exact workflow, systems, controls, and metrics are finalized during assessment and pilot design."
+        compact
+        className="border-y border-card-border bg-white"
+      />
 
       <section className="bg-white px-4 py-14 md:py-20">
         <div className="mx-auto max-w-[1280px]">

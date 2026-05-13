@@ -28,6 +28,43 @@ For each client story or internal demo, collect:
 - NDA constraints and identifying details that must be removed.
 - Whether the public version should be a direct anonymous story, sanitized story, representative composite, or internal-only proof point.
 
+## Current Public Proof Layer
+
+The site now uses representative, NDA-safe proof patterns in `data/proof-stories.ts`. These are intentionally written as workflow evidence, not named case studies. They should be treated as placeholders until the team confirms which details can be upgraded to anonymous, sanitized, or named proof.
+
+Current representative proof patterns:
+
+- Industrial manufacturing: parts, availability, quoting, order-response agent.
+- Education and childcare: daycare front-desk voice assistant with staff-controlled escalation.
+- Home services: missed-call recovery, booking, dispatch intake, and quote follow-up.
+- Retail and ecommerce: product questions, order status, returns, support triage, and marketing content operations.
+- Professional services: intake, booking, document follow-up, and staff handoff.
+- Healthcare: routine front-desk automation with conservative escalation.
+- Financial services: client intake, document follow-up, status routing, and advisor handoff.
+- Real estate: speed-to-lead, showing request, CRM update, and agent handoff.
+- Hospitality: guest questions, booking support, request routing, and service recovery.
+- Technology and media: support triage, content workflow, customer update, and reporting.
+- Custom software: AI-enabled workbench for review, approvals, and operating visibility.
+- Managed AI Operations: monitoring, review, tuning, and monthly value reporting.
+- AI strategy: workflow assessment, pilot selection, and 30/60/90-day value roadmap.
+
+## What The Team Should Gather Next
+
+For each proof pattern above, gather the strongest available version:
+
+- **One approved anonymous label:** for example, "industrial parts supplier," "regional home services company," "private childcare operator," "appointment-based clinic," or "retail ecommerce brand."
+- **Before workflow:** how the work happened before Automate4U or before the proposed automation.
+- **Workflow volume:** approximate monthly calls, emails, messages, tickets, quotes, bookings, forms, or tasks.
+- **Manual effort baseline:** estimated minutes per request, staff roles involved, interruptions per day, or weekly admin hours.
+- **Systems involved:** CRM, email, phone, chat, calendar, ERP, inventory, ecommerce platform, helpdesk, classroom software, booking tool, spreadsheets, or custom tools.
+- **Automate4U build scope:** what was built, what was connected, what was automated, and what stayed human-owned.
+- **Human control model:** approval rules, escalation rules, audit logs, review queues, monitoring, and sensitive-case handling.
+- **Measured or defensible results:** response time, quote cycle time, missed calls recovered, bookings created, manual touches removed, support tickets deflected, content shipped, or admin hours saved.
+- **Permission level:** named public, anonymous public, sanitized public, representative public, internal sales only, or do not use.
+- **Artifacts:** sanitized screenshots, diagrams, Loom clips, dashboard snapshots, sample transcripts, approval flows, before/after workflow maps, or internal demo recordings.
+
+If exact metrics are not available, collect ranges and operational observations. The public site should say what is measured rather than inventing outcomes.
+
 ## Proof Permission Levels
 
 Use these labels internally:

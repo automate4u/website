@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ProofStorySection from "@/components/proof/ProofStorySection";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import SectionHeader from "@/components/sections/SectionHeader";
 
@@ -350,6 +351,15 @@ export default function HealthcarePage() {
           </aside>
         </div>
       </section>
+
+      <ProofStorySection
+        storySlugs={["healthcare-front-desk", "managed-ai-operations-rhythm"]}
+        eyebrow="Representative proof patterns"
+        title="Healthcare proof should show conservative automation with clear escalation."
+        description="These examples focus on routine front-desk support, privacy-aware routing, staff review, and the operating metrics that help teams expand only when quality is trusted."
+        compact
+        className="border-y border-card-border bg-[#f8fbfa]"
+      />
 
       <AssessmentCTA sourcePage="/industries/healthcare" ctaLocation="healthcare_assessment" />
     </div>

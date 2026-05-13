@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
+import ProofStorySection from "@/components/proof/ProofStorySection";
 import IndustryAcceleratorPreview from "@/components/sections/IndustryAcceleratorPreview";
 import MaturityCurve from "@/components/sections/MaturityCurve";
 import SectionHeader from "@/components/sections/SectionHeader";
@@ -206,6 +207,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ProofStorySection />
 
       <section className="bg-[#f8fbfa] px-4 py-14 md:py-20" aria-labelledby="services-title">
         <div className="mx-auto max-w-[1280px]">

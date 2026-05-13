@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ProofStorySection from "@/components/proof/ProofStorySection";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import SectionHeader from "@/components/sections/SectionHeader";
 
@@ -305,6 +306,15 @@ export default function ManufacturingAcceleratorPage() {
           </aside>
         </div>
       </section>
+
+      <ProofStorySection
+        storySlugs={["manufacturing-response-agent", "custom-operations-workbench"]}
+        eyebrow="Representative proof patterns"
+        title="Manufacturing proof should show faster response without risky commitments."
+        description="These examples show the type of workflow evidence we validate during assessment: what gets captured, which systems are checked, where humans approve, and which operating metrics improve."
+        compact
+        className="border-y border-card-border bg-[#f8fbfa]"
+      />
 
       <AssessmentCTA sourcePage="/industries/manufacturing" ctaLocation="manufacturing_accelerator_assessment" />
     </div>

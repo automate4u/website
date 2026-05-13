@@ -24,7 +24,7 @@ export default function SectionHeader({
           {eyebrow}
         </p>
       ) : null}
-      <h2 className={`text-[26px] font-extrabold leading-[1.12] tracking-[-0.01em] md:text-[36px] ${titleColor}`}>
+      <h2 className={`text-[24px] font-extrabold leading-[1.14] tracking-[-0.01em] md:text-[36px] ${titleColor}`}>
         {title}
       </h2>
       {description ? (

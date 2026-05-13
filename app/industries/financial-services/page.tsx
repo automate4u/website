@@ -73,6 +73,7 @@ export default function FinancialServicesPage() {
         "Measure intake completeness, document turnaround, response time, staff touches reduced, and escalation quality.",
         "Treat review, auditability, privacy, and escalation as part of the system cost.",
       ]}
+      proofStorySlugs={["financial-document-intake", "professional-services-intake"]}
       sourcePage="/industries/financial-services"
       ctaLocation="financial_services_assessment"
     />

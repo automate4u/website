@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ProofStorySection from "@/components/proof/ProofStorySection";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import SectionHeader from "@/components/sections/SectionHeader";
 
@@ -352,6 +353,15 @@ export default function HomeServicesPage() {
           </aside>
         </div>
       </section>
+
+      <ProofStorySection
+        storySlugs={["home-services-dispatch", "managed-ai-operations-rhythm"]}
+        eyebrow="Representative proof patterns"
+        title="Home services proof should tie fast response to booked work and cleaner dispatch."
+        description="These examples show how voice, chat, CRM, calendar, dispatch, follow-up, and human review can work together without over-automating pricing or emergency decisions."
+        compact
+        className="border-y border-card-border bg-[#f8fbfa]"
+      />
 
       <AssessmentCTA sourcePage="/industries/home-services" ctaLocation="home_services_assessment" />
     </div>

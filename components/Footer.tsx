@@ -62,8 +62,8 @@ export default function Footer() {
                 <div className="border-t border-card-border mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted">
                     <p>&copy; {new Date().getFullYear()} Automate4U. All rights reserved.</p>
                     <div className="flex gap-6">
-                        <a href="#" className="hover:text-accent">LinkedIn</a>
-                        <a href="#" className="hover:text-accent">Twitter</a>
+                        <Link href="/core-services" className="hover:text-accent">Services</Link>
+                        <Link href="/contact" className="hover:text-accent">Contact</Link>
                     </div>
                 </div>
             </div>

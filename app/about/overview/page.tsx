@@ -1,296 +1,119 @@
-import React from 'react';
+import Link from "next/link";
+import AssessmentCTA from "@/components/sections/AssessmentCTA";
+import SectionHeader from "@/components/sections/SectionHeader";
+
+const principles = [
+  {
+    title: "Builder-led, not buzzword-led",
+    text: "We care about systems that actually run: calls answered, requests routed, records updated, staff notified, reports created, and exceptions escalated.",
+  },
+  {
+    title: "AI connected to operations",
+    text: "The value is not the model by itself. The value is the workflow around it: integrations, source data, approvals, handoffs, monitoring, and measurable outcomes.",
+  },
+  {
+    title: "Small first, then expand",
+    text: "We help teams start with a workflow that is narrow enough to control and valuable enough to prove before expanding spend.",
+  },
+  {
+    title: "Humans stay responsible",
+    text: "Sensitive or high-value decisions need clear rules, audit trails, approvals, and escalation paths instead of blind automation.",
+  },
+];
+
+const strengths = [
+  "AI voice agents for frontline calls and intake",
+  "Chat, email, and workflow agents connected to business systems",
+  "Custom AI software, dashboards, portals, and review queues",
+  "Security, monitoring, integrations, reporting, and staff adoption",
+];
 
 export default function Page() {
-    return (
-        <>
-            <style dangerouslySetInnerHTML={{
-                __html: `
-    .ab-scope {
-        display: block;
-    }
+  return (
+    <main className="min-h-screen bg-white">
+      <section className="bg-[#051C2C] px-4 py-16 text-white md:py-24">
+        <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div>
+            <p className="mb-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">
+              About Automate4U
+            </p>
+            <h1 className="max-w-[760px] text-[38px] font-extrabold leading-[1.06] tracking-[-0.02em] md:text-[58px]">
+              We build AI systems for the work that slows businesses down.
+            </h1>
+            <p className="mt-6 max-w-[720px] text-base leading-8 text-white/74 md:text-[18px]">
+              Automate4U is a builder-led AI automation team focused on practical workflows: calls, inboxes, quotes, scheduling, customer questions, admin tasks, reporting, and the systems behind them.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="/contact" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
+                Get Free Assessment
+              </Link>
+              <Link href="/about/how-we-work" className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb]">
+                See How We Work
+              </Link>
+            </div>
+          </div>
 
-    .ab-scope * {
-        box-sizing: border-box;
-    }
-
-    /* Tokens */
-    .ab-scope {
-        --ink: #0f1720;
-        --muted: #6b7b8d;
-        --accent: #1db993;
-        --accent-hover: #169b78;
-        --accent-ink: #179c79;
-        --pill-bg: #e9f9f3;
-        --panel: #f8fbfa;
-        --card: #ffffff;
-        --border: #E7EDF2;
-        --soft: #f6f8fb;
-        --radius: 22px;
-    }
-
-    /* Container */
-    .ab-scope .ab-container {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 0 18px;
-    }
-
-    /* HERO */
-    .ab-scope .ab-hero {
-        background: #fff;
-        color: var(--ink);
-        padding: 44px 0;
-        text-align: center;
-    }
-
-    .ab-scope .ab-title {
-        margin: 0 auto 12px;
-        font-weight: 800;
-        line-height: 1.08;
-        letter-spacing: -.01em;
-        font-size: 32px;
-    }
-
-    .ab-scope .ab-subtitle {
-        margin: 0 auto 24px;
-        max-width: 70ch;
-        color: var(--muted);
-        font-size: 1.05rem;
-        font-weight: 500;
-    }
-
-    .ab-scope .ab-intro {
-        max-width: 80ch;
-        margin: 0 auto;
-        text-align: left;
-    }
-
-    .ab-scope .ab-intro p {
-        margin: 0 0 1em;
-        line-height: 1.6;
-        color: var(--ink);
-    }
-
-    .ab-scope .ab-link {
-        color: var(--accent);
-        text-decoration: none;
-        font-weight: 600;
-        border-bottom: 2px solid var(--accent);
-    }
-
-    .ab-scope .ab-link:hover {
-        color: var(--accent-hover);
-        border-bottom-color: var(--accent-hover);
-    }
-
-    @media (min-width: 768px) {
-        .ab-scope .ab-hero {
-            padding: 64px 0;
-        }
-
-        .ab-scope .ab-title {
-            font-size: 48px;
-        }
-    }
-
-    @media (min-width: 1200px) {
-        .ab-scope .ab-title {
-            font-size: 56px;
-        }
-    }
-
-    /* EXPERIENCE SECTION */
-    .ab-scope .ab-experience {
-        width: 100vw;
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #f8fafc;
-        color: var(--ink);
-        padding: 40px 0;
-        text-align: center;
-    }
-
-    .ab-scope .ab-h2 {
-        font-size: 28px;
-        line-height: 1.15;
-        letter-spacing: -.02em;
-        margin: 10px 0 6px;
-        font-weight: 800;
-        text-wrap: balance;
-    }
-
-    .ab-scope .ab-content {
-        max-width: 900px;
-        margin: 32px auto 0;
-        text-align: left;
-    }
-
-    .ab-scope .ab-content p {
-        margin-bottom: 24px;
-        line-height: 1.7;
-        font-size: 1.05rem;
-        color: var(--ink);
-    }
-
-    .ab-scope .ab-highlight-box {
-        background: #fff;
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 32px;
-        margin: 32px 0;
-        box-shadow: 0 4px 12px rgba(15, 23, 32, 0.04);
-    }
-
-    .ab-scope .ab-highlight-title {
-        font-weight: 700;
-        font-size: 1.2rem;
-        margin-bottom: 16px;
-        color: var(--accent-ink);
-    }
-
-    .ab-scope .ab-industry-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .ab-scope .ab-industry-tag {
-        background: var(--pill-bg);
-        color: var(--accent-ink);
-        padding: 6px 14px;
-        border-radius: 999px;
-        font-weight: 600;
-        font-size: 0.9rem;
-    }
-
-    @media (min-width: 768px) {
-        .ab-scope .ab-experience {
-            padding: 64px 0;
-        }
-        
-        .ab-scope .ab-h2 {
-            font-size: 44px;
-        }
-    }
-
-    /* CLOSING CTA */
-    .ab-scope .ab-cta {
-        background: #fff;
-        color: var(--ink);
-        padding: 48px 0;
-        text-align: center;
-    }
-
-    .ab-scope .ab-cta-text {
-        max-width: 70ch;
-        margin: 16px auto 24px;
-        color: var(--muted);
-        line-height: 1.6;
-    }
-
-    .ab-scope .ab-cta-actions {
-        display: flex;
-        gap: 16px;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .ab-scope .ab-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.55rem;
-        padding: 0.8rem 1.2rem;
-        border-radius: 999px;
-        font-weight: 800;
-        text-decoration: none;
-        transition: all 0.2s ease;
-    }
-
-    .ab-scope .ab-primary {
-        background: var(--accent);
-        color: #fff;
-        box-shadow: 0 10px 26px rgba(29, 185, 147, 0.28);
-    }
-
-    .ab-scope .ab-primary:hover {
-        background: var(--accent-hover);
-        transform: translateY(-2px);
-    }
-
-    .ab-scope .ab-secondary {
-        background: transparent;
-        color: var(--accent);
-        border: 2px solid var(--accent);
-    }
-
-    .ab-scope .ab-secondary:hover {
-        background: var(--pill-bg);
-    }
-` }} />
-            <div dangerouslySetInnerHTML={{
-                __html: `<div class="ab-scope">
-
-    <!-- ============== HERO ============== -->
-    <section class="ab-hero" aria-labelledby="ab-hero-title">
-        <div class="ab-container">
-            <h1 id="ab-hero-title" class="ab-title">Company Overview</h1>
-            <p class="ab-subtitle">Building modern, state-of-the-art enterprise systems to enhance your business.</p>
-        </div>
-    </section>
-
-    <!-- ============== EXPERIENCE CONTENT ============== -->
-    <section class="ab-experience" aria-labelledby="ab-exp-title">
-        <div class="ab-container">
-            <h2 id="ab-exp-title" class="ab-h2">Our Experience</h2>
-
-            <div class="ab-content">
-                <p>Our highly experienced, capable, and motivated team has worked with dozens of companies of all sizes—from Fortune 500s to mom-and-pop shops. We bring deep expertise in building modern, state-of-the-art, enterprise-grade systems directly to your operations.</p>
-                
-                <div class="ab-highlight-box">
-                    <h3 class="ab-highlight-title">Industry Expertise</h3>
-                    <p>Our business and development experience spans a wide variety of industries:</p>
-                    <ul class="ab-industry-list">
-                        <li class="ab-industry-tag">Professional Services</li>
-                        <li class="ab-industry-tag">Financial Services</li>
-                        <li class="ab-industry-tag">Industrial Manufacturing</li>
-                        <li class="ab-industry-tag">Healthcare</li>
-                        <li class="ab-industry-tag">Hospitality</li>
-                        <li class="ab-industry-tag">Restaurants</li>
-                        <li class="ab-industry-tag">Transportation</li>
-                        <li class="ab-industry-tag">Logistics</li>
-                        <li class="ab-industry-tag">Real Estate</li>
-                        <li class="ab-industry-tag">Construction</li>
-                        <li class="ab-industry-tag">Home Services</li>
-                    </ul>
+          <div className="rounded-lg border border-white/12 bg-white/[0.07] p-5 shadow-[0_18px_55px_rgba(0,0,0,0.20)]">
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">What we build</p>
+            <div className="mt-5 grid gap-3">
+              {strengths.map((item, index) => (
+                <div key={item} className="grid gap-3 rounded-lg border border-white/10 bg-[#0d1720]/70 p-4 sm:grid-cols-[auto_1fr]">
+                  <div className="grid h-9 w-9 place-items-center rounded-full bg-[#1db993] text-sm font-extrabold text-[#05251d]">
+                    {index + 1}
+                  </div>
+                  <p className="self-center text-sm font-semibold leading-6 text-white/82">{item}</p>
                 </div>
-
-                <p>Please see our <a href="/industries" class="ab-link">Industries page</a> to get a better idea of our past work. Even if you don't see your business type listed, please don't hesitate to reach out.</p>
-                
-                <p>We keep a focused list of our top industries online, but our experience and capabilities extend far beyond just what you see there.</p>
+              ))}
             </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- ============== CLOSING CTA ============== -->
-    <section class="ab-cta" aria-labelledby="ab-cta-title">
-        <div class="ab-container">
-            <h2 id="ab-cta-title" class="ab-h2">Ready to scale?</h2>
-
-            <p class="ab-cta-text">Whether you're a Fortune 500 or a growing local business, we have the tools to help you succeed.</p>
-
-            <div class="ab-cta-actions">
-                <a href="https://automate4u.co/contact/" class="ab-btn ab-primary">Book a Free Consultation</a>
-                <a href="/industries" class="ab-btn ab-secondary">View Industries</a>
-            </div>
+      <section className="px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Our point of view"
+            title="AI should make operations easier to run, not harder to supervise."
+            description="The strongest projects combine useful automation with clear ownership, clean integrations, staff adoption, and a practical value case."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {principles.map((item) => (
+              <article key={item.title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <h2 className="text-xl font-extrabold leading-tight text-ink">{item.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{item.text}</p>
+              </article>
+            ))}
+          </div>
         </div>
-    </section>
+      </section>
 
-</div> <!-- /ab-scope -->
-` }} />
-        </>
-    );
+      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
+        <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Why clients talk to us</p>
+            <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[42px]">
+              We help teams move from AI curiosity to a controlled first workflow.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-muted">
+              Many teams know AI can help, but they do not want an expensive experiment or a tool their staff will not use. We help identify the first workflow worth automating, define the controls, connect the systems, and measure whether it worked.
+            </p>
+          </div>
+          <div className="grid gap-3">
+            {[
+              "Missed calls and slow response times",
+              "Manual quote, intake, support, or admin workflows",
+              "Disconnected CRM, calendar, inbox, and reporting processes",
+              "Need for AI safety, monitoring, and human approvals",
+            ].map((item) => (
+              <p key={item} className="rounded-lg border border-card-border bg-white px-4 py-3 text-sm font-semibold leading-6 text-ink">
+                {item}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <AssessmentCTA sourcePage="/about/overview" ctaLocation="about_overview_assessment" />
+    </main>
+  );
 }

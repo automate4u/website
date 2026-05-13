@@ -67,6 +67,7 @@ export default function Header() {
         about: [
             { name: "Overview", href: "/about/overview" },
             { name: "Our Mission", href: "/about/our-mission" },
+            { name: "Our Team", href: "/about/our-team" },
             { name: "How We Work", href: "/about/how-we-work" },
         ]
     };

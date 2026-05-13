@@ -73,6 +73,7 @@ export default function TechnologyMediaPage() {
         "Measure time saved, backlog reduced, routing accuracy, draft acceptance, and reporting visibility.",
         "Keep expert review for customer commitments, public content, technical claims, and brand-sensitive outputs.",
       ]}
+      proofStorySlugs={["technology-media-workflow", "marketing-content-operations"]}
       sourcePage="/industries/technology-media"
       ctaLocation="technology_media_assessment"
     />

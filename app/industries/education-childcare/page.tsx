@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ProofStorySection from "@/components/proof/ProofStorySection";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import SectionHeader from "@/components/sections/SectionHeader";
 
@@ -360,6 +361,15 @@ export default function EducationChildcarePage() {
           </aside>
         </div>
       </section>
+
+      <ProofStorySection
+        storySlugs={["daycare-front-desk-voice", "ai-roadmap-value-realization"]}
+        eyebrow="Representative proof patterns"
+        title="Education and childcare automation should prove safety, clarity, and staff control."
+        description="These examples focus on routine communication, approved responses, sensitive handoffs, and the measurable operating signals that make cautious rollout easier."
+        compact
+        className="border-y border-card-border bg-[#f8fbfa]"
+      />
 
       <AssessmentCTA sourcePage="/industries/education-childcare" ctaLocation="education_childcare_assessment" />
     </div>

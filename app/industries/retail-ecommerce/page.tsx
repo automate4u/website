@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ProofStorySection from "@/components/proof/ProofStorySection";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import SectionHeader from "@/components/sections/SectionHeader";
 
@@ -350,6 +351,15 @@ export default function RetailEcommercePage() {
           </aside>
         </div>
       </section>
+
+      <ProofStorySection
+        storySlugs={["retail-support-order-agent", "marketing-content-operations"]}
+        eyebrow="Representative proof patterns"
+        title="Retail proof should connect support load, brand control, and measurable follow-up."
+        description="These examples show how customer messaging, order context, marketing output, approval queues, and reporting can reduce repetitive work without weakening trust."
+        compact
+        className="border-y border-card-border bg-[#f8fbfa]"
+      />
 
       <AssessmentCTA sourcePage="/industries/retail-ecommerce" ctaLocation="retail_ecommerce_assessment" />
     </div>

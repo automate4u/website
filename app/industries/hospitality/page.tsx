@@ -73,6 +73,7 @@ export default function HospitalityPage() {
         "Measure response time, requests routed, staff interruptions reduced, guest satisfaction signals, and escalation quality.",
         "Keep emotional, VIP, refund, and safety-related cases under human control.",
       ]}
+      proofStorySlugs={["hospitality-guest-response", "managed-ai-operations-rhythm"]}
       sourcePage="/industries/hospitality"
       ctaLocation="hospitality_assessment"
     />

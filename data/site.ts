@@ -14,6 +14,8 @@ export const siteConfig = {
 export const staticRoutes = [
   "/",
   "/contact",
+  "/privacy",
+  "/terms",
   "/core-services",
   "/core-services/ai-voice",
   "/core-services/ai-agents",
@@ -44,5 +46,6 @@ export const staticRoutes = [
   "/industries/technology-media",
   "/about/overview",
   "/about/our-mission",
+  "/about/our-team",
   "/about/how-we-work",
 ];
