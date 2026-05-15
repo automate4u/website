@@ -26,9 +26,6 @@ export default function Page() {
     <main className="min-h-screen bg-white">
       <section className="bg-[#051C2C] px-4 py-16 text-white md:py-24">
         <div className="mx-auto max-w-[980px]">
-          <p className="mb-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">
-            Our mission
-          </p>
           <h1 className="text-[38px] font-extrabold leading-[1.06] tracking-[-0.02em] md:text-[58px]">
             Help businesses automate repetitive work so people can focus on higher-value work.
           </h1>

@@ -90,9 +90,6 @@ export default function Home() {
       <section className="relative overflow-hidden bg-white px-4 py-12 md:py-[72px]" aria-labelledby="home-hero-title">
         <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
-            <p className="mb-4 inline-flex rounded-full bg-[#e9f9f3] px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#169b78]">
-              AI voice, agents, and workflow automation
-            </p>
             <h1 id="home-hero-title" className="max-w-[760px] text-[36px] font-extrabold leading-[1.06] tracking-[-0.02em] text-ink md:text-[54px]">
               We automate the conversations and workflows that slow your business down.
             </h1>
@@ -208,7 +205,7 @@ export default function Home() {
         </div>
       </section>
 
-      <ProofStorySection />
+      <ProofStorySection filterable />
 
       <section className="bg-[#f8fbfa] px-4 py-14 md:py-20" aria-labelledby="services-title">
         <div className="mx-auto max-w-[1280px]">

@@ -161,9 +161,6 @@ export default function DaycareVoiceAgentPage() {
       <section className="relative overflow-hidden bg-white px-4 py-12 md:py-[72px]" aria-labelledby="daycare-title">
         <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <div>
-            <p className="mb-4 inline-flex rounded-full bg-[#e9f9f3] px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">
-              Daycare Voice Agent
-            </p>
             <h1 id="daycare-title" className="max-w-[780px] text-[34px] font-extrabold leading-[1.08] tracking-[-0.01em] text-ink md:text-[52px]">
               A smarter front desk experience for growing daycare organizations.
             </h1>

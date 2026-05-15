@@ -112,9 +112,6 @@ export default function ManufacturingAcceleratorPage() {
       <section className="relative overflow-hidden bg-white px-4 py-12 md:py-[72px]" aria-labelledby="manufacturing-title">
         <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <div>
-            <p className="mb-4 inline-flex rounded-full bg-[#e9f9f3] px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">
-              Manufacturing AI Accelerator
-            </p>
             <h1 id="manufacturing-title" className="max-w-[760px] text-[34px] font-extrabold leading-[1.08] tracking-[-0.01em] text-ink md:text-[52px]">
               AI agents for manufacturing customer response, quote intake, and order follow-up.
             </h1>

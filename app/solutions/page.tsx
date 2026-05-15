@@ -39,9 +39,6 @@ export default function SolutionsPage() {
       <section className="bg-white px-4 py-12 md:py-[72px]" aria-labelledby="solutions-title">
         <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <div>
-            <p className="mb-4 inline-flex rounded-full bg-[#e9f9f3] px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">
-              Solutions
-            </p>
             <h1 id="solutions-title" className="max-w-[760px] text-[34px] font-extrabold leading-[1.08] tracking-[-0.01em] text-ink md:text-[52px]">
               Focused AI implementations for the workflows your team already handles every day.
             </h1>
@@ -94,8 +91,8 @@ export default function SolutionsPage() {
         <div className="mx-auto max-w-[1180px]">
           <SectionHeader
             eyebrow="Available solution pages"
-            title="See the first focused implementation pattern."
-            description="We will expand this library as each industry page gets a clear solution path. For now, the daycare voice agent is the benchmark for calm, operational, buyer-facing solution pages."
+            title="Start with a focused implementation."
+            description="Explore practical solution pages that show how Automate4U applies AI voice, agents, messaging, and workflow automation to a specific operating problem."
           />
           <div className="mt-10 grid gap-5 md:grid-cols-2">
             {solutions.map((solution) => (
@@ -119,12 +116,12 @@ export default function SolutionsPage() {
       <section className="bg-[#051C2C] px-4 py-14 text-white md:py-20" aria-labelledby="roadmap-title">
         <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#87e6ce]">Planned solution library</p>
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#87e6ce]">Solution paths</p>
             <h2 id="roadmap-title" className="mt-3 text-[28px] font-extrabold leading-tight tracking-[-0.01em] md:text-[38px]">
-              Each new solution should make one specific workflow easier to trust, buy, and deploy.
+              Focused solutions make one specific workflow easier to trust, buy, and deploy.
             </h2>
             <p className="mt-5 text-base leading-8 text-white/72">
-              The library should grow around real buyer curiosity: what the agent does, what systems it touches, what it costs, what stays human, and how the first pilot proves value.
+              Each solution explains what the agent does, what systems it touches, what it costs, what stays human, and how the first pilot proves value.
             </p>
           </div>
           <div className="grid gap-3">

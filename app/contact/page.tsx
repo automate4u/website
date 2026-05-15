@@ -14,10 +14,7 @@ export default function ContactPage() {
     <>
       <section className="bg-white px-4 py-16 text-center text-ink" aria-labelledby="contact-title">
         <div className="mx-auto max-w-[880px]">
-          <p className="inline-flex rounded-full bg-[#e9f9f3] px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#169b78]">
-            Get Free Assessment
-          </p>
-          <h1 id="contact-title" className="mx-auto mt-4 max-w-[780px] text-[34px] font-extrabold leading-[1.1] tracking-[-0.02em] md:text-[52px]">
+          <h1 id="contact-title" className="mx-auto max-w-[780px] text-[34px] font-extrabold leading-[1.1] tracking-[-0.02em] md:text-[52px]">
             Start with the workflow that is costing your team the most time.
           </h1>
           <p className="mx-auto mt-5 max-w-[680px] text-base leading-7 text-muted md:text-lg">

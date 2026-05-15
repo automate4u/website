@@ -3,6 +3,25 @@ import Image from "next/image";
 import { howWeBuildPillars } from "@/data/how-we-build";
 import { serviceOffers } from "@/data/service-offers";
 
+const automationWords = [
+    "calls",
+    "emails",
+    "messages",
+    "workflows",
+    "follow-up",
+    "data sync",
+    "admin work",
+    "customer support",
+    "lead response",
+    "quote requests",
+    "bookings",
+    "intake",
+    "reporting",
+    "handoffs",
+    "content tasks",
+    "CRM updates",
+];
+
 export default function Footer() {
     return (
         <footer className="bg-slate-50 border-t border-card-border pt-16 pb-8 text-ink">
@@ -10,12 +29,26 @@ export default function Footer() {
                 <div className="grid gap-8 md:grid-cols-5 lg:gap-12">
 
                     <div className="col-span-1 md:col-span-1 lg:col-span-1">
+                        <p
+                            className="mb-4 text-[24px] font-extrabold leading-[1.03] tracking-[-0.01em] text-ink"
+                            aria-label="We automate calls, emails, messages, workflows, follow-up, data sync, admin work, and customer support for you."
+                        >
+                            <span className="block">We automate</span>
+                            <span className="footer-word-fader my-1 block" aria-hidden="true">
+                                {automationWords.map((word, index) => (
+                                    <span key={word} style={{ animationDelay: `${index * 2}s` }}>
+                                        {word}
+                                    </span>
+                                ))}
+                            </span>
+                            <span className="block">for you.</span>
+                        </p>
+                        <p className="text-muted text-sm leading-relaxed mb-6">
+                            Practical AI automation for the conversations, tasks, and system handoffs that slow growing teams down.
+                        </p>
                         <Link href="/" className="block mb-6">
                             <Image src="/images/logos/a4u-logo.svg" alt="Automate4U Logo" width={160} height={32} className="h-6 w-auto" />
                         </Link>
-                        <p className="text-muted text-sm leading-relaxed mb-6">
-                            Empowering businesses with AI-driven automation, custom software, and seamless integrations.
-                        </p>
                     </div>
 
                     <div>

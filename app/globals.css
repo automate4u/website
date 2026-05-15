@@ -36,7 +36,7 @@
   --card-border: #E7EDF2;
 }
 
-/* Force light mode for now to match original design */
+/* Keep the current brand palette consistent across user color-scheme settings. */
 /* @media (prefers-color-scheme: dark) { ... } removed */
 
 body {
@@ -49,6 +49,55 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+.footer-word-fader {
+  position: relative;
+  display: block;
+  min-width: 9.5ch;
+  height: 1.12em;
+  color: #167f65;
+  white-space: nowrap;
+}
+
+.footer-word-fader span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transform: translateY(0.25em);
+  animation: footer-word-fade 32s ease-in-out infinite;
+}
+
+@keyframes footer-word-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(0.25em);
+  }
+
+  1.4%,
+  4.8% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  6.2%,
+  100% {
+    opacity: 0;
+    transform: translateY(-0.2em);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-word-fader span {
+    animation: none;
+    opacity: 0;
+    transform: none;
+  }
+
+  .footer-word-fader span:first-child {
+    opacity: 1;
   }
 }
 

@@ -67,14 +67,14 @@ const solutionCards = [
   {
     title: "Enrollment Follow-Up Agent",
     description:
-      "A future solution pattern for prospective families, learners, and students who need timely next steps after forms, calls, open houses, or inquiries.",
-    cta: "Planned pattern",
+      "A common starting point for prospective families, learners, and students who need timely next steps after forms, calls, open houses, or inquiries.",
+    cta: "Discuss this path",
   },
   {
     title: "Message Triage Agent",
     description:
-      "A future solution pattern for shared inboxes, parent messages, student questions, staff routing, approvals, and documented escalation.",
-    cta: "Planned pattern",
+      "A practical workflow for shared inboxes, parent messages, student questions, staff routing, approvals, and documented escalation.",
+    cta: "Discuss this path",
   },
 ];
 
@@ -133,9 +133,6 @@ export default function EducationChildcarePage() {
       <section className="relative overflow-hidden bg-white px-4 py-12 md:py-[72px]" aria-labelledby="education-childcare-title">
         <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <div>
-            <p className="mb-4 inline-flex rounded-full bg-[#e9f9f3] px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">
-              Education & Childcare
-            </p>
             <h1 id="education-childcare-title" className="max-w-[780px] text-[34px] font-extrabold leading-[1.08] tracking-[-0.01em] text-ink md:text-[52px]">
               AI operations support for families, learners, enrollment, and admin workflows.
             </h1>

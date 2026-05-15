@@ -83,7 +83,6 @@ type IndustryAcceleratorPageProps = {
 };
 
 export default function IndustryAcceleratorPage({
-  eyebrow,
   title,
   description,
   primaryCta,
@@ -125,9 +124,6 @@ export default function IndustryAcceleratorPage({
       <section className="relative overflow-hidden bg-white px-4 py-12 md:py-[72px]" aria-labelledby="industry-title">
         <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <div>
-            <p className="mb-4 inline-flex rounded-full bg-[#e9f9f3] px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">
-              {eyebrow}
-            </p>
             <h1 id="industry-title" className="max-w-[790px] text-[34px] font-extrabold leading-[1.08] tracking-[-0.01em] text-ink md:text-[52px]">
               {title}
             </h1>

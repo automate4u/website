@@ -104,9 +104,6 @@ export default function SecurityMonitoringAISafetyPage() {
       <section className="bg-[#051C2C] px-4 py-12 text-white md:py-[72px]">
         <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <div>
-            <p className="mb-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">
-              Security, Monitoring & AI Safety
-            </p>
             <h1 className="max-w-[760px] text-[36px] font-extrabold leading-[1.06] tracking-[-0.02em] md:text-[54px]">
               Build AI systems your team can control, inspect, and trust.
             </h1>

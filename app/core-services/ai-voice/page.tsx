@@ -248,8 +248,7 @@ function EventLog({ callActive }: { callActive: boolean }) {
     <div className="rounded-lg border border-white/12 bg-white/[0.07] p-5 text-white shadow-[0_18px_55px_rgba(0,0,0,0.18)]">
       <div className="mb-5 flex items-center justify-between gap-4">
         <div>
-          <p className="text-xs font-extrabold uppercase tracking-[0.12em] text-[#7df0d1]">Back-office event log</p>
-          <h3 className="mt-2 text-2xl font-extrabold">What happens after the call</h3>
+          <h3 className="text-2xl font-extrabold">What happens after the call</h3>
         </div>
         <span className="rounded-full border border-white/12 bg-white/10 px-3 py-1 text-xs font-bold text-white/80">
           {callActive ? "Live call" : "Demo workflow"}
@@ -373,9 +372,6 @@ export default function AIVoicePage() {
       <section className="relative overflow-hidden bg-[#051C2C] px-4 py-12 text-white md:py-[72px]" aria-labelledby="voice-hero-title">
         <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
-            <p className="mb-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">
-              AI Voice Agents
-            </p>
             <h1 id="voice-hero-title" className="max-w-[760px] text-[36px] font-extrabold leading-[1.06] tracking-[-0.02em] md:text-[54px]">
               AI voice that answers calls and moves the work forward.
             </h1>
@@ -441,9 +437,6 @@ export default function AIVoicePage() {
       <section id="voice-demo" className="scroll-mt-28 bg-[#051C2C] px-4 py-14 text-white md:py-20" aria-labelledby="voice-demo-title">
         <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
-            <p className="mb-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">
-              Live demo
-            </p>
             <h2 id="voice-demo-title" className="text-[30px] font-extrabold leading-[1.1] tracking-[-0.01em] md:text-[40px]">
               Test the voice experience, then inspect the operational workflow.
             </h2>

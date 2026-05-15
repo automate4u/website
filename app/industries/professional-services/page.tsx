@@ -75,8 +75,8 @@ const servicePaths = [
   {
     title: "Document follow-up agent",
     description:
-      "A future solution pattern for recurring paperwork, intake forms, reminders, approvals, and client-status visibility.",
-    cta: "Planned solution pattern",
+      "A focused workflow for recurring paperwork, intake forms, reminders, approvals, and client-status visibility.",
+    cta: "Discuss this path",
   },
 ];
 
@@ -135,9 +135,6 @@ export default function ProfessionalServicesPage() {
       <section className="relative overflow-hidden bg-white px-4 py-12 md:py-[72px]" aria-labelledby="professional-services-title">
         <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <div>
-            <p className="mb-4 inline-flex rounded-full bg-[#e9f9f3] px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">
-              Professional Services
-            </p>
             <h1 id="professional-services-title" className="max-w-[780px] text-[34px] font-extrabold leading-[1.08] tracking-[-0.01em] text-ink md:text-[52px]">
               AI intake and follow-up systems for appointment-driven service teams.
             </h1>

@@ -40,9 +40,6 @@ export default function Page() {
       <section className="bg-[#051C2C] px-4 py-16 text-white md:py-24">
         <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
-            <p className="mb-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">
-              How we work
-            </p>
             <h1 className="max-w-[760px] text-[38px] font-extrabold leading-[1.06] tracking-[-0.02em] md:text-[58px]">
               We start with the workflow, then build the AI system around it.
             </h1>

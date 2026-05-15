@@ -12,10 +12,7 @@ export default function ContactForm({
     return (
         <section id="contact" className="py-12 px-4 bg-white text-ink text-left" aria-labelledby="qual-title">
             <div className="max-w-[960px] mx-auto">
-                <p className="inline-flex rounded-full bg-[#e9f9f3] px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#169b78]">
-                    Free AI Workflow Assessment
-                </p>
-                <h2 id="qual-title" className="text-[24px] md:text-[30px] lg:text-[36px] leading-[1.1] tracking-[-0.02em] font-bold my-4 text-balance">
+                <h2 id="qual-title" className="text-[24px] md:text-[30px] lg:text-[36px] leading-[1.1] tracking-[-0.02em] font-bold mb-4 text-balance">
                     Find the first workflow worth automating.
                 </h2>
                 <p className="text-muted text-base mb-8 max-w-[70ch]">

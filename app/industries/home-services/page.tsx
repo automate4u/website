@@ -69,13 +69,13 @@ const servicePaths = [
     title: "Dispatch workflow agent",
     description:
       "A focused workflow pattern for job intake, calendar checks, technician handoff, customer confirmation, and operational logging.",
-    cta: "Planned solution pattern",
+    cta: "Discuss this path",
   },
   {
     title: "Sales follow-up agent",
     description:
       "A follow-up workflow for open estimates, maintenance plans, abandoned forms, financing questions, and review or referral requests.",
-    cta: "Planned solution pattern",
+    cta: "Discuss this path",
   },
 ];
 
@@ -134,9 +134,6 @@ export default function HomeServicesPage() {
       <section className="relative overflow-hidden bg-white px-4 py-12 md:py-[72px]" aria-labelledby="home-services-title">
         <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <div>
-            <p className="mb-4 inline-flex rounded-full bg-[#e9f9f3] px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">
-              Home Services
-            </p>
             <h1 id="home-services-title" className="max-w-[780px] text-[34px] font-extrabold leading-[1.08] tracking-[-0.01em] text-ink md:text-[52px]">
               AI voice and workflow automation for calls, booking, dispatch, and follow-up.
             </h1>

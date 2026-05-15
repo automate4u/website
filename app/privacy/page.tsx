@@ -57,9 +57,6 @@ export default function PrivacyPage() {
     <main className="min-h-screen bg-white">
       <section className="bg-[#051C2C] px-4 py-16 text-white md:py-24">
         <div className="mx-auto max-w-[980px]">
-          <p className="mb-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">
-            Privacy
-          </p>
           <h1 className="text-[38px] font-extrabold leading-tight tracking-[-0.02em] md:text-[56px]">
             Privacy Policy
           </h1>
