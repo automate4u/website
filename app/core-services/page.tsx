@@ -3,12 +3,9 @@ import Link from "next/link";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import SectionHeader from "@/components/sections/SectionHeader";
 import { serviceOffers } from "@/data/service-offers";
+import { metadataForPath } from "@/lib/route-metadata";
 
-export const metadata: Metadata = {
-  title: "AI Automation Services | Automate4U",
-  description:
-    "Explore Automate4U services for AI voice agents, AI workflow agents, AI chat, marketing automation, managed AI operations, strategy, and custom AI software.",
-};
+export const metadata: Metadata = metadataForPath("/core-services");
 
 const serviceFit = [
   {

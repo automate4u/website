@@ -22,6 +22,8 @@ const readinessChecks = [
   "We can measure time saved, response time, cycle time, or conversion.",
 ];
 
+const aiChatDemoUrl = "https://app.livechatai.com/aibot-iframe/cmgdycnrf0001jx042rasimwz";
+
 function ProofShell({
   eyebrow,
   title,
@@ -50,6 +52,9 @@ function ProofShell({
 }
 
 function AIChatProof() {
+  const [demoActive, setDemoActive] = useState(false);
+  const [demoLoaded, setDemoLoaded] = useState(false);
+
   return (
     <ProofShell
       eyebrow="Chat demo"
@@ -59,15 +64,65 @@ function AIChatProof() {
       <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-start">
         <div>
           <p className="mb-3 text-sm font-bold text-ink">Basic FAQ chatbot example</p>
-          <div className="h-[560px] overflow-hidden rounded-lg border border-card-border bg-[#f8fbfa] shadow-[0_16px_48px_rgba(15,23,32,0.08)]">
-            <iframe
-              src="https://app.livechatai.com/aibot-iframe/cmgdycnrf0001jx042rasimwz"
-              title="AI chatbot demo"
-              allow="microphone"
-              loading="lazy"
-              className="h-[590px] w-full border-0"
-              onLoad={() => trackEvent("site_chat_demo_viewed", { page: "/core-services/ai-chat", ctaLocation: "chat_demo_iframe" })}
-            />
+          <div className="relative h-[560px] overflow-hidden rounded-lg border border-card-border bg-[#f8fbfa] shadow-[0_16px_48px_rgba(15,23,32,0.08)]">
+            {!demoActive ? (
+              <div className="absolute inset-0 z-20 flex items-center justify-center bg-[#f8fbfa] p-5">
+                <div className="w-full max-w-[420px] rounded-lg border border-card-border bg-white p-5 shadow-[0_12px_34px_rgba(15,23,32,0.08)]">
+                  <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Demo preview</p>
+                  <h3 className="mt-3 text-2xl font-extrabold leading-tight text-ink">A simple chatbot surface is available to try.</h3>
+                  <p className="mt-3 text-sm leading-6 text-muted">
+                    The live demo is served by an external provider, so we load it only when requested. A production build connects this surface to approved knowledge, CRM or ticketing, staff handoff, and reporting.
+                  </p>
+                  <div className="mt-5 grid gap-2 text-sm font-semibold text-ink">
+                    <span className="rounded-md bg-[#f8fbfa] px-3 py-2">Approved answer boundaries</span>
+                    <span className="rounded-md bg-[#f8fbfa] px-3 py-2">Lead or support intent captured</span>
+                    <span className="rounded-md bg-[#f8fbfa] px-3 py-2">Human handoff with transcript</span>
+                  </div>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setDemoActive(true);
+                        trackEvent("site_chat_demo_started", { page: "/core-services/ai-chat", ctaLocation: "chat_demo_preview" });
+                      }}
+                      className="inline-flex rounded-full bg-accent px-4 py-2 text-sm font-extrabold text-white hover:bg-btn-hover"
+                    >
+                      Load live demo
+                    </button>
+                    <a
+                      href={aiChatDemoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex rounded-full border border-card-border bg-white px-4 py-2 text-sm font-extrabold text-ink hover:border-[#1db993]/50"
+                    >
+                      Open in new tab
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ) : null}
+            {demoActive ? (
+              <>
+                {!demoLoaded ? (
+                  <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#f8fbfa] p-5">
+                    <div className="rounded-lg border border-card-border bg-white px-5 py-4 text-sm font-bold text-ink shadow-[0_12px_34px_rgba(15,23,32,0.08)]">
+                      Loading live demo...
+                    </div>
+                  </div>
+                ) : null}
+                <iframe
+                  src={aiChatDemoUrl}
+                  title="AI chatbot demo"
+                  allow="microphone"
+                  loading="lazy"
+                  className={`h-[590px] w-full border-0 transition-opacity duration-300 ${demoLoaded ? "opacity-100" : "opacity-0"}`}
+                  onLoad={() => {
+                    setDemoLoaded(true);
+                    trackEvent("site_chat_demo_viewed", { page: "/core-services/ai-chat", ctaLocation: "chat_demo_iframe" });
+                  }}
+                />
+              </>
+            ) : null}
           </div>
           <p className="mt-3 text-sm leading-6 text-muted">This is a simple demo surface. A production implementation connects to approved knowledge, business systems, reporting, and staff handoff.</p>
         </div>

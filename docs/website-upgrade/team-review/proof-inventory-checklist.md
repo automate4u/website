@@ -164,8 +164,8 @@ Before launch, the homepage should have at least:
 
 ## Related Documents
 
-- `05-content-proof-and-wow-factor.md`: proof and wow-factor plan.
-- `12-expertise-demonstration-experiences.md`: demos and interactive proof modules.
-- `14-labor-efficiency-and-human-redeployment.md`: labor-efficiency claims.
-- `13-smb-spend-confidence-strategy.md`: buyer confidence and staged investment.
-- `16-cta-lead-routing-analytics-and-pricing.md`: pricing, CTA, and lead-routing decisions that proof should support.
+- `../implementation-reference/05-content-proof-and-wow-factor.md`: proof and wow-factor plan.
+- `../implementation-reference/12-expertise-demonstration-experiences.md`: demos and interactive proof modules.
+- `../implementation-reference/14-labor-efficiency-and-human-redeployment.md`: labor-efficiency claims.
+- `../implementation-reference/13-smb-spend-confidence-strategy.md`: buyer confidence and staged investment.
+- `cta-lead-routing-analytics-and-pricing.md`: pricing, CTA, and lead-routing decisions that proof should support.

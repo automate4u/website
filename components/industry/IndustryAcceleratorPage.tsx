@@ -239,7 +239,7 @@ export default function IndustryAcceleratorPage({
       {proofStorySlugs?.length ? (
         <ProofStorySection
           storySlugs={proofStorySlugs}
-          eyebrow="Representative proof patterns"
+          eyebrow="Workflow examples"
           title="The first win should connect the conversation to a measurable operating outcome."
           description="These examples show the kind of workflow evidence we look for during an assessment: what gets captured, which systems are touched, where humans stay in control, and how value is measured."
           compact

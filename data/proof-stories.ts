@@ -16,16 +16,16 @@ export type ProofStory = {
 export const proofStories: ProofStory[] = [
   {
     slug: "manufacturing-response-agent",
-    label: "Representative manufacturing workflow",
-    title: "Parts, availability, quoting, and order-response agent",
+    label: "Manufacturing response workflow",
+    title: "Parts, availability, quoting, and order-response workflow",
     context:
-      "Industrial teams often receive repetitive customer questions about part availability, quote status, order timing, and next steps while sales and operations staff are already busy.",
+      "Industrial teams often receive repetitive customer questions about part availability, quote status, order timing, substitutions, and next steps while sales and operations staff are already busy.",
     workflow:
       "An email or chat request is classified, checked against approved inventory/order context, summarized, routed to the right owner, and prepared for reply or quote follow-up.",
     connectedActions: [
       "Look up approved product, inventory, or order context",
       "Create or update CRM activity",
-      "Draft response or quote follow-up",
+      "Draft a response or quote follow-up for review",
       "Create a task for sales, parts, or operations",
     ],
     humanControls: [
@@ -46,12 +46,12 @@ export const proofStories: ProofStory[] = [
   },
   {
     slug: "daycare-front-desk-voice",
-    label: "Representative education workflow",
+    label: "Childcare front-desk workflow",
     title: "Daycare front-desk voice assistant with staff-controlled escalation",
     context:
       "Childcare teams field repetitive calls about enrollment, tours, absences, pickup notices, hours, program availability, and policy questions during already busy parts of the day.",
     workflow:
-      "A voice assistant answers approved routine questions, captures parent context, routes notices to the right location or classroom, and escalates sensitive or policy-bound cases to staff.",
+      "A voice assistant answers approved routine questions, captures parent context, routes notices to the right location or classroom, and escalates sensitive or policy-bound cases before action is taken.",
     connectedActions: [
       "Capture caller, child, location, request type, and urgency",
       "Route enrollment or tour inquiries",
@@ -66,7 +66,7 @@ export const proofStories: ProofStory[] = [
     metrics: [
       "Routine calls handled",
       "Missed calls reduced",
-      "Staff interruptions reduced",
+      "Front-desk interruptions reduced",
       "Sensitive escalations logged",
     ],
     links: [
@@ -76,12 +76,12 @@ export const proofStories: ProofStory[] = [
   },
   {
     slug: "home-services-dispatch",
-    label: "Representative home services workflow",
+    label: "Home services dispatch workflow",
     title: "Missed-call recovery, booking, dispatch intake, and quote follow-up",
     context:
       "Home service teams lose opportunities when calls arrive after hours, while staff are on another call, or when technicians and office teams are coordinating urgent requests.",
     workflow:
-      "A voice or chat workflow captures job details, service location, urgency, preferred times, and equipment notes, then creates the booking path, dispatch task, or quote follow-up.",
+      "A voice or chat workflow captures job details, service location, urgency, preferred times, and equipment notes, then creates the booking path, dispatch task, or quote follow-up for the office team.",
     connectedActions: [
       "Qualify service need and urgency",
       "Create calendar, CRM, or dispatch task",
@@ -106,12 +106,12 @@ export const proofStories: ProofStory[] = [
   },
   {
     slug: "marketing-content-operations",
-    label: "Representative marketing workflow",
+    label: "Marketing operations workflow",
     title: "Content drafting, approval queue, scheduling, and reporting",
     context:
       "Small teams often have enough ideas but not enough time to turn them into reviewed posts, emails, nurture sequences, campaign assets, and follow-up tasks.",
     workflow:
-      "Approved source material is turned into drafts, routed through brand or owner review, scheduled only after approval, and reported against output and lead movement.",
+      "Approved source material is turned into drafts, routed through brand or owner review, scheduled only after approval, and reported against output, engagement, and lead movement.",
     connectedActions: [
       "Draft posts, emails, captions, FAQs, or campaign variants",
       "Create review tasks and approval queues",
@@ -136,12 +136,12 @@ export const proofStories: ProofStory[] = [
   },
   {
     slug: "retail-support-order-agent",
-    label: "Representative retail workflow",
+    label: "Retail support workflow",
     title: "Product questions, order status, returns, and support triage",
     context:
       "Retail and ecommerce teams often answer the same product, sizing, order, return, delivery, and promo questions across chat, email, social, and support queues.",
     workflow:
-      "A customer message is matched to approved product and policy context, routed by intent, summarized for staff when needed, and logged against support or CRM records.",
+      "A customer message is matched to approved product, order, and policy context, routed by intent, summarized for staff when needed, and logged against support or CRM records.",
     connectedActions: [
       "Answer from approved FAQs, product data, and policy rules",
       "Create or update support ticket context",
@@ -166,7 +166,7 @@ export const proofStories: ProofStory[] = [
   },
   {
     slug: "professional-services-intake",
-    label: "Representative professional services workflow",
+    label: "Professional services intake workflow",
     title: "Intake, booking, document follow-up, and staff handoff",
     context:
       "Appointment-driven teams lose capacity when every inquiry requires manual intake, scheduling coordination, missing-information follow-up, and staff routing.",
@@ -196,7 +196,7 @@ export const proofStories: ProofStory[] = [
   },
   {
     slug: "healthcare-front-desk",
-    label: "Representative healthcare workflow",
+    label: "Healthcare front-desk workflow",
     title: "Front-desk automation with conservative escalation",
     context:
       "Clinics and wellness teams need faster handling for appointment requests, reminders, forms, and routine questions while protecting privacy and clinical judgment.",
@@ -226,7 +226,7 @@ export const proofStories: ProofStory[] = [
   },
   {
     slug: "custom-operations-workbench",
-    label: "Representative custom software workflow",
+    label: "Custom software workflow",
     title: "AI-enabled workbench for review, approvals, and operating visibility",
     context:
       "Some workflows need more than automations behind the scenes. Staff need a clear interface for queues, summaries, approvals, exceptions, and operational visibility.",
@@ -256,7 +256,7 @@ export const proofStories: ProofStory[] = [
   },
   {
     slug: "managed-ai-operations-rhythm",
-    label: "Representative managed operations workflow",
+    label: "Managed AI operations workflow",
     title: "Monitoring, review, tuning, and monthly value reporting",
     context:
       "Once AI touches customer communication, revenue follow-up, or operational handoffs, the system needs ownership after launch.",
@@ -286,7 +286,7 @@ export const proofStories: ProofStory[] = [
   },
   {
     slug: "ai-roadmap-value-realization",
-    label: "Representative strategy workflow",
+    label: "AI roadmap workflow",
     title: "Workflow assessment, pilot selection, and 30/60/90-day value roadmap",
     context:
       "Many teams know they should explore AI but are cautious about spend, operational risk, and choosing the wrong first workflow.",
@@ -316,7 +316,7 @@ export const proofStories: ProofStory[] = [
   },
   {
     slug: "real-estate-lead-response",
-    label: "Representative real estate workflow",
+    label: "Real estate lead workflow",
     title: "Speed-to-lead, showing request, CRM update, and agent handoff",
     context:
       "Real estate teams lose opportunities when listing inquiries, missed calls, portal leads, and showing requests sit without fast qualification and follow-up.",
@@ -346,7 +346,7 @@ export const proofStories: ProofStory[] = [
   },
   {
     slug: "hospitality-guest-response",
-    label: "Representative hospitality workflow",
+    label: "Hospitality guest workflow",
     title: "Guest questions, booking support, request routing, and service recovery",
     context:
       "Hospitality teams field questions before, during, and after a visit while staff are also supporting guests in person.",
@@ -376,7 +376,7 @@ export const proofStories: ProofStory[] = [
   },
   {
     slug: "technology-media-workflow",
-    label: "Representative technology and media workflow",
+    label: "Technology and media workflow",
     title: "Support triage, content workflow, customer update, and reporting",
     context:
       "Technology and media teams often need to turn messy inputs into clear tickets, briefs, summaries, drafts, tasks, and status reports without lowering quality.",
@@ -406,7 +406,7 @@ export const proofStories: ProofStory[] = [
   },
   {
     slug: "financial-document-intake",
-    label: "Representative financial services workflow",
+    label: "Financial services intake workflow",
     title: "Client intake, document follow-up, status routing, and advisor handoff",
     context:
       "Financial service teams often need to chase documents, clarify intake details, answer process questions, and route cases without automating regulated judgment.",

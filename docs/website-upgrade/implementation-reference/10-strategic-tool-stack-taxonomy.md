@@ -278,6 +278,6 @@ Avoid:
 
 ## Related Documents
 
-- `03-site-architecture-and-offers.md`: where integration maps appear.
+- `../team-review/site-architecture-and-offers.md`: where integration maps appear.
 - `05-content-proof-and-wow-factor.md`: how tools support visitor trust and workflow clarity.
 - `08-execution-contracts.md`: content schemas that reference `connectedSystems`.

@@ -364,7 +364,7 @@ export default function EducationChildcarePage() {
 
       <ProofStorySection
         storySlugs={["daycare-front-desk-voice", "ai-roadmap-value-realization"]}
-        eyebrow="Representative proof patterns"
+        eyebrow="Workflow examples"
         title="Education and childcare automation should prove safety, clarity, and staff control."
         description="These examples focus on routine communication, approved responses, sensitive handoffs, and the measurable operating signals that make cautious rollout easier."
         compact

@@ -309,7 +309,7 @@ export default function ManufacturingAcceleratorPage() {
 
       <ProofStorySection
         storySlugs={["manufacturing-response-agent", "custom-operations-workbench"]}
-        eyebrow="Representative proof patterns"
+        eyebrow="Workflow examples"
         title="Manufacturing proof should show faster response without risky commitments."
         description="These examples show the type of workflow evidence we validate during assessment: what gets captured, which systems are checked, where humans approve, and which operating metrics improve."
         compact

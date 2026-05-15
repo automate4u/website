@@ -489,10 +489,10 @@ Recommended AI Voice decision:
 
 ## Related Documents
 
-- `03-site-architecture-and-offers.md`: broader navigation and offer ladder.
-- `04-implementation-roadmap.md`: active build sequence.
-- `06-technical-remediation.md`: technical cleanup requirements.
-- `08-execution-contracts.md`: content schemas, component APIs, forms, analytics, and test contracts.
-- `11-creative-experience-direction.md`: visual and tonal direction.
-- `16-cta-lead-routing-analytics-and-pricing.md`: CTA, HubSpot, notifications, analytics, and pricing guidance.
-- `17-pricing-transparency-and-cost-model.md`: cost model and public pricing transparency rules.
+- `site-architecture-and-offers.md`: broader navigation and offer ladder.
+- `../implementation-reference/04-implementation-roadmap.md`: active build sequence.
+- `../implementation-reference/06-technical-remediation.md`: technical cleanup requirements.
+- `../implementation-reference/08-execution-contracts.md`: content schemas, component APIs, forms, analytics, and test contracts.
+- `creative-experience-direction.md`: visual and tonal direction.
+- `cta-lead-routing-analytics-and-pricing.md`: CTA, HubSpot, notifications, analytics, and pricing guidance.
+- `pricing-transparency-and-cost-model.md`: cost model and public pricing transparency rules.

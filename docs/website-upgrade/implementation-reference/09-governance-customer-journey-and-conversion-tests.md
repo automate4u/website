@@ -191,4 +191,4 @@ The form and primary CTAs are revenue-critical. A deploy should fail if the asse
 - `05-content-proof-and-wow-factor.md`: where governance and first-7-days content should appear.
 - `06-technical-remediation.md`: technical testing requirements.
 - `08-execution-contracts.md`: form and analytics contracts.
-- `16-cta-lead-routing-analytics-and-pricing.md`: CTA and lead-routing decisions.
+- `../team-review/cta-lead-routing-analytics-and-pricing.md`: CTA and lead-routing decisions.

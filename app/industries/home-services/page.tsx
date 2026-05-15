@@ -356,7 +356,7 @@ export default function HomeServicesPage() {
 
       <ProofStorySection
         storySlugs={["home-services-dispatch", "managed-ai-operations-rhythm"]}
-        eyebrow="Representative proof patterns"
+        eyebrow="Workflow examples"
         title="Home services proof should tie fast response to booked work and cleaner dispatch."
         description="These examples show how voice, chat, CRM, calendar, dispatch, follow-up, and human review can work together without over-automating pricing or emergency decisions."
         compact

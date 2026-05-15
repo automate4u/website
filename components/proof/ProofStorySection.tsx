@@ -13,9 +13,9 @@ type ProofStorySectionProps = {
 
 export default function ProofStorySection({
   storySlugs,
-  eyebrow = "NDA-safe proof patterns",
-  title = "Specific workflows, clear controls, and measurable outcomes.",
-  description = "Many client relationships require confidentiality. These representative workflow examples show the kinds of operating problems Automate4U designs around without exposing client identities, proprietary systems, or private implementation details.",
+  eyebrow = "Workflow examples",
+  title = "See the kind of operating work we design around.",
+  description = "These examples are written from real workflow patterns we understand: repeated requests, disconnected systems, human handoffs, and measurable operating outcomes. Client names, proprietary systems, and private implementation details stay protected.",
   compact = false,
   className = "bg-white",
 }: ProofStorySectionProps) {
@@ -38,20 +38,20 @@ export default function ProofStorySection({
 
         <div className={`mt-8 grid gap-5 ${stories.length === 1 ? "" : "lg:grid-cols-2"}`}>
           {stories.map((story) => (
-            <article key={story.slug} className="rounded-lg border border-card-border bg-[#f8fbfa] p-5 shadow-[0_8px_24px_rgba(15,23,32,0.04)] md:p-6">
+            <article key={story.slug} className="rounded-lg border border-card-border bg-[#f8fbfa] p-5 shadow-[0_10px_30px_rgba(15,23,32,0.055)] md:p-6">
               <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">{story.label}</p>
               <h3 className="mt-3 text-2xl font-extrabold leading-tight text-ink">{story.title}</h3>
               <p className="mt-4 text-sm leading-6 text-muted">{story.context}</p>
 
-              <div className="mt-5 rounded-lg border border-card-border bg-white p-4">
-                <p className="text-xs font-extrabold uppercase tracking-[0.08em] text-[#167f65]">Workflow</p>
+              <div className="mt-5 rounded-lg border border-[#cfe9df] bg-white p-4">
+                <p className="text-xs font-extrabold uppercase tracking-[0.08em] text-[#167f65]">How the workflow runs</p>
                 <p className="mt-2 text-sm font-semibold leading-6 text-ink">{story.workflow}</p>
               </div>
 
               <div className={`mt-4 grid gap-4 ${compact ? "md:grid-cols-1 xl:grid-cols-3" : "md:grid-cols-3"}`}>
-                <ProofList title="Connected actions" items={story.connectedActions} />
-                <ProofList title="Human controls" items={story.humanControls} />
-                <ProofList title="Metrics to validate" items={story.metrics} />
+                <ProofList title="What gets connected" items={story.connectedActions} />
+                <ProofList title="Where people stay in control" items={story.humanControls} />
+                <ProofList title="What we measure" items={story.metrics} />
               </div>
 
               <div className="mt-5 flex flex-wrap gap-2">
@@ -66,7 +66,7 @@ export default function ProofStorySection({
         </div>
 
         <div className="mt-8 rounded-lg border border-card-border bg-[#f8fbfa] p-5 text-sm leading-6 text-muted">
-          <strong className="text-ink">Proof standard:</strong> public examples should be anonymous, sanitized, or representative unless a client has explicitly approved named use. Exact metrics should only be published when approved; otherwise the site should show the metrics we measure and validate during implementation.
+          <strong className="text-ink">Confidentiality note:</strong> many automation projects involve private client systems, workflows, and data. Public examples stay anonymous or representative unless a client approves named use. Exact performance metrics should be published only when approved; otherwise we show the metrics we validate during assessment and pilot work.
         </div>
       </div>
     </section>
@@ -79,8 +79,9 @@ function ProofList({ title, items }: { title: string; items: string[] }) {
       <p className="text-xs font-extrabold uppercase tracking-[0.08em] text-[#167f65]">{title}</p>
       <ul className="mt-3 grid gap-2">
         {items.map((item) => (
-          <li key={item} className="text-sm leading-6 text-muted">
-            {item}
+          <li key={item} className="grid grid-cols-[10px_1fr] gap-2 text-sm leading-6 text-muted">
+            <span className="mt-[9px] h-1.5 w-1.5 rounded-full bg-[#1db993]" aria-hidden="true" />
+            <span>{item}</span>
           </li>
         ))}
       </ul>

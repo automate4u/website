@@ -288,7 +288,7 @@ Rules:
 
 - `01-current-site-audit.md`: issues this plan addresses.
 - `04-implementation-roadmap.md`: when to execute this work.
-- `03-site-architecture-and-offers.md`: routes and conversion paths to support.
+- `../team-review/site-architecture-and-offers.md`: routes and conversion paths to support.
 - `08-execution-contracts.md`: content schemas, component APIs, form success behavior, and analytics naming.
 - `09-governance-customer-journey-and-conversion-tests.md`: governance, first-7-days process, and conversion-path testing.
-- `16-cta-lead-routing-analytics-and-pricing.md`: final CTA, lead routing, analytics, and pricing decisions.
+- `../team-review/cta-lead-routing-analytics-and-pricing.md`: final CTA, lead routing, analytics, and pricing decisions.

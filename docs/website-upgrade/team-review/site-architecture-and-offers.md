@@ -118,7 +118,7 @@ Current status:
 
 - The AI Voice page largely matches the intended service model.
 - It should not be substantially changed without cofounder review because the current page flow was influenced by cofounder direction.
-- Potential future refinements are documented in `18-services-and-capabilities-plan.md`.
+- Potential future refinements are documented in `services-and-how-we-build-taxonomy.md`.
 
 ### AI Agents
 
@@ -330,9 +330,9 @@ Recommended approach:
 
 ## Related Documents
 
-- `02-positioning-strategy.md`: market story behind the architecture.
-- `04-implementation-roadmap.md`: execution order.
-- `06-technical-remediation.md`: metadata, routing, and technical implementation.
-- `13-smb-spend-confidence-strategy.md`: reducing SMB spend anxiety.
-- `16-cta-lead-routing-analytics-and-pricing.md`: CTA labels, lead routing, analytics, and pricing.
-- `18-services-and-capabilities-plan.md`: detailed Services vs How We Build taxonomy and implementation plan.
+- `market-positioning-strategy.md`: market story behind the architecture.
+- `../implementation-reference/04-implementation-roadmap.md`: execution order.
+- `../implementation-reference/06-technical-remediation.md`: metadata, routing, and technical implementation.
+- `../implementation-reference/13-smb-spend-confidence-strategy.md`: reducing SMB spend anxiety.
+- `cta-lead-routing-analytics-and-pricing.md`: CTA labels, lead routing, analytics, and pricing.
+- `services-and-how-we-build-taxonomy.md`: detailed Services vs How We Build taxonomy and implementation plan.

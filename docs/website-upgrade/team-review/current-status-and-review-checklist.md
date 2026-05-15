@@ -1,18 +1,57 @@
-# Team Handoff Status
+# Current Status And Review Checklist
 
-Last updated: after the launch-facing cleanup pass and first visual QA polish.
+Last updated: after the launch-facing cleanup pass, visual QA polish, docs-folder cleanup, remaining legacy-pattern audit, proof-language polish, AI Chat demo fallback, metadata/sitemap cleanup, and Privacy/Terms polish.
 
 This document is the quick team-review version of the upgrade work.
 
 Use:
 
-- `../for-codex-implementation/04-implementation-roadmap.md` for the full build roadmap.
-- `18-services-and-capabilities-plan.md` for the service/capability taxonomy.
-- `20-production-lead-routing-setup.md` for HubSpot, Resend, Calendly, and PostHog setup.
+- `../implementation-reference/04-implementation-roadmap.md` for the full build roadmap.
+- `services-and-how-we-build-taxonomy.md` for the service/capability taxonomy.
+- `production-lead-routing-setup.md` for HubSpot, Resend, Calendly, and PostHog setup.
 
 ## Current Status
 
-The upgrade is in a strong mid-implementation state.
+The upgrade is in a strong pre-launch review state. The main website rebuild is largely complete; the remaining work is production lead routing, team/legal/proof review, and final page polish.
+
+## Simple Checklist
+
+### Done
+
+- [x] Technical foundation stabilized: lint, build, sitemap, robots, metadata, schema basics, typed data, and route cleanup.
+- [x] Shared assessment form and Server Action added.
+- [x] Form captures budget range, source page, CTA location, landing page, referrer, and UTM fields.
+- [x] Homepage rebuilt around operational pain, connected systems, AI Voice as flagship wedge, broader automation, proof, spend confidence, and assessment CTA.
+- [x] Core service pages rebuilt or added.
+- [x] Industry pages rebuilt as native React pages.
+- [x] Daycare Voice Agent added under Solutions as a focused implementation.
+- [x] Capabilities reframed into How We Build trust pages.
+- [x] Representative proof/workflow examples added across homepage, service pages, and industry pages.
+- [x] Proof wording polished to sound buyer-facing rather than like internal NDA planning notes.
+- [x] AI Chat demo now has a user-triggered preview/fallback instead of showing a blank third-party iframe by default.
+- [x] Privacy and Terms expanded into review-ready pages.
+- [x] Docs reorganized into `team-review/` and `implementation-reference/`.
+- [x] Standard checks pass: `npm run lint`, `npm run build`, and `npm run test:e2e`.
+
+### Still To Do
+
+- [ ] Final production lead routing once credentials and HubSpot field/object decisions are ready.
+- [ ] Real production-style form submission test into HubSpot and internal email notifications.
+- [ ] Add final Calendly assessment link to form success states and notification emails.
+- [ ] Add final PostHog project key and confirm live funnel events.
+- [ ] Team review of top buyer pages for tone, density, claims, and sales clarity.
+- [ ] Cofounder review of AI Voice before major flow changes.
+- [ ] Proof inventory collection and approval of anonymous/sanitized claims.
+- [ ] Legal counsel review of Privacy and Terms.
+- [ ] Replace generated/sourced imagery with real team/process photos when available.
+
+### Next Work While Credentials Are Pending
+
+- [ ] Final human-quality pass on `/`, `/core-services`, `/core-services/ai-voice`, `/core-services/ai-chat`, `/core-services/ai-agents`, `/industries/manufacturing`, `/industries/education-childcare`, and `/solutions/daycare-voice-agent`.
+- [ ] Reduce density where sections feel heavy.
+- [ ] Tighten claims that feel too broad, too strong, or not NDA-safe.
+- [ ] Review CTA placement and page rhythm on desktop/mobile.
+- [ ] Prepare proof inventory using `proof-inventory-checklist.md`.
 
 What is stable:
 
@@ -20,6 +59,13 @@ What is stable:
 - Production build passes.
 - Playwright conversion-path tests pass.
 - First mobile typography polish pass has been applied to reduce oversized headings on dense pages.
+- Second visual QA pass reviewed remaining service pages, How We Build, and several remaining industry pages on mobile/desktop without finding launch-blocking layout problems.
+- Remaining legacy-pattern audit found no active migrated-page usage of `dangerouslySetInnerHTML`, Formspree, raw `<img>` tags, old WordPress assets, or old HTTP asset references in `app/`, `components/`, or `data/`. The only `dangerouslySetInnerHTML` usage found is the intentional JSON-LD component, and the only iframe found is the intentional AI Chat demo.
+- Proof sections now use more buyer-facing language: workflow examples, connected systems, human controls, and measurable operating outcomes rather than internal NDA/planning phrasing.
+- The AI Chat demo section now uses a polished user-triggered preview with an external demo link so the page still feels intentional if the third-party iframe is slow or visually blank.
+- Metadata/sitemap cleanup now keeps redirect-only legacy capability URLs out of the sitemap and gives `/core-services`, `/privacy`, and `/terms` canonical metadata through the shared metadata helper.
+- Privacy and Terms pages have been expanded from basic placeholders into practical review-ready pages covering assessment data, analytics, third-party tools, sensitive workflow details, AI/automation boundaries, pricing/examples, and project-specific agreements.
+- Website upgrade docs are now split into human-readable `team-review/` docs and deeper `implementation-reference/` docs.
 - Main CTA language is standardized as **Get Free Assessment**.
 - The offer is standardized as **Free AI Workflow Assessment**.
 - AI Voice remains the flagship wedge, but the site no longer positions Automate4U as voice-only.
@@ -89,7 +135,7 @@ Current service proof assets:
 
 ### Proof Layer
 
-The first Phase 5 proof layer has been added.
+The first Phase 5 proof layer has been added and the public-facing language has been tightened.
 
 Added:
 
@@ -97,7 +143,7 @@ Added:
 - `components/proof/ProofStorySection.tsx`
 - Homepage proof section with representative workflow examples.
 - Filtered proof sections on shared service pages and industry pages.
-- Proof inventory instructions in `15-proof-inventory-checklist.md`.
+- Proof inventory instructions in `proof-inventory-checklist.md`.
 
 Current proof stories:
 
@@ -172,6 +218,7 @@ The public About section has been cleaned up:
 - `/about/our-team` is now a native page without placeholder headshots; real team photos can be added later.
 - `/privacy` has been added.
 - `/terms` has been added.
+- Privacy and Terms now have practical business/legal review language, but still need counsel review before being treated as final legal policy.
 
 Footer dead links were removed.
 
@@ -197,6 +244,7 @@ Completed:
 Known non-blocking warning:
 
 - `baseline-browser-mapping` reports that its data is more than two months old during build. The build still passes. This can be updated later with a dependency refresh.
+- The AI Chat demo iframe is served by an external provider. The page now uses a user-triggered preview/fallback, but the embedded demo itself can still depend on third-party availability.
 
 ## What The Team Should Review
 
@@ -236,8 +284,9 @@ These are the remaining items Codex can continue implementing without needing st
 
 ### Visual And UX QA
 
-- Continue desktop/mobile review across all service pages.
-- Continue desktop/mobile review across all industry pages.
+- Complete one final human-quality pass on the highest-value buyer paths first:
+  `/`, `/core-services`, `/core-services/ai-voice`, `/core-services/ai-chat`, `/core-services/ai-agents`, `/industries/manufacturing`, `/industries/education-childcare`, and `/solutions/daycare-voice-agent`.
+- Review secondary service, industry, and How We Build pages after the priority paths are approved.
 - Reduce density where proof modules feel too heavy.
 - Check CTA placement, spacing, and page rhythm.
 - Review footer and navigation density after team feedback.
@@ -250,10 +299,9 @@ These are the remaining items Codex can continue implementing without needing st
 
 ### Remaining Migration Cleanup
 
-- Identify lower-priority legacy pages that still use migrated HTML patterns.
-- Replace or redirect remaining legacy surfaces.
-- Remove remaining legacy Formspree/raw-image patterns where present.
-- Confirm sitemap/canonical behavior after cleanup.
+- Keep legacy-pattern checks in the release QA routine.
+- Confirm sitemap/canonical behavior after final route review.
+- If old hidden routes are reintroduced later, rebuild or redirect them rather than bringing back migrated HTML patterns.
 
 ## Team-Owned Setup And Review
 
@@ -276,7 +324,7 @@ These items require Automate4U account access, business judgment, or approval.
 ### Required For Trust And Proof
 
 - Review all representative proof stories for NDA safety.
-- Gather proof inventory using `15-proof-inventory-checklist.md`.
+- Gather proof inventory using `proof-inventory-checklist.md`.
 - Approve any anonymous/sanitized case study claims before publication.
 - Approve exact metrics before they appear publicly.
 
@@ -289,13 +337,13 @@ These items require Automate4U account access, business judgment, or approval.
 
 ## Known Caveats
 
-The site is much stronger, but it is not final.
+The site is strong enough for serious team review, but it should not be treated as fully launch-final until production routing, proof review, and legal review are complete.
 
 Remaining risks:
 
-- Some pages are content-rich and need a final visual rhythm pass on mobile and desktop.
-- The first mobile heading polish is complete, but service/proof modules still deserve human review for density and ordering.
-- AI Chat relies on an external iframe demo that can take a few seconds to load.
+- Some pages are content-rich and still deserve final human review for density, ordering, and tone.
+- The first mobile heading polish and second visual QA pass are complete, but subjective page rhythm should still be reviewed by the team.
+- AI Chat has a polished fallback/preview, but the external embedded demo can still depend on third-party availability.
 - Proof/case study assets still need NDA-safe review before adding stronger claims.
 - Representative proof stories should be replaced or supplemented with approved anonymous/sanitized case studies when the proof inventory is collected.
 - HubSpot, Resend, Calendly, and PostHog final credentials/configuration still need real production setup.
@@ -305,12 +353,13 @@ Remaining risks:
 
 When work resumes, prioritize in this order:
 
-1. Team provides production routing credentials and decisions from `20-production-lead-routing-setup.md`.
-2. Codex finalizes production lead routing code and tests the path.
-3. Team reviews homepage, Services overview, AI Voice, AI Chat, AI Agents, Manufacturing, Education & Childcare, and Daycare Voice Agent.
-4. Codex continues visual QA on the remaining service and industry pages.
+1. While credentials are pending, Codex completes a final human-quality pass on the priority buyer paths listed above.
+2. Team provides production routing credentials and decisions from `production-lead-routing-setup.md`.
+3. Codex finalizes production lead routing code and tests the path.
+4. Team reviews homepage, Services overview, AI Voice, AI Chat, AI Agents, Manufacturing, Education & Childcare, and Daycare Voice Agent.
 5. Team gathers proof inventory for anonymous case studies and measurable outcomes.
-6. Legal review of Privacy and Terms pages.
+6. Codex replaces representative proof with approved anonymous/sanitized proof where available.
+7. Legal review of Privacy and Terms pages.
 
 ## Current Verification
 

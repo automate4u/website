@@ -354,7 +354,7 @@ export default function RetailEcommercePage() {
 
       <ProofStorySection
         storySlugs={["retail-support-order-agent", "marketing-content-operations"]}
-        eyebrow="Representative proof patterns"
+        eyebrow="Workflow examples"
         title="Retail proof should connect support load, brand control, and measurable follow-up."
         description="These examples show how customer messaging, order context, marketing output, approval queues, and reporting can reduce repetitive work without weakening trust."
         compact

@@ -354,7 +354,7 @@ export default function HealthcarePage() {
 
       <ProofStorySection
         storySlugs={["healthcare-front-desk", "managed-ai-operations-rhythm"]}
-        eyebrow="Representative proof patterns"
+        eyebrow="Workflow examples"
         title="Healthcare proof should show conservative automation with clear escalation."
         description="These examples focus on routine front-desk support, privacy-aware routing, staff review, and the operating metrics that help teams expand only when quality is trusted."
         compact

@@ -233,4 +233,4 @@ Together, these prove:
 - `05-content-proof-and-wow-factor.md`: proof and visual storytelling.
 - `08-execution-contracts.md`: data types and analytics contracts.
 - `10-strategic-tool-stack-taxonomy.md`: canonical tool names.
-- `11-creative-experience-direction.md`: visual and motion guardrails.
+- `../team-review/creative-experience-direction.md`: visual and motion guardrails.

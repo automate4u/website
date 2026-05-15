@@ -289,9 +289,9 @@ export default function ServiceOfferPage({ service }: ServiceOfferPageProps) {
 
       <ProofStorySection
         storySlugs={proofStoriesByServiceSlug[service.slug]}
-        eyebrow="Representative proof patterns"
-        title="What this looks like in real operating workflows."
-        description="These examples are written to be specific enough to evaluate while protecting client confidentiality. The exact workflow, systems, controls, and metrics are finalized during assessment and pilot design."
+        eyebrow="Workflow examples"
+        title="How this service turns into measurable operating work."
+        description="These examples show the kind of workflow design, system connection, human control, and measurement we bring into assessment and pilot work."
         compact
         className="border-y border-card-border bg-white"
       />

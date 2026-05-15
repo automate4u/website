@@ -14,6 +14,7 @@ export type AnalyticsEventName =
   | "site_workflow_card_clicked"
   | "site_maturity_stage_selected"
   | "site_case_study_viewed"
+  | "site_chat_demo_started"
   | "site_chat_demo_viewed"
   | "site_industry_accelerator_viewed"
   | "site_botpress_opened"

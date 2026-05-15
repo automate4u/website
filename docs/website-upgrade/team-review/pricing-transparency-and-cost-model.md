@@ -346,7 +346,7 @@ Do not claim the system will independently approve custody, safety, identity, le
 
 ## Related Documents
 
-- `13-smb-spend-confidence-strategy.md`: spend anxiety and pricing confidence.
-- `16-cta-lead-routing-analytics-and-pricing.md`: CTA and pricing page decisions.
-- `09-governance-customer-journey-and-conversion-tests.md`: safety, governance, and high-risk workflow language.
-- `14-labor-efficiency-and-human-redeployment.md`: labor-efficiency claims and guardrails.
+- `../implementation-reference/13-smb-spend-confidence-strategy.md`: spend anxiety and pricing confidence.
+- `cta-lead-routing-analytics-and-pricing.md`: CTA and pricing page decisions.
+- `../implementation-reference/09-governance-customer-journey-and-conversion-tests.md`: safety, governance, and high-risk workflow language.
+- `../implementation-reference/14-labor-efficiency-and-human-redeployment.md`: labor-efficiency claims and guardrails.

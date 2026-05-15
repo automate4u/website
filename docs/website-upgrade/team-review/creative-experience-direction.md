@@ -358,8 +358,8 @@ Visuals that do not answer one of those questions should be removed.
 ## Related Documents
 
 - `README.md`: reading order and first milestone.
-- `02-positioning-strategy.md`: strategic story.
-- `04-implementation-roadmap.md`: implementation phases.
-- `05-content-proof-and-wow-factor.md`: proof and demo content.
-- `06-technical-remediation.md`: performance and accessibility requirements.
-- `16-cta-lead-routing-analytics-and-pricing.md`: CTA label system and pricing guardrails.
+- `market-positioning-strategy.md`: strategic story.
+- `../implementation-reference/04-implementation-roadmap.md`: implementation phases.
+- `../implementation-reference/05-content-proof-and-wow-factor.md`: proof and demo content.
+- `../implementation-reference/06-technical-remediation.md`: performance and accessibility requirements.
+- `cta-lead-routing-analytics-and-pricing.md`: CTA label system and pricing guardrails.

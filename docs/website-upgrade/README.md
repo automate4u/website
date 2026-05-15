@@ -2,12 +2,27 @@
 
 This folder is the source of truth for the Automate4U website upgrade.
 
-The docs are now separated by owner:
+The docs are split into two practical folders:
 
-- `for-team-review/`: business, strategy, proof, pricing, legal, and production setup docs for the Automate4U team.
-- `for-codex-implementation/`: technical roadmap, execution contracts, remediation, and implementation guardrails for Codex.
+- `team-review/`: short, human-readable docs for team review, production setup, proof collection, pricing, positioning, and approval decisions. Files here use plain names instead of numbered planning names.
+- `implementation-reference/`: deeper working docs for Codex and Michael to stay aligned while implementing. These can keep numbered names because they are roadmap/reference material, not team review packets.
 
-Use this README as the entry point.
+## Start Here
+
+For the Automate4U team:
+
+- `team-review/current-status-and-review-checklist.md`
+- `team-review/production-lead-routing-setup.md`
+- `team-review/proof-inventory-checklist.md`
+- `team-review/services-and-how-we-build-taxonomy.md`
+- `team-review/project-decisions-summary.md`
+
+For Codex and implementation planning:
+
+- `implementation-reference/04-implementation-roadmap.md`
+- `implementation-reference/08-execution-contracts.md`
+- `implementation-reference/06-technical-remediation.md`
+- `implementation-reference/01-current-site-audit.md`
 
 ## Current Direction
 
@@ -28,56 +43,26 @@ Key decisions:
 - V1 free tools: Resend Free, Calendly Free, and PostHog Free where appropriate.
 - Pricing transparency: show ranges and cost drivers without reducing Automate4U to raw API resale.
 
-## Read First
+## Team Review Folder
 
-For the team:
+Use `team-review/` when the team needs to review, approve, configure, or provide business inputs.
 
-- `for-team-review/README.md`
-- `for-team-review/19-team-handoff-status.md`
-- `for-team-review/20-production-lead-routing-setup.md`
-- `for-team-review/15-proof-inventory-checklist.md`
+Team-owned work includes:
 
-For Codex:
+- Production credentials and setup decisions.
+- HubSpot object model and custom fields.
+- Proof inventory and NDA-safe case study approvals.
+- Pricing and cost-model comfort.
+- Positioning, service taxonomy, claims, and tone.
+- Cofounder review of AI Voice before major flow changes.
+- Legal review of Privacy and Terms.
+- Real team/process imagery when available.
 
-- `for-codex-implementation/README.md`
-- `for-codex-implementation/04-implementation-roadmap.md`
-- `for-codex-implementation/08-execution-contracts.md`
-- `for-codex-implementation/06-technical-remediation.md`
+## Implementation Reference Folder
 
-## Team Review Docs
+Use `implementation-reference/` for build sequencing, technical decisions, and long-form planning context.
 
-Use `for-team-review/` for docs that need business review, approval, account setup, or proof collection.
-
-This includes:
-
-- Positioning and strategy.
-- Site architecture and offers.
-- Services vs How We Build taxonomy.
-- CTA, pricing, spend confidence, and labor-savings messaging.
-- Creative direction and expertise demonstration.
-- Governance, customer journey, and production lead routing.
-- Proof inventory and NDA-safe case study rules.
-- Team handoff/status.
-
-The team-owned folder is intentionally written so non-developers can review the business decisions without reading implementation details first.
-
-## Codex Implementation Docs
-
-Use `for-codex-implementation/` for docs that guide code changes.
-
-This includes:
-
-- Current-site audit.
-- Active implementation roadmap.
-- Technical remediation plan.
-- Execution contracts for content, components, forms, analytics, and tests.
-- Tool-stack taxonomy for integration names and reusable data.
-
-Codex should use these docs as the active build instructions and should not invent a new implementation plan in chat unless the team changes direction.
-
-## Ownership Guide
-
-### Codex Can Implement
+Codex-owned work includes:
 
 - React/Next.js page work.
 - Shared components and data models.
@@ -85,24 +70,13 @@ Codex should use these docs as the active build instructions and should not inve
 - HubSpot/Resend/PostHog/Calendly integration code once credentials and field decisions are available.
 - Sitemap, metadata, schema, redirects, analytics events, and tests.
 - Visual QA and responsive polish.
-- Documentation updates that keep the roadmap current.
-
-### Team Must Provide Or Review
-
-- HubSpot private app token and object model decisions.
-- Resend account, verified sender/domain, and API key.
-- Final Calendly booking link.
-- PostHog project key.
-- Real team photos and approved brand/process imagery.
-- Proof inventory, approved metrics, and NDA-safe case study permissions.
-- Legal review for Privacy and Terms.
-- Cofounder review of the AI Voice flagship page before major flow changes.
+- Documentation updates that keep implementation status accurate.
 
 ## Current Implementation Status
 
 For the latest snapshot, read:
 
-- `for-team-review/19-team-handoff-status.md`
+- `team-review/current-status-and-review-checklist.md`
 
 Current high-level status:
 
@@ -129,4 +103,4 @@ Current high-level status:
 
 The docs are deep enough. New planning should only be added if it prevents a concrete implementation mistake.
 
-Build from `for-codex-implementation/04-implementation-roadmap.md`, using `for-codex-implementation/08-execution-contracts.md` and `for-team-review/11-creative-experience-direction.md` as guardrails.
+Build from `implementation-reference/04-implementation-roadmap.md`, using `implementation-reference/08-execution-contracts.md` and `team-review/creative-experience-direction.md` as guardrails.

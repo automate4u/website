@@ -43,7 +43,7 @@ This should feel more valuable than a generic sales call without giving away a f
 
 The paid follow-on can be an **AI Blueprint Sprint** or full workflow audit for buyers who need a detailed implementation plan before build.
 
-See `16-cta-lead-routing-analytics-and-pricing.md` for the complete CTA label system, lead routing, analytics, and pricing guidance.
+See `cta-lead-routing-analytics-and-pricing.md` for the complete CTA label system, lead routing, analytics, and pricing guidance.
 
 ## Proof Model
 
@@ -103,10 +103,10 @@ The website should make AI Voice feel like the most polished and demo-ready door
 
 ## Related Documents
 
-- `01-current-site-audit.md`: current website quality gaps.
-- `02-positioning-strategy.md`: messaging and market narrative.
-- `03-site-architecture-and-offers.md`: navigation, page model, and offer structure.
-- `04-implementation-roadmap.md`: execution phases.
-- `05-content-proof-and-wow-factor.md`: trust, demos, proof, and visual impact.
-- `06-technical-remediation.md`: engineering remediation plan.
-- `16-cta-lead-routing-analytics-and-pricing.md`: CTA, lead routing, analytics, and public pricing decisions.
+- `../implementation-reference/01-current-site-audit.md`: current website quality gaps.
+- `market-positioning-strategy.md`: messaging and market narrative.
+- `site-architecture-and-offers.md`: navigation, page model, and offer structure.
+- `../implementation-reference/04-implementation-roadmap.md`: execution phases.
+- `../implementation-reference/05-content-proof-and-wow-factor.md`: trust, demos, proof, and visual impact.
+- `../implementation-reference/06-technical-remediation.md`: engineering remediation plan.
+- `cta-lead-routing-analytics-and-pricing.md`: CTA, lead routing, analytics, and public pricing decisions.

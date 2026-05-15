@@ -77,7 +77,7 @@ Show:
 
 Build at least four detailed anonymous cases.
 
-Before writing them, use `15-proof-inventory-checklist.md` to confirm what can be stated publicly, anonymously, sanitized, representative, or only in private sales conversations.
+Before writing them, use `../team-review/proof-inventory-checklist.md` to confirm what can be stated publicly, anonymously, sanitized, representative, or only in private sales conversations.
 
 Because Automate4U has NDA constraints, public case studies should be written as anonymous or representative workflow stories. They must sound specific because the workflow is specific, but they must not reveal client-identifying facts, unique system combinations, exact dates, geography, staff names, logos, or proprietary details.
 
@@ -127,7 +127,7 @@ Each case should include:
 
 ## Wow Factor Ideas
 
-The creative direction should follow `11-creative-experience-direction.md`: premium, precise, operational, and built around proof. Avoid generic futuristic visuals that do not explain a workflow or business outcome.
+The creative direction should follow `../team-review/creative-experience-direction.md`: premium, precise, operational, and built around proof. Avoid generic futuristic visuals that do not explain a workflow or business outcome.
 
 The interactive proof experiences are defined in `12-expertise-demonstration-experiences.md`. Prioritize the Automation Simulator, Voice Demo plus Back-Office Event Log, and Automation Ideas Library.
 
@@ -317,7 +317,7 @@ Show:
 3. Launch one automation.
 4. Measure and expand what works.
 
-For pricing guidance, use `16-cta-lead-routing-analytics-and-pricing.md` and `17-pricing-transparency-and-cost-model.md`. Public pricing should show simple ranges, usage-based categories, and a clear explanation that raw vendor/API costs vary by provider, model, security needs, usage volume, and workflow complexity.
+For pricing guidance, use `../team-review/cta-lead-routing-analytics-and-pricing.md` and `../team-review/pricing-transparency-and-cost-model.md`. Public pricing should show simple ranges, usage-based categories, and a clear explanation that raw vendor/API costs vary by provider, model, security needs, usage volume, and workflow complexity.
 
 ## First 7 Days Follow-Up Experience
 
@@ -384,14 +384,14 @@ Priority proof modules:
 ## Related Documents
 
 - `02-positioning-strategy.md`: messaging strategy.
-- `03-site-architecture-and-offers.md`: where this content appears.
+- `../team-review/site-architecture-and-offers.md`: where this content appears.
 - `04-implementation-roadmap.md`: when to build these assets.
 - `08-execution-contracts.md`: data shapes and component contracts for these sections.
 - `09-governance-customer-journey-and-conversion-tests.md`: safety, journey, and critical-path testing details.
 - `10-strategic-tool-stack-taxonomy.md`: canonical tool and integration categories.
-- `11-creative-experience-direction.md`: premium visual, motion, and interaction direction.
+- `../team-review/creative-experience-direction.md`: premium visual, motion, and interaction direction.
 - `12-expertise-demonstration-experiences.md`: interactive demos and proof modules.
 - `13-smb-spend-confidence-strategy.md`: reducing spend anxiety for SMB buyers.
 - `14-labor-efficiency-and-human-redeployment.md`: labor savings and human redeployment messaging.
-- `15-proof-inventory-checklist.md`: proof collection requirements before publishing claims.
-- `17-pricing-transparency-and-cost-model.md`: pricing transparency and variable cost logic.
+- `../team-review/proof-inventory-checklist.md`: proof collection requirements before publishing claims.
+- `../team-review/pricing-transparency-and-cost-model.md`: pricing transparency and variable cost logic.

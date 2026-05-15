@@ -6,6 +6,12 @@ export type RouteMetadata = {
 
 export const routeMetadata: RouteMetadata[] = [
   {
+    path: "/core-services",
+    title: "AI Automation Services | Automate4U",
+    description:
+      "Explore Automate4U services for AI voice agents, workflow agents, AI chat, marketing automation, managed AI operations, strategy, and custom AI software.",
+  },
+  {
     path: "/capabilities",
     title: "How We Build Reliable AI Automation | Automate4U",
     description:
@@ -42,18 +48,6 @@ export const routeMetadata: RouteMetadata[] = [
       "AI automation for content operations, support workflows, customer response, metadata, reporting, and internal operations.",
   },
   {
-    path: "/capabilities/ai-agents-workflow-automation",
-    title: "AI Agents and Workflow Automation | Automate4U",
-    description:
-      "AI agents and workflow automations for sales, support, operations, CRM updates, routing, reporting, and admin work.",
-  },
-  {
-    path: "/capabilities/ai-voice-chat-experiences",
-    title: "AI Voice and Chat Experiences | Automate4U",
-    description:
-      "AI voice and chat systems that handle frontline conversations and connect them to booking, CRM, support, and operations workflows.",
-  },
-  {
     path: "/capabilities/custom-software-ai-solutions",
     title: "Workflow and Systems Architecture | Automate4U",
     description:
@@ -64,12 +58,6 @@ export const routeMetadata: RouteMetadata[] = [
     title: "Data Integrations and AI Infrastructure | Automate4U",
     description:
       "Data integration and infrastructure services that connect AI agents to CRMs, calendars, databases, documents, reporting, and business systems.",
-  },
-  {
-    path: "/capabilities/marketing-automation",
-    title: "AI Marketing Automation | Automate4U",
-    description:
-      "AI marketing automation for content production, approvals, scheduling, campaign workflows, reporting, and customer follow-up.",
   },
   {
     path: "/capabilities/operational-intelligence-analytics",

@@ -128,7 +128,7 @@ Show:
 
 Route assessment leads to HubSpot as the primary source of truth.
 
-For the production setup checklist, environment variables, team-owned credentials, and HubSpot/Resend/Calendly/PostHog ownership split, see `20-production-lead-routing-setup.md`.
+For the production setup checklist, environment variables, team-owned credentials, and HubSpot/Resend/Calendly/PostHog ownership split, see `production-lead-routing-setup.md`.
 
 Required destinations:
 
@@ -191,7 +191,7 @@ Why:
 - Showing cost drivers can build trust when paired with clear explanation of platform reliability, monitoring, workflow design, risk management, and support.
 - Vendor costs vary by model, provider, region, security needs, latency requirements, workflow volume, and integrations, so exact figures must be framed as planning estimates.
 
-See `17-pricing-transparency-and-cost-model.md` for the detailed cost model.
+See `pricing-transparency-and-cost-model.md` for the detailed cost model.
 
 ## Scheduling Recommendation
 
@@ -325,10 +325,10 @@ Recommended interaction:
 
 ## Related Documents
 
-- `03-site-architecture-and-offers.md`: offer ladder and page structure.
-- `06-technical-remediation.md`: Server Action, CRM, analytics, and test requirements.
-- `08-execution-contracts.md`: form props, success states, and analytics event names.
-- `13-smb-spend-confidence-strategy.md`: spend anxiety and staged buying path.
-- `14-labor-efficiency-and-human-redeployment.md`: labor-efficiency messaging.
-- `15-proof-inventory-checklist.md`: NDA-safe proof requirements.
-- `17-pricing-transparency-and-cost-model.md`: detailed pricing transparency and variable cost model.
+- `site-architecture-and-offers.md`: offer ladder and page structure.
+- `../implementation-reference/06-technical-remediation.md`: Server Action, CRM, analytics, and test requirements.
+- `../implementation-reference/08-execution-contracts.md`: form props, success states, and analytics event names.
+- `../implementation-reference/13-smb-spend-confidence-strategy.md`: spend anxiety and staged buying path.
+- `../implementation-reference/14-labor-efficiency-and-human-redeployment.md`: labor-efficiency messaging.
+- `proof-inventory-checklist.md`: NDA-safe proof requirements.
+- `pricing-transparency-and-cost-model.md`: detailed pricing transparency and variable cost model.

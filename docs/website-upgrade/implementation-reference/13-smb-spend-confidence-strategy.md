@@ -150,7 +150,7 @@ Suggested public ranges to validate before launch:
 
 These ranges should be positioned as planning guidance, not a universal quote.
 
-For the detailed pricing transparency model, use `17-pricing-transparency-and-cost-model.md`.
+For the detailed pricing transparency model, use `../team-review/pricing-transparency-and-cost-model.md`.
 
 ## Offer Copy Implications
 
@@ -256,11 +256,11 @@ This helps Automate4U avoid selling oversized projects to buyers who need confid
 
 ## Related Documents
 
-- `03-site-architecture-and-offers.md`: offer ladder.
+- `../team-review/site-architecture-and-offers.md`: offer ladder.
 - `05-content-proof-and-wow-factor.md`: buyer trust sections and proof.
 - `08-execution-contracts.md`: assessment form and post-submit experience.
 - `09-governance-customer-journey-and-conversion-tests.md`: first-7-days journey.
 - `12-expertise-demonstration-experiences.md`: demos that prove value before purchase.
 - `14-labor-efficiency-and-human-redeployment.md`: labor-efficiency and human redeployment messaging.
-- `16-cta-lead-routing-analytics-and-pricing.md`: final CTA and pricing guidance.
-- `17-pricing-transparency-and-cost-model.md`: variable cost model and public pricing transparency guidance.
+- `../team-review/cta-lead-routing-analytics-and-pricing.md`: final CTA and pricing guidance.
+- `../team-review/pricing-transparency-and-cost-model.md`: variable cost model and public pricing transparency guidance.

@@ -493,4 +493,4 @@ Rules:
 - `12-expertise-demonstration-experiences.md`: interactive proof modules and demo requirements.
 - `13-smb-spend-confidence-strategy.md`: spend-confidence messaging and offer framing.
 - `14-labor-efficiency-and-human-redeployment.md`: labor-efficiency and human redeployment claims.
-- `16-cta-lead-routing-analytics-and-pricing.md`: CTA labels, CRM/email routing, analytics recommendation, and pricing guardrails.
+- `../team-review/cta-lead-routing-analytics-and-pricing.md`: CTA labels, CRM/email routing, analytics recommendation, and pricing guardrails.

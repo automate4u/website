@@ -357,7 +357,7 @@ export default function ProfessionalServicesPage() {
 
       <ProofStorySection
         storySlugs={["professional-services-intake", "healthcare-front-desk"]}
-        eyebrow="Representative proof patterns"
+        eyebrow="Workflow examples"
         title="Professional services proof should show faster intake with judgment protected."
         description="These examples focus on appointment-driven workflows where AI captures context, prepares the handoff, and keeps regulated or sensitive decisions with qualified people."
         compact

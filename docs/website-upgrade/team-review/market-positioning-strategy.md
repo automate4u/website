@@ -214,8 +214,8 @@ Avoid:
 
 ## Related Documents
 
-- `00-context-and-decisions.md`: agreed positioning decisions.
-- `03-site-architecture-and-offers.md`: how the positioning maps to pages and offers.
-- `05-content-proof-and-wow-factor.md`: how to make the positioning visible and persuasive.
-- `09-governance-customer-journey-and-conversion-tests.md`: trust, first-7-days journey, and conversion testing.
-- `14-labor-efficiency-and-human-redeployment.md`: labor savings and human redeployment messaging.
+- `project-decisions-summary.md`: agreed positioning decisions.
+- `site-architecture-and-offers.md`: how the positioning maps to pages and offers.
+- `../implementation-reference/05-content-proof-and-wow-factor.md`: how to make the positioning visible and persuasive.
+- `../implementation-reference/09-governance-customer-journey-and-conversion-tests.md`: trust, first-7-days journey, and conversion testing.
+- `../implementation-reference/14-labor-efficiency-and-human-redeployment.md`: labor savings and human redeployment messaging.
