@@ -11,7 +11,8 @@ Do not treat each phase as a fully separate project. The safest implementation p
 3. Rebuild the homepage and AI Voice page as the first proof of the new system.
 4. Build one high-quality Industry Accelerator to validate the repeatable page model.
 5. Add proof, pricing transparency, analytics, and conversion tests around the pages that now exist.
-6. Keep legacy-pattern checks in release QA and avoid reintroducing migrated HTML.
+6. Reduce and sharpen the page experience so priority buyer paths are easier to scan.
+7. Keep legacy-pattern checks in release QA and avoid reintroducing migrated HTML.
 
 Use `../README.md` for the full doc map. Use this file as the active task sequence.
 
@@ -29,16 +30,24 @@ Use `../README.md` for the full doc map. Use this file as the active task sequen
 - [x] Services overview and direct service pages rebuilt or added: AI Voice, AI Agents, AI Chat, AI Operations Strategy, Marketing Automation, Managed AI Operations, and Custom AI Software.
 - [x] Capabilities reframed as How We Build, with trust pages for security, integrations, analytics/value, adoption, strategy, and workflow architecture.
 - [x] Industry pages rebuilt as native React pages for all current industry routes.
+- [x] Industry pages standardized on the shared `IndustryAcceleratorPage` structure so every industry uses the same trusted flow while keeping industry-specific copy, proof, controls, and sector thinking.
 - [x] Solutions section added, with Daycare Voice Agent treated as a focused implementation rather than an industry.
 - [x] Representative workflow proof layer added across homepage, service pages, and industry pages.
 - [x] Proof language polished so public pages read as buyer-facing workflow examples rather than internal NDA planning notes.
 - [x] AI Chat demo changed to a user-triggered preview/fallback so a slow third-party iframe does not make the page look broken.
 - [x] Privacy and Terms expanded into practical review-ready pages.
+- [x] Homepage Phase 8 reduction pass completed: removed repeated maturity/value/thinking/managed-ops sections and tightened the page to hero, diagnosis, connected workflow, services, proof, and CTA.
+- [x] Shared service-page Phase 8 reduction completed: removed duplicated proof-story, operational reality, standalone systems, controls, rollout, and budget sections; collapsed them into a focused first-workflow section plus trust links, FAQ, and CTA.
+- [x] Priority-page focus pass continued after `/services` migration: Services overview and AI Voice each had one repeated confidence/context section removed; Manufacturing and Education & Childcare retained compact sector-thinking sections so the pages still show industry understanding without becoming heavy.
+- [x] Service-specific proof polish completed for the direct service pages so the shorter structure still gives each service a distinct reason to believe.
+- [x] Public-copy standard tightened and applied to obvious live-page issues: public sections should speak directly to the visitor and avoid internal strategy language such as "this page shows," "buyers need to see," "proof model," or "placeholder."
 - [x] Docs reorganized into `team-review/` and `implementation-reference/`.
 - [x] Legacy-pattern audit completed: no active buyer-facing migrated HTML, Formspree, raw `<img>`, old WordPress assets, or old HTTP asset references found in `app/`, `components/`, or `data/`.
+- [x] Public service URLs migrated from `/core-services/*` to `/services/*`; `/core-services/*` now exists only as permanent redirects.
 
 ### Remaining Before Launch/Team Signoff
 
+- [ ] Human review the shortened priority pages for taste, scanability, and whether any removed context needs to return in a more compact format.
 - [ ] Finalize production lead routing after credentials and field decisions are available.
 - [ ] Run a real production-style form submission test into HubSpot and internal email notifications.
 - [ ] Add final Calendly assessment link to success states and notification emails.
@@ -51,8 +60,9 @@ Use `../README.md` for the full doc map. Use this file as the active task sequen
 
 ### Recommended Next Steps While Credentials Are Pending
 
-- [ ] Final human-quality pass on the highest-value buyer paths:
-  `/`, `/core-services`, `/core-services/ai-voice`, `/core-services/ai-chat`, `/core-services/ai-agents`, `/industries/manufacturing`, `/industries/education-childcare`, and `/solutions/daycare-voice-agent`.
+- [ ] Final human-quality pass on the remaining highest-value buyer paths:
+  `/services`, `/services/ai-voice`, `/industries/manufacturing`, `/industries/education-childcare`, and `/solutions/daycare-voice-agent`.
+- [ ] For each priority page, define the one main buyer question, remove duplicate sections, and keep only the proof/process blocks needed to move that buyer forward.
 - [ ] Review page density, section order, CTA rhythm, and whether the proof modules help or feel heavy.
 - [ ] Tighten any claims that feel too broad, too strong, or not NDA-safe.
 - [ ] Prepare proof inventory using `../team-review/proof-inventory-checklist.md`.
@@ -71,6 +81,7 @@ Last updated: after Phase 5 representative proof placement, visual QA polish, do
 | Phase 5: Proof + trust assets | First layer built; real proof pending | Representative proof data, homepage proof, service-page proof, industry-page proof, buyer-facing proof-language polish, and AI Chat demo fallback are complete. Full proof inventory, approved metrics, final case study copy, and stronger demo artifacts still remain. |
 | Phase 6: Analytics + iteration | Code started; live config pending | Optional PostHog loading, attribution capture, first event tracking, and first conversion-path tests are implemented. Full funnel reporting needs PostHog credentials and production validation. |
 | Phase 7: Remaining migration | Audit complete | Active `app/`, `components/`, and `data/` surfaces no longer show migrated-page usage of `dangerouslySetInnerHTML`, raw `<img>` tags, old WordPress/HTTP assets, or Formspree. The intentional exceptions are JSON-LD injection and the AI Chat demo iframe. Keep this audit in release QA so legacy patterns are not reintroduced. |
+| Phase 8: Page focus and reduction | Added after team feedback | First team feedback says many pages feel long and hard to get through. Next pass should shorten priority buyer paths, remove repeated sections, and move depth into supporting pages only where useful. |
 
 Completed in the first implementation pass:
 
@@ -83,16 +94,16 @@ Completed in the first implementation pass:
 - Shared Free AI Workflow Assessment Server Action added.
 - Shared `AssessmentLeadForm` component added.
 - Contact page rebuilt around the shared assessment form.
-- Core service lead flows migrated to the shared assessment path where practical.
+- Service lead flows migrated to the shared assessment path where practical.
 - Primary CTA language standardized across key entry points.
 - UTM/referrer/landing-page attribution fields added to assessment forms.
 - Optional PostHog loader added behind `NEXT_PUBLIC_POSTHOG_KEY`.
 - Assessment and AI Voice demo analytics events wired for key conversion actions.
 - Assessment success state upgraded with next-step copy and optional Calendly link.
 - Global Organization/WebSite JSON-LD added.
-- Service/Breadcrumb JSON-LD added for typed core service and Industry Accelerator routes.
+- Service/Breadcrumb JSON-LD added for typed service and Industry Accelerator routes.
 - Playwright installed and first conversion-path tests added for the assessment form and AI Voice assessment path.
-- Active core service pages now use `next/image` instead of raw `<img>` elements.
+- Active service pages now use `next/image` instead of raw `<img>` elements.
 - Homepage v1 rebuilt around the approved positioning and CTA, then revised into Homepage v2 with stronger advisory diagnosis, implementation method, sector-thinking notes, human/process trust imagery, buyer-facing service labels, and a memorable brand line.
 - Shared section components added for the homepage and future AI Voice/accelerator reuse.
 - AI Voice flagship page rebuilt around the voice-to-operations story, live demo, back-office event log, workflow examples, pricing confidence, FAQ, and assessment CTA.
@@ -126,28 +137,29 @@ Completed in the first implementation pass:
 - Workflow & Systems Architecture detail page rebuilt from the overlapping custom-software capability route into a native React trust page that explains workflow design, system boundaries, handoffs, custom build patterns, client artifacts, related services, related capabilities, and the shared assessment CTA.
 - Shared service-page renderer and typed service-page content added for direct service offers.
 - AI Agents & Workflow Automation, AI Chat & Customer Messaging, and AI Operations Strategy rebuilt from older one-off CSS/client pages into native service pages with operational reality, workflow examples, connected systems, human controls, rollout, budget confidence, FAQ, trust-capability links, and the shared assessment CTA.
-- Marketing Automation & Content Agents, Managed AI Operations, and Custom AI Software direct service pages added under `/core-services/`.
-- Flexible service-specific proof stacks added so the direct service pages do not rely only on a shared template: AI Chat has a chatbot demo, downstream action explanation, and conversation scenarios; AI Agents has a searchable agent-pattern library and operating-loop proof; AI Operations Strategy has a readiness check and 30/60/90 value roadmap; Marketing Automation has an idea-to-approval workflow preview and approval-control proof; Managed AI Operations has an operating dashboard mock and monthly review preview; Custom AI Software has an interface snapshot and architecture proof block.
+- Marketing Automation & Content Agents, Managed AI Operations, and Custom AI Software direct service pages added under `/services/`.
+- Flexible service-specific proof stacks added so the direct service pages do not rely only on a shared template: AI Chat has a chatbot demo, downstream action explanation, and conversation scenarios; AI Agents has first-agent starting points, a searchable agent-pattern library, and operating-loop proof; AI Operations Strategy has concrete roadmap deliverables, a readiness check, and 30/60/90 value roadmap; Marketing Automation has automation lanes, an idea-to-approval workflow preview, and approval-control proof; Managed AI Operations has monthly ownership, an operating dashboard mock, and monthly review preview; Custom AI Software has custom-fit criteria, an interface snapshot, and architecture proof block.
 - Direct service pages now include a tailored "first pilot proof" band near the top of the page so each service quickly explains what the first engagement should validate before a client expands spend.
 - Phase 5 proof layer expanded: reusable representative workflow proof stories now cover manufacturing, daycare/education, home services, retail/ecommerce, professional services, healthcare, financial services, real estate, hospitality, technology/media, custom software, Managed AI Operations, and AI strategy. Homepage, service pages, and industry pages now use filtered NDA-safe proof-pattern sections with connected actions, human controls, and metrics to validate.
 - Proof sections were polished to read as buyer-facing workflow examples instead of internal proof/NDA planning language. Public labels now emphasize the workflow, connected systems, human control, and measurable operating outcomes.
 - AI Chat demo fallback added as a polished user-triggered preview with an external-demo path so the page does not depend visually on a third-party iframe loading immediately.
-- Metadata/sitemap cleanup completed for this pass: `/core-services`, `/privacy`, and `/terms` now use shared canonical metadata, and redirect-only legacy capability routes are no longer carried in the sitemap/metadata source.
+- Metadata/sitemap cleanup completed for this pass: `/services`, `/privacy`, and `/terms` now use shared canonical metadata, and redirect-only legacy capability routes are no longer carried in the sitemap/metadata source.
 - Privacy and Terms were expanded into review-ready pages that cover assessment data, sensitive workflow details, analytics, third-party services, AI/automation boundaries, pricing/example caveats, and project-specific written agreements.
 - First visual QA polish pass completed on top buyer paths. Mobile heading scale was tightened globally for large page headings, and the shared section header mobile size was reduced so dense sections read cleaner on small screens.
 - Second visual QA pass reviewed remaining service pages, How We Build, and several remaining industry pages across mobile/desktop. No launch-blocking layout issues were found in that pass; remaining visual work is normal human review for density, ordering, and final taste.
 - Remaining legacy-pattern audit completed across `app/`, `components/`, and `data/`: no active migrated-page `dangerouslySetInnerHTML`, Formspree, raw `<img>`, old WordPress assets, or old HTTP asset references were found. The remaining `dangerouslySetInnerHTML` usage is the intentional JSON-LD component, and the remaining iframe is the intentional AI Chat demo.
 - Service navigation, service metadata, sitemap routes, and structured-data source entries updated for the expanded direct service set.
 - Overlapping legacy capability URLs for AI Agents, AI Voice/Chat, and Marketing Automation now redirect to the correct service destinations instead of competing as duplicate full pages.
+- `/core-services/*` routes now redirect permanently to the corresponding `/services/*` route and are excluded from sitemap/canonical metadata.
 - Retell API route hardened.
 - Botpress script injection typed and lazy-loaded.
 - Several raw image, unused import, and JSX lint issues fixed.
 
 Next recommended implementation slice:
 
-1. While credentials are pending, complete the final human-quality pass on the highest-value buyer paths.
-2. When credentials are ready, finalize production lead routing and run a real submission test.
-3. Team reviews homepage, Services overview, AI Voice, AI Chat, AI Agents, Manufacturing, Education & Childcare, and Daycare Voice Agent for tone, density, claims, and conversion clarity.
+1. Complete the page focus and reduction pass on the highest-value buyer paths.
+2. Team reviews the shorter flow for homepage, Services overview, AI Voice, AI Chat, AI Agents, Manufacturing, Education & Childcare, and Daycare Voice Agent.
+3. When credentials are ready, finalize production lead routing and run a real submission test.
 4. Cofounder reviews optional AI Voice refinements before that page changes further.
 5. Continue Phase 5 proof and trust assets: collect proof inventory, replace representative stories with approved anonymous/sanitized stories where possible, add final metrics, and add stronger demo artifacts where the proof would materially improve buyer confidence.
 
@@ -163,6 +175,8 @@ Next recommended implementation slice:
 | Phase 5: Proof + trust assets | `05-content-proof-and-wow-factor.md`, `09-governance-customer-journey-and-conversion-tests.md`, `12-expertise-demonstration-experiences.md`, `14-labor-efficiency-and-human-redeployment.md`, `../team-review/proof-inventory-checklist.md` | Add credibility, governance, human control, and NDA-safe proof. |
 | Phase 6: Analytics + iteration | `06-technical-remediation.md`, `08-execution-contracts.md`, `09-governance-customer-journey-and-conversion-tests.md`, `../team-review/cta-lead-routing-analytics-and-pricing.md` | Track revenue-critical behavior and protect conversion paths. |
 | Phase 7: Remaining migration | `01-current-site-audit.md`, `06-technical-remediation.md`, `08-execution-contracts.md` | Keep legacy patterns out of active routes and preserve route/SEO consistency. |
+| Phase 8: Page focus and reduction | `../team-review/current-status-and-review-checklist.md`, `../team-review/creative-experience-direction.md`, `../team-review/site-architecture-and-offers.md`, `20-final-site-quality-review-plan.md` | Shorten priority pages, remove repeated sections, and make the highest-value buyer paths easier to scan. |
+| Final site quality review | `20-final-site-quality-review-plan.md` | Use the final page-quality checklist before staging/team review and before any production launch decision. |
 
 ## Phase 1: Stabilize The Technical Foundation
 
@@ -383,6 +397,43 @@ Acceptance criteria:
 - No active buyer-facing route uses migrated HTML as its page model.
 - Shared components and typed data cover common page patterns.
 - SEO, performance, accessibility, and conversion tracking stay consistent.
+
+## Phase 8: Page Focus And Reduction
+
+Use `20-final-site-quality-review-plan.md` as the working checklist for this phase.
+
+Goals:
+
+- Make priority buyer paths easier to scan and easier to finish.
+- Reduce repeated proof, process, and trust language.
+- Keep the strongest conversion argument on each page instead of trying to prove every capability everywhere.
+
+Priority pages:
+
+- `/`
+- `/services`
+- `/services/ai-voice`
+- `/services/ai-chat`
+- `/services/ai-agents`
+- `/industries/manufacturing`
+- `/industries/education-childcare`
+- `/solutions/daycare-voice-agent`
+
+Steps:
+
+- Define the one main buyer question for each page.
+- Decide the minimum section set needed to answer that question.
+- Remove or condense repeated sections that appear on nearby pages.
+- Move deeper trust/process content to How We Build pages where possible.
+- Keep proof where it materially improves buyer confidence; otherwise link to a deeper proof/service page.
+- Use tabs, filters, accordions, or shorter card groups only when they improve comprehension.
+- Preserve SEO fundamentals, CTAs, and lead paths while reducing length.
+
+Acceptance criteria:
+
+- Each priority page has a clear job and faster path to the CTA.
+- Buyers can understand the offer without reading every section.
+- Team reviewers no longer describe the main pages as long or hard to get through.
 
 ## Related Documents
 

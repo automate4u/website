@@ -6,9 +6,9 @@ The goal is simple: buyers should quickly understand what Automate4U sells, whil
 
 ## Current Problem
 
-The current site has two overlapping concepts:
+The earlier site had two overlapping concepts:
 
-- `core-services`: direct offers such as AI Voice, AI Agents, AI Chat, and AI Transformation.
+- `services`: direct offers such as AI Voice, AI Agents, AI Chat, and AI Transformation.
 - `capabilities`: a mix of direct offers and delivery capabilities, including AI Voice & Chat, AI Agents, Marketing Automation, Custom Software, Data Integrations, Security, Operational Intelligence, Strategy, and Training.
 
 This creates avoidable confusion.
@@ -290,12 +290,12 @@ The related How We Build capability should not use the same buyer-facing label b
 
 Legacy overlap decision:
 
-- `/capabilities/ai-agents-workflow-automation` overlaps with the AI Agents service and should redirect to `/core-services/ai-agents`.
-- `/capabilities/ai-voice-chat-experiences` overlaps with AI Voice and AI Chat services and should redirect to the strongest service destination, currently `/core-services/ai-voice`.
-- `/capabilities/marketing-automation` overlaps with the direct Marketing Automation service and should redirect to `/core-services/marketing-automation`.
+- `/capabilities/ai-agents-workflow-automation` overlaps with the AI Agents service and should redirect to `/services/ai-agents`.
+- `/capabilities/ai-voice-chat-experiences` overlaps with AI Voice and AI Chat services and should redirect to the strongest service destination, currently `/services/ai-voice`.
+- `/capabilities/marketing-automation` overlaps with the direct Marketing Automation service and should redirect to `/services/marketing-automation`.
 - `/capabilities/custom-software-ai-solutions` has been repurposed as **Workflow & Systems Architecture** in the How We Build layer. It should remain a trust page, not a duplicate Custom AI Software service page.
 
-Do not rebuild these overlapping legacy capability pages as full competing pages under the old labels. Direct services should live under `/core-services/`; How We Build pages should explain delivery capability and risk reduction.
+Do not rebuild these overlapping legacy capability pages as full competing pages under the old labels. Direct services should live under `/services/`; How We Build pages should explain delivery capability and risk reduction.
 
 ## Capability Page Model
 
@@ -363,22 +363,25 @@ The `Security, Monitoring & AI Safety` page should be the highest-priority capab
 
 ## Route Strategy
 
-Preserve existing routes during the current migration.
+Current canonical service route family:
 
-Near-term:
+- `/services`
+- `/services/ai-voice`
+- `/services/ai-agents`
+- `/services/ai-chat`
+- `/services/ai-transformation`
+- `/services/marketing-automation`
+- `/services/managed-ai-operations`
+- `/services/custom-ai-software`
 
-- Keep `/core-services/*` live.
-- Keep `/capabilities/*` live.
-- Update labels, internal links, and page content for clarity.
-- Do not introduce redirects until the service/capability rebuild is stable.
+Legacy route handling:
 
-Medium-term option:
+- `/core-services/*` now redirects permanently to the corresponding `/services/*` page.
+- Legacy shortcut routes such as `/ai-voice`, `/ai-agents`, and `/ai-chat` should point to `/services/*`.
+- Overlapping legacy capability routes for AI Agents, AI Voice/Chat, and Marketing Automation should redirect to the strongest direct service destination.
+- How We Build capability routes should remain under `/capabilities/*`.
 
-- Consider `/services/*` as the canonical service route family.
-- Redirect `/core-services/*` only after reviewing analytics and search risk.
-- If `/services/*` is introduced, preserve metadata and internal links carefully.
-
-For now, do not let route naming slow implementation. The bigger priority is buyer clarity and page quality.
+Do not add new public links to `/core-services/*`. Service data, metadata, sitemap entries, structured data, CTA source fields, analytics page values, proof links, industry links, navigation, and footer links should use `/services/*`.
 
 ## Current AI Voice Page Assessment
 

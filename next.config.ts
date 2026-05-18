@@ -10,32 +10,52 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/ai-voice",
-        destination: "/core-services/ai-voice",
+        destination: "/services/ai-voice",
         permanent: true,
       },
       {
         source: "/ai-agents",
-        destination: "/core-services/ai-agents",
+        destination: "/services/ai-agents",
         permanent: true,
       },
       {
         source: "/ai-chat",
-        destination: "/core-services/ai-chat",
+        destination: "/services/ai-chat",
+        permanent: true,
+      },
+      {
+        source: "/core-services",
+        destination: "/services",
+        permanent: true,
+      },
+      {
+        source: "/core-services/:path*",
+        destination: "/services/:path*",
         permanent: true,
       },
       {
         source: "/capabilities/ai-agents-workflow-automation",
-        destination: "/core-services/ai-agents",
+        destination: "/services/ai-agents",
         permanent: true,
       },
       {
         source: "/capabilities/ai-voice-chat-experiences",
-        destination: "/core-services/ai-voice",
+        destination: "/services/ai-voice",
         permanent: true,
       },
       {
         source: "/capabilities/marketing-automation",
-        destination: "/core-services/marketing-automation",
+        destination: "/services/marketing-automation",
+        permanent: true,
+      },
+      {
+        source: "/capabilities/workflow-systems-architecture",
+        destination: "/capabilities/custom-software-ai-solutions",
+        permanent: true,
+      },
+      {
+        source: "/capabilities/workflow-architecture",
+        destination: "/capabilities/custom-software-ai-solutions",
         permanent: true,
       },
     ];

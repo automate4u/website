@@ -30,19 +30,21 @@ function ProofShell({
   description,
   children,
   dark = false,
+  compact = false,
 }: {
   eyebrow: string;
   title: string;
   description: string;
   children: ReactNode;
   dark?: boolean;
+  compact?: boolean;
 }) {
   return (
-    <section className={`${dark ? "bg-[#051C2C] text-white" : "bg-white text-ink"} px-4 py-14 md:py-20`}>
+    <section className={`${dark ? "bg-[#051C2C] text-white" : "bg-white text-ink"} px-4 ${compact ? "py-10 md:py-14" : "py-14 md:py-20"}`}>
       <div className="mx-auto max-w-[1280px]">
         <div className="max-w-[820px]">
           <p className={`text-xs font-bold uppercase tracking-[0.08em] ${dark ? "text-[#7df0d1]" : "text-[#167f65]"}`}>{eyebrow}</p>
-          <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] md:text-[42px]">{title}</h2>
+          <h2 className={`mt-3 font-extrabold leading-tight tracking-[-0.01em] ${compact ? "text-[28px] md:text-[36px]" : "text-[30px] md:text-[42px]"}`}>{title}</h2>
           <p className={`mt-4 text-base leading-8 ${dark ? "text-white/72" : "text-muted"}`}>{description}</p>
         </div>
         <div className="mt-8">{children}</div>
@@ -83,7 +85,7 @@ function AIChatProof() {
                       type="button"
                       onClick={() => {
                         setDemoActive(true);
-                        trackEvent("site_chat_demo_started", { page: "/core-services/ai-chat", ctaLocation: "chat_demo_preview" });
+                        trackEvent("site_chat_demo_started", { page: "/services/ai-chat", ctaLocation: "chat_demo_preview" });
                       }}
                       className="inline-flex rounded-full bg-accent px-4 py-2 text-sm font-extrabold text-white hover:bg-btn-hover"
                     >
@@ -118,7 +120,7 @@ function AIChatProof() {
                   className={`h-[590px] w-full border-0 transition-opacity duration-300 ${demoLoaded ? "opacity-100" : "opacity-0"}`}
                   onLoad={() => {
                     setDemoLoaded(true);
-                    trackEvent("site_chat_demo_viewed", { page: "/core-services/ai-chat", ctaLocation: "chat_demo_iframe" });
+                    trackEvent("site_chat_demo_viewed", { page: "/services/ai-chat", ctaLocation: "chat_demo_iframe" });
                   }}
                 />
               </>
@@ -128,7 +130,7 @@ function AIChatProof() {
         </div>
         <div className="grid gap-4">
           {[
-            ["Visitor asks", "The assistant answers from approved FAQs, product/service context, or policies."],
+            ["Customer asks", "The assistant answers from approved FAQs, product/service context, or policies."],
             ["Intent captured", "Lead, booking, support, product question, return, order status, or escalation."],
             ["System updated", "CRM record, ticket, booking, task, transcript, or follow-up is created."],
             ["Human handoff", "Sensitive, frustrated, uncertain, or high-value conversations route to staff with context."],
@@ -163,6 +165,33 @@ function AIChatScenarioProof() {
         {scenarios.map(([title, text]) => (
           <article key={title} className="rounded-lg border border-card-border bg-[#f8fbfa] p-6">
             <h3 className="text-xl font-extrabold text-ink">{title}</h3>
+            <p className="mt-3 text-sm leading-6 text-muted">{text}</p>
+          </article>
+        ))}
+      </div>
+    </ProofShell>
+  );
+}
+
+function FirstAgentStartProof() {
+  const startingPoints = [
+    ["Inbox triage", "Classify routine emails, draft replies, assign owners, and flag requests that need human judgment."],
+    ["CRM hygiene", "Update records, summarize activity, create follow-up tasks, and catch missing fields before leads go cold."],
+    ["Quote support", "Capture request details, check approved sources, prepare internal notes, and route the next step to sales or operations."],
+    ["Support routing", "Summarize issues, suggest approved responses, route escalations, and leave a clean record for the team."],
+  ];
+
+  return (
+    <ProofShell
+      eyebrow="Where to start"
+      title="Choose the first agent by where work already piles up."
+      description="The best first agent usually sits on top of a workflow your team already handles every day: repeated inputs, known decisions, clear exceptions, and a measurable outcome."
+      compact
+    >
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {startingPoints.map(([title, text]) => (
+          <article key={title} className="rounded-lg border border-card-border bg-[#f8fbfa] p-5">
+            <h3 className="text-lg font-extrabold leading-tight text-ink">{title}</h3>
             <p className="mt-3 text-sm leading-6 text-muted">{text}</p>
           </article>
         ))}
@@ -259,6 +288,35 @@ function AIAgentOperatingLoopProof() {
   );
 }
 
+function StrategyDeliverablesProof() {
+  const deliverables = [
+    ["Workflow map", "Where requests enter, who touches them, what systems are involved, and where delays or repeated work happen."],
+    ["Opportunity ranking", "A practical order of automation opportunities based on value, risk, feasibility, and adoption effort."],
+    ["First pilot scope", "The first paid workflow, what it should include, what it should avoid, and how success will be measured."],
+    ["Budget range", "A realistic view of build, integration, usage, support, and managed operations cost drivers."],
+    ["Risk model", "What can be automated, what should be drafted, and what must stay under human approval."],
+    ["30/60/90 plan", "The review rhythm for implementation, measured value, staff feedback, and expansion decisions."],
+  ];
+
+  return (
+    <ProofShell
+      eyebrow="What you receive"
+      title="Walk away with decisions your team can act on."
+      description="A useful AI roadmap should make the next investment easier to understand, easier to approve, and easier to measure."
+      compact
+    >
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {deliverables.map(([title, text]) => (
+          <article key={title} className="rounded-lg border border-card-border bg-[#f8fbfa] p-5">
+            <h3 className="text-lg font-extrabold leading-tight text-ink">{title}</h3>
+            <p className="mt-3 text-sm leading-6 text-muted">{text}</p>
+          </article>
+        ))}
+      </div>
+    </ProofShell>
+  );
+}
+
 function StrategyProof() {
   const [checked, setChecked] = useState<boolean[]>(() => readinessChecks.map(() => false));
   const score = checked.filter(Boolean).length;
@@ -315,6 +373,33 @@ function StrategyValueRoadmapProof() {
           <article key={title} className="rounded-lg border border-card-border bg-[#f8fbfa] p-6">
             <h3 className="text-2xl font-extrabold text-ink">{title}</h3>
             <p className="mt-4 text-sm leading-6 text-muted">{text}</p>
+          </article>
+        ))}
+      </div>
+    </ProofShell>
+  );
+}
+
+function MarketingLanesProof() {
+  const lanes = [
+    ["Social content engine", "Turn approved offers, FAQs, reviews, events, and service notes into draft posts and captions for review."],
+    ["Email nurture", "Move new leads, old inquiries, abandoned carts, and repeat customers into structured follow-up paths."],
+    ["Campaign production", "Create landing copy, email variants, post drafts, reminders, and internal launch tasks from one campaign brief."],
+    ["Lead reactivation", "Find quiet contacts, draft relevant outreach, route warm replies, and update the CRM when interest returns."],
+  ];
+
+  return (
+    <ProofShell
+      eyebrow="Automation lanes"
+      title="Use AI where marketing work gets stuck most often."
+      description="The right marketing workflow is not more random content. It is a repeatable lane that helps your team publish, follow up, and measure without losing brand control."
+      compact
+    >
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {lanes.map(([title, text]) => (
+          <article key={title} className="rounded-lg border border-card-border bg-[#f8fbfa] p-5">
+            <h3 className="text-lg font-extrabold leading-tight text-ink">{title}</h3>
+            <p className="mt-3 text-sm leading-6 text-muted">{text}</p>
           </article>
         ))}
       </div>
@@ -383,6 +468,34 @@ function MarketingApprovalProof() {
   );
 }
 
+function ManagedMonthlyProof() {
+  const items = [
+    ["Monitor", "Usage, failures, escalations, low-confidence answers, workflow completion, and integration health."],
+    ["Tune", "Prompts, approved knowledge, routing rules, handoff logic, and workflow steps as real usage changes."],
+    ["Review", "Sensitive cases, staff overrides, audit logs, access rules, cost movement, and quality concerns."],
+    ["Report", "Hours saved, response time, cost per request, backlog movement, conversion, and next workflow candidates."],
+    ["Improve", "Fix weak points, retire unused flows, expand proven automations, and prepare the next safe rollout."],
+  ];
+
+  return (
+    <ProofShell
+      eyebrow="Monthly ownership"
+      title="Know exactly what is handled after launch."
+      description="Managed AI Operations gives your business an operating rhythm for systems that touch customers, staff workload, revenue, or sensitive workflows."
+      compact
+    >
+      <div className="grid gap-3">
+        {items.map(([title, text]) => (
+          <article key={title} className="grid gap-2 rounded-lg border border-card-border bg-[#f8fbfa] p-5 md:grid-cols-[140px_1fr] md:items-start">
+            <h3 className="text-lg font-extrabold leading-tight text-ink">{title}</h3>
+            <p className="text-sm leading-6 text-muted">{text}</p>
+          </article>
+        ))}
+      </div>
+    </ProofShell>
+  );
+}
+
 function ManagedOpsProof() {
   const rows = [
     ["Voice agent", "98.7%", "3 escalations", "Healthy"],
@@ -424,8 +537,8 @@ function ManagedOpsReportProof() {
   return (
     <ProofShell
       eyebrow="Monthly operating review"
-      title="Buyers need to know what happens after launch."
-      description="Managed operations should include a regular review of quality, usage, costs, escalations, workflow changes, and the next improvement priorities."
+      title="Know what is working, what changed, and what should improve next."
+      description="Managed operations includes a regular review of quality, usage, costs, escalations, workflow changes, and the next improvement priorities."
     >
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {[
@@ -436,6 +549,33 @@ function ManagedOpsReportProof() {
         ].map(([title, text]) => (
           <article key={title} className="rounded-lg border border-card-border bg-[#f8fbfa] p-6">
             <h3 className="text-xl font-extrabold text-ink">{title}</h3>
+            <p className="mt-3 text-sm leading-6 text-muted">{text}</p>
+          </article>
+        ))}
+      </div>
+    </ProofShell>
+  );
+}
+
+function CustomFitProof() {
+  const fitSignals = [
+    ["Your process is unique", "The workflow, approval path, data view, or customer experience does not fit cleanly inside standard tools."],
+    ["People need one work surface", "Staff are switching between inboxes, spreadsheets, CRMs, calendars, documents, and task tools to finish one job."],
+    ["AI needs controls", "The system needs permissions, approvals, audit logs, human review, and clear boundaries around what AI can do."],
+    ["The workflow can become an asset", "A focused internal console, portal, or dashboard would make the business easier to operate and improve over time."],
+  ];
+
+  return (
+    <ProofShell
+      eyebrow="When custom fits"
+      title="Build custom software when the workflow deserves its own operating surface."
+      description="Custom AI software should not be the default. It makes sense when a purpose-built interface can remove friction that generic tools keep creating."
+      compact
+    >
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {fitSignals.map(([title, text]) => (
+          <article key={title} className="rounded-lg border border-card-border bg-[#f8fbfa] p-5">
+            <h3 className="text-lg font-extrabold leading-tight text-ink">{title}</h3>
             <p className="mt-3 text-sm leading-6 text-muted">{text}</p>
           </article>
         ))}
@@ -517,6 +657,7 @@ export default function ServiceProofModules({ slug }: { slug: string }) {
   if (slug === "ai-agents") {
     return (
       <>
+        <FirstAgentStartProof />
         <AIAgentsProof />
         <AIAgentOperatingLoopProof />
       </>
@@ -526,6 +667,7 @@ export default function ServiceProofModules({ slug }: { slug: string }) {
   if (slug === "ai-transformation") {
     return (
       <>
+        <StrategyDeliverablesProof />
         <StrategyProof />
         <StrategyValueRoadmapProof />
       </>
@@ -535,6 +677,7 @@ export default function ServiceProofModules({ slug }: { slug: string }) {
   if (slug === "marketing-automation") {
     return (
       <>
+        <MarketingLanesProof />
         <MarketingProof />
         <MarketingApprovalProof />
       </>
@@ -544,6 +687,7 @@ export default function ServiceProofModules({ slug }: { slug: string }) {
   if (slug === "managed-ai-operations") {
     return (
       <>
+        <ManagedMonthlyProof />
         <ManagedOpsProof />
         <ManagedOpsReportProof />
       </>
@@ -553,6 +697,7 @@ export default function ServiceProofModules({ slug }: { slug: string }) {
   if (slug === "custom-ai-software") {
     return (
       <>
+        <CustomFitProof />
         <CustomSoftwareProof />
         <CustomArchitectureProof />
       </>

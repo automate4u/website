@@ -6,7 +6,7 @@ export default function HospitalityPage() {
       eyebrow="Hospitality"
       title="AI guest response and operations workflows for hospitality teams."
       description="We help hotels, venues, restaurants, short-term rental operators, and guest-service teams answer routine questions, route requests, support bookings, and keep staff focused on the moments where hospitality needs a human touch."
-      primaryCta={{ label: "Explore AI Voice", href: "/core-services/ai-voice" }}
+      primaryCta={{ label: "Explore AI Voice", href: "/services/ai-voice" }}
       image={{ src: "/images/industries/hospitality.jpg", alt: "Hospitality team supporting guest communication and service workflow" }}
       typicalRequest="Can I change my reservation, and is early check-in available?"
       diagnosisTitle="Hospitality teams need fast response without making the guest experience feel automated."
@@ -33,9 +33,9 @@ export default function HospitalityPage() {
       serviceTitle="Connect guest communication to the team workflow behind it."
       serviceDescription="Hospitality automation can start with voice, chat, follow-up, or staff routing depending on where the team feels the most pressure."
       servicePaths={[
-        { title: "AI Voice for guest calls", description: "Voice workflows for routine calls, booking questions, directions, policy questions, and after-hours request capture.", href: "/core-services/ai-voice", cta: "Explore AI Voice" },
-        { title: "AI Chat for guest questions", description: "Chat and message workflows for amenities, hours, policies, reservation support, and staff handoff.", href: "/core-services/ai-chat", cta: "Explore AI Chat" },
-        { title: "AI Agents for operations", description: "Agents that create tasks, route service requests, update notes, send follow-up, and report recurring issues.", href: "/core-services/ai-agents", cta: "Explore AI Agents" },
+        { title: "AI Voice for guest calls", description: "Voice workflows for routine calls, booking questions, directions, policy questions, and after-hours request capture.", href: "/services/ai-voice", cta: "Explore AI Voice" },
+        { title: "AI Chat for guest questions", description: "Chat and message workflows for amenities, hours, policies, reservation support, and staff handoff.", href: "/services/ai-chat", cta: "Explore AI Chat" },
+        { title: "AI Agents for operations", description: "Agents that create tasks, route service requests, update notes, send follow-up, and report recurring issues.", href: "/services/ai-agents", cta: "Explore AI Agents" },
       ]}
       sectorTitle="Hospitality automation has to feel helpful, not cold."
       sectorDescription="The winning pattern is fast routine support paired with clear human escalation for emotional, VIP, urgent, or service-recovery moments."
@@ -67,7 +67,7 @@ export default function HospitalityPage() {
         ["Expand", "Add more locations, channels, review workflows, event support, or managed operations after the first workflow is trusted."],
       ]}
       confidenceTitle="Costs should reflect guest volume, channels, and service risk."
-      confidenceDescription="Hospitality buyers need an automation path that starts practically, protects service quality, and expands only after staff trust the handoffs."
+      confidenceDescription="Start with a practical workflow that protects service quality, gives staff clear handoffs, and expands only after the team trusts how the automation behaves."
       confidenceNotes={[
         "Start with routine guest questions or request routing before service recovery automation.",
         "Measure response time, requests routed, staff interruptions reduced, guest satisfaction signals, and escalation quality.",

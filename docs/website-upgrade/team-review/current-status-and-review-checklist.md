@@ -1,18 +1,19 @@
 # Current Status And Review Checklist
 
-Last updated: after the launch-facing cleanup pass, visual QA polish, docs-folder cleanup, remaining legacy-pattern audit, proof-language polish, AI Chat demo fallback, metadata/sitemap cleanup, and Privacy/Terms polish.
+Last updated: after the launch-facing cleanup pass, visual QA polish, docs-folder cleanup, remaining legacy-pattern audit, proof-language polish, AI Chat demo fallback, metadata/sitemap cleanup, Privacy/Terms polish, first team feedback about page length, homepage reduction, shared service-page reduction, audience-facing copy cleanup, service-specific proof polish, the first final-quality review pass, the secondary service/industry/About/How We Build review pass, remaining industry/legal/trust-page review, and Workflow Architecture redirect cleanup.
 
 This document is the quick team-review version of the upgrade work.
 
 Use:
 
 - `../implementation-reference/04-implementation-roadmap.md` for the full build roadmap.
+- `../implementation-reference/20-final-site-quality-review-plan.md` for the final page-quality review standard Codex should use from here forward.
 - `services-and-how-we-build-taxonomy.md` for the service/capability taxonomy.
 - `production-lead-routing-setup.md` for HubSpot, Resend, Calendly, and PostHog setup.
 
 ## Current Status
 
-The upgrade is in a strong pre-launch review state. The main website rebuild is largely complete; the remaining work is production lead routing, team/legal/proof review, and final page polish.
+The upgrade is in a strong pre-launch review state. The main website rebuild is largely complete; the remaining work is page focus/reduction, production lead routing, team/legal/proof review, and final page polish.
 
 ## Simple Checklist
 
@@ -22,20 +23,39 @@ The upgrade is in a strong pre-launch review state. The main website rebuild is 
 - [x] Shared assessment form and Server Action added.
 - [x] Form captures budget range, source page, CTA location, landing page, referrer, and UTM fields.
 - [x] Homepage rebuilt around operational pain, connected systems, AI Voice as flagship wedge, broader automation, proof, spend confidence, and assessment CTA.
-- [x] Core service pages rebuilt or added.
+- [x] Service pages rebuilt or added.
 - [x] Industry pages rebuilt as native React pages.
+- [x] Industry pages standardized on the shared `IndustryAcceleratorPage` structure so every industry uses the same trusted flow while keeping industry-specific copy, proof, controls, and sector thinking.
 - [x] Daycare Voice Agent added under Solutions as a focused implementation.
 - [x] Capabilities reframed into How We Build trust pages.
 - [x] Representative proof/workflow examples added across homepage, service pages, and industry pages.
 - [x] Proof wording polished to sound buyer-facing rather than like internal NDA planning notes.
 - [x] AI Chat demo now has a user-triggered preview/fallback instead of showing a blank third-party iframe by default.
 - [x] Privacy and Terms expanded into review-ready pages.
+- [x] Homepage Phase 8 reduction pass completed: removed repeated maturity/value/thinking/managed-ops sections and tightened the page to hero, diagnosis, connected workflow, services, proof, and CTA.
+- [x] Shared service-page Phase 8 reduction completed: removed duplicated proof-story, operational reality, standalone systems, controls, rollout, and budget sections; collapsed them into a focused first-workflow section plus trust links, FAQ, and CTA.
+- [x] Priority-page focus pass continued after `/services` migration: Services overview and AI Voice each had one repeated section removed; Manufacturing and Education & Childcare retained compact sector-thinking sections so the pages still show industry understanding without becoming heavy. Daycare Voice Agent kept the cofounder-approved flow with cleaner audience-facing wording.
+- [x] Service-specific proof polish added so non-voice service pages keep the shorter shared structure without feeling identical: AI Agents has first-agent starting points, AI Transformation has concrete deliverables, Marketing Automation has automation lanes, Managed AI Operations has monthly ownership, and Custom AI Software has custom-fit criteria.
+- [x] Audience-facing copy standard tightened: public pages should speak directly to the visitor and avoid internal phrasing such as "this page shows," "buyers need to see," "proof model," or "placeholder."
+- [x] First final-quality review pass started using `../implementation-reference/20-final-site-quality-review-plan.md`.
+- [x] Public internal-language cleanup completed for obvious terms found during review, including "Flagship wedge," "buyers need," "what clients should see," and page-explaining copy.
+- [x] Homepage and industry proof cards were made more compact so proof stays useful without making the page feel as heavy.
+- [x] Secondary service pages reviewed visually: AI Operations Strategy, Marketing Automation, Managed AI Operations, and Custom AI Software.
+- [x] Shared industry-page template reviewed visually through Hospitality, Financial Services, and Real Estate.
+- [x] About Overview, Our Team, and Security/Safety trust page reviewed visually.
+- [x] Additional audience-facing cleanup completed across How We Build and About pages so sections speak directly to the visitor instead of referring to "clients" or "buyers" as an outside group.
+- [x] Remaining industry pages reviewed visually: Home Services, Professional Services, Retail & Ecommerce, Healthcare, and Technology & Media.
+- [x] Privacy and Terms reviewed visually; public legal-review disclaimer removed from the pages and retained only as an internal/team-review requirement.
+- [x] Remaining How We Build pages reviewed visually: Data & Integrations, Operational Intelligence, Workflow Architecture, Staff Training & Adoption, and Technology Strategy.
+- [x] Redirects added for intuitive Workflow Architecture URLs so `/capabilities/workflow-systems-architecture` and `/capabilities/workflow-architecture` resolve to the implemented Workflow & Systems Architecture page.
+- [x] Public service URLs migrated from `/core-services/*` to `/services/*`; `/core-services/*` now exists only as permanent redirects.
 - [x] Docs reorganized into `team-review/` and `implementation-reference/`.
 - [x] Standard checks pass: `npm run lint`, `npm run build`, and `npm run test:e2e`.
 
 ### Still To Do
 
 - [ ] Final production lead routing once credentials and HubSpot field/object decisions are ready.
+- [ ] Human review the shortened priority pages for taste, scanability, and whether any removed context needs to return in a more compact format.
 - [ ] Real production-style form submission test into HubSpot and internal email notifications.
 - [ ] Add final Calendly assessment link to form success states and notification emails.
 - [ ] Add final PostHog project key and confirm live funnel events.
@@ -47,7 +67,9 @@ The upgrade is in a strong pre-launch review state. The main website rebuild is 
 
 ### Next Work While Credentials Are Pending
 
-- [ ] Final human-quality pass on `/`, `/core-services`, `/core-services/ai-voice`, `/core-services/ai-chat`, `/core-services/ai-agents`, `/industries/manufacturing`, `/industries/education-childcare`, and `/solutions/daycare-voice-agent`.
+- [ ] Review `/services`, `/services/ai-voice`, `/industries/manufacturing`, `/industries/education-childcare`, and `/solutions/daycare-voice-agent` on staging after the reduction pass.
+- [ ] Complete one final click-through on staging once deployed so redirects, forms, and third-party scripts are verified in the hosted environment.
+- [ ] Reduce each priority page to one clear buyer job, one primary CTA path, and only the proof/process sections needed for that buyer.
 - [ ] Reduce density where sections feel heavy.
 - [ ] Tighten claims that feel too broad, too strong, or not NDA-safe.
 - [ ] Review CTA placement and page rhythm on desktop/mobile.
@@ -60,10 +82,11 @@ What is stable:
 - Playwright conversion-path tests pass.
 - First mobile typography polish pass has been applied to reduce oversized headings on dense pages.
 - Second visual QA pass reviewed remaining service pages, How We Build, and several remaining industry pages on mobile/desktop without finding launch-blocking layout problems.
+- Final-quality screenshots reviewed the homepage, Services overview, AI Voice, AI Chat, AI Agents, AI Operations Strategy, Marketing Automation, Managed AI Operations, Custom AI Software, Manufacturing, Education & Childcare, Daycare Voice Agent, Capabilities overview, selected shared-template industry pages, About Overview, Our Team, and Security/Safety.
 - Remaining legacy-pattern audit found no active migrated-page usage of `dangerouslySetInnerHTML`, Formspree, raw `<img>` tags, old WordPress assets, or old HTTP asset references in `app/`, `components/`, or `data/`. The only `dangerouslySetInnerHTML` usage found is the intentional JSON-LD component, and the only iframe found is the intentional AI Chat demo.
 - Proof sections now use more buyer-facing language: workflow examples, connected systems, human controls, and measurable operating outcomes rather than internal NDA/planning phrasing.
 - The AI Chat demo section now uses a polished user-triggered preview with an external demo link so the page still feels intentional if the third-party iframe is slow or visually blank.
-- Metadata/sitemap cleanup now keeps redirect-only legacy capability URLs out of the sitemap and gives `/core-services`, `/privacy`, and `/terms` canonical metadata through the shared metadata helper.
+- Metadata/sitemap cleanup now keeps redirect-only legacy capability URLs out of the sitemap and gives `/services`, `/privacy`, and `/terms` canonical metadata through the shared metadata helper.
 - Privacy and Terms pages have been expanded from basic placeholders into practical review-ready pages covering assessment data, analytics, third-party tools, sensitive workflow details, AI/automation boundaries, pricing/examples, and project-specific agreements.
 - Website upgrade docs are now split into human-readable `team-review/` docs and deeper `implementation-reference/` docs.
 - Main CTA language is standardized as **Get Free Assessment**.
@@ -78,6 +101,29 @@ What changed strategically:
 - **Industries** now means where those services are applied.
 - **How We Build** now means trust and delivery capability: security, integrations, analytics, adoption, architecture, and strategy.
 - Focused implementations such as Daycare Voice Agent live under **Solutions**, linked contextually from service and industry pages rather than pushed as a primary top-nav category.
+
+## Page Focus And Reduction Pass
+
+First team feedback: many pages feel long and hard to get through. This should be treated as a dedicated next pass before launch, not as small copy cleanup.
+
+Principles:
+
+- Each page should answer one main buyer question quickly.
+- The first screen should make the page’s value clear without requiring context from other pages.
+- Repeated trust language should be removed when the same point was already made nearby.
+- Proof should be strongest where it changes confidence; otherwise link to a deeper proof or service page.
+- Service pages should prioritize what the buyer can buy and what the first project looks like.
+- Industry pages should prioritize industry pain, common workflows, and relevant service/solution paths.
+- How We Build pages can carry more depth because they are trust/supporting pages, but they should still be scannable.
+- Long sections should become shorter cards, accordions, tabs, filters, or links to deeper pages only when that improves clarity.
+
+Candidate reductions:
+
+- Homepage: keep the strongest diagnosis, service map, filtered proof, and CTA; remove or condense repeated maturity/value/trust language.
+- Service pages: keep hero, first pilot proof, service-specific demo/proof, workflow examples, trust links, FAQ, and CTA; collapse or shorten repeated operational reality/process sections.
+- Industry pages: keep hero, common request, connected workflow, relevant services/solutions, sector context, controls, and CTA; shorten duplicated systems/rollout/proof blocks where they feel repetitive.
+- Daycare Voice Agent: keep the calmer operational flow from the cofounder brief; avoid adding generic AI-agency proof that distracts from daycare executive concerns.
+- How We Build pages: keep detailed trust content, but improve scanability with shorter sections and fewer repeated related links.
 
 ## Major Pages Completed Or Upgraded
 
@@ -111,18 +157,27 @@ Keep AI Voice mostly stable until cofounder review.
 
 Added or rebuilt:
 
-- `/core-services`
-- `/core-services/ai-voice`
-- `/core-services/ai-agents`
-- `/core-services/ai-chat`
-- `/core-services/ai-transformation`
-- `/core-services/marketing-automation`
-- `/core-services/managed-ai-operations`
-- `/core-services/custom-ai-software`
+- `/services`
+- `/services/ai-voice`
+- `/services/ai-agents`
+- `/services/ai-chat`
+- `/services/ai-transformation`
+- `/services/marketing-automation`
+- `/services/managed-ai-operations`
+- `/services/custom-ai-software`
 
-The new `/core-services` overview explains how the services fit together and gives visitors a clearer path through Voice, Agents, Chat, Strategy, Marketing, Managed Ops, and Custom Software.
+The new `/services` overview explains how the services fit together and gives visitors a clearer path through Voice, Agents, Chat, Strategy, Marketing, Managed Ops, and Custom Software. `/core-services/*` redirects permanently to `/services/*`.
 
 The non-voice service pages now use a shared sales spine plus flexible proof stacks. This means the pages stay consistent without becoming cloned templates.
+
+Current service-page proof distinction:
+
+- AI Agents: first-agent starting points, searchable agent library, and operating-loop proof.
+- AI Chat: user-triggered chatbot demo, downstream action explanation, and conversation scenarios.
+- AI Operations Strategy: concrete roadmap deliverables, readiness check, and 30/60/90 value roadmap.
+- Marketing Automation: automation lanes, idea-to-approval workflow preview, and approval-control proof.
+- Managed AI Operations: monthly ownership model, operating dashboard mock, and monthly review preview.
+- Custom AI Software: custom-fit criteria, interface snapshot, and architecture proof.
 
 Current service proof assets:
 
@@ -251,10 +306,10 @@ Known non-blocking warning:
 Review these pages first:
 
 1. `/`
-2. `/core-services`
-3. `/core-services/ai-voice`
-4. `/core-services/ai-chat`
-5. `/core-services/ai-agents`
+2. `/services`
+3. `/services/ai-voice`
+4. `/services/ai-chat`
+5. `/services/ai-agents`
 6. `/industries/manufacturing`
 7. `/industries/education-childcare`
 8. `/solutions/daycare-voice-agent`
@@ -285,7 +340,8 @@ These are the remaining items Codex can continue implementing without needing st
 ### Visual And UX QA
 
 - Complete one final human-quality pass on the highest-value buyer paths first:
-  `/`, `/core-services`, `/core-services/ai-voice`, `/core-services/ai-chat`, `/core-services/ai-agents`, `/industries/manufacturing`, `/industries/education-childcare`, and `/solutions/daycare-voice-agent`.
+  `/`, `/services`, `/services/ai-voice`, `/services/ai-chat`, `/services/ai-agents`, `/industries/manufacturing`, `/industries/education-childcare`, and `/solutions/daycare-voice-agent`.
+- Use `../implementation-reference/20-final-site-quality-review-plan.md` as the review standard for page clarity, page length, audience-facing copy, service-page distinction, proof safety, CTA rhythm, and premium trust.
 - Review secondary service, industry, and How We Build pages after the priority paths are approved.
 - Reduce density where proof modules feel too heavy.
 - Check CTA placement, spacing, and page rhythm.
@@ -341,7 +397,7 @@ The site is strong enough for serious team review, but it should not be treated 
 
 Remaining risks:
 
-- Some pages are content-rich and still deserve final human review for density, ordering, and tone.
+- Some pages are content-rich and now need a deliberate focus/reduction pass before final launch review.
 - The first mobile heading polish and second visual QA pass are complete, but subjective page rhythm should still be reviewed by the team.
 - AI Chat has a polished fallback/preview, but the external embedded demo can still depend on third-party availability.
 - Proof/case study assets still need NDA-safe review before adding stronger claims.
@@ -353,10 +409,10 @@ Remaining risks:
 
 When work resumes, prioritize in this order:
 
-1. While credentials are pending, Codex completes a final human-quality pass on the priority buyer paths listed above.
-2. Team provides production routing credentials and decisions from `production-lead-routing-setup.md`.
-3. Codex finalizes production lead routing code and tests the path.
-4. Team reviews homepage, Services overview, AI Voice, AI Chat, AI Agents, Manufacturing, Education & Childcare, and Daycare Voice Agent.
+1. Codex completes the page focus and reduction pass on the priority buyer paths listed above.
+2. Team reviews the shorter page flow for homepage, Services overview, AI Voice, AI Chat, AI Agents, Manufacturing, Education & Childcare, and Daycare Voice Agent.
+3. Team provides production routing credentials and decisions from `production-lead-routing-setup.md`.
+4. Codex finalizes production lead routing code and tests the path.
 5. Team gathers proof inventory for anonymous case studies and measurable outcomes.
 6. Codex replaces representative proof with approved anonymous/sanitized proof where available.
 7. Legal review of Privacy and Terms pages.

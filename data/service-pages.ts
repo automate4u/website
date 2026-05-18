@@ -50,7 +50,7 @@ export type ServicePageData = {
 export const servicePages: ServicePageData[] = [
   {
     slug: "ai-agents",
-    href: "/core-services/ai-agents",
+    href: "/services/ai-agents",
     eyebrow: "AI Agents & Workflow Automation",
     title: "Agents that handle repeatable work across sales, support, and operations.",
     description:
@@ -138,7 +138,7 @@ export const servicePages: ServicePageData[] = [
   },
   {
     slug: "ai-chat",
-    href: "/core-services/ai-chat",
+    href: "/services/ai-chat",
     eyebrow: "AI Chat & Customer Messaging",
     title: "Customer messaging that answers, qualifies, routes, and follows through.",
     description:
@@ -155,9 +155,9 @@ export const servicePages: ServicePageData[] = [
     operationalReality: {
       title: "A chat widget is not valuable unless it changes what happens after the conversation.",
       description:
-        "Buyers expect fast answers, but teams need reliable routing, clean records, and fewer repetitive interruptions.",
+        "Your customers expect fast answers, and your team needs reliable routing, clean records, and fewer repetitive interruptions.",
       points: [
-        { title: "Website visitors leave without answers", text: "Product, pricing, booking, availability, and support questions often arrive outside staff availability." },
+        { title: "Customers leave without answers", text: "Product, pricing, booking, availability, and support questions often arrive outside staff availability." },
         { title: "Support teams repeat themselves", text: "The same questions consume time that should be spent on exceptions and higher-value customer work." },
         { title: "Lead context gets lost", text: "A conversation is only useful if it creates the right CRM record, task, booking, or follow-up." },
         { title: "Bad answers create risk", text: "Messaging needs approved content, escalation rules, and clear limits for uncertain requests." },
@@ -184,7 +184,7 @@ export const servicePages: ServicePageData[] = [
       },
       {
         title: "Product and order guidance",
-        trigger: "Buyer needs help comparing products, checking availability, or understanding order status.",
+        trigger: "Customer needs help comparing products, checking availability, or understanding order status.",
         action: "Chat searches approved product/order context and routes exceptions to staff.",
         outcome: "Faster customer answers without exposing unsupported claims.",
       },
@@ -226,7 +226,7 @@ export const servicePages: ServicePageData[] = [
   },
   {
     slug: "ai-transformation",
-    href: "/core-services/ai-transformation",
+    href: "/services/ai-transformation",
     eyebrow: "AI Operations Strategy",
     title: "A practical roadmap for automating the work that actually slows the business down.",
     description:
@@ -314,7 +314,7 @@ export const servicePages: ServicePageData[] = [
   },
   {
     slug: "marketing-automation",
-    href: "/core-services/marketing-automation",
+    href: "/services/marketing-automation",
     eyebrow: "Marketing Automation & Content Agents",
     title: "Content and follow-up systems that help small teams publish, nurture, and measure more consistently.",
     description:
@@ -402,7 +402,7 @@ export const servicePages: ServicePageData[] = [
   },
   {
     slug: "managed-ai-operations",
-    href: "/core-services/managed-ai-operations",
+    href: "/services/managed-ai-operations",
     eyebrow: "Managed AI Operations",
     title: "Keep AI systems monitored, tuned, governed, and improving after launch.",
     description:
@@ -490,7 +490,7 @@ export const servicePages: ServicePageData[] = [
   },
   {
     slug: "custom-ai-software",
-    href: "/core-services/custom-ai-software",
+    href: "/services/custom-ai-software",
     eyebrow: "Custom AI Software",
     title: "Purpose-built AI software when off-the-shelf tools do not fit the workflow.",
     description:

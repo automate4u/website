@@ -23,7 +23,7 @@ type ValuePattern = {
 type ServicePath = {
   title: string;
   description: string;
-  href: string;
+  href?: string;
   cta: string;
 };
 
@@ -223,9 +223,13 @@ export default function IndustryAcceleratorPage({
               <article key={path.title} className="rounded-lg border border-card-border bg-[#f8fbfa] p-6">
                 <h3 className="text-xl font-extrabold leading-tight text-ink">{path.title}</h3>
                 <p className="mt-4 text-sm leading-6 text-muted">{path.description}</p>
-                <Link href={path.href} className="mt-6 inline-flex text-sm font-extrabold text-[#167f65]">
-                  {path.cta}
-                </Link>
+                {path.href ? (
+                  <Link href={path.href} className="mt-6 inline-flex text-sm font-extrabold text-[#167f65]">
+                    {path.cta}
+                  </Link>
+                ) : (
+                  <p className="mt-6 text-sm font-extrabold text-muted">{path.cta}</p>
+                )}
               </article>
             ))}
           </div>
@@ -237,20 +241,20 @@ export default function IndustryAcceleratorPage({
           storySlugs={proofStorySlugs}
           eyebrow="Workflow examples"
           title="The first win should connect the conversation to a measurable operating outcome."
-          description="These examples show the kind of workflow evidence we look for during an assessment: what gets captured, which systems are touched, where humans stay in control, and how value is measured."
+          description="See what gets captured, which systems are touched, where humans stay in control, and how value can be measured before the workflow expands."
           compact
           className="border-y border-card-border bg-[#f8fbfa]"
         />
       ) : null}
 
-      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20" aria-labelledby="sector-title">
+      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-12 md:py-16" aria-labelledby="sector-title">
         <div className="mx-auto max-w-[1180px]">
           <SectionHeader eyebrow="What is shaping the sector" title={sectorTitle} description={sectorDescription} />
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {sectorShifts.map((shift) => (
-              <article key={shift.title} className="rounded-lg border border-card-border bg-white p-6">
+              <article key={shift.title} className="rounded-lg border border-card-border bg-white p-5">
                 <h3 className="text-lg font-extrabold leading-6 text-ink">{shift.title}</h3>
-                <p className="mt-4 text-sm leading-6 text-muted">{shift.text}</p>
+                <p className="mt-3 text-sm leading-6 text-muted">{shift.text}</p>
               </article>
             ))}
           </div>

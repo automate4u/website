@@ -156,7 +156,7 @@ export default function WorkflowSystemsArchitecturePage() {
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Implementation evidence</p>
             <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] md:text-[42px]">
-              Clients should understand the workflow before the build begins.
+              Understand the workflow before the build begins.
             </h2>
             <p className="mt-5 text-base leading-8 text-white/72">
               Architecture work should create enough clarity to build safely: where data comes from, which system owns it, who approves exceptions, and how the workflow will be supported.

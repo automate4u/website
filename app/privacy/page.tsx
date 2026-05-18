@@ -61,7 +61,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p className="mt-5 max-w-[760px] text-base leading-8 text-white/74">
-            This page explains how Automate4U handles information submitted through our website, assessment forms, scheduling links, analytics, and lead-routing systems.
+            Learn how Automate4U handles information submitted through our website, assessment forms, scheduling links, analytics, and lead-routing systems.
           </p>
           <p className="mt-5 text-sm font-semibold text-white/60">Last updated: May 15, 2026</p>
         </div>
@@ -107,10 +107,6 @@ export default function PrivacyPage() {
               <a href="mailto:hello@automate4u.ca" className="font-bold text-[#167f65]">hello@automate4u.ca</a>.
             </p>
           </article>
-
-          <p className="rounded-lg border border-card-border bg-[#f8fbfa] p-4 text-sm leading-6">
-            This policy is provided for general website transparency and should be reviewed by legal counsel before being treated as a final legal policy.
-          </p>
 
           <Link href="/contact" className="inline-flex w-fit rounded-full bg-accent px-5 py-3 font-bold text-white hover:bg-btn-hover">
             Contact Automate4U

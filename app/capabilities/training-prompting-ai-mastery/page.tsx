@@ -199,7 +199,7 @@ export default function TrainingPromptingAIMasteryPage() {
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Implementation evidence</p>
             <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] md:text-[42px]">
-              Clients should know how the team will operate with the AI after launch.
+              Know how your team will operate with the AI after launch.
             </h2>
             <p className="mt-5 text-base leading-8 text-white/72">
               Training should leave behind practical guidance: who reviews exceptions, how approved answers change, when staff intervene, and how feedback turns into better automation.

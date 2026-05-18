@@ -199,7 +199,7 @@ export default function OperationalIntelligenceAnalyticsPage() {
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Implementation evidence</p>
             <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] md:text-[42px]">
-              Clients should see what is working, what needs tuning, and what should happen next.
+              See what is working, what needs tuning, and what should happen next.
             </h2>
             <p className="mt-5 text-base leading-8 text-white/72">
               Reporting should make the next decision easier: keep the workflow, tune it, pause it, or expand into adjacent work with clearer confidence.

@@ -115,7 +115,7 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
     if (!state.message) return;
 
     trackEvent(state.ok ? "site_assessment_form_submitted" : "site_assessment_form_failed", {
-      page: "/core-services/ai-voice",
+      page: "/services/ai-voice",
       ctaLocation: "ai_voice_modal",
       serviceInterest: "ai-voice",
     });
@@ -167,7 +167,7 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                 Tell us where calls slow your team down. We will assess the workflow, likely savings, guardrails, and the best next step.
               </p>
               <form className="grid gap-4" action={formAction} noValidate>
-                <input type="hidden" name="sourcePage" value="/core-services/ai-voice" />
+                <input type="hidden" name="sourcePage" value="/services/ai-voice" />
                 <input type="hidden" name="ctaLocation" value="ai_voice_modal" />
                 <input type="hidden" name="serviceInterest" value="ai-voice" />
                 <AttributionFields />
@@ -225,7 +225,7 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                   type="submit"
                   disabled={pending}
                   onClick={() => trackEvent("site_assessment_cta_clicked", {
-                    page: "/core-services/ai-voice",
+                    page: "/services/ai-voice",
                     ctaLocation: "ai_voice_modal",
                     serviceInterest: "ai-voice",
                   })}
@@ -287,7 +287,7 @@ export default function AIVoicePage() {
 
       client.on("call_started", () => {
         trackEvent("site_voice_demo_started", {
-          page: "/core-services/ai-voice",
+          page: "/services/ai-voice",
           ctaLocation: "voice_demo",
           serviceInterest: "ai-voice",
         });
@@ -297,7 +297,7 @@ export default function AIVoicePage() {
 
       client.on("call_ended", () => {
         trackEvent("site_voice_demo_completed", {
-          page: "/core-services/ai-voice",
+          page: "/services/ai-voice",
           ctaLocation: "voice_demo",
           serviceInterest: "ai-voice",
         });
@@ -308,7 +308,7 @@ export default function AIVoicePage() {
       client.on("error", (error) => {
         console.error("Retell error:", error);
         trackEvent("site_voice_demo_failed", {
-          page: "/core-services/ai-voice",
+          page: "/services/ai-voice",
           ctaLocation: "voice_demo",
           serviceInterest: "ai-voice",
         });
@@ -358,7 +358,7 @@ export default function AIVoicePage() {
       const message = error instanceof Error ? error.message : "Unknown error";
       console.error(error);
       trackEvent("site_voice_demo_failed", {
-        page: "/core-services/ai-voice",
+        page: "/services/ai-voice",
         ctaLocation: "voice_demo",
         serviceInterest: "ai-voice",
       });
@@ -408,28 +408,6 @@ export default function AIVoicePage() {
                 <span className="rounded-md bg-white/10 px-3 py-2">KPI logged</span>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="voice-proof-title">
-        <div className="mx-auto max-w-[1280px]">
-          <SectionHeader
-            eyebrow="Why voice first"
-            title="Stop letting important calls interrupt your team or disappear."
-            description="Missed calls, repetitive questions, booking friction, quote requests, urgent escalations, and after-hours inquiries are visible problems. Voice is the starting point; the bigger win is connecting those calls to the workflows behind them."
-          />
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
-            {[
-              ["Immediate coverage", "Answer routine calls instantly without forcing staff to stop deep work."],
-              ["Structured intake", "Collect the right details and classify intent before the handoff."],
-              ["Downstream action", "Update systems, notify staff, create tasks, and record outcomes."],
-            ].map(([title, text]) => (
-              <article key={title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
-                <h3 className="text-xl font-extrabold text-ink">{title}</h3>
-                <p className="mt-4 text-sm leading-6 text-muted">{text}</p>
-              </article>
-            ))}
           </div>
         </div>
       </section>
@@ -525,7 +503,7 @@ export default function AIVoicePage() {
                 See how voice works when it is designed for one real operating environment.
               </h2>
               <p className="mt-5 text-base leading-8 text-muted">
-                The Daycare Voice Agent page shows the calmer, more specific version of the voice story: enrollment calls, parent questions, location routing, approved responses, sensitive handoffs, and a practical rollout for busy childcare teams.
+                Explore a calmer, more specific voice workflow for enrollment calls, parent questions, location routing, approved responses, sensitive handoffs, and practical rollout planning for busy childcare teams.
               </p>
             </div>
             <div className="rounded-lg border border-card-border bg-white p-6">

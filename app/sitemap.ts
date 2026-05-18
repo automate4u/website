@@ -8,6 +8,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: new URL(route, siteConfig.url).toString(),
     lastModified: now,
     changeFrequency: route === "/" ? "weekly" : "monthly",
-    priority: route === "/" ? 1 : route.includes("core-services") ? 0.8 : 0.6,
+    priority: route === "/" ? 1 : route.includes("services") ? 0.8 : 0.6,
   }));
 }

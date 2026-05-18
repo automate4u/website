@@ -64,6 +64,14 @@ Avoid public section copy that says what the website needs to prove, what buyers
 - Instead of "We reduce repetitive labor cost," write about lowering manual touches and freeing staff for higher-value work.
 - Instead of "Humans stay in control," write about approvals, escalation, audit logs, and staff review for sensitive cases.
 
+Audience-facing copy standard:
+
+- Do not write public copy that describes the page itself, such as "this page shows," "the website proves," "buyers need to see," or "this section demonstrates."
+- Do not expose planning language such as "wedge," "proof model," "sales spine," "template," "buyer path," or "placeholder."
+- Write to the person evaluating Automate4U: "Start with...", "See how...", "Your team...", "Your customers...", "The workflow...", and "You stay in control."
+- When a page links to another page, describe the operational value of that next step, not why the page exists.
+- When anonymized proof is necessary, explain the pattern and outcome without sounding like an internal disclaimer.
+
 Visual quality standards:
 
 - Use a restrained type scale. Hero headings should feel confident, not oversized.
@@ -318,7 +326,7 @@ Solution pages are not industry pages. They should describe one specific impleme
 
 The `/solutions` index should stay practical and focused. It should not become a long product catalog before enough solution pages exist. Its job is to explain the implementation pattern, feature available solution pages, and preview the future library in a way that feels credible.
 
-Do not put `Solutions` in the primary top navigation until there are enough strong solution pages to justify it. For now, solution pages should be discovered contextually from relevant industry pages, core service pages, homepage sections, and the footer. This keeps the top navigation focused on broad buyer paths instead of making the business look narrower than it is.
+Do not put `Solutions` in the primary top navigation until there are enough strong solution pages to justify it. For now, solution pages should be discovered contextually from relevant industry pages, service pages, homepage sections, and the footer. This keeps the top navigation focused on broad buyer paths instead of making the business look narrower than it is.
 
 Use `/solutions/daycare-voice-agent` as the first solution-page pattern:
 
@@ -332,7 +340,7 @@ Use `/solutions/daycare-voice-agent` as the first solution-page pattern:
 - Handle objections clearly.
 - End with a low-pressure solution-specific CTA.
 
-Solutions should be linked from relevant industry pages and core service pages. For example, Daycare Voice Agent belongs under the broader Education & Childcare industry context and AI Voice service context.
+Solutions should be linked from relevant industry pages and service pages. For example, Daycare Voice Agent belongs under the broader Education & Childcare industry context and AI Voice service context.
 
 Every premium visual should answer one of these questions:
 

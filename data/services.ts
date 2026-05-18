@@ -21,7 +21,7 @@ export interface ServiceSummary {
 export const services: ServiceSummary[] = [
   {
     slug: "ai-voice",
-    href: "/core-services/ai-voice",
+    href: "/services/ai-voice",
     title: "AI Voice Agents",
     shortTitle: "AI Voice",
     metaTitle: "AI Voice Agents for Business Operations | Automate4U",
@@ -32,7 +32,7 @@ export const services: ServiceSummary[] = [
   },
   {
     slug: "ai-agents",
-    href: "/core-services/ai-agents",
+    href: "/services/ai-agents",
     title: "AI Agents",
     shortTitle: "AI Agents",
     metaTitle: "AI Agents for Sales, Support, and Operations | Automate4U",
@@ -43,7 +43,7 @@ export const services: ServiceSummary[] = [
   },
   {
     slug: "ai-chat",
-    href: "/core-services/ai-chat",
+    href: "/services/ai-chat",
     title: "AI Chatbots",
     shortTitle: "AI Chat",
     metaTitle: "AI Chatbots Connected to Business Workflows | Automate4U",
@@ -54,7 +54,7 @@ export const services: ServiceSummary[] = [
   },
   {
     slug: "ai-transformation",
-    href: "/core-services/ai-transformation",
+    href: "/services/ai-transformation",
     title: "AI Operations Strategy",
     shortTitle: "AI Strategy",
     metaTitle: "AI Workflow Automation and Strategy | Automate4U",
@@ -65,7 +65,7 @@ export const services: ServiceSummary[] = [
   },
   {
     slug: "marketing-automation",
-    href: "/core-services/marketing-automation",
+    href: "/services/marketing-automation",
     title: "Marketing Automation and Content Agents",
     shortTitle: "Marketing Automation",
     metaTitle: "Marketing Automation and Content Agents | Automate4U",
@@ -76,7 +76,7 @@ export const services: ServiceSummary[] = [
   },
   {
     slug: "managed-ai-operations",
-    href: "/core-services/managed-ai-operations",
+    href: "/services/managed-ai-operations",
     title: "Managed AI Operations",
     shortTitle: "Managed AI Ops",
     metaTitle: "Managed AI Operations | Automate4U",
@@ -87,7 +87,7 @@ export const services: ServiceSummary[] = [
   },
   {
     slug: "custom-ai-software",
-    href: "/core-services/custom-ai-software",
+    href: "/services/custom-ai-software",
     title: "Custom AI Software",
     shortTitle: "Custom AI Software",
     metaTitle: "Custom AI Software for Business Workflows | Automate4U",

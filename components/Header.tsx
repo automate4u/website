@@ -36,7 +36,7 @@ export default function Header() {
         services: [
             {
                 name: "Services Overview",
-                href: "/core-services",
+                href: "/services",
                 description: "See how Automate4U services fit together across voice, agents, chat, strategy, operations, marketing, and custom software.",
             },
             ...serviceOffers.map((item) => ({

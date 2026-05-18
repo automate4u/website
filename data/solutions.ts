@@ -21,6 +21,6 @@ export const solutions: SolutionSummary[] = [
       "AI voice assistant for daycare enrollment inquiries, parent call routing, tour requests, absence reporting, and multi-location communication workflows.",
     primaryCtaLabel: "Schedule a Walkthrough",
     relatedIndustryHref: "/industries/education-childcare",
-    relatedServiceHref: "/core-services/ai-voice",
+    relatedServiceHref: "/services/ai-voice",
   },
 ];

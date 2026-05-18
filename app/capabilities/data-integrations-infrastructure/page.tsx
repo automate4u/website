@@ -206,7 +206,7 @@ export default function DataIntegrationsInfrastructurePage() {
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Implementation evidence</p>
             <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] md:text-[42px]">
-              Clients should know where data comes from, where it goes, and what happens when it fails.
+              Know where data comes from, where it goes, and what happens when it fails.
             </h2>
             <p className="mt-5 text-base leading-8 text-white/72">
               This is how AI moves from impressive demo to operational system. We define the handoff points, field mappings, source-of-truth decisions, monitoring signals, and failure paths before expanding automation.

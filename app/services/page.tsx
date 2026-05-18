@@ -5,45 +5,26 @@ import SectionHeader from "@/components/sections/SectionHeader";
 import { serviceOffers } from "@/data/service-offers";
 import { metadataForPath } from "@/lib/route-metadata";
 
-export const metadata: Metadata = metadataForPath("/core-services");
+export const metadata: Metadata = metadataForPath("/services");
 
 const serviceFit = [
   {
     label: "Start with AI Voice",
     title: "When calls interrupt the team or revenue is being missed.",
     text: "Best for front desk, intake, booking, quote routing, service calls, enrollment inquiries, and routine phone workflows that need clean escalation.",
-    href: "/core-services/ai-voice",
+    href: "/services/ai-voice",
   },
   {
     label: "Start with AI Agents",
     title: "When inboxes, CRM queues, documents, or admin workflows repeat every day.",
     text: "Best for email response, support triage, quote intake, CRM updates, finance inboxes, reporting, and operations tasks.",
-    href: "/core-services/ai-agents",
+    href: "/services/ai-agents",
   },
   {
     label: "Start with Strategy",
     title: "When the opportunity is real but the first move is unclear.",
     text: "Best when leadership wants spend confidence, workflow prioritization, risk boundaries, a pilot scope, and a measurable roadmap.",
-    href: "/core-services/ai-transformation",
-  },
-];
-
-const proofPrinciples = [
-  {
-    title: "Connected systems",
-    text: "Every useful automation should do something after the conversation: update records, create tasks, book calendars, notify staff, or log KPIs.",
-  },
-  {
-    title: "Human control",
-    text: "Sensitive, uncertain, high-value, safety-related, financial, or policy-bound work should use approvals, escalation, and audit trails.",
-  },
-  {
-    title: "Spend confidence",
-    text: "Start with a narrow workflow, prove value, then expand based on response time, manual touches reduced, cost per request, and staff feedback.",
-  },
-  {
-    title: "Ongoing ownership",
-    text: "AI systems need monitoring, tuning, reporting, governance, and support after launch so they keep improving instead of drifting.",
+    href: "/services/ai-transformation",
   },
 ];
 
@@ -66,7 +47,7 @@ export default function CoreServicesPage() {
               <Link href="/contact" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
                 Get Free Assessment
               </Link>
-              <Link href="/core-services/ai-voice" className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb]">
+              <Link href="/services/ai-voice" className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb]">
                 Explore AI Voice
               </Link>
             </div>
@@ -100,7 +81,7 @@ export default function CoreServicesPage() {
         <section className="border-b border-card-border bg-white px-4 py-12 md:py-16">
           <div className="mx-auto grid max-w-[1180px] gap-8 rounded-lg border border-card-border bg-[#f8fbfa] p-6 shadow-[0_12px_36px_rgba(15,23,32,0.05)] md:p-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Flagship wedge</p>
+              <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Strong starting point</p>
               <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[42px]">
                 AI Voice often opens the door.
               </h2>
@@ -162,26 +143,7 @@ export default function CoreServicesPage() {
         </div>
       </section>
 
-      <section className="bg-[#051C2C] px-4 py-14 text-white md:py-20">
-        <div className="mx-auto max-w-[1280px]">
-          <div className="max-w-[820px]">
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">What makes the work trustworthy</p>
-            <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] md:text-[42px]">
-              The service is only valuable when the automation is connected, controlled, and measurable.
-            </h2>
-          </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {proofPrinciples.map((item) => (
-              <article key={item.title} className="rounded-lg border border-white/12 bg-white/[0.07] p-5">
-                <h3 className="text-lg font-extrabold text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-white/70">{item.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <AssessmentCTA sourcePage="/core-services" ctaLocation="services_overview_assessment" />
+      <AssessmentCTA sourcePage="/services" ctaLocation="services_overview_assessment" />
     </div>
   );
 }

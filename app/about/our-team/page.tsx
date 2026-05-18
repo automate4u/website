@@ -124,7 +124,7 @@ export default function Page() {
           <SectionHeader
             eyebrow="How we show up"
             title="A senior, practical, hands-on approach to AI implementation."
-            description="Clients should feel that Automate4U understands business operations and can still get deep into the technical details needed to make the system work."
+            description="Work with a team that understands business operations and can still get deep into the technical details needed to make the system work."
           />
           <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {operatingValues.map((item) => (

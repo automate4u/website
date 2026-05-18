@@ -33,7 +33,7 @@ export default function Page() {
             We believe AI should make companies easier to run, easier to serve, and easier to grow. That means practical systems, safe handoffs, connected workflows, and measurable operating improvement.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="/core-services" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
+            <Link href="/services" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
               Explore Services
             </Link>
             <Link href="/capabilities" className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb]">

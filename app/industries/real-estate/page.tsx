@@ -6,7 +6,7 @@ export default function RealEstatePage() {
       eyebrow="Real Estate"
       title="AI lead response and follow-up systems for real estate teams."
       description="We help real estate agents, brokerages, property managers, and leasing teams respond faster, qualify inquiries, book showings, update CRM records, and keep people in control of high-value conversations."
-      primaryCta={{ label: "Explore AI Voice", href: "/core-services/ai-voice" }}
+      primaryCta={{ label: "Explore AI Voice", href: "/services/ai-voice" }}
       image={{ src: "/images/industries/real_estate.jpg", alt: "Real estate team coordinating lead response and property inquiry workflow" }}
       typicalRequest="Is this property still available, and can I book a showing this week?"
       diagnosisTitle="Real estate teams lose opportunities when lead response, qualification, and follow-up are inconsistent."
@@ -42,9 +42,9 @@ export default function RealEstatePage() {
       serviceTitle="Connect fast response to the sales and service workflow behind it."
       serviceDescription="Real estate automation can start with voice, chat, CRM routing, or follow-up agents depending on where leads currently fall through."
       servicePaths={[
-        { title: "AI Voice lead capture", description: "Voice agents for missed calls, listing inquiries, showing requests, intake, and after-hours lead response.", href: "/core-services/ai-voice", cta: "Explore AI Voice" },
-        { title: "AI Agents for CRM follow-up", description: "Agents that create tasks, update CRM fields, send next-step messages, and keep lead nurture moving.", href: "/core-services/ai-agents", cta: "Explore AI Agents" },
-        { title: "AI Chat for property questions", description: "Chat workflows for availability, location, showing requests, qualification, and human handoff.", href: "/core-services/ai-chat", cta: "Explore AI Chat" },
+        { title: "AI Voice lead capture", description: "Voice agents for missed calls, listing inquiries, showing requests, intake, and after-hours lead response.", href: "/services/ai-voice", cta: "Explore AI Voice" },
+        { title: "AI Agents for CRM follow-up", description: "Agents that create tasks, update CRM fields, send next-step messages, and keep lead nurture moving.", href: "/services/ai-agents", cta: "Explore AI Agents" },
+        { title: "AI Chat for property questions", description: "Chat workflows for availability, location, showing requests, qualification, and human handoff.", href: "/services/ai-chat", cta: "Explore AI Chat" },
       ]}
       sectorTitle="Real estate conversion depends on speed, context, and persistent follow-up."
       sectorDescription="AI is most valuable when it helps agents spend less time chasing routine details and more time advising, negotiating, and closing."
@@ -76,7 +76,7 @@ export default function RealEstatePage() {
         ["Expand", "Add more lead sources, nurture sequences, showing workflows, property management routing, or reporting."],
       ]}
       confidenceTitle="Costs should be tied to lead volume and measurable conversion lift."
-      confidenceDescription="Real estate buyers need to see that automation is not another CRM chore. Start with the workflow most likely to recover missed opportunities or reduce manual follow-up."
+      confidenceDescription="Start with the workflow most likely to recover missed opportunities or reduce manual follow-up, without turning automation into another CRM chore for the team."
       confidenceNotes={[
         "Start with lead capture and follow-up before automating complex advisory workflows.",
         "Measure response time, booked showings, CRM completeness, recovered leads, and follow-up completion.",

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import ProofStorySection from "@/components/proof/ProofStorySection";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import SectionHeader from "@/components/sections/SectionHeader";
 import ServiceProofModules from "@/components/services/ServiceProofModule";
@@ -196,15 +195,6 @@ const presentationBySlug: Record<string, ServicePresentation> = {
   },
 };
 
-const proofStoriesByServiceSlug: Record<string, string[]> = {
-  "ai-agents": ["manufacturing-response-agent", "professional-services-intake"],
-  "ai-chat": ["retail-support-order-agent", "manufacturing-response-agent"],
-  "ai-transformation": ["ai-roadmap-value-realization"],
-  "marketing-automation": ["marketing-content-operations", "retail-support-order-agent"],
-  "managed-ai-operations": ["managed-ai-operations-rhythm", "daycare-front-desk-voice"],
-  "custom-ai-software": ["custom-operations-workbench", "manufacturing-response-agent"],
-};
-
 export default function ServiceOfferPage({ service }: ServiceOfferPageProps) {
   const presentation = presentationBySlug[service.slug] ?? presentationBySlug["ai-agents"];
   const relatedCapabilities = service.capabilityHrefs
@@ -284,160 +274,81 @@ export default function ServiceOfferPage({ service }: ServiceOfferPageProps) {
 
       <ServiceProofModules slug={service.slug} />
 
-      <ProofStorySection
-        storySlugs={proofStoriesByServiceSlug[service.slug]}
-        eyebrow="Workflow examples"
-        title="How this service turns into measurable operating work."
-        description="These examples show the kind of workflow design, system connection, human control, and measurement we bring into assessment and pilot work."
-        compact
-        className="border-y border-card-border bg-white"
-      />
-
-      <section className="bg-white px-4 py-14 md:py-20">
-        <div className="mx-auto max-w-[1280px]">
-          <SectionHeader
-            eyebrow="Operational reality"
-            title={service.operationalReality.title}
-            description={service.operationalReality.description}
-          />
-          <div className="mt-8 grid gap-5 md:grid-cols-2">
-            {service.operationalReality.points.map((point) => (
-              <article key={point.title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
-                <h2 className="text-xl font-extrabold leading-tight text-ink">{point.title}</h2>
-                <p className="mt-4 text-sm leading-6 text-muted">{point.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="workflows" className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
         <div className="mx-auto max-w-[1280px]">
           <SectionHeader
-            eyebrow="Workflow examples"
             title={presentation.sections.workflowTitle}
             description={presentation.sections.workflowDescription}
           />
-          <div className="mt-8 grid gap-5 lg:grid-cols-2">
-            {service.workflows.map((workflow) => (
-              <article key={workflow.title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
-                <h2 className="text-xl font-extrabold leading-tight text-ink">{workflow.title}</h2>
-                <div className="mt-5 grid gap-3">
-                  <p className="rounded-lg bg-[#f8fbfa] p-4 text-sm leading-6 text-muted">
-                    <span className="block text-xs font-extrabold uppercase tracking-[0.08em] text-[#167f65]">Trigger</span>
-                    {workflow.trigger}
-                  </p>
-                  <p className="rounded-lg bg-[#f8fbfa] p-4 text-sm leading-6 text-muted">
-                    <span className="block text-xs font-extrabold uppercase tracking-[0.08em] text-[#167f65]">Automation</span>
-                    {workflow.action}
-                  </p>
-                  <p className="rounded-lg bg-[#ecfbf6] p-4 text-sm font-semibold leading-6 text-ink">
-                    <span className="block text-xs font-extrabold uppercase tracking-[0.08em] text-[#167f65]">Outcome</span>
-                    {workflow.outcome}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+            <article className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+              <h2 className="text-xl font-extrabold leading-tight text-ink">First workflows</h2>
+              <div className="mt-5 grid gap-4">
+                {service.workflows.slice(0, 3).map((workflow) => (
+                  <div key={workflow.title} className="border-l-2 border-[#1db993] pl-4">
+                    <h3 className="text-base font-extrabold leading-6 text-ink">{workflow.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-muted">{workflow.outcome}</p>
+                  </div>
+                ))}
+              </div>
+            </article>
 
-      <section className="bg-white px-4 py-14 md:py-20">
-        <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <SectionHeader
-            eyebrow="Connected systems"
-            title={presentation.sections.systemsTitle}
-            description={presentation.sections.systemsDescription}
-          />
-          <div className="grid gap-5 md:grid-cols-3 lg:grid-cols-1">
-            {service.systems.map((group) => (
-              <article key={group.title} className="rounded-lg border border-card-border bg-[#f8fbfa] p-6">
-                <h2 className="text-lg font-extrabold text-ink">{group.title}</h2>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {group.items.map((item) => (
-                    <span key={item} className="rounded-full border border-card-border bg-white px-3 py-1.5 text-sm font-semibold text-muted">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+            <article className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+              <h2 className="text-xl font-extrabold leading-tight text-ink">Systems involved</h2>
+              <div className="mt-5 grid gap-4">
+                {service.systems.map((group) => (
+                  <div key={group.title}>
+                    <h3 className="text-sm font-extrabold leading-6 text-ink">{group.title}</h3>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {group.items.slice(0, 5).map((item) => (
+                        <span key={item} className="rounded-full border border-card-border bg-[#f8fbfa] px-3 py-1.5 text-xs font-semibold text-muted">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </article>
 
-      <section className="bg-[#051C2C] px-4 py-14 text-white md:py-20">
-        <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Human control</p>
-            <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] md:text-[42px]">
-              {presentation.sections.controlTitle}
-            </h2>
-            <p className="mt-5 text-base leading-8 text-white/72">
-              {presentation.sections.controlDescription}
-            </p>
+            <article className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+              <h2 className="text-xl font-extrabold leading-tight text-ink">Controls and cost drivers</h2>
+              <div className="mt-5 grid gap-3">
+                {service.controls.slice(0, 3).map((control) => (
+                  <p key={control} className="text-sm leading-6 text-muted">{control}</p>
+                ))}
+              </div>
+              <div className="mt-5 rounded-lg bg-[#ecfbf6] p-4">
+                <h3 className="text-sm font-extrabold leading-6 text-ink">{service.budget.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-muted">{service.budget.text}</p>
+              </div>
+            </article>
           </div>
-          <div className="grid gap-3">
-            {service.controls.map((control) => (
-              <p key={control} className="rounded-lg border border-white/14 bg-white/[0.06] px-4 py-3 text-sm font-semibold leading-6 text-white/84">
-                {control}
-              </p>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="bg-white px-4 py-14 md:py-20">
-        <div className="mx-auto max-w-[1280px]">
-          <SectionHeader
-            eyebrow="Implementation"
-            title={presentation.sections.rolloutTitle}
-            description={presentation.sections.rolloutDescription}
-          />
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-5 grid gap-3 md:grid-cols-4">
             {service.rollout.map((item) => (
-              <article key={item.step} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+              <article key={item.step} className="rounded-lg border border-card-border bg-white p-4">
                 <p className="text-sm font-extrabold text-[#167f65]">{item.step}</p>
-                <h2 className="mt-3 text-lg font-extrabold leading-tight text-ink">{item.title}</h2>
-                <p className="mt-4 text-sm leading-6 text-muted">{item.text}</p>
+                <h3 className="mt-2 text-base font-extrabold leading-tight text-ink">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-muted">{item.text}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
-        <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Budget confidence</p>
-            <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[42px]">
-              {service.budget.title}
-            </h2>
-            <p className="mt-5 text-base leading-8 text-muted">{service.budget.text}</p>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {service.budget.drivers.map((driver) => (
-              <p key={driver} className="rounded-lg border border-card-border bg-white px-4 py-3 text-sm font-semibold leading-6 text-ink shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
-                {driver}
-              </p>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="bg-white px-4 py-14 md:py-20">
-        <div className="mx-auto max-w-[1280px]">
+        <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <SectionHeader
-            eyebrow="Trust layer"
             title={presentation.sections.trustTitle}
             description={presentation.sections.trustDescription}
           />
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-3 sm:grid-cols-2">
             {relatedCapabilities.map((pillar) => (
-              <Link key={pillar.href} href={pillar.href} className="group rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1db993]/45">
-                <h2 className="text-lg font-extrabold leading-tight text-ink">{pillar.title}</h2>
-                <p className="mt-4 text-sm leading-6 text-muted">{pillar.description}</p>
-                <span className="mt-5 inline-flex text-sm font-extrabold text-[#167f65]">
+              <Link key={pillar.href} href={pillar.href} className="group rounded-lg border border-card-border bg-[#f8fbfa] p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1db993]/45">
+                <h2 className="text-base font-extrabold leading-tight text-ink">{pillar.title}</h2>
+                <p className="mt-3 text-sm leading-6 text-muted">{pillar.description}</p>
+                <span className="mt-4 inline-flex text-sm font-extrabold text-[#167f65]">
                   Learn more <span className="ml-1 transition-transform group-hover:translate-x-1" aria-hidden="true">-&gt;</span>
                 </span>
               </Link>
@@ -448,7 +359,7 @@ export default function ServiceOfferPage({ service }: ServiceOfferPageProps) {
 
       <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
         <div className="mx-auto max-w-[980px]">
-          <SectionHeader eyebrow="FAQ" title="Common questions before starting." />
+          <SectionHeader title="Common questions before starting." />
           <div className="mt-8 grid gap-4">
             {service.faq.map((item) => (
               <details key={item.q} className="rounded-lg border border-card-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">

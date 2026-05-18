@@ -146,9 +146,9 @@ export default function SecurityMonitoringAISafetyPage() {
       <section className="bg-white px-4 py-14 md:py-20">
         <div className="mx-auto max-w-[1280px]">
           <SectionHeader
-            eyebrow="Buyer concerns"
+            eyebrow="Control concerns"
             title="The real risk is not AI itself. It is unclear boundaries."
-            description="Most SMB and mid-market buyers do not want a system that makes uncontrolled decisions. They want useful automation with clear limits, evidence, and a path back to a person."
+            description="Useful automation needs clear limits, visible evidence, and a path back to a person when the workflow is sensitive, uncertain, or high value."
           />
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {riskConcerns.map((concern) => (
@@ -219,10 +219,10 @@ export default function SecurityMonitoringAISafetyPage() {
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Implementation evidence</p>
             <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] md:text-[42px]">
-              Clients should be able to see the control system.
+              See the control system before sensitive workflows go live.
             </h2>
             <p className="mt-5 text-base leading-8 text-white/72">
-              Trust improves when safety is visible. During assessment, blueprint, pilot, or launch work, the client should understand the boundaries and review points before the system touches important operations.
+              Trust improves when safety is visible. During assessment, blueprint, pilot, or launch work, you should understand the boundaries and review points before the system touches important operations.
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -239,7 +239,7 @@ export default function SecurityMonitoringAISafetyPage() {
         <div className="mx-auto max-w-[1280px]">
           <SectionHeader
             eyebrow="Where this matters"
-            title="Security and AI safety should appear inside every service, not only on this page."
+            title="Security and AI safety should be built into every service from the start."
             description="The safeguards should be right-sized to the workflow. A marketing draft agent needs different controls than a voice agent handling pickup changes, medical admin, financial requests, or customer commitments."
           />
           <div className="mt-8 grid gap-5 lg:grid-cols-3">

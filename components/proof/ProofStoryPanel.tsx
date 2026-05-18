@@ -116,9 +116,9 @@ export default function ProofStoryPanel({ stories, compact = false, filterable =
 
 function ProofStoryCard({ story, compact }: { story: ProofStory; compact: boolean }) {
   return (
-    <article className="rounded-lg border border-card-border bg-[#f8fbfa] p-5 shadow-[0_10px_30px_rgba(15,23,32,0.055)] md:p-6">
+    <article className={`rounded-lg border border-card-border bg-[#f8fbfa] shadow-[0_10px_30px_rgba(15,23,32,0.055)] ${compact ? "p-5" : "p-5 md:p-6"}`}>
       <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">{story.label}</p>
-      <h3 className="mt-3 text-2xl font-extrabold leading-tight text-ink">{story.title}</h3>
+      <h3 className={`mt-3 font-extrabold leading-tight text-ink ${compact ? "text-xl" : "text-2xl"}`}>{story.title}</h3>
       <p className="mt-4 text-sm leading-6 text-muted">{story.context}</p>
 
       <div className="mt-5 rounded-lg border border-[#cfe9df] bg-white p-4">
@@ -126,11 +126,19 @@ function ProofStoryCard({ story, compact }: { story: ProofStory; compact: boolea
         <p className="mt-2 text-sm font-semibold leading-6 text-ink">{story.workflow}</p>
       </div>
 
-      <div className={`mt-4 grid gap-4 ${compact ? "md:grid-cols-1 xl:grid-cols-3" : "md:grid-cols-3"}`}>
-        <ProofList title="Connected systems" items={story.connectedActions} />
-        <ProofList title="Human control" items={story.humanControls} />
-        <ProofList title="Measured outcomes" items={story.metrics} />
-      </div>
+      {compact ? (
+        <div className="mt-4 grid gap-3 md:grid-cols-3">
+          <CompactProofList title="Connected" items={story.connectedActions} />
+          <CompactProofList title="Control" items={story.humanControls} />
+          <CompactProofList title="Measure" items={story.metrics} />
+        </div>
+      ) : (
+        <div className="mt-4 grid gap-4 md:grid-cols-3">
+          <ProofList title="Connected systems" items={story.connectedActions} />
+          <ProofList title="Human control" items={story.humanControls} />
+          <ProofList title="Measured outcomes" items={story.metrics} />
+        </div>
+      )}
 
       <div className="mt-5 flex flex-wrap gap-2">
         {story.links.map((link) => (
@@ -140,6 +148,22 @@ function ProofStoryCard({ story, compact }: { story: ProofStory; compact: boolea
         ))}
       </div>
     </article>
+  );
+}
+
+function CompactProofList({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div className="rounded-lg border border-card-border bg-white p-3">
+      <p className="text-xs font-extrabold uppercase tracking-[0.08em] text-[#167f65]">{title}</p>
+      <ul className="mt-2 grid gap-1.5">
+        {items.slice(0, 2).map((item) => (
+          <li key={item} className="grid grid-cols-[8px_1fr] gap-2 text-xs leading-5 text-muted">
+            <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-[#1db993]" aria-hidden="true" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

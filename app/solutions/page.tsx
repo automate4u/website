@@ -43,7 +43,7 @@ export default function SolutionsPage() {
               Focused AI implementations for the workflows your team already handles every day.
             </h1>
             <p className="mt-5 max-w-[680px] text-base leading-8 text-muted md:text-[17px]">
-              Solutions are narrower than industry pages. They show the exact operational pattern: the scenario, the conversation, the downstream action, the human controls, and the rollout path.
+              Explore focused operational patterns: the scenario, the conversation, the downstream action, the human controls, and the rollout path.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="#contact" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white shadow-[0_10px_28px_rgba(29,185,147,0.22)] hover:bg-btn-hover">
@@ -90,9 +90,9 @@ export default function SolutionsPage() {
       <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="available-title">
         <div className="mx-auto max-w-[1180px]">
           <SectionHeader
-            eyebrow="Available solution pages"
+            eyebrow="Available focused solutions"
             title="Start with a focused implementation."
-            description="Explore practical solution pages that show how Automate4U applies AI voice, agents, messaging, and workflow automation to a specific operating problem."
+            description="See how Automate4U applies AI voice, agents, messaging, and workflow automation to specific operating problems."
           />
           <div className="mt-10 grid gap-5 md:grid-cols-2">
             {solutions.map((solution) => (

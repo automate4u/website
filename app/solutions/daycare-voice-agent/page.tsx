@@ -5,33 +5,33 @@ import SectionHeader from "@/components/sections/SectionHeader";
 const frontDeskReality = [
   {
     label: "01",
-    title: "Enrollment inquiries during transitions",
-    text: "Inbound enrollment and program questions arrive precisely when staff are managing classroom transitions and supporting teachers.",
+    title: "Booking tours across busy calendars",
+    text: "Staff are booking tours while checking calendar availability and documenting parent information for follow-up.",
   },
   {
     label: "02",
-    title: "Juggling calls while supporting children",
-    text: "Staff are expected to stay present for children and families while simultaneously managing phone volume and parent inquiries.",
+    title: "Enrollment questions tied to capacity",
+    text: "Enrollment inquiries often require staff to review classroom capacity, age groups, waitlists, and program availability before responding.",
   },
   {
     label: "03",
-    title: "Repetitive questions every day",
-    text: "Hours of front desk time are consumed answering the same questions about hours, programs, tuition, availability, tours, and next steps.",
+    title: "Absence notices that need updates",
+    text: "Parent absence calls need to be captured clearly and reflected in attendance or internal management systems.",
   },
   {
     label: "04",
-    title: "Inconsistent handling across locations",
-    text: "Without a shared system, different centers can respond to identical inquiries in different ways, creating uneven parent experiences.",
+    title: "Pricing and program questions",
+    text: "Routine questions about pricing, programs, and enrollment details often require staff to search approved documents before answering.",
   },
   {
     label: "05",
-    title: "Missed details at peak hours",
-    text: "During high-volume periods, important caller information can be missed, logged inconsistently, or left without a clear follow-up owner.",
+    title: "Pickup and schedule changes",
+    text: "Pickup notices and schedule changes need to be documented, routed to the right classroom staff, and escalated when policy-sensitive.",
   },
   {
     label: "06",
-    title: "Constant administrative interruptions",
-    text: "Routine calls pull staff away from higher-value work such as enrollment conversations, parent relationships, and team support.",
+    title: "Constant system switching",
+    text: "Front desk teams move between calls, emails, internal messaging tools, calendars, documents, and administrative systems throughout the day.",
   },
 ];
 
@@ -215,10 +215,10 @@ export default function DaycareVoiceAgentPage() {
           <div className="mx-auto max-w-[760px] text-center">
             <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#70e7ca]">Daycare front desk reality</p>
             <h2 id="reality-title" className="mt-3 text-[28px] font-extrabold leading-tight tracking-[-0.01em] md:text-[38px]">
-              Daycare front desks are handling more than just phone calls.
+              Daycare front desks are managing calls and operational systems at the same time.
             </h2>
             <p className="mx-auto mt-4 max-w-[620px] text-sm leading-7 text-white/66 md:text-base">
-              For multi-location organizations, the communication burden compounds across every center, every day.
+              Every call often creates follow-up work across calendars, classroom records, parent details, internal messages, and staff handoffs.
             </p>
           </div>
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -291,7 +291,7 @@ export default function DaycareVoiceAgentPage() {
             ))}
           </div>
           <p className="mx-auto mt-8 max-w-[720px] text-center text-xs leading-6 text-white/42">
-            Demo scenario previews are shown for planning. Approved audio examples can be reviewed during an operational walkthrough.
+            During a walkthrough, we can review approved examples and map the call scenarios that matter most to your centers.
           </p>
         </div>
       </section>

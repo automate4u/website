@@ -90,7 +90,7 @@ export default function CapabilitiesPage() {
           <SectionHeader
             eyebrow="Trust pillars"
             title="The capabilities behind safe, useful AI systems."
-            description="Services are what you buy. These are the delivery disciplines that make those services reliable enough to use in real operations."
+            description="Reliable automation depends on the delivery disciplines behind the service: safety, integrations, monitoring, reporting, adoption, and workflow architecture."
           />
 
           {featuredPillar ? (
@@ -174,12 +174,12 @@ export default function CapabilitiesPage() {
       <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="artifacts-title">
         <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-2 lg:items-start">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">What clients should see</p>
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">What your team should expect</p>
             <h2 id="artifacts-title" className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[42px]">
               Trust comes from visible operating discipline.
             </h2>
             <p className="mt-5 text-base leading-8 text-muted">
-              Buyers do not only need to hear that an AI system works. They need to see how the workflow is mapped, where the system connects, what happens when something fails, and how success will be measured after launch.
+              You should be able to see how the workflow is mapped, where the system connects, what happens when something fails, and how success will be measured after launch.
             </p>
           </div>
           <div className="grid gap-5 md:grid-cols-2">

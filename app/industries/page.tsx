@@ -65,7 +65,7 @@ export default function IndustriesPage() {
               AI automation for the industries where communication, handoffs, and admin work slow teams down.
             </h1>
             <p className="mt-5 max-w-[680px] text-base leading-8 text-muted md:text-[17px]">
-              Every industry has its own policies, systems, customer expectations, and risk points. We use industry pages to show the operating context, then solution pages to show focused implementations that can launch in a practical first phase.
+              Every industry has its own policies, systems, customer expectations, and risk points. Start with the operating context, then explore focused implementations that can launch in a practical first phase.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="#contact" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white shadow-[0_10px_28px_rgba(29,185,147,0.22)] hover:bg-btn-hover">
@@ -89,7 +89,7 @@ export default function IndustriesPage() {
               <div className="rounded-lg border border-card-border bg-white p-5">
                 <h2 className="text-xl font-extrabold text-ink">Solutions show the specific implementation.</h2>
                 <p className="mt-2 text-sm leading-6 text-muted">
-                  Use solution pages when you want to see a concrete workflow, such as a voice agent for daycare front desks or a response agent for parts availability.
+                  Explore focused workflows such as a voice agent for daycare front desks or a response agent for parts availability.
                 </p>
               </div>
             </div>
@@ -168,7 +168,7 @@ export default function IndustriesPage() {
               Start with a real workflow before expanding into the full operating system.
             </h2>
             <p className="mt-5 text-base leading-8 text-white/72">
-              A solution page shows what the buyer can actually imagine deploying: the scenario, the call or message experience, the handoff, the controls, and the rollout path.
+              See the scenario, the call or message experience, the staff handoff, the controls, and the rollout path before deciding whether a focused automation is worth exploring.
             </p>
           </div>
           <Link

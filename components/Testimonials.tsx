@@ -96,9 +96,6 @@ export default function Testimonials() {
                         </div>
                     </article>
 
-                    {/* Card 3 - Placeholder or remove if not needed. HTML showed 2 cards explicitly but structure for 3. I'll add a 3rd filler or just stick to 2 if user only had 2. HTML had 2 cards. I will keep it to 2 cards to be faithful. */}
-                    {/* Actually HTML had only 2 cards. */}
-
                 </div>
             </div>
         </section>

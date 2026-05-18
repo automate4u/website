@@ -73,7 +73,7 @@ export default function TermsPage() {
             <h2 className="text-2xl font-extrabold text-ink">Plain-language summary</h2>
             <div className="mt-5 grid gap-3 md:grid-cols-3">
               {[
-                ["Website content is informational", "Examples and pricing ranges help buyers understand possibilities, not guaranteed outcomes."],
+                ["Website content is informational", "Examples and pricing ranges help you understand possibilities, not guaranteed outcomes."],
                 ["Projects need written scope", "Actual work, deliverables, pricing, safeguards, and responsibilities must be agreed in writing."],
                 ["Human control matters", "Sensitive workflows should keep appropriate review, escalation, and approval boundaries."],
               ].map(([title, text]) => (
@@ -99,10 +99,6 @@ export default function TermsPage() {
               <a href="mailto:hello@automate4u.ca" className="font-bold text-[#167f65]">hello@automate4u.ca</a>.
             </p>
           </article>
-
-          <p className="rounded-lg border border-card-border bg-[#f8fbfa] p-4 text-sm leading-6">
-            These terms are provided for general website transparency and should be reviewed by legal counsel before being treated as final legal terms.
-          </p>
 
           <Link href="/contact" className="inline-flex w-fit rounded-full bg-accent px-5 py-3 font-bold text-white hover:bg-btn-hover">
             Contact Automate4U

@@ -6,7 +6,7 @@ export default function TechnologyMediaPage() {
       eyebrow="Technology & Media"
       title="AI support, content operations, and workflow agents for technology and media teams."
       description="We help software, media, creative, publishing, and digital teams reduce support backlog, organize content operations, route customer requests, and automate reporting without losing editorial or product control."
-      primaryCta={{ label: "Explore AI Agents", href: "/core-services/ai-agents" }}
+      primaryCta={{ label: "Explore AI Agents", href: "/services/ai-agents" }}
       image={{ src: "/images/industries/tech.jpg", alt: "Technology and media team reviewing support and content workflow" }}
       typicalRequest="Can you summarize the issue, route it to the right team, and draft the customer update?"
       diagnosisTitle="Technology and media teams need automation that organizes high-volume information without flattening judgment."
@@ -33,8 +33,8 @@ export default function TechnologyMediaPage() {
       serviceTitle="Connect agents to the systems where product, content, and support work happens."
       serviceDescription="Technology and media automation can start with support, content production, operational reporting, or internal workflow agents."
       servicePaths={[
-        { title: "AI Agents for workflow automation", description: "Agents that classify, summarize, route, draft, update tickets, create tasks, and report on workflow status.", href: "/core-services/ai-agents", cta: "Explore AI Agents" },
-        { title: "Marketing automation", description: "Content drafting, approval, scheduling, campaign reporting, and social or email production workflows.", href: "/core-services/marketing-automation", cta: "Explore Marketing Automation" },
+        { title: "AI Agents for workflow automation", description: "Agents that classify, summarize, route, draft, update tickets, create tasks, and report on workflow status.", href: "/services/ai-agents", cta: "Explore AI Agents" },
+        { title: "Marketing automation", description: "Content drafting, approval, scheduling, campaign reporting, and social or email production workflows.", href: "/services/marketing-automation", cta: "Explore Marketing Automation" },
         { title: "Operational intelligence", description: "Reporting workflows that turn support, content, product, or campaign events into usable management visibility.", href: "/capabilities/operational-intelligence-analytics", cta: "Explore Operational Intelligence" },
       ]}
       sectorTitle="AI is useful when it improves throughput without lowering quality."
@@ -67,7 +67,7 @@ export default function TechnologyMediaPage() {
         ["Expand", "Add more sources, approval paths, content types, dashboards, or managed operations once the first workflow is trusted."],
       ]}
       confidenceTitle="Costs should map to workflow volume, review depth, and systems connected."
-      confidenceDescription="Technology and media buyers need to see that automation improves throughput without adding quality risk or another tool to manage."
+      confidenceDescription="Start with a workflow that improves throughput without adding quality risk, extra review burden, or another tool your team has to manage."
       confidenceNotes={[
         "Start with internal drafts, triage, summaries, or reporting before public publishing automation.",
         "Measure time saved, backlog reduced, routing accuracy, draft acceptance, and reporting visibility.",

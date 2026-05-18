@@ -19,7 +19,7 @@ test("assessment form submits without losing source context", async ({ page }) =
 });
 
 test("ai voice page exposes demo and assessment conversion paths", async ({ page }) => {
-  await page.goto("/core-services/ai-voice");
+  await page.goto("/services/ai-voice");
 
   await expect(page.getByRole("button", { name: "Try Now" }).first()).toBeVisible();
 

@@ -6,7 +6,7 @@ export default function FinancialServicesPage() {
       eyebrow="Financial Services"
       title="AI intake, document, and support workflows for financial service teams."
       description="We help advisory, insurance, lending, bookkeeping, accounting, and financial service teams reduce repetitive intake, document follow-up, routing, and support work while keeping advice, approvals, and sensitive decisions human-led."
-      primaryCta={{ label: "Explore AI Agents", href: "/core-services/ai-agents" }}
+      primaryCta={{ label: "Explore AI Agents", href: "/services/ai-agents" }}
       image={{ src: "/images/industries/financialServices.jpg", alt: "Financial services team reviewing client intake and workflow information" }}
       typicalRequest="Can someone confirm what documents you need and where my application stands?"
       diagnosisTitle="Financial service teams need speed and consistency without weakening trust, compliance, or review."
@@ -33,7 +33,7 @@ export default function FinancialServicesPage() {
       serviceTitle="Build around intake, workflow routing, and staff review."
       serviceDescription="Financial services automation should start with operational support and expand only after controls, approvals, and data boundaries are clear."
       servicePaths={[
-        { title: "AI Agents for intake", description: "Agents that collect context, classify requests, create CRM tasks, and route cases with summaries.", href: "/core-services/ai-agents", cta: "Explore AI Agents" },
+        { title: "AI Agents for intake", description: "Agents that collect context, classify requests, create CRM tasks, and route cases with summaries.", href: "/services/ai-agents", cta: "Explore AI Agents" },
         { title: "Data and integrations", description: "Connect approved forms, CRM fields, document status, calendars, and reporting without replacing core review systems.", href: "/capabilities/data-integrations-infrastructure", cta: "Explore Integrations" },
         { title: "Security and monitoring", description: "Design audit logs, escalation rules, monitoring, and human review around sensitive workflows.", href: "/capabilities/security-monitoring-ai-safety", cta: "Explore Safety Controls" },
       ]}
@@ -67,7 +67,7 @@ export default function FinancialServicesPage() {
         ["Expand", "Add more channels, document types, CRM fields, reporting, or managed operations once controls are trusted."],
       ]}
       confidenceTitle="Spend should map to workflow volume, risk, and review requirements."
-      confidenceDescription="Financial service buyers need clarity on what is automated, what remains human, and how the first workflow saves time without increasing risk."
+      confidenceDescription="Start with a workflow where the automation boundary is clear, human review stays in place, and saved time does not come at the expense of client trust or compliance."
       confidenceNotes={[
         "Start with operational preparation, not autonomous financial advice.",
         "Measure intake completeness, document turnaround, response time, staff touches reduced, and escalation quality.",

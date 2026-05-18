@@ -41,7 +41,7 @@ export const proofStories: ProofStory[] = [
     ],
     links: [
       { label: "Manufacturing", href: "/industries/manufacturing" },
-      { label: "AI Agents", href: "/core-services/ai-agents" },
+      { label: "AI Agents", href: "/services/ai-agents" },
     ],
   },
   {
@@ -101,7 +101,7 @@ export const proofStories: ProofStory[] = [
     ],
     links: [
       { label: "Home Services", href: "/industries/home-services" },
-      { label: "AI Voice", href: "/core-services/ai-voice" },
+      { label: "AI Voice", href: "/services/ai-voice" },
     ],
   },
   {
@@ -130,7 +130,7 @@ export const proofStories: ProofStory[] = [
       "Campaign reporting cadence",
     ],
     links: [
-      { label: "Marketing Automation", href: "/core-services/marketing-automation" },
+      { label: "Marketing Automation", href: "/services/marketing-automation" },
       { label: "Retail & Ecommerce", href: "/industries/retail-ecommerce" },
     ],
   },
@@ -160,7 +160,7 @@ export const proofStories: ProofStory[] = [
       "Escalation quality",
     ],
     links: [
-      { label: "AI Chat", href: "/core-services/ai-chat" },
+      { label: "AI Chat", href: "/services/ai-chat" },
       { label: "Retail & Ecommerce", href: "/industries/retail-ecommerce" },
     ],
   },
@@ -191,7 +191,7 @@ export const proofStories: ProofStory[] = [
     ],
     links: [
       { label: "Professional Services", href: "/industries/professional-services" },
-      { label: "AI Agents", href: "/core-services/ai-agents" },
+      { label: "AI Agents", href: "/services/ai-agents" },
     ],
   },
   {
@@ -221,7 +221,7 @@ export const proofStories: ProofStory[] = [
     ],
     links: [
       { label: "Healthcare", href: "/industries/healthcare" },
-      { label: "AI Voice", href: "/core-services/ai-voice" },
+      { label: "AI Voice", href: "/services/ai-voice" },
     ],
   },
   {
@@ -250,7 +250,7 @@ export const proofStories: ProofStory[] = [
       "Decision traceability",
     ],
     links: [
-      { label: "Custom AI Software", href: "/core-services/custom-ai-software" },
+      { label: "Custom AI Software", href: "/services/custom-ai-software" },
       { label: "How We Build", href: "/capabilities" },
     ],
   },
@@ -280,7 +280,7 @@ export const proofStories: ProofStory[] = [
       "Monthly value realized",
     ],
     links: [
-      { label: "Managed AI Operations", href: "/core-services/managed-ai-operations" },
+      { label: "Managed AI Operations", href: "/services/managed-ai-operations" },
       { label: "AI Safety", href: "/capabilities/security-monitoring-ai-safety" },
     ],
   },
@@ -310,8 +310,8 @@ export const proofStories: ProofStory[] = [
       "Value realization milestones",
     ],
     links: [
-      { label: "AI Operations Strategy", href: "/core-services/ai-transformation" },
-      { label: "Spend Confidence", href: "/core-services" },
+      { label: "AI Operations Strategy", href: "/services/ai-transformation" },
+      { label: "Spend Confidence", href: "/services" },
     ],
   },
   {
@@ -341,7 +341,7 @@ export const proofStories: ProofStory[] = [
     ],
     links: [
       { label: "Real Estate", href: "/industries/real-estate" },
-      { label: "AI Voice", href: "/core-services/ai-voice" },
+      { label: "AI Voice", href: "/services/ai-voice" },
     ],
   },
   {
@@ -371,7 +371,7 @@ export const proofStories: ProofStory[] = [
     ],
     links: [
       { label: "Hospitality", href: "/industries/hospitality" },
-      { label: "AI Chat", href: "/core-services/ai-chat" },
+      { label: "AI Chat", href: "/services/ai-chat" },
     ],
   },
   {
@@ -401,7 +401,7 @@ export const proofStories: ProofStory[] = [
     ],
     links: [
       { label: "Technology & Media", href: "/industries/technology-media" },
-      { label: "Marketing Automation", href: "/core-services/marketing-automation" },
+      { label: "Marketing Automation", href: "/services/marketing-automation" },
     ],
   },
   {
@@ -431,7 +431,7 @@ export const proofStories: ProofStory[] = [
     ],
     links: [
       { label: "Financial Services", href: "/industries/financial-services" },
-      { label: "AI Agents", href: "/core-services/ai-agents" },
+      { label: "AI Agents", href: "/services/ai-agents" },
     ],
   },
 ];

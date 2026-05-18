@@ -87,7 +87,7 @@ export default function Page() {
       <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
         <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Why clients talk to us</p>
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Why teams talk to us</p>
             <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[42px]">
               We help teams move from AI curiosity to a controlled first workflow.
             </h2>

@@ -90,7 +90,7 @@ Recommended homepage flow:
 
 ## Core Service Pages
 
-Core service pages should be commercially clear. They should answer:
+Service pages should be commercially clear. They should answer:
 
 - What business problem this solves.
 - What workflows it can handle.
@@ -135,7 +135,7 @@ Examples:
 
 Current status:
 
-- AI Agents, AI Chat, AI Operations Strategy, Marketing Automation, Managed AI Operations, and Custom AI Software now have direct `/core-services/` pages.
+- AI Agents, AI Chat, AI Operations Strategy, Marketing Automation, Managed AI Operations, and Custom AI Software now have direct `/services/` pages.
 - These pages use a shared service-page structure: operational reality, workflow examples, connected systems, human controls, implementation process, budget confidence, FAQ, trust capability links, and the Free AI Workflow Assessment CTA.
 - Older overlapping capability URLs should not be treated as separate services. AI Agents, Voice/Chat, and Marketing Automation capability URLs redirect to service pages. Workflow & Systems Architecture remains under How We Build.
 
