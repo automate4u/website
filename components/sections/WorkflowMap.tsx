@@ -17,22 +17,35 @@ export default function WorkflowMap() {
         <div className="rounded-lg border border-white/14 bg-white/[0.05] p-4 shadow-[0_18px_55px_rgba(0,0,0,0.18)] backdrop-blur md:p-5">
           <div className="grid gap-4 md:grid-cols-[1fr_0.85fr_1fr] md:items-center">
             <div className="grid gap-3">
-              {inputs.map((item) => (
-                <div key={item} className="rounded-lg border border-white/12 bg-white/[0.07] px-4 py-3 text-sm font-semibold text-white/88">
+              {inputs.map((item, index) => (
+                <div
+                  key={item}
+                  className="workflow-flow-card workflow-input-card rounded-lg border border-white/12 bg-white/[0.07] px-4 py-3 text-sm font-semibold text-white/88"
+                  style={{ animationDelay: `${index * 90}ms` }}
+                >
                   {item}
                 </div>
               ))}
             </div>
 
-            <div className="rounded-lg border border-[#1db993]/40 bg-[#1db993]/12 p-5 text-center">
-              <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#7df0d1]">AI operating layer</p>
-              <p className="mt-3 text-2xl font-extrabold leading-tight">Voice + agents + workflows</p>
-              <p className="mt-3 text-sm leading-6 text-white/70">Rules, context, integrations, guardrails, and human approval.</p>
+            <div className="workflow-core rounded-lg border border-[#1db993]/40 bg-[#1db993]/12 p-5 text-center">
+              <div className="workflow-core-streams" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </div>
+              <p className="relative text-xs font-bold uppercase tracking-[0.12em] text-[#7df0d1]">AI operating layer</p>
+              <p className="relative mt-3 text-2xl font-extrabold leading-tight">Voice + agents + workflows</p>
+              <p className="relative mt-3 text-sm leading-6 text-white/70">Rules, context, integrations, guardrails, and human approval.</p>
             </div>
 
             <div className="grid gap-3">
-              {actions.map((item) => (
-                <div key={item} className="rounded-lg border border-white/12 bg-white px-4 py-3 text-sm font-bold text-ink">
+              {actions.map((item, index) => (
+                <div
+                  key={item}
+                  className="workflow-flow-card workflow-output-card rounded-lg border border-white/12 bg-white px-4 py-3 text-sm font-bold text-ink"
+                  style={{ animationDelay: `${(index + inputs.length) * 90}ms` }}
+                >
                   {item}
                 </div>
               ))}

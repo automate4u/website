@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
+import GlobalAssessmentLauncher from "@/components/GlobalAssessmentLauncher";
 import SiteAnalytics from "@/components/SiteAnalytics";
 import JsonLd from "@/components/JsonLd";
 import { siteConfig } from "@/data/site";
@@ -32,6 +33,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <GlobalAssessmentLauncher />
         <ChatWidget />
         <SiteAnalytics />
       </body>

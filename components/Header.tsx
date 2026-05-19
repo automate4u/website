@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import AssessmentTrigger from "@/components/AssessmentTrigger";
 import { howWeBuildPillars } from "@/data/how-we-build";
 import { serviceOffers } from "@/data/service-offers";
 
@@ -168,9 +169,13 @@ export default function Header() {
 
                 {/* CTA & Mobile Toggle */}
                 <div className="flex items-center gap-4">
-                    <Link href="/contact" className="hidden lg:inline-flex bg-accent hover:bg-btn-hover text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-lg shadow-accent/20">
+                    <AssessmentTrigger
+                        sourcePage={pathname}
+                        ctaLocation="header_desktop_assessment"
+                        className="hidden lg:inline-flex bg-accent hover:bg-btn-hover text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-lg shadow-accent/20"
+                    >
                         Get Free Assessment
-                    </Link>
+                    </AssessmentTrigger>
 
                     <button
                         className="lg:hidden relative z-50 w-10 h-10 flex items-center justify-center text-ink"
@@ -263,9 +268,14 @@ export default function Header() {
 
                         <Link href="/contact" className="block font-bold text-lg text-ink">Contact</Link>
 
-                        <Link href="/contact" className="w-full bg-accent text-white py-3 rounded-full font-bold text-center mt-4">
+                        <AssessmentTrigger
+                            sourcePage={pathname}
+                            ctaLocation="header_mobile_assessment"
+                            onOpen={() => setMobileMenuOpen(false)}
+                            className="w-full bg-accent text-white py-3 rounded-full font-bold text-center mt-4"
+                        >
                             Get Free Assessment
-                        </Link>
+                        </AssessmentTrigger>
                     </div>
                 </div>
 

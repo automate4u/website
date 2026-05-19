@@ -177,7 +177,7 @@ export default function TechnologyStrategyAIEnablementPage() {
         <div className="mx-auto max-w-[1280px]">
           <SectionHeader
             eyebrow="Where this matters"
-            title="Strategy should point directly into the services buyers can act on."
+            title="Strategy should point directly into services your team can act on."
             description="The goal is to identify the right starting point: voice, agents, chat, marketing automation, custom software, or managed operations."
           />
           <div className="mt-8 grid gap-5 lg:grid-cols-3">

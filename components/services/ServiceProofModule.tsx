@@ -73,7 +73,7 @@ function AIChatProof() {
                   <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Demo preview</p>
                   <h3 className="mt-3 text-2xl font-extrabold leading-tight text-ink">A simple chatbot surface is available to try.</h3>
                   <p className="mt-3 text-sm leading-6 text-muted">
-                    The live demo is served by an external provider, so we load it only when requested. A production build connects this surface to approved knowledge, CRM or ticketing, staff handoff, and reporting.
+                    We load the live demo only when you request it so the page stays fast. A real implementation connects this surface to approved knowledge, CRM or ticketing, staff handoff, and reporting.
                   </p>
                   <div className="mt-5 grid gap-2 text-sm font-semibold text-ink">
                     <span className="rounded-md bg-[#f8fbfa] px-3 py-2">Approved answer boundaries</span>
@@ -126,7 +126,7 @@ function AIChatProof() {
               </>
             ) : null}
           </div>
-          <p className="mt-3 text-sm leading-6 text-muted">This is a simple demo surface. A production implementation connects to approved knowledge, business systems, reporting, and staff handoff.</p>
+          <p className="mt-3 text-sm leading-6 text-muted">This is a simple demo surface. A real implementation connects to approved knowledge, business systems, reporting, and staff handoff.</p>
         </div>
         <div className="grid gap-4">
           {[

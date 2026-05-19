@@ -190,7 +190,7 @@ export default function IndustriesPage() {
           <SectionHeader
             eyebrow="How we choose the first workflow"
             title="The best first automation is narrow enough to launch and valuable enough to measure."
-            description="We help buyers avoid oversized projects by finding a specific repeatable workflow with clear inputs, clear systems, clear handoffs, and a measurable business result."
+            description="We help teams avoid oversized projects by finding a specific repeatable workflow with clear inputs, clear systems, clear handoffs, and a measurable business result."
           />
           <div className="mt-10 grid gap-4 lg:grid-cols-3">
             {selectionSteps.map((item) => (

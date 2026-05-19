@@ -7,7 +7,7 @@ import { serviceOffers } from "@/data/service-offers";
 const measurementProblems = [
   {
     title: "Automation value is hard to prove",
-    text: "If hours saved, response time, cost per request, handoff quality, and conversion impact are not tracked, buyers are left guessing whether the system is worth expanding.",
+    text: "If hours saved, response time, cost per request, handoff quality, and conversion impact are not tracked, teams are left guessing whether the system is worth expanding.",
   },
   {
     title: "Reports lag behind operations",
@@ -180,7 +180,7 @@ export default function OperationalIntelligenceAnalyticsPage() {
           <SectionHeader
             eyebrow="30 / 60 / 90"
             title="Value realization should be reviewed, not assumed."
-            description="A practical review cadence gives buyers confidence that the first workflow is being measured before they commit to more automation."
+            description="A practical review cadence gives your team confidence that the first workflow is being measured before you commit to more automation."
           />
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {roadmap.map((item) => (
@@ -220,7 +220,7 @@ export default function OperationalIntelligenceAnalyticsPage() {
           <SectionHeader
             eyebrow="Where this matters"
             title="Every service should be tied to measurable business outcomes."
-            description="Measurement helps buyers understand whether voice, agents, chat, marketing automation, strategy, or custom software are reducing repetitive work and improving the workflows that matter."
+            description="Measurement helps your team understand whether voice, agents, chat, marketing automation, strategy, or custom software are reducing repetitive work and improving the workflows that matter."
           />
           <div className="mt-8 grid gap-5 lg:grid-cols-3">
             {serviceOffers.slice(0, 6).map((service) => (

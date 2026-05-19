@@ -26,7 +26,7 @@ const servicePaths = [
 ];
 
 const sectorShifts = [
-  { title: "Customers expect faster answers", text: "Industrial buyers may tolerate complex products, but they still expect quick acknowledgement, clear next steps, and fewer follow-up loops." },
+  { title: "Customers expect faster answers", text: "Industrial customers may tolerate complex products, but they still expect quick acknowledgement, clear next steps, and fewer follow-up loops." },
   { title: "Operating data is scattered", text: "ERP, inventory, quote, CRM, and order data can support better service, but staff often bridge those systems manually during customer conversations." },
   { title: "AI is moving into daily workflows", text: "The useful shift is not a standalone chatbot. It is an agent that captures the request, checks approved data, routes work, and keeps the team informed." },
 ];
@@ -90,7 +90,7 @@ export default function ManufacturingAcceleratorPage() {
       rolloutDescription="The first milestone should be narrow enough to launch, valuable enough to measure, and clear enough that staff trust how the agent behaves."
       rollout={rollout}
       confidenceTitle="Costs should be tied to real usage and managed system value."
-      confidenceDescription="We can expose the raw vendor-cost logic where it helps buyers understand the economics, while making clear that production pricing also includes hosting, monitoring, support, security, integrations, tuning, and staff adoption."
+      confidenceDescription="We can expose the raw vendor-cost logic where it helps your team understand the economics, while making clear that production pricing also includes hosting, monitoring, support, security, integrations, tuning, and staff adoption."
       confidenceNotes={confidenceNotes}
       proofStorySlugs={["manufacturing-response-agent", "custom-operations-workbench"]}
       sourcePage="/industries/manufacturing"

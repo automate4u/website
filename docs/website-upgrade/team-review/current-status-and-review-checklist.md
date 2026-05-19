@@ -1,6 +1,6 @@
 # Current Status And Review Checklist
 
-Last updated: after the launch-facing cleanup pass, visual QA polish, docs-folder cleanup, remaining legacy-pattern audit, proof-language polish, AI Chat demo fallback, metadata/sitemap cleanup, Privacy/Terms polish, first team feedback about page length, homepage reduction, shared service-page reduction, audience-facing copy cleanup, service-specific proof polish, the first final-quality review pass, the secondary service/industry/About/How We Build review pass, remaining industry/legal/trust-page review, and Workflow Architecture redirect cleanup.
+Last updated: after the launch-facing cleanup pass, visual QA polish, docs-folder cleanup, remaining legacy-pattern audit, proof-language polish, AI Chat demo fallback, metadata/sitemap cleanup, Privacy/Terms polish, first team feedback about page length, homepage reduction, shared service-page reduction, audience-facing copy cleanup, service-specific proof polish, the first final-quality review pass, the secondary service/industry/About/How We Build review pass, remaining industry/legal/trust-page review, Workflow Architecture redirect cleanup, first buyer-perception polish pass, and shared assessment-modal CTA pass.
 
 This document is the quick team-review version of the upgrade work.
 
@@ -49,12 +49,16 @@ The upgrade is in a strong pre-launch review state. The main website rebuild is 
 - [x] Remaining How We Build pages reviewed visually: Data & Integrations, Operational Intelligence, Workflow Architecture, Staff Training & Adoption, and Technology Strategy.
 - [x] Redirects added for intuitive Workflow Architecture URLs so `/capabilities/workflow-systems-architecture` and `/capabilities/workflow-architecture` resolve to the implemented Workflow & Systems Architecture page.
 - [x] Public service URLs migrated from `/core-services/*` to `/services/*`; `/core-services/*` now exists only as permanent redirects.
+- [x] First buyer-perception polish pass completed: reduced public third-person "buyer" language, tightened service/AI Voice wording, clarified optional assessment fields, improved assessment reassurance, and added restrained workflow motion where it explains connected systems.
+- [x] Shared assessment popout added for primary **Get Free Assessment** CTAs, with compact bottom CTA sections replacing repeated embedded forms across standard pages.
+- [x] AI Voice demo section adjusted to use a light section with a dark embedded demo surface so the flagship demo stands out without feeling disconnected from the rest of the site.
 - [x] Docs reorganized into `team-review/` and `implementation-reference/`.
 - [x] Standard checks pass: `npm run lint`, `npm run build`, and `npm run test:e2e`.
 
 ### Still To Do
 
 - [ ] Final production lead routing once credentials and HubSpot field/object decisions are ready.
+- [ ] Staging buyer-perception QA pass across the highest-intent pages to check clarity, trust, proof credibility, page length, CTA rhythm, and premium feel after the latest polish.
 - [ ] Human review the shortened priority pages for taste, scanability, and whether any removed context needs to return in a more compact format.
 - [ ] Real production-style form submission test into HubSpot and internal email notifications.
 - [ ] Add final Calendly assessment link to form success states and notification emails.
@@ -67,6 +71,7 @@ The upgrade is in a strong pre-launch review state. The main website rebuild is 
 
 ### Next Work While Credentials Are Pending
 
+- [ ] Run the buyer-perception QA pass from `../implementation-reference/20-final-site-quality-review-plan.md` across `/`, `/services`, `/services/ai-voice`, `/services/ai-agents`, `/services/ai-chat`, `/industries/manufacturing`, `/industries/education-childcare`, `/solutions/daycare-voice-agent`, `/capabilities/security-monitoring-ai-safety`, and `/contact`.
 - [ ] Review `/services`, `/services/ai-voice`, `/industries/manufacturing`, `/industries/education-childcare`, and `/solutions/daycare-voice-agent` on staging after the reduction pass.
 - [ ] Complete one final click-through on staging once deployed so redirects, forms, and third-party scripts are verified in the hosted environment.
 - [ ] Reduce each priority page to one clear buyer job, one primary CTA path, and only the proof/process sections needed for that buyer.

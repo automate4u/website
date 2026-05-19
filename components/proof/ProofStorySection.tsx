@@ -13,7 +13,7 @@ type ProofStorySectionProps = {
 
 export default function ProofStorySection({
   storySlugs,
-  title = "See what automation could take off your team’s plate.",
+  title = "Explore workflow patterns we can automate for your team.",
   description,
   compact = false,
   className = "bg-white",
@@ -22,7 +22,7 @@ export default function ProofStorySection({
   const headerDescription =
     description ??
     (filterable
-      ? "Filter by workflow type and see how everyday requests can become updates, handoffs, approvals, and measurable outcomes."
+      ? "Filter by workflow type to see how everyday requests become updates, handoffs, approvals, and measurable outcomes."
       : "See how everyday requests can become system updates, handoffs, approvals, and measurable outcomes.");
 
   const stories = storySlugs?.length

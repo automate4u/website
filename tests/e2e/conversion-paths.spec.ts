@@ -23,13 +23,13 @@ test("ai voice page exposes demo and assessment conversion paths", async ({ page
 
   await expect(page.getByRole("button", { name: "Try Now" }).first()).toBeVisible();
 
-  await page.getByRole("button", { name: "Get Free Assessment" }).first().click();
+  await page.locator("main").getByRole("button", { name: "Get Free Assessment" }).first().click();
   await expect(page.getByRole("heading", { name: "Request Your AI Voice Assessment" })).toBeVisible();
 
   await page.getByLabel("Work email *").fill("voice-test@example.com");
   await page.getByLabel("Company *").fill("Voice Example Co");
-  await page.getByLabel("What does success look like?").fill("Recover missed calls and route booking updates to the right team.");
+  await page.getByLabel("Biggest workflow pain").fill("Recover missed calls and route booking updates to the right team.");
   await page.getByRole("button", { name: "Request My Assessment" }).click();
 
-  await expect(page.getByText("We'll review your workflow within 1 business day.")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Assessment request received." })).toBeVisible();
 });

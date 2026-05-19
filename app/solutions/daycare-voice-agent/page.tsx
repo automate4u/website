@@ -1,5 +1,5 @@
 import Link from "next/link";
-import AssessmentLeadForm from "@/components/AssessmentLeadForm";
+import AssessmentTrigger from "@/components/AssessmentTrigger";
 import SectionHeader from "@/components/sections/SectionHeader";
 
 const frontDeskReality = [
@@ -384,13 +384,21 @@ export default function DaycareVoiceAgentPage() {
           </div>
 
           <div className="rounded-lg border border-card-border bg-white p-5 shadow-[0_12px_36px_rgba(15,23,32,0.06)] md:p-6">
-            <AssessmentLeadForm
+            <h3 className="text-2xl font-extrabold leading-tight text-ink">Schedule an operational walkthrough.</h3>
+            <p className="mt-4 text-sm leading-6 text-muted">
+              Open the assessment form when you are ready. We will focus on call scenarios, location rules, parent experience, and staff handoffs before recommending a rollout path.
+            </p>
+            <AssessmentTrigger
               sourcePage="/solutions/daycare-voice-agent"
               ctaLocation="daycare_voice_operational_walkthrough"
               serviceInterest="ai-voice"
               workflowInterest="daycare front desk voice assistant"
-              submitLabel="Schedule Operational Walkthrough"
-            />
+              modalTitle="Schedule an Operational Walkthrough"
+              modalDescription="Tell us how your daycare front desk handles enrollment calls, parent questions, location routing, and sensitive handoffs. We will review whether voice automation is a practical fit."
+              className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover sm:w-auto"
+            >
+              Schedule Operational Walkthrough
+            </AssessmentTrigger>
             <p className="mt-4 text-sm leading-6 text-muted">
               We respect your privacy. Sensitive daycare workflows should keep staff approval until policies, data accuracy, and escalation rules are validated.
             </p>

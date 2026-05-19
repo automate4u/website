@@ -38,7 +38,7 @@ export default function CoreServicesPage() {
         <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
             <h1 className="max-w-[760px] text-[38px] font-extrabold leading-[1.06] tracking-[-0.02em] md:text-[58px]">
-              Build the AI operating layer around your calls, messages, workflows, and systems.
+              Build AI automation around your calls, messages, admin work, and business systems.
             </h1>
             <p className="mt-6 max-w-[720px] text-base leading-8 text-white/74 md:text-[18px]">
               Automate4U helps SMB and mid-market teams reduce repetitive labor, respond faster, connect business systems, and keep people in control where judgment matters.
@@ -83,7 +83,7 @@ export default function CoreServicesPage() {
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Strong starting point</p>
               <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[42px]">
-                AI Voice often opens the door.
+                Use AI Voice when calls are the clearest pain.
               </h2>
               <p className="mt-4 text-base leading-8 text-muted">
                 Voice is prominent because missed calls, intake, booking, and routing are easy for teams to feel immediately. The strongest implementations then connect voice to chat, email, CRM, operations, reporting, and human review.
@@ -93,7 +93,7 @@ export default function CoreServicesPage() {
               <h3 className="text-2xl font-extrabold text-ink">{primary.title}</h3>
               <p className="mt-4 text-sm leading-6 text-muted">{primary.description}</p>
               <span className="mt-6 inline-flex text-sm font-extrabold text-[#167f65]">
-                View flagship service <span className="ml-1 transition-transform group-hover:translate-x-1" aria-hidden="true">-&gt;</span>
+                Explore AI Voice <span className="ml-1 transition-transform group-hover:translate-x-1" aria-hidden="true">-&gt;</span>
               </span>
             </Link>
           </div>

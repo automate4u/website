@@ -7,7 +7,7 @@ const frictionAreas = [
   },
   {
     title: "Missed calls turn into missed revenue",
-    text: "Home service buyers often call the next company if they cannot get a quick answer, especially for HVAC, plumbing, electrical, restoration, or urgent repair work.",
+    text: "Home service customers often call the next company if they cannot get a quick answer, especially for HVAC, plumbing, electrical, restoration, or urgent repair work.",
   },
   {
     title: "The answer depends on operational context",

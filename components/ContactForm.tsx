@@ -18,6 +18,11 @@ export default function ContactForm({
                 <p className="text-muted text-base mb-8 max-w-[70ch]">
                     Tell us where calls, emails, admin, or disconnected tools are slowing your team down. We&apos;ll review the workflow and recommend a practical first step.
                 </p>
+                <div className="mb-6 grid gap-3 rounded-lg border border-card-border bg-[#f8fbfa] p-5 text-sm leading-6 text-muted md:grid-cols-3">
+                    <p><strong className="block text-ink">1. We review the workflow</strong>Where time, follow-up, handoffs, or system gaps are costing attention.</p>
+                    <p><strong className="block text-ink">2. We identify the safest first step</strong>A narrow workflow, required guardrails, and likely systems involved.</p>
+                    <p><strong className="block text-ink">3. You decide what comes next</strong>A paid blueprint, a pilot, or no project if the fit is not strong enough.</p>
+                </div>
 
                 <AssessmentLeadForm
                     sourcePage={sourcePage}

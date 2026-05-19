@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useActionState, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import AttributionFields from "@/components/AttributionFields";
+import AssessmentTrigger from "@/components/AssessmentTrigger";
 import SectionHeader from "@/components/sections/SectionHeader";
-import { submitAssessmentLeadWithState } from "@/app/actions/assessment";
 import { trackEvent } from "@/lib/analytics";
 import { solutions } from "@/data/solutions";
 
@@ -15,36 +14,22 @@ type RetellClient = {
   stopCall: () => void;
 };
 
-const operationsEvents = [
+const demoTakeaways = [
   {
-    label: "Call answered",
-    detail: "AI greets caller, captures intent, and checks the request type.",
-    status: "Live",
+    title: "Fast, confident first response",
+    text: "The caller gets immediate acknowledgement instead of voicemail, hold time, or dead air.",
   },
   {
-    label: "Intent detected",
-    detail: "Booking request, quote question, service issue, or human escalation.",
-    status: "Classified",
+    title: "Professional intake structure",
+    text: "Questions feel purposeful, not robotic, so the agent can qualify intent without sounding clumsy.",
   },
   {
-    label: "Business data checked",
-    detail: "CRM, calendar, inventory, pricing rules, or knowledge base are queried.",
-    status: "Connected",
+    title: "Clear operational next step",
+    text: "Calls end with captured details, routing, or booking readiness instead of unresolved conversation.",
   },
   {
-    label: "Action created",
-    detail: "Task, booking, quote follow-up, ticket, or internal notification is created.",
-    status: "Triggered",
-  },
-  {
-    label: "Human handoff",
-    detail: "Sensitive, uncertain, or high-value requests route to staff with full context.",
-    status: "Controlled",
-  },
-  {
-    label: "KPI logged",
-    detail: "Handled minutes, outcome, escalation, and response-time metrics are recorded.",
-    status: "Measured",
+    title: "Workflow readiness",
+    text: "The demo is designed around the systems businesses actually care about connecting, not just a generic voice sample.",
   },
 ];
 
@@ -82,6 +67,43 @@ const pricingNotes = [
   "High-risk workflows should keep staff approval, audit logs, and extra checks instead of being priced like routine calls.",
 ];
 
+const pilotDeliverables = [
+  {
+    title: "One defined call workflow",
+    text: "Choose a routine but valuable flow such as missed-call recovery, booking intake, quote routing, enrollment inquiries, or front-desk questions.",
+  },
+  {
+    title: "Approved call behavior",
+    text: "Define what the agent can answer, what it should capture, what it must never promise, and when a person takes over.",
+  },
+  {
+    title: "Connected next actions",
+    text: "Route outcomes into the tools your team uses: CRM, calendar, inbox, ticketing, SMS, spreadsheets, or internal notifications.",
+  },
+  {
+    title: "Measured pilot review",
+    text: "Track handled calls, escalations, call minutes, response time, handoff quality, and where the workflow should improve next.",
+  },
+];
+
+const pricingCards = [
+  {
+    title: "Focused pilot",
+    range: "$3k-$5k/mo planning range",
+    text: "Best for proving one call workflow with a defined usage allowance, staff review, and limited integrations.",
+  },
+  {
+    title: "Production voice operations",
+    range: "$5k-$10k+/mo planning range",
+    text: "Best when voice becomes part of daily operations, with monitoring, tuning, reporting, integrations, and support.",
+  },
+  {
+    title: "Usage-based voice volume",
+    range: "$1.00-$1.50/min planning range",
+    text: "Voice usage usually scales by handled call minutes, completed workflows, escalation needs, and risk level.",
+  },
+];
+
 const faqs = [
   {
     q: "Is this only a phone answering bot?",
@@ -96,8 +118,24 @@ const faqs = [
     a: "Yes. Common workflows include HubSpot, Google Calendar, Calendly, helpdesk tools, spreadsheets, email, SMS, and custom APIs.",
   },
   {
+    q: "Does it sound human enough for real callers?",
+    a: "The goal is professional and natural, not gimmicky. We tune the voice experience around your call types, approved language, escalation rules, and the kind of tone your customers expect.",
+  },
+  {
+    q: "What happens if the AI does not know the answer?",
+    a: "It should not guess. Unknown, sensitive, low-confidence, or high-value requests can be routed to staff with the caller context, transcript, and suggested next step.",
+  },
+  {
     q: "How should we start?",
     a: "Start with one measurable workflow. Prove value, train the team, then expand into more channels or Managed AI Operations.",
+  },
+  {
+    q: "How long does setup usually take?",
+    a: "A focused pilot can often move faster than a broad transformation, but timeline depends on call complexity, integrations, approval rules, and how quickly your team can validate the workflow.",
+  },
+  {
+    q: "Can we edit the agent after launch?",
+    a: "Yes. Voice agents should improve with real call patterns. We can adjust scripts, routing rules, escalation logic, integrations, and reporting as operations change.",
   },
   {
     q: "Is voice the only thing Automate4U builds?",
@@ -105,180 +143,60 @@ const faqs = [
   },
 ];
 
-function ContactModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const [state, formAction, pending] = useActionState(submitAssessmentLeadWithState, {
-    ok: false,
-    message: "",
-  });
-
-  useEffect(() => {
-    if (!state.message) return;
-
-    trackEvent(state.ok ? "site_assessment_form_submitted" : "site_assessment_form_failed", {
-      page: "/services/ai-voice",
-      ctaLocation: "ai_voice_modal",
-      serviceInterest: "ai-voice",
-    });
-  }, [state.message, state.ok]);
-
-  if (!open) return null;
-
-  return (
-    <div
-      className="fixed inset-0 z-[1000] flex items-center justify-end bg-black/50 backdrop-blur-sm"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="popup-title"
-      onClick={(event) => {
-        if (event.target === event.currentTarget) onClose();
-      }}
-    >
-      <div className="flex h-full w-full max-w-[760px] flex-col bg-white shadow-[-20px_0_70px_rgba(0,0,0,0.22)] md:h-[88vh] md:rounded-l-2xl">
-        <div className="flex items-center justify-between border-b border-card-border px-6 py-5">
-          <h3 id="popup-title" className="text-xl font-extrabold text-ink">
-            Request Your AI Voice Assessment
-          </h3>
-          <button
-            onClick={onClose}
-            className="rounded-lg p-2 text-muted hover:bg-[#f5f8f7] hover:text-ink"
-            aria-label="Close"
-          >
-            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-              <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-          </button>
-        </div>
-
-        <div className="flex-1 overflow-y-auto p-6">
-          {state.ok ? (
-            <div className="grid place-items-center gap-4 py-12 text-center" role="status">
-              <div className="grid h-12 w-12 place-items-center rounded-full bg-[#e9f9f3] text-2xl font-bold text-[#169b78]">
-                ✓
-              </div>
-              <h4 className="text-xl font-extrabold text-ink">We&apos;ll review your workflow within 1 business day.</h4>
-              <p className="max-w-[520px] text-muted">{state.message}</p>
-              <button onClick={onClose} className="mt-2 rounded-full bg-accent px-6 py-3 font-extrabold text-white hover:bg-btn-hover">
-                Close
-              </button>
-            </div>
-          ) : (
-            <>
-              <p className="mb-6 text-center leading-7 text-muted">
-                Tell us where calls slow your team down. We will assess the workflow, likely savings, guardrails, and the best next step.
-              </p>
-              <form className="grid gap-4" action={formAction} noValidate>
-                <input type="hidden" name="sourcePage" value="/services/ai-voice" />
-                <input type="hidden" name="ctaLocation" value="ai_voice_modal" />
-                <input type="hidden" name="serviceInterest" value="ai-voice" />
-                <AttributionFields />
-
-                <div className="grid gap-4 md:grid-cols-2">
-                  <label className="grid gap-1.5">
-                    <span className="text-sm font-semibold text-ink">Work email *</span>
-                    <input type="email" name="email" required placeholder="you@company.com" autoComplete="email" className="rounded-xl border border-card-border px-3 py-3" />
-                  </label>
-                  <label className="grid gap-1.5">
-                    <span className="text-sm font-semibold text-ink">Company *</span>
-                    <input type="text" name="company" required placeholder="Company Inc." className="rounded-xl border border-card-border px-3 py-3" />
-                  </label>
-                  <label className="grid gap-1.5">
-                    <span className="text-sm font-semibold text-ink">Team size</span>
-                    <select name="team_size" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
-                      <option value="" disabled>Select</option>
-                      {["1-10", "11-50", "51-200", "200+"].map((option) => <option key={option}>{option}</option>)}
-                    </select>
-                  </label>
-                  <label className="grid gap-1.5">
-                    <span className="text-sm font-semibold text-ink">Current channels</span>
-                    <select name="channels" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
-                      <option value="" disabled>Select</option>
-                      {["Phone only", "Phone + email", "Phone + SMS", "Multiple channels"].map((option) => <option key={option}>{option}</option>)}
-                    </select>
-                  </label>
-                  <label className="grid gap-1.5">
-                    <span className="text-sm font-semibold text-ink">Monthly budget (USD)</span>
-                    <select name="budget" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
-                      <option value="" disabled>Select</option>
-                      {["Exploring", "$3k-$5k", "$5k-$10k", "$10k+"].map((option) => <option key={option}>{option}</option>)}
-                    </select>
-                  </label>
-                  <label className="grid gap-1.5">
-                    <span className="text-sm font-semibold text-ink">Timeline</span>
-                    <select name="timeline" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
-                      <option value="" disabled>Select</option>
-                      {["ASAP", "1-2 months", "This quarter", "Just exploring"].map((option) => <option key={option}>{option}</option>)}
-                    </select>
-                  </label>
-                  <label className="grid gap-1.5 md:col-span-2">
-                    <span className="text-sm font-semibold text-ink">What does success look like?</span>
-                    <textarea name="workflowPain" rows={4} placeholder="e.g., fewer missed calls, faster bookings, safer handoffs, less admin follow-up..." className="rounded-xl border border-card-border px-3 py-3" />
-                  </label>
-                </div>
-
-                {state.message && !state.ok ? (
-                  <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
-                    {state.message}
-                  </p>
-                ) : null}
-
-                <button
-                  type="submit"
-                  disabled={pending}
-                  onClick={() => trackEvent("site_assessment_cta_clicked", {
-                    page: "/services/ai-voice",
-                    ctaLocation: "ai_voice_modal",
-                    serviceInterest: "ai-voice",
-                  })}
-                  className="inline-flex justify-center rounded-full bg-accent px-6 py-3 font-extrabold text-white hover:bg-btn-hover disabled:cursor-not-allowed disabled:opacity-70"
-                >
-                  {pending ? "Submitting..." : "Request My Assessment"}
-                </button>
-                <p className="text-center text-sm text-muted">We never sell your data. By submitting you agree we may contact you about this request.</p>
-              </form>
-            </>
-          )}
-        </div>
-      </div>
-    </div>
-  );
+function formatCurrency(value: number) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(value);
 }
 
-function EventLog({ callActive }: { callActive: boolean }) {
-  return (
-    <div className="rounded-lg border border-white/12 bg-white/[0.07] p-5 text-white shadow-[0_18px_55px_rgba(0,0,0,0.18)]">
-      <div className="mb-5 flex items-center justify-between gap-4">
-        <div>
-          <h3 className="text-2xl font-extrabold">What happens after the call</h3>
-        </div>
-        <span className="rounded-full border border-white/12 bg-white/10 px-3 py-1 text-xs font-bold text-white/80">
-          {callActive ? "Live call" : "Demo workflow"}
-        </span>
-      </div>
+function DemoTakeaways() {
+  const communicationPoints = demoTakeaways.slice(0, 3);
+  const workflowReadiness = demoTakeaways[3];
 
-      <div className="grid gap-3">
-        {operationsEvents.map((event, index) => (
-          <div key={event.label} className="grid gap-3 rounded-lg border border-white/10 bg-[#0d1720]/70 p-4 md:grid-cols-[auto_1fr_auto] md:items-center">
-            <div className="grid h-9 w-9 place-items-center rounded-full bg-[#1db993] text-sm font-extrabold text-[#05251d]">
-              {index + 1}
+  return (
+    <div className="mx-auto mt-6 grid max-w-[1120px] gap-4 lg:grid-cols-[1fr_0.95fr]">
+      <div className="rounded-[18px] border border-card-border bg-white p-5 shadow-[0_14px_36px_rgba(15,23,32,0.055)] md:p-6">
+        <h3 className="text-xl font-extrabold text-ink">What this interaction should communicate</h3>
+        <div className="mt-5 grid gap-3">
+          {communicationPoints.map((item) => (
+            <article key={item.title} className="relative pl-5">
+              <span className="absolute left-0 top-2 h-2.5 w-2.5 rounded-full bg-[#1db993] shadow-[0_0_0_4px_rgba(29,185,147,0.12)]" aria-hidden="true" />
+              <h4 className="font-extrabold text-ink">{item.title}</h4>
+              <p className="mt-1 text-sm leading-6 text-muted">{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+      <div className="rounded-[18px] border border-card-border bg-white p-5 shadow-[0_14px_36px_rgba(15,23,32,0.055)] md:p-6">
+        <h3 className="text-xl font-extrabold text-ink">{workflowReadiness.title}</h3>
+        <p className="mt-4 text-sm leading-6 text-muted">{workflowReadiness.text}</p>
+        <div className="mt-5 grid gap-3 text-sm font-extrabold text-ink">
+          {["CRM updates", "Calendar booking", "Lead notifications"].map((item) => (
+            <div key={item} className="flex items-center justify-between rounded-lg border border-card-border bg-[#f8fbfa] px-4 py-3">
+              <span>{item}</span>
+              <span className="h-3 w-3 rounded-full bg-[#1db993] shadow-[0_0_0_5px_rgba(29,185,147,0.12)]" aria-hidden="true" />
             </div>
-            <div>
-              <h4 className="font-extrabold text-white">{event.label}</h4>
-              <p className="mt-1 text-sm leading-6 text-white/68">{event.detail}</p>
-            </div>
-            <span className="w-fit rounded-full bg-white px-3 py-1 text-xs font-extrabold text-ink">{event.status}</span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
 export default function AIVoicePage() {
-  const [modalOpen, setModalOpen] = useState(false);
   const retellClientRef = useRef<RetellClient | null>(null);
   const [callActive, setCallActive] = useState(false);
   const [callStarting, setCallStarting] = useState(false);
+  const [monthlyCalls, setMonthlyCalls] = useState(600);
+  const [adminMinutesPerCall, setAdminMinutesPerCall] = useState(4);
+  const [staffCostPerHour, setStaffCostPerHour] = useState(30);
+  const [automationShare, setAutomationShare] = useState(45);
   const daycareSolution = solutions.find((solution) => solution.slug === "daycare-voice-agent");
+
+  const monthlyHoursRedirected = Math.round((monthlyCalls * adminMinutesPerCall * (automationShare / 100)) / 60);
+  const monthlyCapacityValue = monthlyHoursRedirected * staffCostPerHour;
 
   useEffect(() => {
     import("retell-client-js-sdk").then(({ RetellWebClient }) => {
@@ -382,9 +300,16 @@ export default function AIVoicePage() {
               <a href="#voice-demo" className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb]">
                 Try Voice Demo
               </a>
-              <button onClick={() => setModalOpen(true)} className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
+              <AssessmentTrigger
+                sourcePage="/services/ai-voice"
+                ctaLocation="ai_voice_hero"
+                serviceInterest="ai-voice"
+                modalTitle="Request Your AI Voice Assessment"
+                modalDescription="Tell us where calls slow your team down. We will assess the workflow, likely savings, guardrails, and the best next step."
+                className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover"
+              >
                 Get Free Assessment
-              </button>
+              </AssessmentTrigger>
             </div>
             <p className="mt-5 text-sm leading-6 text-white/58">
               Start with one routine call workflow, prove value, then expand into connected agents across chat, email, operations, and support.
@@ -412,60 +337,92 @@ export default function AIVoicePage() {
         </div>
       </section>
 
-      <section id="voice-demo" className="scroll-mt-28 bg-[#051C2C] px-4 py-14 text-white md:py-20" aria-labelledby="voice-demo-title">
-        <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-          <div>
-            <h2 id="voice-demo-title" className="text-[30px] font-extrabold leading-[1.1] tracking-[-0.01em] md:text-[40px]">
-              Test the voice experience, then inspect the operational workflow.
+      <section id="voice-demo" className="scroll-mt-28 bg-[#f8fbfa] px-4 py-14 md:py-20" aria-labelledby="voice-demo-title">
+        <div className="mx-auto max-w-[1180px]">
+          <div className="mx-auto mb-8 max-w-[780px] text-center">
+            <h2 id="voice-demo-title" className="text-[30px] font-extrabold leading-[1.1] tracking-[-0.01em] text-ink md:text-[40px]">
+              Experience a live AI voice workflow before you commit.
             </h2>
-            <p className="mt-5 text-base leading-7 text-white/70">
-              The live demo proves call quality. The event log proves the business model: every conversation should become structured data, workflow action, human handoff, and measurable outcome.
+            <p className="mx-auto mt-5 max-w-[660px] text-base leading-7 text-muted">
+              Launch the demo to hear how a front-desk style agent can answer, qualify, and route calls with a polished customer experience.
             </p>
+          </div>
 
-            <div className="mt-8 rounded-lg border border-white/12 bg-white/[0.07] p-5">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <p className="text-sm font-bold text-white/60">Demo status</p>
-                  <p className="mt-1 text-2xl font-extrabold">{callActive ? "Live call in progress" : "Ready to connect"}</p>
-                </div>
-                <span className={`h-3 w-3 rounded-full ${callActive ? "bg-red-400" : "bg-[#1db993]"}`} aria-hidden="true" />
+          <div className="mx-auto max-w-[1120px] rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_70%_85%,rgba(29,185,147,0.18),transparent_34%),linear-gradient(135deg,#0b2230,#102734)] p-4 text-white shadow-[0_22px_60px_rgba(15,23,32,0.16)] md:p-5">
+            <div className="mb-5 flex items-center justify-between gap-4 px-1">
+              <div className="flex items-center gap-3">
+                <span className="flex gap-1.5" aria-hidden="true">
+                  <span className="h-1.5 w-1.5 rounded-full bg-white/38" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-white/38" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-white/38" />
+                </span>
+                <p className="text-sm font-extrabold text-white/88">Live Voice Preview</p>
               </div>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-3 py-1.5 text-xs font-extrabold text-white/88">
+                <span className={`h-2.5 w-2.5 rounded-full ${callActive ? "bg-red-400" : "bg-[#1db993]"}`} aria-hidden="true" />
+                {callActive ? "Live call" : "Ready to connect"}
+              </span>
+            </div>
 
-              <div className="mt-6 rounded-lg border border-white/12 bg-[#0d1720]/70 p-5">
-                <div className="mb-5 flex items-center gap-3">
-                  <div className="grid h-12 w-12 place-items-center rounded-lg bg-[#1db993] text-lg font-extrabold text-[#05251d]">AI</div>
+            <div className="grid gap-5 lg:grid-cols-[1.48fr_0.72fr] lg:items-start">
+              <div className="rounded-[18px] border border-white/12 bg-white/10 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] md:p-6">
+                <div className="flex items-center gap-4">
+                  <div className="grid h-12 w-12 place-items-center rounded-[14px] bg-[#1db993] text-lg font-extrabold text-white">AI</div>
                   <div>
                     <h3 className="font-extrabold text-white">Automate4U Voice Receptionist</h3>
-                    <p className="text-sm text-white/60">Natural intake, qualification, and handoff</p>
+                    <p className="mt-1 text-sm text-white/68">Natural intake, qualification, and handoff</p>
                   </div>
                 </div>
-                <div className="grid gap-3">
-                  <div className="rounded-lg bg-white/10 p-4 text-sm leading-6 text-white/78">
-                    <strong className="block text-white">Agent</strong>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {["Front-desk style intake", "Lead capture and routing", "Built for CRM and calendar workflows"].map((item) => (
+                    <span key={item} className="inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/8 px-3 py-2 text-xs font-extrabold text-white/90">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#1db993]" aria-hidden="true" />
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-6 flex h-[58px] items-end gap-2" aria-hidden="true">
+                  {[18, 36, 24, 46, 18, 34, 54, 22, 42, 28, 50, 16].map((height, index) => (
+                    <span
+                      key={`${height}-${index}`}
+                      className="flex-1 rounded-full bg-gradient-to-t from-[#1db993] to-[#7df0d1]"
+                      style={{ height }}
+                    />
+                  ))}
+                </div>
+
+                <div className="mt-5 grid gap-3">
+                  <div className="rounded-xl bg-white/14 px-4 py-3 text-center text-sm leading-6 text-white/88">
+                    <strong className="block text-xs uppercase tracking-[0.08em] text-[#7df0d1]">Agent</strong>
                     Thanks for calling. I can help answer questions, collect details, and direct you to the right next step.
                   </div>
-                  <div className="ml-auto max-w-[88%] rounded-lg bg-[#1db993] p-4 text-sm leading-6 font-semibold text-[#05251d]">
-                    <strong className="block">Caller</strong>
+                  <div className="ml-auto max-w-[92%] rounded-xl border border-[#1db993]/30 bg-[#1db993]/18 px-4 py-3 text-center text-sm leading-6 text-white/90">
+                    <strong className="block text-xs uppercase tracking-[0.08em] text-[#7df0d1]">Caller</strong>
                     I want to book a consultation and check whether someone can call me back today.
                   </div>
                 </div>
               </div>
 
-              <button
-                className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb] disabled:cursor-not-allowed disabled:opacity-70"
-                type="button"
-                onClick={launchRetellVoice}
-                disabled={callStarting}
-              >
-                {callStarting ? "Connecting..." : callActive ? "End Call" : "Try Now"}
-              </button>
-              <p className="mt-3 text-sm leading-6 text-white/58">
-                Your browser will request microphone access. If the demo cannot start, the assessment path still works.
-              </p>
+              <div className="rounded-[18px] border border-white/12 bg-white/10 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] md:p-6">
+                <h3 className="text-lg font-extrabold text-white">Test the live voice demo</h3>
+                <p className="mt-4 text-sm leading-6 text-white/72">
+                  Your browser will request microphone access. Once connected, speak naturally and test the live experience in real time.
+                </p>
+                <button
+                  className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full bg-[#0d1720] px-6 text-base font-extrabold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] hover:bg-[#101f2b] disabled:cursor-not-allowed disabled:opacity-70"
+                  type="button"
+                  onClick={launchRetellVoice}
+                  disabled={callStarting}
+                >
+                  {callStarting ? "Connecting..." : callActive ? "End Call" : "Try Now"}
+                </button>
+              </div>
             </div>
           </div>
 
-          <EventLog callActive={callActive} />
+          <DemoTakeaways />
         </div>
       </section>
 
@@ -522,27 +479,116 @@ export default function AIVoicePage() {
         </section>
       ) : null}
 
-      <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="pricing-confidence-title">
-        <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+      <section className="bg-[#f8fbfa] px-4 py-14 md:py-20" aria-labelledby="voice-pilot-title">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Pilot path"
+            title="What your first AI Voice pilot should prove."
+            description="A strong pilot should not ask you to trust a full replacement system on day one. It should prove one workflow, the controls around it, and the operational value before expansion."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {pilotDeliverables.map((item, index) => (
+              <article key={item.title} className="rounded-lg border border-card-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <p className="text-sm font-extrabold text-[#167f65]">0{index + 1}</p>
+                <h3 className="mt-3 text-lg font-extrabold leading-tight text-ink">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-muted">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="voice-value-title">
+        <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div>
+            <SectionHeader
+              eyebrow="Value estimator"
+              title="Estimate the repetitive call work your team could redirect."
+              description="This is not a guaranteed ROI claim. It is a practical way to discuss whether routine calls are consuming enough staff time to justify a focused voice pilot."
+            />
+            <div className="mt-6 rounded-lg border border-[#1db993]/30 bg-[#e9f9f3] p-5">
+              <p className="text-sm font-extrabold text-ink">Current estimate</p>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                <div>
+                  <p className="text-[34px] font-extrabold leading-none text-[#167f65]">{monthlyHoursRedirected}</p>
+                  <p className="mt-2 text-sm font-semibold text-muted">staff hours/month that may be redirected</p>
+                </div>
+                <div>
+                  <p className="text-[34px] font-extrabold leading-none text-[#167f65]">{formatCurrency(monthlyCapacityValue)}</p>
+                  <p className="mt-2 text-sm font-semibold text-muted">estimated monthly labor capacity value</p>
+                </div>
+              </div>
+              <p className="mt-4 text-sm leading-6 text-muted">
+                The final business case should also consider revenue captured from missed calls, response speed, customer experience, risk controls, and implementation/support cost.
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-card-border bg-[#f8fbfa] p-5 shadow-[0_12px_36px_rgba(15,23,32,0.05)] md:p-6">
+            <div className="grid gap-5">
+              <label className="grid gap-2">
+                <span className="text-sm font-extrabold text-ink">Routine calls per month: {monthlyCalls}</span>
+                <input type="range" min="100" max="3000" step="50" value={monthlyCalls} onChange={(event) => setMonthlyCalls(Number(event.target.value))} />
+              </label>
+              <label className="grid gap-2">
+                <span className="text-sm font-extrabold text-ink">Admin minutes per routine call: {adminMinutesPerCall}</span>
+                <input type="range" min="1" max="15" step="1" value={adminMinutesPerCall} onChange={(event) => setAdminMinutesPerCall(Number(event.target.value))} />
+              </label>
+              <label className="grid gap-2">
+                <span className="text-sm font-extrabold text-ink">Loaded staff cost per hour: {formatCurrency(staffCostPerHour)}</span>
+                <input type="range" min="18" max="75" step="1" value={staffCostPerHour} onChange={(event) => setStaffCostPerHour(Number(event.target.value))} />
+              </label>
+              <label className="grid gap-2">
+                <span className="text-sm font-extrabold text-ink">Share likely handled or shortened by AI: {automationShare}%</span>
+                <input type="range" min="10" max="80" step="5" value={automationShare} onChange={(event) => setAutomationShare(Number(event.target.value))} />
+              </label>
+            </div>
+            <p className="mt-5 text-sm leading-6 text-muted">
+              We validate these assumptions during assessment. Sensitive or unclear calls should be escalated instead of counted as fully automated.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#f8fbfa] px-4 py-14 md:py-20" aria-labelledby="pricing-confidence-title">
+        <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <SectionHeader
             eyebrow="Pricing confidence"
             title="Voice automation pricing should be transparent, but not reduced to raw API cost."
             description="Voice automation should feel financially clear before you commit. We explain the cost drivers, start with a useful pilot, and tie expansion to volume, risk, reliability, and measurable value."
           />
           <div className="grid gap-4">
-            {pricingNotes.map((note) => (
-              <div key={note} className="rounded-lg border border-card-border bg-[#f8fbfa] p-5 text-sm leading-6 text-muted">
-                {note}
-              </div>
-            ))}
-            <div className="rounded-lg border border-[#1db993]/30 bg-[#e9f9f3] p-5">
+            <div className="grid gap-4 md:grid-cols-3">
+              {pricingCards.map((card) => (
+                <article key={card.title} className="rounded-lg border border-card-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                  <h3 className="text-lg font-extrabold text-ink">{card.title}</h3>
+                  <p className="mt-3 text-xl font-extrabold leading-tight text-[#167f65]">{card.range}</p>
+                  <p className="mt-3 text-sm leading-6 text-muted">{card.text}</p>
+                </article>
+              ))}
+            </div>
+            <div className="grid gap-3 md:grid-cols-3">
+              {pricingNotes.map((note) => (
+                <div key={note} className="rounded-lg border border-card-border bg-white p-5 text-sm leading-6 text-muted">
+                  {note}
+                </div>
+              ))}
+            </div>
+            <div className="rounded-lg border border-[#1db993]/30 bg-white p-5">
               <h3 className="text-xl font-extrabold text-ink">Recommended buying path</h3>
               <p className="mt-3 text-sm leading-6 text-muted">
                 Free assessment, then either a paid AI Blueprint Sprint or a pilot project. Production systems can expand into Managed AI Operations once usage and value are clear.
               </p>
-              <button onClick={() => setModalOpen(true)} className="mt-5 rounded-full bg-accent px-6 py-3 font-extrabold text-white hover:bg-btn-hover">
+              <AssessmentTrigger
+                sourcePage="/services/ai-voice"
+                ctaLocation="ai_voice_pricing_confidence"
+                serviceInterest="ai-voice"
+                modalTitle="Request Your AI Voice Assessment"
+                modalDescription="Tell us where calls slow your team down. We will assess the workflow, likely savings, guardrails, and the best next step."
+                className="mt-5 rounded-full bg-accent px-6 py-3 font-extrabold text-white hover:bg-btn-hover"
+              >
                 Get Free Assessment
-              </button>
+              </AssessmentTrigger>
             </div>
           </div>
         </div>
@@ -577,13 +623,18 @@ export default function AIVoicePage() {
               We will help you identify the call flow, integrations, human controls, and KPI target that make sense as a first step.
             </p>
           </div>
-          <button onClick={() => setModalOpen(true)} className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
+          <AssessmentTrigger
+            sourcePage="/services/ai-voice"
+            ctaLocation="ai_voice_final_cta"
+            serviceInterest="ai-voice"
+            modalTitle="Request Your AI Voice Assessment"
+            modalDescription="Tell us where calls slow your team down. We will assess the workflow, likely savings, guardrails, and the best next step."
+            className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover"
+          >
             Get Free Assessment
-          </button>
+          </AssessmentTrigger>
         </div>
       </section>
-
-      <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
   );
 }

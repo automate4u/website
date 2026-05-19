@@ -296,7 +296,7 @@ export const servicePages: ServicePageData[] = [
     ],
     budget: {
       title: "Strategy should make spend easier to approve.",
-      text: "The goal is not to sell a giant transformation by default. The goal is to identify the first workflow where cost, risk, and measurable value make sense.",
+      text: "The goal is not to sell a giant transformation. The goal is to identify the first workflow where cost, risk, and measurable value make sense.",
       drivers: ["Discovery depth", "Number of workflows reviewed", "Systems involved", "Risk and compliance needs", "Pilot design detail", "Stakeholder workshops"],
     },
     faq: [
