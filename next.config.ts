@@ -5,17 +5,17 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/ai-voice",
-        destination: "/core-services/ai-voice",
+        destination: "/services/ai-voice",
         permanent: true,
       },
       {
         source: "/ai-agents",
-        destination: "/core-services/ai-agents",
+        destination: "/services/ai-agents",
         permanent: true,
       },
       {
         source: "/ai-chat",
-        destination: "/core-services/ai-chat",
+        destination: "/services/ai-chat",
         permanent: true,
       },
     ];

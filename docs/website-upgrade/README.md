@@ -2,7 +2,27 @@
 
 This folder is the source of truth for the Automate4U website upgrade.
 
-The plan is intentionally both strategic and technical: the site should sell Automate4U as a small expert team that designs and builds AI operations systems, with AI Voice as the flagship wedge and broader automation as the long-term value.
+The docs are split into two practical folders:
+
+- `team-review/`: short, human-readable docs for team review, production setup, proof collection, pricing, positioning, and approval decisions. Files here use plain names instead of numbered planning names.
+- `implementation-reference/`: deeper working docs for Codex and Michael to stay aligned while implementing. These can keep numbered names because they are roadmap/reference material, not team review packets.
+
+## Start Here
+
+For the Automate4U team:
+
+- `team-review/current-status-and-review-checklist.md`
+- `team-review/production-lead-routing-setup.md`
+- `team-review/proof-inventory-checklist.md`
+- `team-review/services-and-how-we-build-taxonomy.md`
+- `team-review/project-decisions-summary.md`
+
+For Codex and implementation planning:
+
+- `implementation-reference/04-implementation-roadmap.md`
+- `implementation-reference/08-execution-contracts.md`
+- `implementation-reference/06-technical-remediation.md`
+- `implementation-reference/01-current-site-audit.md`
 
 ## Current Direction
 
@@ -13,83 +33,74 @@ Core positioning:
 Key decisions:
 
 - Primary audience: SMB and mid-market owners/operators.
-- Main CTA: Free AI Workflow Assessment.
-- Primary CTA button label: Get Free Assessment.
-- Proof model: anonymous case studies with concrete metrics.
-- Positioning: automation-led, with AI Voice as the flagship demo and sales wedge.
-- Creative direction: trustworthy professional-services credibility plus precise AI operations interfaces.
-- Strategic layer: Digital Workforce, Value Realization, AI maturity, Managed AI Operations.
-- Technical layer: typed content, Server Actions, lazy third-party scripts, Playwright conversion tests.
-- Trust layer: governance, human-in-the-loop safeguards, first-7-days follow-up journey.
-- Lead routing: HubSpot as source of truth, with email notifications to Johnny, Michael, and hello@automate4u.ca.
-- HubSpot v1 model: basic contact plus assessment context; deal/ticket modeling deferred until setup.
-- V1 free tools: Resend Free for notification emails, Calendly Free for the assessment booking link, PostHog Free for analytics.
-- Pricing transparency: show ranges and explain variable vendor-cost drivers without reducing Automate4U to raw API resale.
+- Main CTA offer: **Free AI Workflow Assessment**.
+- Primary CTA button label: **Get Free Assessment**.
+- Proof model: anonymous, sanitized, or representative proof until real client approval exists.
+- Positioning: automation-led, with AI Voice as the flagship wedge.
+- Scope: voice is prominent, but Automate4U also sells chat, email, marketing, operational, integration, and custom AI automation.
+- Creative direction: trustworthy professional services plus precise AI operations interfaces.
+- Lead routing: HubSpot as source of truth, with email notifications to Johnny, Michael, and hello@automate4u.co.
+- V1 free tools: Resend Free, Calendly Free, and PostHog Free where appropriate.
+- Pricing transparency: show ranges and cost drivers without reducing Automate4U to raw API resale.
 
-## Recommended Reading Order
+## Team Review Folder
 
-1. `00-context-and-decisions.md`
-2. `01-current-site-audit.md`
-3. `02-positioning-strategy.md`
-4. `03-site-architecture-and-offers.md`
-5. `04-implementation-roadmap.md`
-6. `08-execution-contracts.md`
-7. `11-creative-experience-direction.md`
-8. `06-technical-remediation.md`
-9. `09-governance-customer-journey-and-conversion-tests.md`
-10. `10-strategic-tool-stack-taxonomy.md`
-11. `14-labor-efficiency-and-human-redeployment.md`
-12. `15-proof-inventory-checklist.md`
-13. `16-cta-lead-routing-analytics-and-pricing.md`
-14. `17-pricing-transparency-and-cost-model.md`
+Use `team-review/` when the team needs to review, approve, configure, or provide business inputs.
 
-Use the other docs as supporting references:
+Team-owned work includes:
 
-- `05-content-proof-and-wow-factor.md`
-- `07-refinement-notes.md`
+- Production credentials and setup decisions.
+- HubSpot object model and custom fields.
+- Proof inventory and NDA-safe case study approvals.
+- Pricing and cost-model comfort.
+- Positioning, service taxonomy, claims, and tone.
+- Cofounder review of AI Voice before major flow changes.
+- Legal review of Privacy and Terms.
+- Real team/process imagery when available.
 
-## First Implementation Milestone
+## Implementation Reference Folder
 
-Do not try to rebuild the entire site at once.
+Use `implementation-reference/` for build sequencing, technical decisions, and long-form planning context.
 
-Codex implementation note:
+Codex-owned work includes:
 
-- These docs are the implementation source of truth for the upgrade project.
-- Do not begin code implementation until explicitly instructed.
-- When implementation begins, start from this milestone and keep app changes aligned with the docs instead of inventing a new plan in chat.
+- React/Next.js page work.
+- Shared components and data models.
+- Server Actions and form handling.
+- HubSpot/Resend/PostHog/Calendly integration code once credentials and field decisions are available.
+- Sitemap, metadata, schema, redirects, analytics events, and tests.
+- Visual QA and responsive polish.
+- Documentation updates that keep implementation status accurate.
 
-Milestone 1 should ship:
+## Current Implementation Status
 
-- Technical foundation fixes: lint/build, metadata helper, sitemap, robots.
-- Typed content source of truth for core services, workflows, accelerators, and case studies.
-- Shared Free AI Workflow Assessment form using a Server Action where practical.
-- HubSpot lead routing plus email notifications.
-- Basic HubSpot contact model, Resend notification emails, and Calendly assessment booking link.
-- PostHog event analytics for assessment, demo, and workflow engagement.
-- Homepage rebuilt around the new positioning.
-- AI Voice flagship page rebuilt enough to show the voice-to-operations story.
-- One high-quality Industry Accelerator page.
-- Playwright conversion-path tests for the assessment form and voice demo path.
+For the latest snapshot, read:
+
+- `team-review/current-status-and-review-checklist.md`
+
+Current high-level status:
+
+- Lint, production build, and Playwright conversion-path tests pass.
+- Homepage, AI Voice, service pages, industry pages, How We Build pages, About pages, and legal basics have been substantially rebuilt.
+- Representative proof stories have been added and placed across the site.
+- Production lead routing code exists at a basic v1 level, but final production setup still needs real credentials and field decisions.
 
 ## What Must Not Get Lost
 
 - AI Voice is the flagship wedge, not the whole business.
-- The site must support chat, email, marketing, operational, and integration automations.
-- The design should feel premium and engineered, not like a generic AI template.
+- The site must support chat, email, marketing, operational, integration, and custom AI automations.
+- The design should feel premium, professional, and engineered, not like a generic AI template.
 - The design should include real people, process, collaboration, and professional-services trust cues, not only dashboards and abstract AI visuals.
-- The homepage should demonstrate expertise through interactive systems, especially the Automation Simulator, Voice Demo plus Back-Office Event Log, and Automation Ideas Library.
 - Proof must be concrete, truthful, and tied to real workflows.
-- Under NDA constraints, public case studies must be anonymous, sanitized, or representative enough to protect client identity while staying truthful.
-- Case studies and proof modules should not be written until the proof inventory is collected.
-- SMB buyers fear spend itself, so the site must show a staged path: start small, prove value, then expand.
-- The site can explain raw cost drivers transparently, but pricing must stay tied to reliability, workflow design, monitoring, risk, and support.
-- The CTA is "Get Free Assessment"; the offer is "Free AI Workflow Assessment"; paid follow-ons are the AI Blueprint Sprint or pilot project.
+- Public case studies must be anonymous, sanitized, or representative enough to protect client identity unless explicit client approval exists.
+- SMB buyers fear spend, so the site must show a staged path: start small, prove value, then expand.
 - Labor savings should be framed as automating repetitive hours and redeploying humans to higher-value work, not careless employee replacement.
 - Governance and human handoff are part of the sales story.
+- Direct services should be easy to find. How We Build should prove how Automate4U builds safely, securely, and reliably.
 - A broken assessment form is a deployment blocker.
 
 ## Anti-Overbuild Rule
 
-The docs are now deep enough. New planning should only be added if it prevents a concrete implementation mistake.
+The docs are deep enough. New planning should only be added if it prevents a concrete implementation mistake.
 
-Start building from `04-implementation-roadmap.md`, using `08-execution-contracts.md` and `11-creative-experience-direction.md` as guardrails.
+Build from `implementation-reference/04-implementation-roadmap.md`, using `implementation-reference/08-execution-contracts.md` and `team-review/creative-experience-direction.md` as guardrails.

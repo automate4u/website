@@ -1,8 +1,19 @@
 import { NextResponse } from 'next/server';
 
+type RetellWebCallRequest = {
+    agent_id?: string;
+    agent_version?: number;
+    metadata?: Record<string, string | number | boolean>;
+};
+
+function isRequestBody(value: unknown): value is RetellWebCallRequest {
+    return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
 export async function POST(request: Request) {
     try {
-        const body = await request.json();
+        const payload: unknown = await request.json();
+        const body = isRequestBody(payload) ? payload : {};
 
         // Use defaults matching the original WordPress plugin
         const agent_id = body.agent_id || 'agent_8eb3dcb6ee11e198779d6b762f';
@@ -13,7 +24,7 @@ export async function POST(request: Request) {
 
         if (!apiKey) {
             console.error('[Retell API Route] API key not found in process.env.RETELL_API_KEY');
-            return NextResponse.json({ error: 'RETELL_API_KEY not set' }, { status: 500 });
+            return NextResponse.json({ error: 'Voice demo is not configured' }, { status: 500 });
         }
 
         const retellResponse = await fetch('https://api.retellai.com/v2/create-web-call', {
@@ -33,12 +44,12 @@ export async function POST(request: Request) {
 
         if (!retellResponse.ok) {
             console.error('[Retell API Route] Retell API error:', retellResponse.status, data);
-            return NextResponse.json({ error: 'Failed to create web call', details: data }, { status: retellResponse.status });
+            return NextResponse.json({ error: 'Failed to create web call' }, { status: retellResponse.status });
         }
 
         return NextResponse.json(data);
-    } catch (error: any) {
+    } catch (error) {
         console.error('[Retell API Route] Server error:', error);
-        return NextResponse.json({ error: 'Internal server error', details: error.message }, { status: 500 });
+        return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
 }
