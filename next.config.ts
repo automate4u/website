@@ -18,6 +18,16 @@ const nextConfig: NextConfig = {
         destination: "/services/ai-chat",
         permanent: true,
       },
+      {
+        source: "/core-services",
+        destination: "/services",
+        permanent: true,
+      },
+      {
+        source: "/core-services/:path*",
+        destination: "/services/:path*",
+        permanent: true,
+      },
     ];
   },
 };
