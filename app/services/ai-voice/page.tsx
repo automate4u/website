@@ -554,8 +554,8 @@ export default function AIVoicePage() {
         <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <SectionHeader
             eyebrow="Pricing confidence"
-            title="Voice automation pricing should be transparent, but not reduced to raw API cost."
-            description="Voice automation should feel financially clear before you commit. We explain the cost drivers, start with a useful pilot, and tie expansion to volume, risk, reliability, and measurable value."
+            title="Know what drives the cost before you commit."
+            description="Voice automation pricing depends on call volume, risk, integrations, monitoring, support, and how much work the system is allowed to complete. We explain the moving parts upfront so you can start with a pilot that makes financial sense."
           />
           <div className="grid gap-4">
             <div className="grid gap-4 md:grid-cols-3">
