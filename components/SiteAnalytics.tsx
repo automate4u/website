@@ -25,6 +25,26 @@ export default function SiteAnalytics() {
               ? "preview"
               : "unknown";
         posthog.register({ appEnvironment: appEnvironment, appHostname: hostname });
+        try {
+          var storedProfile = window.localStorage.getItem("a4u_team_analytics_profile");
+          if (storedProfile) {
+            var profile = JSON.parse(storedProfile);
+            if (profile && profile.email && profile.email.indexOf("@automate4u.co") > -1) {
+              var email = String(profile.email).trim().toLowerCase();
+              var name = profile.name ? String(profile.name).trim() : "";
+              posthog.identify(email, {
+                email: email,
+                name: name,
+                company: "Automate4U",
+                userType: "team",
+                isTeamMember: true
+              });
+              posthog.register({ userType: "team", isTeamMember: true });
+            }
+          }
+        } catch (error) {
+          // Keep analytics non-blocking.
+        }
       `}
     </Script>
   );
