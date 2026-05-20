@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ProofStorySection from "@/components/proof/ProofStorySection";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
+import AssessmentTrigger from "@/components/AssessmentTrigger";
 import SectionHeader from "@/components/sections/SectionHeader";
 
 type TextBlock = {
@@ -131,9 +132,19 @@ export default function IndustryAcceleratorPage({
               {description}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href={primaryCta.href} className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white shadow-[0_10px_28px_rgba(29,185,147,0.22)] hover:bg-btn-hover">
-                {primaryCta.label}
-              </Link>
+              {primaryCta.href === "#contact" ? (
+                <AssessmentTrigger
+                  sourcePage={sourcePage}
+                  ctaLocation={ctaLocation}
+                  className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white shadow-[0_10px_28px_rgba(29,185,147,0.22)] hover:bg-btn-hover"
+                >
+                  {primaryCta.label}
+                </AssessmentTrigger>
+              ) : (
+                <Link href={primaryCta.href} className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white shadow-[0_10px_28px_rgba(29,185,147,0.22)] hover:bg-btn-hover">
+                  {primaryCta.label}
+                </Link>
+              )}
               <Link href={secondaryCta.href} className="inline-flex h-12 items-center justify-center rounded-full border border-card-border px-6 text-base font-extrabold text-ink hover:border-[#1db993]/45 hover:text-[#167f65]">
                 {secondaryCta.label}
               </Link>

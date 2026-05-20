@@ -1,9 +1,11 @@
 import Link from "next/link";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
+import AssessmentTrigger from "@/components/AssessmentTrigger";
 import SectionHeader from "@/components/sections/SectionHeader";
 import ServiceProofModules from "@/components/services/ServiceProofModule";
 import { howWeBuildPillars } from "@/data/how-we-build";
 import type { ServicePageData } from "@/data/service-pages";
+import type { ServiceSlug } from "@/data/services";
 
 type ServiceOfferPageProps = {
   service: ServicePageData;
@@ -213,9 +215,14 @@ export default function ServiceOfferPage({ service }: ServiceOfferPageProps) {
               {service.description}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="#contact" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
+              <AssessmentTrigger
+                sourcePage={service.href}
+                ctaLocation={`${service.slug}_service_hero`}
+                serviceInterest={service.slug as ServiceSlug}
+                className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover"
+              >
                 Get Free Assessment
-              </Link>
+              </AssessmentTrigger>
               <Link href="#workflows" className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb]">
                 {presentation.secondaryCta}
               </Link>

@@ -12,7 +12,7 @@ export const metadata: Metadata = createMetadata({
 export default function ContactPage() {
   return (
     <>
-      <section className="bg-white px-4 py-16 text-center text-ink" aria-labelledby="contact-title">
+      <section className="bg-white px-4 pb-10 pt-12 text-center text-ink md:pb-12 md:pt-16" aria-labelledby="contact-title">
         <div className="mx-auto max-w-[880px]">
           <h1 id="contact-title" className="mx-auto max-w-[780px] text-[34px] font-extrabold leading-[1.1] tracking-[-0.02em] md:text-[52px]">
             Start with the workflow that is costing your team the most time.

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AssessmentTrigger from "@/components/AssessmentTrigger";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import SectionHeader from "@/components/sections/SectionHeader";
 import { serviceOffers } from "@/data/service-offers";
@@ -44,9 +45,13 @@ export default function CoreServicesPage() {
               Automate4U helps SMB and mid-market teams reduce repetitive labor, respond faster, connect business systems, and keep people in control where judgment matters.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
+              <AssessmentTrigger
+                sourcePage="/services"
+                ctaLocation="services_hero"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover"
+              >
                 Get Free Assessment
-              </Link>
+              </AssessmentTrigger>
               <Link href="/services/ai-voice" className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb]">
                 Explore AI Voice
               </Link>

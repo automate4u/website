@@ -53,13 +53,14 @@ The upgrade is in a strong pre-launch review state. The main website rebuild is 
 - [x] Shared assessment popout added for primary **Get Free Assessment** CTAs, with compact bottom CTA sections replacing repeated embedded forms across standard pages.
 - [x] AI Voice demo section adjusted to use a light section with a dark embedded demo surface so the flagship demo stands out without feeling disconnected from the rest of the site.
 - [x] PostHog configured for privacy-conscious funnel analytics: pageviews and explicit conversion events are enabled, autocapture/session recording are disabled, and events include environment metadata.
+- [x] Highest-intent buyer-perception QA pass completed for homepage, Services, AI Voice, AI Chat, AI Agents, Manufacturing, Education & Childcare, Daycare Voice Agent, Security & Safety, and Contact. Low-risk fixes were made to CTA tracking context and Contact page spacing.
 - [x] Docs reorganized into `team-review/` and `implementation-reference/`.
 - [x] Standard checks pass: `npm run lint`, `npm run build`, and `npm run test:e2e`.
 
 ### Still To Do
 
 - [ ] Final production lead routing once credentials and HubSpot field/object decisions are ready.
-- [ ] Staging buyer-perception QA pass across the highest-intent pages to check clarity, trust, proof credibility, page length, CTA rhythm, and premium feel after the latest polish.
+- [x] Staging/local buyer-perception QA pass across the highest-intent pages to check clarity, trust, proof credibility, page length, CTA rhythm, and premium feel after the latest polish.
 - [ ] Human review the shortened priority pages for taste, scanability, and whether any removed context needs to return in a more compact format.
 - [ ] Real production-style form submission test into HubSpot and internal email notifications.
 - [ ] Add final Calendly assessment link to form success states and notification emails.
@@ -72,7 +73,7 @@ The upgrade is in a strong pre-launch review state. The main website rebuild is 
 
 ### Next Work While Credentials Are Pending
 
-- [ ] Run the buyer-perception QA pass from `../implementation-reference/20-final-site-quality-review-plan.md` across `/`, `/services`, `/services/ai-voice`, `/services/ai-agents`, `/services/ai-chat`, `/industries/manufacturing`, `/industries/education-childcare`, `/solutions/daycare-voice-agent`, `/capabilities/security-monitoring-ai-safety`, and `/contact`.
+- [x] Run the buyer-perception QA pass from `../implementation-reference/20-final-site-quality-review-plan.md` across `/`, `/services`, `/services/ai-voice`, `/services/ai-agents`, `/services/ai-chat`, `/industries/manufacturing`, `/industries/education-childcare`, `/solutions/daycare-voice-agent`, `/capabilities/security-monitoring-ai-safety`, and `/contact`.
 - [ ] Review `/services`, `/services/ai-voice`, `/industries/manufacturing`, `/industries/education-childcare`, and `/solutions/daycare-voice-agent` on staging after the reduction pass.
 - [ ] Complete one final click-through on production/staging after each deploy so redirects, forms, analytics, and third-party scripts are verified in the hosted environment.
 - [ ] Reduce each priority page to one clear buyer job, one primary CTA path, and only the proof/process sections needed for that buyer.
