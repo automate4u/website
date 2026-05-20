@@ -150,6 +150,15 @@ After setup:
 
 Use PostHog Free for v1 funnel analytics.
 
+Current implementation:
+
+- PostHog loads only when `NEXT_PUBLIC_POSTHOG_KEY` is configured.
+- Pageviews are enabled.
+- Explicit custom events are enabled.
+- Autocapture is disabled.
+- Session recording is disabled.
+- Events include `appEnvironment` and `appHostname` so local, preview, and production traffic can be separated.
+
 Track:
 
 - CTA clicks.

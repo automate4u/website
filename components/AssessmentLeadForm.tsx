@@ -168,15 +168,6 @@ export default function AssessmentLeadForm({
       <button
         type="submit"
         disabled={pending}
-        onClick={() => {
-          trackEvent("site_assessment_cta_clicked", {
-            page: sourcePage,
-            ctaLocation,
-            serviceInterest,
-            acceleratorInterest,
-            workflowInterest,
-          });
-        }}
         className="rounded-full bg-accent px-5 py-3 font-bold text-white hover:bg-btn-hover disabled:cursor-not-allowed disabled:opacity-70"
       >
         {pending ? "Submitting..." : submitLabel}
