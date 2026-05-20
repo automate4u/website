@@ -156,7 +156,7 @@ Destination:
 - HubSpot is the primary CRM/source of truth.
 - Use a basic HubSpot v1 model: create or update contacts and store assessment context as properties/notes.
 - Defer contact-plus-deal or contact-plus-ticket modeling until HubSpot is fully configured.
-- Send notification emails to `johnny@automate4u.ca`, `michael@automate4u.ca`, and `hello@automate4u.ca`.
+- Send notification emails to `johnny@automate4u.co`, `michael@automate4u.co`, and `hello@automate4u.co`.
 - Use Resend Free as the default v1 email notification provider unless HubSpot-native notifications cover the final form path.
 - Keep the integration behind the Server Action so CRM and email credentials never reach the browser.
 - Store page source, CTA location, service interest, workflow interest, industry interest, and UTM fields with the HubSpot record.

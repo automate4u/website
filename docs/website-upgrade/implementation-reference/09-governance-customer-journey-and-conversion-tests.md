@@ -88,7 +88,7 @@ Actions:
 - Send an automatic confirmation email if email infrastructure is available.
 - Create or update the lead in HubSpot.
 - Use the basic HubSpot v1 model: contact plus submission context, with deal/ticket modeling deferred.
-- Send internal notifications to `johnny@automate4u.ca`, `michael@automate4u.ca`, and `hello@automate4u.ca`.
+- Send internal notifications to `johnny@automate4u.co`, `michael@automate4u.co`, and `hello@automate4u.co`.
 - Use Resend Free for v1 notification emails unless HubSpot-native notifications cover the final form path.
 - Include what happens next and expected response time.
 - Preserve page source, UTM data, selected service, selected workflow, and message context.

@@ -33,7 +33,7 @@ Decision:
 
 - Prefer Server Actions for the Free AI Workflow Assessment form.
 - The Server Action should post to HubSpot as the primary CRM/source of truth.
-- The Server Action should send internal email notifications to Johnny, Michael, and hello@automate4u.ca.
+- The Server Action should send internal email notifications to Johnny, Michael, and hello@automate4u.co.
 - Formspree or a generic webhook should only be used as a temporary bridge or fallback.
 
 ### 2. Use `next/script` And Explicit Loading Strategies

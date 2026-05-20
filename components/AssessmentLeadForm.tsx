@@ -88,7 +88,7 @@ export default function AssessmentLeadForm({
   return (
     <form action={formAction} onFocusCapture={trackStarted} className="grid gap-4">
       <div className="rounded-xl border border-[#cfe9df] bg-[#ecfbf6] px-4 py-3 text-sm leading-6 text-[#155f4d]">
-        <strong className="text-ink">Most fields are optional.</strong> Work email and company are the only required fields so we can follow up with a useful response.
+        <strong className="text-ink">Most fields are optional.</strong> Work email and company are the only required fields, answering others will reduce the time it takes for us to recommend actionable first steps.
       </div>
 
       <input type="hidden" name="sourcePage" value={sourcePage} />
@@ -98,64 +98,66 @@ export default function AssessmentLeadForm({
       <input type="hidden" name="workflowInterest" value={workflowInterest ?? ""} />
       <AttributionFields />
 
-      <label className="grid gap-1.5">
-        <span className="text-sm font-semibold text-ink">Name <span className="font-normal text-muted">(optional)</span></span>
-        <input name="name" autoComplete="name" className="rounded-xl border border-card-border px-3 py-3" />
-      </label>
+      <div className="grid gap-4 md:grid-cols-2">
+        <label className="grid gap-1.5">
+          <span className="text-sm font-semibold text-ink">Name <span className="font-normal text-muted">(optional)</span></span>
+          <input name="name" autoComplete="name" className="rounded-xl border border-card-border px-3 py-3" />
+        </label>
 
-      <label className="grid gap-1.5">
-        <span className="text-sm font-semibold text-ink">Work email *</span>
-        <input name="email" type="email" required autoComplete="email" className="rounded-xl border border-card-border px-3 py-3" />
-      </label>
+        <label className="grid gap-1.5">
+          <span className="text-sm font-semibold text-ink">Work email *</span>
+          <input name="email" type="email" required autoComplete="email" className="rounded-xl border border-card-border px-3 py-3" />
+        </label>
 
-      <label className="grid gap-1.5">
-        <span className="text-sm font-semibold text-ink">Company *</span>
-        <input name="company" required autoComplete="organization" className="rounded-xl border border-card-border px-3 py-3" />
-      </label>
+        <label className="grid gap-1.5">
+          <span className="text-sm font-semibold text-ink">Company *</span>
+          <input name="company" required autoComplete="organization" className="rounded-xl border border-card-border px-3 py-3" />
+        </label>
 
-      <label className="grid gap-1.5">
-        <span className="text-sm font-semibold text-ink">Website <span className="font-normal text-muted">(optional)</span></span>
-        <input name="website" type="url" autoComplete="url" className="rounded-xl border border-card-border px-3 py-3" />
-      </label>
+        <label className="grid gap-1.5">
+          <span className="text-sm font-semibold text-ink">Website <span className="font-normal text-muted">(optional)</span></span>
+          <input name="website" type="url" autoComplete="url" className="rounded-xl border border-card-border px-3 py-3" />
+        </label>
 
-      <label className="grid gap-1.5">
-        <span className="text-sm font-semibold text-ink">Industry <span className="font-normal text-muted">(optional)</span></span>
-        <input name="industry" className="rounded-xl border border-card-border px-3 py-3" />
-      </label>
+        <label className="grid gap-1.5">
+          <span className="text-sm font-semibold text-ink">Industry <span className="font-normal text-muted">(optional)</span></span>
+          <input name="industry" className="rounded-xl border border-card-border px-3 py-3" />
+        </label>
 
-      <label className="grid gap-1.5">
-        <span className="text-sm font-semibold text-ink">Biggest workflow pain <span className="font-normal text-muted">(optional)</span></span>
-        <textarea name="workflowPain" rows={4} className="rounded-xl border border-card-border px-3 py-3" />
-      </label>
+        <label className="grid gap-1.5">
+          <span className="text-sm font-semibold text-ink">Timeline <span className="font-normal text-muted">(optional)</span></span>
+          <select name="timeline" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
+            <option value="" disabled>Select a timeline</option>
+            <option>ASAP</option>
+            <option>1-2 months</option>
+            <option>This quarter</option>
+            <option>Just exploring</option>
+          </select>
+        </label>
 
-      <label className="grid gap-1.5">
-        <span className="text-sm font-semibold text-ink">Tools currently used <span className="font-normal text-muted">(optional)</span></span>
-        <input name="tools" placeholder="HubSpot, Calendly, QuickBooks, spreadsheets..." className="rounded-xl border border-card-border px-3 py-3" />
-      </label>
+        <label className="grid gap-1.5 md:col-span-2">
+          <span className="text-sm font-semibold text-ink">Biggest workflow pain <span className="font-normal text-muted">(optional)</span></span>
+          <textarea name="workflowPain" rows={3} className="rounded-xl border border-card-border px-3 py-3" />
+        </label>
 
-      <label className="grid gap-1.5">
-        <span className="text-sm font-semibold text-ink">Budget range <span className="font-normal text-muted">(optional)</span></span>
-        <select name="budget" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
-          <option value="" disabled>Select a budget range</option>
-          <option>Exploring fit first</option>
-          <option>Under $3k/month</option>
-          <option>$3k-$5k/month</option>
-          <option>$5k-$10k/month</option>
-          <option>$10k+/month</option>
-          <option>Project budget, not monthly</option>
-        </select>
-      </label>
+        <label className="grid gap-1.5 md:col-span-2">
+          <span className="text-sm font-semibold text-ink">Tools currently used <span className="font-normal text-muted">(optional)</span></span>
+          <input name="tools" placeholder="HubSpot, Calendly, QuickBooks, spreadsheets..." className="rounded-xl border border-card-border px-3 py-3" />
+        </label>
 
-      <label className="grid gap-1.5">
-        <span className="text-sm font-semibold text-ink">Timeline <span className="font-normal text-muted">(optional)</span></span>
-        <select name="timeline" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
-          <option value="" disabled>Select a timeline</option>
-          <option>ASAP</option>
-          <option>1-2 months</option>
-          <option>This quarter</option>
-          <option>Just exploring</option>
-        </select>
-      </label>
+        <label className="grid gap-1.5 md:col-span-2">
+          <span className="text-sm font-semibold text-ink">Budget range <span className="font-normal text-muted">(optional)</span></span>
+          <select name="budget" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
+            <option value="" disabled>Select a budget range</option>
+            <option>Exploring fit first</option>
+            <option>Under $3k/month</option>
+            <option>$3k-$5k/month</option>
+            <option>$5k-$10k/month</option>
+            <option>$10k+/month</option>
+            <option>Project budget, not monthly</option>
+          </select>
+        </label>
+      </div>
 
       {state.message && !state.ok ? (
         <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">

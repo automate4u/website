@@ -96,7 +96,7 @@ export default function TermsPage() {
             <h2 className="text-2xl font-extrabold text-ink">Contact</h2>
             <p className="mt-4 leading-7">
               Questions about these terms can be sent to{" "}
-              <a href="mailto:hello@automate4u.ca" className="font-bold text-[#167f65]">hello@automate4u.ca</a>.
+              <a href="mailto:hello@automate4u.co" className="font-bold text-[#167f65]">hello@automate4u.co</a>.
             </p>
           </article>
 

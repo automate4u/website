@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Automate4U",
-  url: "https://automate4u.ca",
+  url: "https://automate4u.co",
   defaultTitle: "Automate4U - AI Voice, Agents, and Workflow Automation",
   description:
     "Automate4U builds AI voice agents, chat and email agents, and workflow automations that connect to the systems running your business.",

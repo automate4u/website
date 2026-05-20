@@ -374,13 +374,13 @@ These items require Automate4U account access, business judgment, or approval.
 - Decide HubSpot v1 model: contact-only, or contact plus company/deal/ticket.
 - Provide exact HubSpot custom property names if custom fields are desired.
 - Create Resend account/API key if using Resend for internal notification emails.
-- Verify the sender/domain for `hello@automate4u.ca`.
+- Verify the sender/domain for `hello@automate4u.co`.
 - Provide final Calendly Free AI Workflow Assessment link.
 - Provide PostHog project key if using PostHog.
 - Confirm notification recipients remain:
-  - `johnny@automate4u.ca`
-  - `michael@automate4u.ca`
-  - `hello@automate4u.ca`
+  - `johnny@automate4u.co`
+  - `michael@automate4u.co`
+  - `hello@automate4u.co`
 
 ### Required For Trust And Proof
 

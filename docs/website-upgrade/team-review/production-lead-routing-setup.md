@@ -16,9 +16,9 @@ The assessment form code already supports:
 - HubSpot private app token via `HUBSPOT_PRIVATE_APP_TOKEN`.
 - Resend email notifications via `RESEND_API_KEY`.
 - Notification recipients:
-  - `johnny@automate4u.ca`
-  - `michael@automate4u.ca`
-  - `hello@automate4u.ca`
+  - `johnny@automate4u.co`
+  - `michael@automate4u.co`
+  - `hello@automate4u.co`
 - Source page, CTA location, landing page, referrer, UTM fields, service interest, workflow interest, budget, timeline, team size, and workflow pain capture.
 - Production guardrail: production submissions fail if neither HubSpot nor Resend is configured.
 - E2E test mode through `A4U_E2E_TEST_MODE=1`.
@@ -50,7 +50,7 @@ Automate4U must provide or confirm:
 - **HubSpot object model:** contact-only for v1, or contact + company + deal/ticket.
 - **HubSpot field names:** exact internal property names for any custom fields.
 - **Resend API key:** production value for `RESEND_API_KEY`, if using Resend.
-- **Verified sender:** production `RESEND_FROM_EMAIL`, such as `hello@automate4u.ca`, after domain verification.
+- **Verified sender:** production `RESEND_FROM_EMAIL`, such as `hello@automate4u.co`, after domain verification.
 - **Calendly link:** final Free AI Workflow Assessment booking URL.
 - **PostHog key:** production value for `NEXT_PUBLIC_POSTHOG_KEY`, if using PostHog.
 - **Legal/privacy approval:** confirm that form, analytics, CRM, email notification, and AI demo language is acceptable.
@@ -101,7 +101,7 @@ Production:
 ```txt
 HUBSPOT_PRIVATE_APP_TOKEN=...
 RESEND_API_KEY=...
-RESEND_FROM_EMAIL=hello@automate4u.ca
+RESEND_FROM_EMAIL=hello@automate4u.co
 NEXT_PUBLIC_POSTHOG_KEY=...
 NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
 NEXT_PUBLIC_CALENDLY_ASSESSMENT_URL=https://calendly.com/...
@@ -126,7 +126,7 @@ Steps:
 3. Configure DNS records required by Resend.
 4. Create an API key.
 5. Set `RESEND_API_KEY` in production environment variables.
-6. Set `RESEND_FROM_EMAIL` to a verified sender, ideally `hello@automate4u.ca`.
+6. Set `RESEND_FROM_EMAIL` to a verified sender, ideally `hello@automate4u.co`.
 7. Submit a test assessment and confirm all three recipients receive the email.
 
 ## Calendly Setup Checklist

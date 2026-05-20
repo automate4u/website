@@ -380,7 +380,7 @@ Submission:
 - The Server Action should post to HubSpot as the primary CRM.
 - V1 HubSpot model: create/update a contact and store assessment context as properties/notes.
 - Defer deal/ticket object modeling until the HubSpot workspace is configured.
-- The Server Action should send notification emails to `johnny@automate4u.ca`, `michael@automate4u.ca`, and `hello@automate4u.ca`.
+- The Server Action should send notification emails to `johnny@automate4u.co`, `michael@automate4u.co`, and `hello@automate4u.co`.
 - Use Resend Free as the default notification email provider unless HubSpot-native notifications cover the final submission path.
 - Formspree or a generic webhook should only be used as a fallback or temporary bridge.
 

@@ -1,9 +1,9 @@
 "use server";
 
 const notificationRecipients = [
-  "johnny@automate4u.ca",
-  "michael@automate4u.ca",
-  "hello@automate4u.ca",
+  "johnny@automate4u.co",
+  "michael@automate4u.co",
+  "hello@automate4u.co",
 ];
 
 export type AssessmentLeadState = {
@@ -26,6 +26,14 @@ function formDataToObject(formData: FormData): Record<string, string> {
   }
 
   return data;
+}
+
+function present(value: string | undefined): string {
+  return value && value.trim() ? value.trim() : "Not provided";
+}
+
+function notificationLine(label: string, value: string | undefined): string {
+  return `${label}: ${present(value)}`;
 }
 
 async function submitToHubSpot(data: Record<string, string>) {
@@ -76,38 +84,38 @@ async function sendNotification(data: Record<string, string>) {
   if (process.env.A4U_E2E_TEST_MODE === "1") return;
 
   const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.RESEND_FROM_EMAIL ?? "hello@automate4u.ca";
+  const from = process.env.RESEND_FROM_EMAIL ?? "hello@automate4u.co";
   if (!apiKey) return;
 
   const subject = `New AI workflow assessment request from ${data.company || data.email || "website"}`;
   const body = [
-    `Name: ${data.name}`,
-    `Email: ${data.email}`,
-    `Company: ${data.company}`,
-    `Website: ${data.website}`,
-    `Industry: ${data.industry}`,
-    `Workflow pain: ${data.workflowPain || data.goals}`,
-    `Tools: ${data.tools}`,
-    `Team size: ${data.team_size}`,
-    `Current channels: ${data.channels}`,
-    `Use case: ${data.use_case}`,
-    `Objective: ${data.objective}`,
-    `Sensitivity: ${data.sensitivity}`,
-    `Budget: ${data.budget}`,
-    `Volume: ${data.volume}`,
-    `Timeline: ${data.timeline}`,
-    `Service interest: ${data.serviceInterest}`,
-    `Accelerator interest: ${data.acceleratorInterest}`,
-    `Workflow interest: ${data.workflowInterest}`,
-    `Source page: ${data.sourcePage}`,
-    `CTA location: ${data.ctaLocation}`,
-    `Landing page: ${data.landingPage}`,
-    `Referrer: ${data.referrer}`,
-    `UTM source: ${data.utmSource}`,
-    `UTM medium: ${data.utmMedium}`,
-    `UTM campaign: ${data.utmCampaign}`,
-    `UTM term: ${data.utmTerm}`,
-    `UTM content: ${data.utmContent}`,
+    notificationLine("Name", data.name),
+    notificationLine("Email", data.email),
+    notificationLine("Company", data.company),
+    notificationLine("Website", data.website),
+    notificationLine("Industry", data.industry),
+    notificationLine("Workflow pain", data.workflowPain || data.goals),
+    notificationLine("Tools", data.tools),
+    notificationLine("Team size", data.team_size),
+    notificationLine("Current channels", data.channels),
+    notificationLine("Use case", data.use_case),
+    notificationLine("Objective", data.objective),
+    notificationLine("Sensitivity", data.sensitivity),
+    notificationLine("Budget", data.budget),
+    notificationLine("Volume", data.volume),
+    notificationLine("Timeline", data.timeline),
+    notificationLine("Service interest", data.serviceInterest),
+    notificationLine("Accelerator interest", data.acceleratorInterest),
+    notificationLine("Workflow interest", data.workflowInterest),
+    notificationLine("Source page", data.sourcePage),
+    notificationLine("CTA location", data.ctaLocation),
+    notificationLine("Landing page", data.landingPage),
+    notificationLine("Referrer", data.referrer),
+    notificationLine("UTM source", data.utmSource),
+    notificationLine("UTM medium", data.utmMedium),
+    notificationLine("UTM campaign", data.utmCampaign),
+    notificationLine("UTM term", data.utmTerm),
+    notificationLine("UTM content", data.utmContent),
   ].join("\n");
 
   const response = await fetch("https://api.resend.com/emails", {
@@ -125,7 +133,8 @@ async function sendNotification(data: Record<string, string>) {
   });
 
   if (!response.ok) {
-    throw new Error("Assessment notification email failed.");
+    const errorText = await response.text();
+    throw new Error(`Assessment notification email failed: ${response.status} ${errorText}`);
   }
 }
 
@@ -145,13 +154,30 @@ export async function submitAssessmentLead(formData: FormData) {
     throw new Error("No assessment lead destination is configured.");
   }
 
-  const results = await Promise.allSettled([
-    submitToHubSpot(data),
-    sendNotification(data),
-  ]);
+  const destinations = [
+    {
+      name: "HubSpot",
+      configured: Boolean(process.env.HUBSPOT_PRIVATE_APP_TOKEN),
+      promise: submitToHubSpot(data),
+    },
+    {
+      name: "Resend",
+      configured: Boolean(process.env.RESEND_API_KEY),
+      promise: sendNotification(data),
+    },
+  ];
 
-  const failed = results.filter((result) => result.status === "rejected");
-  if (failed.length === results.length) {
+  const results = await Promise.allSettled(destinations.map((destination) => destination.promise));
+  const configuredResults = results.filter((_, index) => destinations[index].configured);
+  const failedConfigured = configuredResults.filter((result) => result.status === "rejected");
+
+  results.forEach((result, index) => {
+    if (result.status === "rejected") {
+      console.error(`${destinations[index].name} assessment routing failed:`, result.reason);
+    }
+  });
+
+  if (configuredResults.length > 0 && failedConfigured.length === configuredResults.length) {
     throw new Error("Assessment submission failed.");
   }
 }
@@ -169,7 +195,7 @@ export async function submitAssessmentLeadWithState(
   } catch {
     return {
       ok: false,
-      message: "Something went wrong. Please try again or email hello@automate4u.ca.",
+      message: "Something went wrong. Please try again or email hello@automate4u.co.",
     };
   }
 }

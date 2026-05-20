@@ -96,7 +96,7 @@ export default function PrivacyPage() {
             <h2 className="text-2xl font-extrabold text-ink">Access, correction, or deletion requests</h2>
             <p className="mt-4 leading-7">
               To request access, correction, or deletion of information you submitted through the website, contact us at{" "}
-              <a href="mailto:hello@automate4u.ca" className="font-bold text-[#167f65]">hello@automate4u.ca</a>. We may need to verify the request before taking action.
+              <a href="mailto:hello@automate4u.co" className="font-bold text-[#167f65]">hello@automate4u.co</a>. We may need to verify the request before taking action.
             </p>
           </article>
 
@@ -104,7 +104,7 @@ export default function PrivacyPage() {
             <h2 className="text-2xl font-extrabold text-ink">Contact</h2>
             <p className="mt-4 leading-7">
               Questions about this policy can be sent to{" "}
-              <a href="mailto:hello@automate4u.ca" className="font-bold text-[#167f65]">hello@automate4u.ca</a>.
+              <a href="mailto:hello@automate4u.co" className="font-bold text-[#167f65]">hello@automate4u.co</a>.
             </p>
           </article>
 

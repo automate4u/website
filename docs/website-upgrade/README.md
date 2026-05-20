@@ -39,7 +39,7 @@ Key decisions:
 - Positioning: automation-led, with AI Voice as the flagship wedge.
 - Scope: voice is prominent, but Automate4U also sells chat, email, marketing, operational, integration, and custom AI automation.
 - Creative direction: trustworthy professional services plus precise AI operations interfaces.
-- Lead routing: HubSpot as source of truth, with email notifications to Johnny, Michael, and hello@automate4u.ca.
+- Lead routing: HubSpot as source of truth, with email notifications to Johnny, Michael, and hello@automate4u.co.
 - V1 free tools: Resend Free, Calendly Free, and PostHog Free where appropriate.
 - Pricing transparency: show ranges and cost drivers without reducing Automate4U to raw API resale.
 

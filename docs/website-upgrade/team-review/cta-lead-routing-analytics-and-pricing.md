@@ -136,9 +136,9 @@ Required destinations:
 - Create a HubSpot deal or ticket when appropriate.
 - Store page source, CTA location, service interest, workflow interest, industry interest, and UTM fields.
 - Send email notifications to:
-  - `johnny@automate4u.ca`
-  - `michael@automate4u.ca`
-  - `hello@automate4u.ca`
+  - `johnny@automate4u.co`
+  - `michael@automate4u.co`
+  - `hello@automate4u.co`
 
 Recommended implementation:
 
