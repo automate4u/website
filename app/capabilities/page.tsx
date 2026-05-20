@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AssessmentTrigger from "@/components/AssessmentTrigger";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import SectionHeader from "@/components/sections/SectionHeader";
 import { howWeBuildPillars } from "@/data/how-we-build";
@@ -57,9 +58,13 @@ export default function CapabilitiesPage() {
               Before you trust AI with calls, emails, customer questions, quotes, bookings, or operational workflows, you need to know how it is connected, monitored, measured, and controlled.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="#contact" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
+              <AssessmentTrigger
+                sourcePage="/capabilities"
+                ctaLocation="capabilities_hero"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover"
+              >
                 Get Free Assessment
-              </Link>
+              </AssessmentTrigger>
               <Link href="/capabilities/security-monitoring-ai-safety" className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-base font-extrabold text-ink hover:bg-[#f4fffb]">
                 Review Safety Controls
               </Link>

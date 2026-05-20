@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import AssessmentModal from "@/components/AssessmentModal";
 import { services, type ServiceSlug } from "@/data/services";
+import { trackEvent } from "@/lib/analytics";
 
 const serviceSlugs = new Set(services.map((service) => service.slug));
 
@@ -33,12 +34,17 @@ export default function GlobalAssessmentLauncher() {
       if (!isAssessmentCta) return;
 
       event.preventDefault();
+      trackEvent("site_assessment_cta_clicked", {
+        page: pathname,
+        ctaLocation: "global_assessment_cta",
+        serviceInterest,
+      });
       setOpen(true);
     };
 
     document.addEventListener("click", onClick, true);
     return () => document.removeEventListener("click", onClick, true);
-  }, []);
+  }, [pathname, serviceInterest]);
 
   return (
     <>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import AssessmentTrigger from "@/components/AssessmentTrigger";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import ProofStorySection from "@/components/proof/ProofStorySection";
 import SectionHeader from "@/components/sections/SectionHeader";
@@ -41,9 +42,13 @@ export default function Home() {
               Automate4U designs AI voice agents, chat and email agents, marketing workflows, and operations automations that connect to the systems your team already uses.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="#contact" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white shadow-[0_10px_30px_rgba(29,185,147,0.25)] hover:bg-btn-hover">
+              <AssessmentTrigger
+                sourcePage="/"
+                ctaLocation="homepage_hero"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white shadow-[0_10px_30px_rgba(29,185,147,0.25)] hover:bg-btn-hover"
+              >
                 Get Free Assessment
-              </Link>
+              </AssessmentTrigger>
               <Link href="/services/ai-voice#voice-demo" className="inline-flex h-12 items-center justify-center rounded-full border border-card-border px-6 text-base font-extrabold text-ink hover:border-[#1db993]/45 hover:text-[#169b78]">
                 Try Voice Demo
               </Link>

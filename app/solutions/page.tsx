@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AssessmentTrigger from "@/components/AssessmentTrigger";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import SectionHeader from "@/components/sections/SectionHeader";
 import { solutions } from "@/data/solutions";
@@ -46,9 +47,13 @@ export default function SolutionsPage() {
               Explore focused operational patterns: the scenario, the conversation, the downstream action, the human controls, and the rollout path.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="#contact" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white shadow-[0_10px_28px_rgba(29,185,147,0.22)] hover:bg-btn-hover">
+              <AssessmentTrigger
+                sourcePage="/solutions"
+                ctaLocation="solutions_hero"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white shadow-[0_10px_28px_rgba(29,185,147,0.22)] hover:bg-btn-hover"
+              >
                 Get Free Assessment
-              </Link>
+              </AssessmentTrigger>
               <Link href="/industries" className="inline-flex h-12 items-center justify-center rounded-full border border-card-border px-6 text-base font-extrabold text-ink hover:border-[#1db993]/45 hover:text-[#167f65]">
                 Browse Industries
               </Link>
