@@ -47,6 +47,24 @@ declare global {
   }
 }
 
+function getAnalyticsEnvironment() {
+  if (typeof window === "undefined") {
+    return { appEnvironment: "server", appHostname: "" };
+  }
+
+  const hostname = window.location.hostname;
+  const appEnvironment =
+    hostname === "localhost" || hostname === "127.0.0.1"
+      ? "local"
+      : hostname === "automate4u.co" || hostname === "www.automate4u.co"
+        ? "production"
+        : hostname.endsWith(".vercel.app")
+          ? "preview"
+          : "unknown";
+
+  return { appEnvironment, appHostname: hostname };
+}
+
 export function getStoredAttribution() {
   if (typeof window === "undefined") return {};
 
@@ -86,8 +104,10 @@ export function trackEvent(eventName: AnalyticsEventName, payload: AnalyticsPayl
   if (typeof window === "undefined") return;
 
   const attribution = getStoredAttribution();
+  const environment = getAnalyticsEnvironment();
   const eventPayload = {
     page: window.location.pathname,
+    ...environment,
     ...attribution,
     ...payload,
   };
