@@ -46,20 +46,6 @@ body {
   scroll-behavior: smooth;
 }
 
-/* Keep the ElevenLabs voice demo from stacking under the Botpress chat launcher. */
-.a4u-elevenlabs-convai {
-  position: fixed !important;
-  right: 80px !important;
-  bottom: 0px !important;
-  z-index: 900 !important;
-}
-
-@media (max-width: 640px) {
-  .a4u-elevenlabs-convai {
-    right: -10px !important;
-    bottom: 70px !important;
-  }
-}
 
 @layer utilities {
   .text-balance {
