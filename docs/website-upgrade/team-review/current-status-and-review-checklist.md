@@ -67,7 +67,7 @@ The upgrade is in a strong pre-launch review state. The main website rebuild is 
 - [x] Add final PostHog project key and confirm live funnel events.
 - [ ] Team review of top buyer pages for tone, density, claims, and sales clarity.
 - [ ] Cofounder review of AI Voice before major flow changes.
-- [ ] Proof inventory collection and approval of anonymous/sanitized claims.
+- [ ] Proof inventory collection, result ranges, and approval of anonymous/sanitized claims for the highest-priority proof stories.
 - [ ] Legal counsel review of Privacy and Terms.
 - [ ] Replace generated/sourced imagery with real team/process photos when available.
 
@@ -226,8 +226,9 @@ Current proof stories:
 
 Important proof rule:
 
-- These are representative, NDA-safe workflow examples. They show workflow specificity, connected actions, human controls, and metrics to validate. They should not be presented as named client case studies unless a client explicitly approves that use.
-- Exact metrics should not be invented. Until approved metrics are available, the site should show the metrics Automate4U validates during assessment and pilot work.
+- These are NDA-safe, outcome-backed workflow proof patterns. They should feel like real operational work: specific workflow, connected actions, human controls, and business results.
+- They should not be presented as named client case studies unless a client explicitly approves that use.
+- Exact metrics should not be invented. Use results-oriented language where it is grounded in real work or defensible founder/team experience, then upgrade to precise metrics when the team approves them.
 
 ### Industries
 
@@ -417,12 +418,64 @@ Remaining risks:
 When work resumes, prioritize in this order:
 
 1. Codex completes the page focus and reduction pass on the priority buyer paths listed above.
-2. Team reviews the shorter page flow for homepage, Services overview, AI Voice, AI Chat, AI Agents, Manufacturing, Education & Childcare, and Daycare Voice Agent.
-3. Team provides production routing credentials and decisions from `production-lead-routing-setup.md`.
-4. Codex finalizes production lead routing code and tests the path.
-5. Team gathers proof inventory for anonymous case studies and measurable outcomes.
-6. Codex replaces representative proof with approved anonymous/sanitized proof where available.
-7. Legal review of Privacy and Terms pages.
+2. Codex only adds new credibility/proof sections when they help answer one of the five buyer questions in `../implementation-reference/20-final-site-quality-review-plan.md`.
+3. Team reviews the shorter page flow for homepage, Services overview, AI Voice, AI Chat, AI Agents, Manufacturing, Education & Childcare, and Daycare Voice Agent.
+4. Team provides production routing credentials and decisions from `production-lead-routing-setup.md`.
+5. Codex finalizes production lead routing code and tests the path.
+6. Team gathers proof inventory for anonymous case studies and measurable outcomes.
+7. Codex replaces representative proof with approved anonymous/sanitized proof where available.
+8. Legal review of Privacy and Terms pages.
+
+## Current Guardrail Against Fluff
+
+Do not add more copy just because Automate4U can say more.
+
+Any new website section should pass at least two of these tests:
+
+- It helps a visitor understand the operating problem faster.
+- It proves Automate4U can build a connected system, not just an isolated AI tool.
+- It reduces spend, risk, security, maintenance, or staff-adoption anxiety.
+- It shows downstream business action: CRM, calendar, quote, ticket, notification, approval, audit log, KPI, or report.
+- It makes a service page less generic and easier to buy.
+- It gives a cautious evaluator more confidence without making the page longer than needed.
+
+If a section only says "we are experienced" in a general way, cut it, shorten it, or move it to About/How We Build.
+
+Current implication for founder/team credibility:
+
+- Homepage credibility band: acceptable because it quickly explains production-minded implementation.
+- About Team technical-depth section: acceptable because About is the natural place for founder/team credibility.
+- Data & Integrations ecosystem section: acceptable because integration breadth is directly relevant to a How We Build trust page.
+- Service-specific credibility callouts: only add where the service currently lacks a distinct reason to believe. Do not add generic credibility blocks to every service page by default.
+
+## Latest Page Decision Pass
+
+AI Chat, AI Agents, AI Operations Strategy, Marketing Automation, Managed AI Operations, and Custom AI Software were reviewed against the buyer-quality checklist.
+
+Decision:
+
+- Do not add new sections to these pages yet. They already have service-specific proof modules.
+- Improve the existing proof language instead of lengthening the pages.
+
+Changes made:
+
+- AI Chat now more clearly references source-grounded answers, fallback rules, unsupported-answer avoidance, and knowledge-gap review.
+- AI Agents now more clearly references validation, retries, duplicate-action prevention, failed-action review, retry history, and action logging.
+- AI Operations Strategy now more clearly references the first paid next step, budget range, no-build/cleanup recommendations, approval points, and post-pilot decision gates.
+- Marketing Automation now more clearly references approved source material, CRM follow-up, reply tracking, lead movement, reporting, and owner approval.
+- Managed AI Operations now more clearly references cost visibility, runbooks, incident notes, vendor/tool changes, retries, and issue response.
+- Custom AI Software now more clearly references role-based access, maintenance, monitoring, support ownership, payments/search/database actions, and audit trails.
+- About / How We Work now includes a compact production engineering standards section covering approved sources, scenario testing, visible business actions, handoff/recovery, monitoring, and evidence-based expansion.
+- Public copy polish removed several remaining meta/explanatory phrases from high-value pages: AI Voice now frames the demo as what a strong voice experience should prove, AI Agents points visitors toward a practical starting role, Solutions speaks to choosing a narrow operating problem, and Data & Integrations explains discovery checks in buyer-facing terms.
+- Public proof cards now use clearer labels: business actions, human controls, and results tracked. Proof metric labels should stay outcome-oriented when Automate4U can credibly stand behind the result, while avoiding invented exact numbers or client-identifying details.
+- ElevenLabs daycare voice demo added to the Daycare Voice Agent solution page and added as a selectable demo option on the AI Voice service page.
+
+Why this is aligned with the roadmap:
+
+- It strengthens trust and production credibility without making the pages longer.
+- It improves the distinct reason to believe for each service.
+- It answers buyer concerns about hallucination, unreliable automation, and hidden system actions.
+- It keeps deeper builder credibility on About / How We Work instead of adding generic credibility blocks to every sales page.
 
 ## Current Verification
 

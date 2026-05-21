@@ -73,10 +73,10 @@ function AIChatProof() {
                   <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Demo preview</p>
                   <h3 className="mt-3 text-2xl font-extrabold leading-tight text-ink">A simple chatbot surface is available to try.</h3>
                   <p className="mt-3 text-sm leading-6 text-muted">
-                    We load the live demo only when you request it so the page stays fast. A real implementation connects this surface to approved knowledge, CRM or ticketing, staff handoff, and reporting.
+                    We load the live demo only when you request it so the page stays fast. A real implementation connects this surface to approved knowledge, fallback rules, CRM or ticketing, staff handoff, and reporting.
                   </p>
                   <div className="mt-5 grid gap-2 text-sm font-semibold text-ink">
-                    <span className="rounded-md bg-[#f8fbfa] px-3 py-2">Approved answer boundaries</span>
+                    <span className="rounded-md bg-[#f8fbfa] px-3 py-2">Source-grounded answer boundaries</span>
                     <span className="rounded-md bg-[#f8fbfa] px-3 py-2">Lead or support intent captured</span>
                     <span className="rounded-md bg-[#f8fbfa] px-3 py-2">Human handoff with transcript</span>
                   </div>
@@ -126,11 +126,11 @@ function AIChatProof() {
               </>
             ) : null}
           </div>
-          <p className="mt-3 text-sm leading-6 text-muted">This is a simple demo surface. A real implementation connects to approved knowledge, business systems, reporting, and staff handoff.</p>
+          <p className="mt-3 text-sm leading-6 text-muted">This is a simple demo surface. A real implementation connects to approved knowledge, fallback rules, business systems, reporting, and staff handoff.</p>
         </div>
         <div className="grid gap-4">
           {[
-            ["Customer asks", "The assistant answers from approved FAQs, product/service context, or policies."],
+            ["Customer asks", "The assistant answers from approved FAQs, product/service context, or policies, and avoids unsupported answers."],
             ["Intent captured", "Lead, booking, support, product question, return, order status, or escalation."],
             ["System updated", "CRM record, ticket, booking, task, transcript, or follow-up is created."],
             ["Human handoff", "Sensitive, frustrated, uncertain, or high-value conversations route to staff with context."],
@@ -217,7 +217,7 @@ function AIAgentsProof() {
     <ProofShell
       eyebrow="Agent library"
       title="Browse agent patterns your team may recognize in your own operations."
-      description="Concrete examples make the offer easier to understand. The right agent is usually a tailored version of a repeatable pattern."
+      description="Start with a familiar operating role, then tailor the agent around your systems, approvals, handoffs, and value target."
     >
       <div className="rounded-lg border border-card-border bg-[#f8fbfa] p-5 shadow-[0_12px_36px_rgba(15,23,32,0.05)]">
         <div className="grid gap-3 md:grid-cols-[1fr_auto]">
@@ -266,16 +266,16 @@ function AIAgentOperatingLoopProof() {
     <ProofShell
       eyebrow="Operating loop"
       title="Agents need a defined job, not an open-ended instruction."
-      description="The strongest agent workflows define inputs, permissions, tools, review rules, and evidence so the team can trust what happened."
+      description="The strongest agent workflows define inputs, permissions, tools, validation, retries, review rules, and evidence so the team can trust what happened."
       dark
     >
       <div className="grid gap-4 md:grid-cols-5">
         {[
           ["Trigger", "A lead, email, ticket, call, document, form, or CRM change starts the workflow."],
           ["Context", "The agent checks approved sources, customer history, rules, and current system data."],
-          ["Action", "It drafts, classifies, routes, updates, schedules, extracts, or prepares the next step."],
+          ["Action", "It drafts, classifies, routes, updates, schedules, extracts, validates inputs, and avoids duplicate actions."],
           ["Review", "Sensitive, uncertain, high-value, or policy-bound work is escalated for approval."],
-          ["Record", "The system logs the action, source, owner, status, KPI, and follow-up trail."],
+          ["Record", "The system logs the action, source, owner, status, retry history, KPI, and follow-up trail."],
         ].map(([title, text], index) => (
           <article key={title} className="rounded-lg border border-white/12 bg-white/[0.07] p-5">
             <p className="text-sm font-extrabold text-[#7df0d1]">0{index + 1}</p>
@@ -350,7 +350,7 @@ function StrategyProof() {
           <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Readiness score</p>
           <div className="mt-3 text-[56px] font-extrabold leading-none text-ink">{score}/6</div>
           <p className="mt-4 text-xl font-extrabold leading-tight text-ink">{recommendation}</p>
-          <p className="mt-4 text-sm leading-6 text-muted">The assessment call should validate the workflow, business case, risks, and first milestone rather than jump straight to a large build.</p>
+          <p className="mt-4 text-sm leading-6 text-muted">The assessment call should validate the workflow, business case, risks, first milestone, and next decision rather than jump straight to a large build.</p>
         </aside>
       </div>
     </ProofShell>
@@ -362,13 +362,13 @@ function StrategyValueRoadmapProof() {
     <ProofShell
       eyebrow="Value roadmap"
       title="The strategy should make spend easier to approve."
-      description="A practical AI roadmap connects each initiative to a workflow, measurable KPI, operating risk, and next investment decision."
+      description="A practical AI roadmap connects each initiative to a workflow, measurable KPI, operating risk, budget range, and next investment decision."
     >
       <div className="grid gap-4 md:grid-cols-3">
         {[
-          ["30 days", "Map workflows, identify spend drivers, rank opportunities, and choose a first pilot with clear boundaries."],
+          ["30 days", "Map workflows, identify spend drivers, rank opportunities, and choose a first paid step with clear boundaries."],
           ["60 days", "Build or configure the pilot, test human handoffs, define reporting, and prepare staff for controlled use."],
-          ["90 days", "Review measured impact, tighten prompts and processes, decide whether to expand, pause, or rebuild the next workflow."],
+          ["90 days", "Review measured impact, tighten prompts and processes, then decide whether to expand, pause, or rebuild the next workflow."],
         ].map(([title, text]) => (
           <article key={title} className="rounded-lg border border-card-border bg-[#f8fbfa] p-6">
             <h3 className="text-2xl font-extrabold text-ink">{title}</h3>
@@ -383,7 +383,7 @@ function StrategyValueRoadmapProof() {
 function MarketingLanesProof() {
   const lanes = [
     ["Social content engine", "Turn approved offers, FAQs, reviews, events, and service notes into draft posts and captions for review."],
-    ["Email nurture", "Move new leads, old inquiries, abandoned carts, and repeat customers into structured follow-up paths."],
+    ["Email nurture", "Move new leads, old inquiries, abandoned carts, and repeat customers into structured follow-up paths with CRM context."],
     ["Campaign production", "Create landing copy, email variants, post drafts, reminders, and internal launch tasks from one campaign brief."],
     ["Lead reactivation", "Find quiet contacts, draft relevant outreach, route warm replies, and update the CRM when interest returns."],
   ];
@@ -392,7 +392,7 @@ function MarketingLanesProof() {
     <ProofShell
       eyebrow="Automation lanes"
       title="Use AI where marketing work gets stuck most often."
-      description="The right marketing workflow is not more random content. It is a repeatable lane that helps your team publish, follow up, and measure without losing brand control."
+      description="The right marketing workflow is not more random content. It is a repeatable lane that helps your team publish, follow up, update CRM context, and measure without losing brand control."
       compact
     >
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -420,7 +420,7 @@ function MarketingProof() {
           ["Draft", "AI prepares post, email, caption, FAQ, landing copy, or campaign variant."],
           ["Review", "Owner checks brand voice, claims, compliance, audience, and offer."],
           ["Schedule", "Approved asset is queued for email, social, CRM nurture, or sales follow-up."],
-          ["Report", "Workflow logs output, engagement, lead movement, and next content opportunities."],
+          ["Report", "Workflow logs output, engagement, CRM follow-up, lead movement, and next content opportunities."],
         ].map(([title, text], index) => (
           <article key={title} className="rounded-lg border border-card-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
             <p className="text-sm font-extrabold text-[#167f65]">0{index + 1}</p>
@@ -445,7 +445,7 @@ function MarketingApprovalProof() {
         <aside className="rounded-lg border border-white/12 bg-white/[0.07] p-6">
           <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Review queue</p>
           <div className="mt-5 grid gap-3">
-            {["LinkedIn post needs founder approval", "Campaign email needs offer check", "Product FAQ needs compliance review", "Customer story needs anonymization"].map((item) => (
+            {["LinkedIn post needs owner approval", "Campaign email needs offer check", "Product FAQ needs compliance review", "Customer story needs anonymization"].map((item) => (
               <p key={item} className="rounded-lg bg-[#0d1720]/70 px-4 py-3 text-sm font-semibold leading-6 text-white/82">{item}</p>
             ))}
           </div>
@@ -455,7 +455,7 @@ function MarketingApprovalProof() {
             ["Brand rules", "Tone, terms, claims, excluded phrases, approval requirements, and publishing boundaries."],
             ["Source material", "Past posts, offers, service pages, call notes, reviews, product info, and campaign briefs."],
             ["Human approvals", "Final publishing, sensitive claims, offers, regulated language, and high-visibility assets stay with people."],
-            ["Performance loop", "Reporting feeds the next content ideas, nurture segments, and campaign improvements."],
+            ["Performance loop", "Reporting feeds the next content ideas, nurture segments, CRM follow-up, and campaign improvements."],
           ].map(([title, text]) => (
             <article key={title} className="rounded-lg border border-white/12 bg-white/[0.07] p-5">
               <h3 className="text-lg font-extrabold text-white">{title}</h3>
@@ -473,6 +473,7 @@ function ManagedMonthlyProof() {
     ["Monitor", "Usage, failures, escalations, low-confidence answers, workflow completion, and integration health."],
     ["Tune", "Prompts, approved knowledge, routing rules, handoff logic, and workflow steps as real usage changes."],
     ["Review", "Sensitive cases, staff overrides, audit logs, access rules, cost movement, and quality concerns."],
+    ["Respond", "Use runbooks for failed actions, broken integrations, vendor changes, and workflows that need human attention."],
     ["Report", "Hours saved, response time, cost per request, backlog movement, conversion, and next workflow candidates."],
     ["Improve", "Fix weak points, retire unused flows, expand proven automations, and prepare the next safe rollout."],
   ];
@@ -481,7 +482,7 @@ function ManagedMonthlyProof() {
     <ProofShell
       eyebrow="Monthly ownership"
       title="Know exactly what is handled after launch."
-      description="Managed AI Operations gives your business an operating rhythm for systems that touch customers, staff workload, revenue, or sensitive workflows."
+      description="Managed AI Operations gives your business an operating rhythm for systems that touch customers, staff workload, revenue, vendor usage costs, or sensitive workflows."
       compact
     >
       <div className="grid gap-3">
@@ -538,12 +539,12 @@ function ManagedOpsReportProof() {
     <ProofShell
       eyebrow="Monthly operating review"
       title="Know what is working, what changed, and what should improve next."
-      description="Managed operations includes a regular review of quality, usage, costs, escalations, workflow changes, and the next improvement priorities."
+      description="Managed operations includes a regular review of quality, reliability, usage, costs, escalations, workflow changes, and the next improvement priorities."
     >
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {[
           ["Quality", "Low-confidence answers, customer friction, staff overrides, missed intents, and prompt updates."],
-          ["Reliability", "Integration failures, retry queues, latency, downtime, model changes, and incident notes."],
+          ["Reliability", "Integration failures, retry queues, latency, downtime, model changes, runbooks, and incident notes."],
           ["Cost", "Voice minutes, message volume, vendor usage, workflow volume, and cost-per-request trends."],
           ["Value", "Hours saved, response time, deflection, booking conversion, backlog reduction, and next workflow candidates."],
         ].map(([title, text]) => (
@@ -562,14 +563,14 @@ function CustomFitProof() {
     ["Your process is unique", "The workflow, approval path, data view, or customer experience does not fit cleanly inside standard tools."],
     ["People need one work surface", "Staff are switching between inboxes, spreadsheets, CRMs, calendars, documents, and task tools to finish one job."],
     ["AI needs controls", "The system needs permissions, approvals, audit logs, human review, and clear boundaries around what AI can do."],
-    ["The workflow can become an asset", "A focused internal console, portal, or dashboard would make the business easier to operate and improve over time."],
+    ["The build needs ownership", "A focused internal console, portal, or dashboard should include support expectations, monitoring, and a path to improve over time."],
   ];
 
   return (
     <ProofShell
       eyebrow="When custom fits"
       title="Build custom software when the workflow deserves its own operating surface."
-      description="Custom AI software should not be the default. It makes sense when a purpose-built interface can remove friction that generic tools keep creating."
+      description="Custom AI software should not be the default. It makes sense when a purpose-built interface can remove friction, preserve control, and become easier to operate than a stack of workarounds."
       compact
     >
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -605,8 +606,8 @@ function CustomSoftwareProof() {
           {[
             ["AI summary", "Concise context from calls, emails, CRM, documents, and prior actions."],
             ["Staff action", "Approve, edit, assign, request more info, or escalate from one place."],
-            ["System update", "CRM, calendar, ticket, dashboard, notification, or database action."],
-            ["Audit trail", "Who approved, what changed, what source was used, and what happened next."],
+            ["System update", "CRM, calendar, ticket, dashboard, notification, payment, search, or database action."],
+            ["Audit trail", "Who approved, what changed, what source was used, what system action ran, and what happened next."],
           ].map(([title, text]) => (
             <article key={title} className="rounded-lg border border-card-border bg-white p-5">
               <h3 className="text-lg font-extrabold text-ink">{title}</h3>
@@ -624,7 +625,7 @@ function CustomArchitectureProof() {
     <ProofShell
       eyebrow="Build architecture"
       title="The proof is not only the screen. It is the system behind it."
-      description="Custom AI software should show how data, tools, permissions, AI actions, human approvals, and reporting fit together before a larger build begins."
+      description="Custom AI software should show how data, tools, permissions, AI actions, human approvals, support ownership, and reporting fit together before a larger build begins."
       dark
     >
       <div className="grid gap-4 md:grid-cols-4">

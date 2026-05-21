@@ -1,5 +1,6 @@
 import Link from "next/link";
 import AssessmentTrigger from "@/components/AssessmentTrigger";
+import ElevenLabsVoiceWidget from "@/components/ElevenLabsVoiceWidget";
 import SectionHeader from "@/components/sections/SectionHeader";
 
 const frontDeskReality = [
@@ -155,6 +156,8 @@ const faqs = [
   },
 ];
 
+const elevenLabsDaycareAgentId = "agent_6901kqk9zt0jffzbynnxaggqhr16";
+
 export default function DaycareVoiceAgentPage() {
   return (
     <div className="min-h-screen bg-white">
@@ -266,6 +269,19 @@ export default function DaycareVoiceAgentPage() {
               Designed to sound professional, patient, and parent-friendly during real daycare communication scenarios.
             </p>
           </div>
+
+          <div className="mx-auto mt-10 max-w-[760px] rounded-[24px] border border-white/10 bg-white/[0.04] p-3 shadow-[0_18px_50px_rgba(0,0,0,0.22)]">
+            <ElevenLabsVoiceWidget
+              agentId={elevenLabsDaycareAgentId}
+              sourcePage="/solutions/daycare-voice-agent"
+              ctaLocation="daycare_voice_elevenlabs_demo"
+              title="Try the daycare voice assistant"
+              description="Speak naturally about enrollment, tours, absence reporting, pickup notices, or program availability."
+              actionText="Try daycare voice"
+              startCallText="Start daycare call"
+            />
+          </div>
+
           <div className="mx-auto mt-10 grid max-w-[1040px] gap-5 md:grid-cols-3">
             {callScenarios.map((scenario) => (
               <article key={scenario.title} className="rounded-lg border border-white/10 bg-white/[0.04] p-5 shadow-[0_14px_34px_rgba(0,0,0,0.18)]">

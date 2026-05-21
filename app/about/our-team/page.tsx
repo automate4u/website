@@ -45,6 +45,33 @@ const operatingValues = [
   },
 ];
 
+const technicalDepth = [
+  {
+    title: "AI agents that take action",
+    text: "Production agents need more than prompts. They need tool-calling, validation, retries, fallbacks, logging, and clear escalation rules.",
+  },
+  {
+    title: "Document and knowledge systems",
+    text: "RAG and knowledge workflows require careful source handling, retrieval quality, answer grounding, review loops, and fallback behavior.",
+  },
+  {
+    title: "Integrations and permissions",
+    text: "AI work often depends on CRM, calendars, inboxes, messaging tools, SSO, APIs, data ownership, roles, and safe access patterns.",
+  },
+  {
+    title: "Custom operating software",
+    text: "Some workflows need dashboards, review queues, portals, reports, search, payments, or admin tools that generic automation platforms cannot provide.",
+  },
+  {
+    title: "Monitoring and reliability",
+    text: "Useful AI systems need structured logs, alerts, runbooks, dashboards, cost visibility, and a plan for what happens when something fails.",
+  },
+  {
+    title: "Sensitive workflow design",
+    text: "High-risk requests need human review, approval rules, audit trails, access control, and clear boundaries around what AI should never decide alone.",
+  },
+];
+
 export default function Page() {
   return (
     <main className="min-h-screen bg-white">
@@ -119,7 +146,28 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
+      <section className="border-t border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Technical depth"
+            title="The engineering experience behind the implementation."
+            description="A small expert team can move quickly because the same people thinking through the workflow can also reason about architecture, integrations, controls, monitoring, and long-term support."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {technicalDepth.map((item) => (
+              <article key={item.title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <h2 className="text-xl font-extrabold leading-tight text-ink">{item.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{item.text}</p>
+              </article>
+            ))}
+          </div>
+          <p className="mt-6 max-w-[900px] text-sm leading-7 text-muted">
+            That technical range helps us discuss your workflow honestly: what can be automated now, what should stay under review, what needs custom software, and what should be monitored after launch.
+          </p>
+        </div>
+      </section>
+
+      <section className="border-y border-card-border bg-white px-4 py-14 md:py-20">
         <div className="mx-auto max-w-[1280px]">
           <SectionHeader
             eyebrow="How we show up"

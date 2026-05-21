@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AssessmentTrigger from "@/components/AssessmentTrigger";
+import ElevenLabsVoiceWidget from "@/components/ElevenLabsVoiceWidget";
 import SectionHeader from "@/components/sections/SectionHeader";
 import { trackEvent } from "@/lib/analytics";
 import { solutions } from "@/data/solutions";
@@ -60,6 +61,29 @@ const workflowExamples = [
   kpi: string;
   href?: string;
 }>;
+
+const elevenLabsDaycareAgentId = "agent_6901kqk9zt0jffzbynnxaggqhr16";
+
+const voiceDemoOptions = [
+  {
+    id: "general",
+    label: "General front desk",
+    title: "Automate4U Voice Receptionist",
+    subtitle: "Natural intake, qualification, and handoff",
+    tags: ["Front-desk style intake", "Lead capture and routing", "Built for CRM and calendar workflows"],
+    agentLine: "Thanks for calling. I can help answer questions, collect details, and direct you to the right next step.",
+    callerLine: "I want to book a consultation and check whether someone can call me back today.",
+  },
+  {
+    id: "daycare",
+    label: "Daycare front desk",
+    title: "Daycare Voice Assistant",
+    subtitle: "Enrollment, parent questions, tour requests, and staff handoff",
+    tags: ["Enrollment inquiries", "Tour request intake", "Sensitive handoff rules"],
+    agentLine: "Thanks for calling. I can help with enrollment questions, tour requests, absence notices, and routing to the right location.",
+    callerLine: "I want to ask about availability for my child and see if I can schedule a tour this week.",
+  },
+] as const;
 
 const pricingNotes = [
   "Voice cost depends on handled minutes, call complexity, model choices, transcription, text-to-speech, routing, and recording needs.",
@@ -158,7 +182,7 @@ function DemoTakeaways() {
   return (
     <div className="mx-auto mt-6 grid max-w-[1120px] gap-4 lg:grid-cols-[1fr_0.95fr]">
       <div className="rounded-[18px] border border-card-border bg-white p-5 shadow-[0_14px_36px_rgba(15,23,32,0.055)] md:p-6">
-        <h3 className="text-xl font-extrabold text-ink">What this interaction should communicate</h3>
+        <h3 className="text-xl font-extrabold text-ink">What a strong voice experience should prove</h3>
         <div className="mt-5 grid gap-3">
           {communicationPoints.map((item) => (
             <article key={item.title} className="relative pl-5">
@@ -193,7 +217,9 @@ export default function AIVoicePage() {
   const [adminMinutesPerCall, setAdminMinutesPerCall] = useState(4);
   const [staffCostPerHour, setStaffCostPerHour] = useState(30);
   const [automationShare, setAutomationShare] = useState(45);
+  const [activeDemo, setActiveDemo] = useState<(typeof voiceDemoOptions)[number]["id"]>("general");
   const daycareSolution = solutions.find((solution) => solution.slug === "daycare-voice-agent");
+  const selectedDemo = voiceDemoOptions.find((option) => option.id === activeDemo) ?? voiceDemoOptions[0];
 
   const monthlyHoursRedirected = Math.round((monthlyCalls * adminMinutesPerCall * (automationShare / 100)) / 60);
   const monthlyCapacityValue = monthlyHoursRedirected * staffCostPerHour;
@@ -341,11 +367,40 @@ export default function AIVoicePage() {
         <div className="mx-auto max-w-[1180px]">
           <div className="mx-auto mb-8 max-w-[780px] text-center">
             <h2 id="voice-demo-title" className="text-[30px] font-extrabold leading-[1.1] tracking-[-0.01em] text-ink md:text-[40px]">
-              Experience a live AI voice workflow before you commit.
+              Experience live AI voice workflows before you commit.
             </h2>
             <p className="mx-auto mt-5 max-w-[660px] text-base leading-7 text-muted">
-              Launch the demo to hear how a front-desk style agent can answer, qualify, and route calls with a polished customer experience.
+              Choose a general front-desk demo or a daycare-specific voice assistant to hear how different workflows can be shaped around real operations.
             </p>
+          </div>
+
+          <div className="mx-auto mb-5 flex max-w-[760px] flex-wrap justify-center gap-2">
+            {voiceDemoOptions.map((option) => {
+              const isActive = option.id === activeDemo;
+              return (
+                <button
+                  key={option.id}
+                  type="button"
+                  onClick={() => {
+                    setActiveDemo(option.id);
+                    trackEvent("site_voice_demo_selected", {
+                      page: "/services/ai-voice",
+                      ctaLocation: "voice_demo_selector",
+                      serviceInterest: "ai-voice",
+                      demoType: option.id,
+                    });
+                  }}
+                  className={`rounded-full border px-4 py-2 text-sm font-extrabold transition-colors ${
+                    isActive
+                      ? "border-[#167f65] bg-[#167f65] text-white"
+                      : "border-card-border bg-white text-muted hover:border-[#1db993]/50 hover:text-ink"
+                  }`}
+                  aria-pressed={isActive}
+                >
+                  {option.label}
+                </button>
+              );
+            })}
           </div>
 
           <div className="mx-auto max-w-[1120px] rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_70%_85%,rgba(29,185,147,0.18),transparent_34%),linear-gradient(135deg,#0b2230,#102734)] p-4 text-white shadow-[0_22px_60px_rgba(15,23,32,0.16)] md:p-5">
@@ -360,7 +415,7 @@ export default function AIVoicePage() {
               </div>
               <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-3 py-1.5 text-xs font-extrabold text-white/88">
                 <span className={`h-2.5 w-2.5 rounded-full ${callActive ? "bg-red-400" : "bg-[#1db993]"}`} aria-hidden="true" />
-                {callActive ? "Live call" : "Ready to connect"}
+                {activeDemo === "general" && callActive ? "Live call" : "Ready to connect"}
               </span>
             </div>
 
@@ -369,13 +424,13 @@ export default function AIVoicePage() {
                 <div className="flex items-center gap-4">
                   <div className="grid h-12 w-12 place-items-center rounded-[14px] bg-[#1db993] text-lg font-extrabold text-white">AI</div>
                   <div>
-                    <h3 className="font-extrabold text-white">Automate4U Voice Receptionist</h3>
-                    <p className="mt-1 text-sm text-white/68">Natural intake, qualification, and handoff</p>
+                    <h3 className="font-extrabold text-white">{selectedDemo.title}</h3>
+                    <p className="mt-1 text-sm text-white/68">{selectedDemo.subtitle}</p>
                   </div>
                 </div>
 
                 <div className="mt-5 flex flex-wrap gap-2">
-                  {["Front-desk style intake", "Lead capture and routing", "Built for CRM and calendar workflows"].map((item) => (
+                  {selectedDemo.tags.map((item) => (
                     <span key={item} className="inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/8 px-3 py-2 text-xs font-extrabold text-white/90">
                       <span className="h-1.5 w-1.5 rounded-full bg-[#1db993]" aria-hidden="true" />
                       {item}
@@ -391,34 +446,48 @@ export default function AIVoicePage() {
                       style={{ height }}
                     />
                   ))}
-                </div>
+                  </div>
 
                 <div className="mt-5 grid gap-3">
                   <div className="rounded-xl bg-white/14 px-4 py-3 text-center text-sm leading-6 text-white/88">
                     <strong className="block text-xs uppercase tracking-[0.08em] text-[#7df0d1]">Agent</strong>
-                    Thanks for calling. I can help answer questions, collect details, and direct you to the right next step.
+                    {selectedDemo.agentLine}
                   </div>
                   <div className="ml-auto max-w-[92%] rounded-xl border border-[#1db993]/30 bg-[#1db993]/18 px-4 py-3 text-center text-sm leading-6 text-white/90">
                     <strong className="block text-xs uppercase tracking-[0.08em] text-[#7df0d1]">Caller</strong>
-                    I want to book a consultation and check whether someone can call me back today.
+                    {selectedDemo.callerLine}
                   </div>
                 </div>
               </div>
 
-              <div className="rounded-[18px] border border-white/12 bg-white/10 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] md:p-6">
-                <h3 className="text-lg font-extrabold text-white">Test the live voice demo</h3>
-                <p className="mt-4 text-sm leading-6 text-white/72">
-                  Your browser will request microphone access. Once connected, speak naturally and test the live experience in real time.
-                </p>
-                <button
-                  className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full bg-[#0d1720] px-6 text-base font-extrabold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] hover:bg-[#101f2b] disabled:cursor-not-allowed disabled:opacity-70"
-                  type="button"
-                  onClick={launchRetellVoice}
-                  disabled={callStarting}
-                >
-                  {callStarting ? "Connecting..." : callActive ? "End Call" : "Try Now"}
-                </button>
-              </div>
+              {activeDemo === "general" ? (
+                <div className="rounded-[18px] border border-white/12 bg-white/10 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] md:p-6">
+                  <h3 className="text-lg font-extrabold text-white">Test the live voice demo</h3>
+                  <p className="mt-4 text-sm leading-6 text-white/72">
+                    Your browser will request microphone access. Once connected, speak naturally and test the live experience in real time.
+                  </p>
+                  <button
+                    className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full bg-[#0d1720] px-6 text-base font-extrabold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] hover:bg-[#101f2b] disabled:cursor-not-allowed disabled:opacity-70"
+                    type="button"
+                    onClick={launchRetellVoice}
+                    disabled={callStarting}
+                  >
+                    {callStarting ? "Connecting..." : callActive ? "End Call" : "Try Now"}
+                  </button>
+                </div>
+              ) : (
+                <div className="rounded-[18px] border border-white/12 bg-white p-3 text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                  <ElevenLabsVoiceWidget
+                    agentId={elevenLabsDaycareAgentId}
+                    sourcePage="/services/ai-voice"
+                    ctaLocation="ai_voice_daycare_elevenlabs_demo"
+                    title="Test the daycare voice assistant"
+                    description="Speak naturally about enrollment, tours, parent questions, or routing to a location. This demo uses the daycare-specific ElevenLabs agent."
+                    actionText="Try daycare voice"
+                    startCallText="Start daycare call"
+                  />
+                </div>
+              )}
             </div>
           </div>
 

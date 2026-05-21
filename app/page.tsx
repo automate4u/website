@@ -29,6 +29,25 @@ const serviceLabels: Record<string, string> = {
   "ai-transformation": "Strategic roadmap",
 };
 
+const credibilitySignals = [
+  {
+    title: "Production AI systems",
+    text: "Agent workflows need validation, retries, fallbacks, logging, and human escalation paths before they can be trusted with real customers.",
+  },
+  {
+    title: "Grounded knowledge agents",
+    text: "Document and knowledge agents should answer from approved source material, identify uncertainty, and route unsupported questions to people.",
+  },
+  {
+    title: "Connected business tools",
+    text: "Useful automation updates the CRM, books the calendar, creates the task, sends the notification, logs the outcome, and shows what happened.",
+  },
+  {
+    title: "Operational software depth",
+    text: "Custom dashboards, portals, permissions, payments, search, reporting, and review queues all shape whether AI actually fits the business.",
+  },
+];
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
@@ -99,6 +118,27 @@ export default function Home() {
       </section>
 
       <WorkflowMap />
+
+      <section className="border-y border-card-border bg-white px-4 py-14 md:py-20" aria-labelledby="home-credibility-title">
+        <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div>
+            <h2 id="home-credibility-title" className="text-[30px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[42px]">
+              Built by people who understand production systems, not just AI demos.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-muted">
+              The hard part is not making AI say something impressive once. The hard part is making it work with real data, real tools, real approvals, and real customers day after day.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {credibilitySignals.map((item) => (
+              <article key={item.title} className="rounded-lg border border-card-border bg-[#f8fbfa] p-5 shadow-[0_8px_24px_rgba(15,23,32,0.035)]">
+                <h3 className="text-lg font-extrabold leading-tight text-ink">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-muted">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="bg-[#f8fbfa] px-4 py-14 md:py-20" aria-labelledby="services-title">
         <div className="mx-auto max-w-[1280px]">

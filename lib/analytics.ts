@@ -9,6 +9,7 @@ export type AnalyticsEventName =
   | "site_assessment_form_submitted"
   | "site_assessment_form_failed"
   | "site_voice_demo_started"
+  | "site_voice_demo_selected"
   | "site_voice_demo_completed"
   | "site_voice_demo_failed"
   | "site_workflow_card_clicked"
@@ -31,6 +32,9 @@ export type AnalyticsPayload = {
   serviceInterest?: ServiceSlug | string;
   acceleratorInterest?: IndustryAcceleratorSlug | string;
   workflowInterest?: string;
+  demoType?: string;
+  provider?: string;
+  agentId?: string;
   maturityStage?: string;
   utmSource?: string;
   utmMedium?: string;
