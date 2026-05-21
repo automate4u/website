@@ -19,7 +19,7 @@ const solutionCategories = [
   },
 ];
 
-const buyerQuestions = [
+const solutionFitChecks = [
   "What conversation or admin task is consuming the most staff time?",
   "Which systems need to be checked before the AI can answer or act?",
   "Where should the AI stop and hand off to a person?",
@@ -44,7 +44,7 @@ export default function SolutionsPage() {
               Focused AI implementations for the workflows your team already handles every day.
             </h1>
             <p className="mt-5 max-w-[680px] text-base leading-8 text-muted md:text-[17px]">
-              Explore focused operational patterns: the scenario, the conversation, the downstream action, the human controls, and the rollout path.
+              Choose a narrow operating problem, connect it to the systems behind it, and launch with clear human controls instead of a vague AI experiment.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <AssessmentTrigger
@@ -61,9 +61,9 @@ export default function SolutionsPage() {
           </div>
 
           <div className="rounded-lg border border-card-border bg-[#f8fbfa] p-5 shadow-[0_16px_48px_rgba(15,23,32,0.07)] md:p-6">
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Solution design filter</p>
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Find the right starting point</p>
             <div className="mt-5 grid gap-3">
-              {buyerQuestions.map((question) => (
+              {solutionFitChecks.map((question) => (
                 <p key={question} className="rounded-lg border border-card-border bg-white px-4 py-3 text-sm font-semibold leading-6 text-ink">
                   {question}
                 </p>

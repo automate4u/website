@@ -155,7 +155,7 @@ export const proofStories: ProofStory[] = [
     ],
     metrics: [
       "First response time",
-      "Tickets deflected or triaged",
+      "Tickets deflected or triaged for review",
       "Cost per request",
       "Escalation quality",
     ],
@@ -244,7 +244,7 @@ export const proofStories: ProofStory[] = [
       "Manual override and exception handling built into the interface",
     ],
     metrics: [
-      "Manual steps removed",
+      "Manual steps reduced",
       "Review cycle time",
       "Queue visibility",
       "Decision traceability",

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import AssessmentTrigger from "@/components/AssessmentTrigger";
+import UnifiedVoiceDemo from "@/components/UnifiedVoiceDemo";
 import SectionHeader from "@/components/sections/SectionHeader";
 
 const frontDeskReality = [
@@ -155,6 +156,22 @@ const faqs = [
   },
 ];
 
+const elevenLabsDaycareAgentId = "agent_6901kqk9zt0jffzbynnxaggqhr16";
+
+const daycareVoiceProvider = [
+  {
+    id: "elevenlabs" as const,
+    label: "Daycare Voice Assistant",
+    agentId: elevenLabsDaycareAgentId,
+    title: "Daycare Voice Assistant",
+    subtitle: "Enrollment, tours, absence reporting, and staff handoff",
+    description: "Speak naturally about enrollment, tours, absence reporting, pickup notices, or program availability.",
+    tags: ["Enrollment inquiries", "Tour request intake", "Absence reporting", "Sensitive handoff rules"],
+    agentLine: "Thanks for calling. I can help with enrollment questions, tour requests, absence notices, and routing to the right location.",
+    callerLine: "I want to ask about availability for my child and see if I can schedule a tour this week.",
+  },
+];
+
 export default function DaycareVoiceAgentPage() {
   return (
     <div className="min-h-screen bg-white">
@@ -266,6 +283,23 @@ export default function DaycareVoiceAgentPage() {
               Designed to sound professional, patient, and parent-friendly during real daycare communication scenarios.
             </p>
           </div>
+
+          <div className="mx-auto mt-10 max-w-[760px]">
+            <UnifiedVoiceDemo
+              providers={daycareVoiceProvider}
+              sourcePage="/solutions/daycare-voice-agent"
+              ctaLocation="daycare_voice_unified_demo"
+              variant="dark"
+              defaultProvider="elevenlabs"
+            />
+          </div>
+
+          <div className="mx-auto mt-8 max-w-[720px] text-center">
+            <p className="text-sm leading-6 text-white/68">
+              These example conversations show how the assistant handles common daycare scenarios. Each demonstrates the natural flow from parent inquiry to appropriate action or handoff.
+            </p>
+          </div>
+
           <div className="mx-auto mt-10 grid max-w-[1040px] gap-5 md:grid-cols-3">
             {callScenarios.map((scenario) => (
               <article key={scenario.title} className="rounded-lg border border-white/10 bg-white/[0.04] p-5 shadow-[0_14px_34px_rgba(0,0,0,0.18)]">

@@ -1,0 +1,497 @@
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+import { ConversationProvider, useConversation } from "@elevenlabs/react";
+import { trackEvent } from "@/lib/analytics";
+
+type VoiceProvider = "retell" | "elevenlabs";
+
+type RetellClient = {
+    on: (event: string, handler: (...args: unknown[]) => void) => void;
+    startCall: (args: { accessToken: string }) => Promise<void>;
+    stopCall: () => void;
+};
+
+type UnifiedVoiceDemoProps = {
+    // Provider configuration
+    providers: Array<{
+        id: VoiceProvider;
+        label: string;
+        agentId?: string; // For ElevenLabs
+        title: string;
+        subtitle: string;
+        description: string;
+        tags: string[];
+        agentLine: string;
+        callerLine: string;
+    }>;
+
+    // Analytics and tracking
+    sourcePage: string;
+    ctaLocation: string;
+
+    // Visual configuration
+    variant?: "dark" | "light";
+    defaultProvider?: VoiceProvider;
+
+    // Optional customization
+    title?: string;
+    description?: string;
+};
+
+const BAR_COUNT = 12;
+
+function generateIdleBars(): number[] {
+    return Array.from({ length: BAR_COUNT }, () => 12 + Math.random() * 8);
+}
+
+function generateActiveBars(speaking: boolean): number[] {
+    const intensity = speaking ? 1.0 : 0.6;
+    return Array.from(
+        { length: BAR_COUNT },
+        () => 8 + Math.random() * 46 * intensity,
+    );
+}
+
+/**
+ * Public export — wraps the inner demo in the required ConversationProvider
+ * so consumers don't need to worry about the provider hierarchy.
+ */
+export default function UnifiedVoiceDemo(props: UnifiedVoiceDemoProps) {
+    return (
+        <ConversationProvider>
+            <UnifiedVoiceDemoInner {...props} />
+        </ConversationProvider>
+    );
+}
+
+function UnifiedVoiceDemoInner({
+    providers,
+    sourcePage,
+    ctaLocation,
+    variant = "dark",
+    defaultProvider = "retell",
+    title,
+    description,
+}: UnifiedVoiceDemoProps) {
+    const [activeProvider, setActiveProvider] = useState<VoiceProvider>(defaultProvider);
+    const [bars, setBars] = useState<number[]>(generateIdleBars);
+    const animationRef = useRef<number>(0);
+
+    // Retell state
+    const retellClientRef = useRef<RetellClient | null>(null);
+    const [retellCallActive, setRetellCallActive] = useState(false);
+    const [retellCallStarting, setRetellCallStarting] = useState(false);
+
+    // ElevenLabs state
+    const conversation = useConversation({
+        onConnect: () => {
+            const provider = providers.find(p => p.id === "elevenlabs");
+            if (provider?.agentId) {
+                trackEvent("site_voice_demo_started", {
+                    page: sourcePage,
+                    ctaLocation,
+                    serviceInterest: "ai-voice",
+                    provider: "elevenlabs",
+                    agentId: provider.agentId,
+                });
+            }
+        },
+        onDisconnect: () => {
+            const provider = providers.find(p => p.id === "elevenlabs");
+            if (provider?.agentId) {
+                trackEvent("site_voice_demo_completed", {
+                    page: sourcePage,
+                    ctaLocation,
+                    serviceInterest: "ai-voice",
+                    provider: "elevenlabs",
+                    agentId: provider.agentId,
+                });
+            }
+        },
+        onError: (error) => {
+            console.error("ElevenLabs error:", error);
+            const provider = providers.find(p => p.id === "elevenlabs");
+            if (provider?.agentId) {
+                trackEvent("site_voice_demo_failed", {
+                    page: sourcePage,
+                    ctaLocation,
+                    serviceInterest: "ai-voice",
+                    provider: "elevenlabs",
+                    agentId: provider.agentId,
+                });
+            }
+        },
+    });
+
+    const selectedProvider = providers.find(p => p.id === activeProvider) ?? providers[0];
+
+    // Determine connection state based on active provider
+    const isConnected = activeProvider === "retell"
+        ? retellCallActive
+        : conversation.status === "connected";
+
+    const isConnecting = activeProvider === "retell"
+        ? retellCallStarting
+        : conversation.status === "connecting";
+
+    const isSpeaking = activeProvider === "elevenlabs" ? conversation.isSpeaking : false;
+
+    // Keep a ref in sync for animation
+    const isSpeakingRef = useRef(isSpeaking);
+    useEffect(() => {
+        isSpeakingRef.current = isSpeaking;
+    }, [isSpeaking]);
+
+    // Animate bars while connected
+    useEffect(() => {
+        if (!isConnected) {
+            setBars(generateIdleBars());
+            return;
+        }
+
+        let running = true;
+        const tick = () => {
+            if (!running) return;
+            setBars(generateActiveBars(isSpeakingRef.current));
+            animationRef.current = requestAnimationFrame(() => setTimeout(tick, 120));
+        };
+        tick();
+
+        return () => {
+            running = false;
+            cancelAnimationFrame(animationRef.current);
+        };
+    }, [isConnected]);
+
+    // Initialize Retell client
+    useEffect(() => {
+        import("retell-client-js-sdk").then(({ RetellWebClient }) => {
+            const client = new RetellWebClient() as RetellClient;
+            retellClientRef.current = client;
+
+            client.on("call_started", () => {
+                trackEvent("site_voice_demo_started", {
+                    page: sourcePage,
+                    ctaLocation,
+                    serviceInterest: "ai-voice",
+                    provider: "retell",
+                });
+                setRetellCallActive(true);
+                setRetellCallStarting(false);
+            });
+
+            client.on("call_ended", () => {
+                trackEvent("site_voice_demo_completed", {
+                    page: sourcePage,
+                    ctaLocation,
+                    serviceInterest: "ai-voice",
+                    provider: "retell",
+                });
+                setRetellCallActive(false);
+                setRetellCallStarting(false);
+            });
+
+            client.on("error", (error) => {
+                console.error("Retell error:", error);
+                trackEvent("site_voice_demo_failed", {
+                    page: sourcePage,
+                    ctaLocation,
+                    serviceInterest: "ai-voice",
+                    provider: "retell",
+                });
+                setRetellCallActive(false);
+                setRetellCallStarting(false);
+            });
+        }).catch((error) => console.error("Could not load Retell SDK", error));
+
+        return () => {
+            if (retellClientRef.current) {
+                try {
+                    retellClientRef.current.stopCall();
+                } catch {
+                    // Ignore teardown errors
+                }
+            }
+        };
+    }, [sourcePage, ctaLocation]);
+
+    const handleRetellCall = async () => {
+        if (!retellClientRef.current) return;
+
+        if (retellCallActive) {
+            retellClientRef.current.stopCall();
+            return;
+        }
+
+        try {
+            setRetellCallStarting(true);
+            await navigator.mediaDevices.getUserMedia({ audio: true });
+
+            const response = await fetch("/api/retell/web-call", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ metadata: { source: "unified-voice-demo" } }),
+            });
+
+            const data = await response.json();
+            if (!response.ok || !data.access_token) {
+                throw new Error(data.error || "Failed to start call");
+            }
+
+            await retellClientRef.current.startCall({
+                accessToken: data.access_token,
+            });
+        } catch (error: unknown) {
+            const message = error instanceof Error ? error.message : "Unknown error";
+            console.error(error);
+            trackEvent("site_voice_demo_failed", {
+                page: sourcePage,
+                ctaLocation,
+                serviceInterest: "ai-voice",
+                provider: "retell",
+            });
+            alert(`Sorry, couldn't start the voice session. (${message})`);
+            setRetellCallStarting(false);
+        }
+    };
+
+    const handleElevenLabsCall = async () => {
+        if (conversation.status === "connected") {
+            await conversation.endSession();
+            return;
+        }
+
+        try {
+            await navigator.mediaDevices.getUserMedia({ audio: true });
+            const agentId = selectedProvider.agentId;
+            if (!agentId) {
+                throw new Error("No agent ID configured for ElevenLabs");
+            }
+
+            await conversation.startSession({ agentId });
+        } catch (error) {
+            const message = error instanceof Error ? error.message : "Unknown error";
+            console.error("ElevenLabs session error:", error);
+            trackEvent("site_voice_demo_failed", {
+                page: sourcePage,
+                ctaLocation,
+                serviceInterest: "ai-voice",
+                provider: "elevenlabs",
+                agentId: selectedProvider.agentId,
+            });
+            alert(`Sorry, couldn't start the voice session. (${message})`);
+        }
+    };
+
+    const handleToggleCall = activeProvider === "retell" ? handleRetellCall : handleElevenLabsCall;
+
+    // Status and button text
+    let statusLabel = "Ready to connect";
+    if (isConnecting) statusLabel = "Connecting…";
+    else if (isConnected && isSpeaking) statusLabel = "Assistant speaking";
+    else if (isConnected) statusLabel = "Live call";
+
+    let buttonText = "Try Now";
+    if (isConnecting) buttonText = "Connecting…";
+    else if (isConnected) buttonText = "End Call";
+
+    const isDark = variant === "dark";
+
+    return (
+        <div className="mx-auto max-w-[1180px]">
+            {/* Only show title/description section if provided */}
+            {title && (
+                <div className="mx-auto mb-8 max-w-[780px] text-center">
+                    <h2 className={`text-[30px] font-extrabold leading-[1.1] tracking-[-0.01em] md:text-[40px] ${isDark ? "text-white" : "text-ink"
+                        }`}>
+                        {title}
+                    </h2>
+                    {description && (
+                        <p className={`mx-auto mt-5 max-w-[660px] text-base leading-7 ${isDark ? "text-white/66" : "text-muted"
+                            }`}>
+                            {description}
+                        </p>
+                    )}
+                </div>
+            )}
+
+            {/* Provider selector - only show if there are multiple providers */}
+            {providers.length > 1 && (
+                <div className="mx-auto mb-5 flex max-w-[760px] flex-wrap justify-center gap-2">
+                    {providers.map((provider) => {
+                        const isActive = provider.id === activeProvider;
+                        return (
+                            <button
+                                key={provider.id}
+                                type="button"
+                                onClick={() => {
+                                    setActiveProvider(provider.id);
+                                    trackEvent("site_voice_demo_selected", {
+                                        page: sourcePage,
+                                        ctaLocation,
+                                        serviceInterest: "ai-voice",
+                                        provider: provider.id,
+                                    });
+                                }}
+                                className={`rounded-full border px-4 py-2 text-sm font-extrabold transition-colors ${isActive
+                                    ? isDark
+                                        ? "border-[#1db993] bg-[#1db993] text-white"
+                                        : "border-[#167f65] bg-[#167f65] text-white"
+                                    : isDark
+                                        ? "border-white/20 bg-white/10 text-white/80 hover:border-[#1db993]/50 hover:text-white"
+                                        : "border-card-border bg-white text-muted hover:border-[#1db993]/50 hover:text-ink"
+                                    }`}
+                                aria-pressed={isActive}
+                            >
+                                {provider.label}
+                            </button>
+                        );
+                    })}
+                </div>
+            )}
+
+            {/* Main demo interface */}
+            <div className={`mx-auto max-w-[1120px] rounded-[24px] border p-4 shadow-[0_22px_60px_rgba(15,23,32,0.16)] md:p-5 ${isDark
+                ? "border-white/10 bg-[radial-gradient(circle_at_70%_85%,rgba(29,185,147,0.18),transparent_34%),linear-gradient(135deg,#0b2230,#102734)] text-white"
+                : "border-card-border bg-white text-ink"
+                }`}>
+                {/* Header */}
+                <div className="mb-5 flex items-center justify-between gap-4 px-1">
+                    <div className="flex items-center gap-3">
+                        <span className="flex gap-1.5" aria-hidden="true">
+                            <span className={`h-1.5 w-1.5 rounded-full ${isDark ? "bg-white/38" : "bg-muted/38"}`} />
+                            <span className={`h-1.5 w-1.5 rounded-full ${isDark ? "bg-white/38" : "bg-muted/38"}`} />
+                            <span className={`h-1.5 w-1.5 rounded-full ${isDark ? "bg-white/38" : "bg-muted/38"}`} />
+                        </span>
+                        <p className={`text-sm font-extrabold ${isDark ? "text-white/88" : "text-ink"}`}>
+                            Live Voice Preview
+                        </p>
+                    </div>
+                    <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-extrabold ${isDark
+                        ? "border-white/12 bg-white/10 text-white/88"
+                        : "border-card-border bg-[#f8fbfa] text-muted"
+                        }`}>
+                        <span
+                            className={`h-2.5 w-2.5 rounded-full ${isConnected
+                                ? "bg-red-400 animate-pulse shadow-[0_0_6px_rgba(248,113,113,0.6)]"
+                                : isConnecting
+                                    ? "bg-amber-400 animate-pulse"
+                                    : "bg-[#1db993]"
+                                }`}
+                            aria-hidden="true"
+                        />
+                        {statusLabel}
+                    </span>
+                </div>
+
+                <div className="grid gap-5 lg:grid-cols-[1.48fr_0.72fr] lg:items-start">
+                    {/* Main demo panel */}
+                    <div className={`rounded-[18px] border p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] md:p-6 ${isDark
+                        ? "border-white/12 bg-white/10"
+                        : "border-card-border bg-[#f8fbfa]"
+                        }`}>
+                        <div className="flex items-center gap-4">
+                            <div className="grid h-12 w-12 place-items-center rounded-[14px] bg-[#1db993] text-lg font-extrabold text-white">
+                                AI
+                            </div>
+                            <div>
+                                <h3 className={`font-extrabold ${isDark ? "text-white" : "text-ink"}`}>
+                                    {selectedProvider.title}
+                                </h3>
+                                <p className={`mt-1 text-sm ${isDark ? "text-white/68" : "text-muted"}`}>
+                                    {selectedProvider.subtitle}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="mt-5 flex flex-wrap gap-2">
+                            {selectedProvider.tags.map((tag) => (
+                                <span
+                                    key={tag}
+                                    className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-extrabold ${isDark
+                                        ? "border-white/14 bg-white/8 text-white/90"
+                                        : "border-card-border bg-white text-ink"
+                                        }`}
+                                >
+                                    <span className="h-1.5 w-1.5 rounded-full bg-[#1db993]" aria-hidden="true" />
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+
+                        {/* Waveform bars */}
+                        <div className="mt-6 flex h-[58px] items-end gap-2" aria-hidden="true">
+                            {bars.map((height, index) => (
+                                <span
+                                    key={`${height}-${index}`}
+                                    className={`flex-1 rounded-full transition-[height] duration-150 ease-out ${isConnected
+                                        ? "bg-gradient-to-t from-[#1db993] to-[#7df0d1]"
+                                        : isDark
+                                            ? "bg-white/18"
+                                            : "bg-[#1db993]/22"
+                                        }`}
+                                    style={{ height }}
+                                />
+                            ))}
+                        </div>
+
+                        {/* Conversation preview */}
+                        <div className="mt-5 grid gap-3">
+                            <div className={`rounded-xl px-4 py-3 text-center text-sm leading-6 ${isDark
+                                ? "bg-white/14 text-white/88"
+                                : "bg-white border border-card-border text-ink"
+                                }`}>
+                                <strong className={`block text-xs uppercase tracking-[0.08em] ${isDark ? "text-[#7df0d1]" : "text-[#167f65]"
+                                    }`}>
+                                    Agent
+                                </strong>
+                                {selectedProvider.agentLine}
+                            </div>
+                            <div className={`ml-auto max-w-[92%] rounded-xl border px-4 py-3 text-center text-sm leading-6 ${isDark
+                                ? "border-[#1db993]/30 bg-[#1db993]/18 text-white/90"
+                                : "border-[#1db993]/30 bg-[#1db993]/10 text-ink"
+                                }`}>
+                                <strong className={`block text-xs uppercase tracking-[0.08em] ${isDark ? "text-[#7df0d1]" : "text-[#167f65]"
+                                    }`}>
+                                    Caller
+                                </strong>
+                                {selectedProvider.callerLine}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Control panel */}
+                    <div className={`rounded-[18px] border p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] md:p-6 ${isDark
+                        ? "border-white/12 bg-white/10"
+                        : "border-card-border bg-white"
+                        }`}>
+                        <h3 className={`text-lg font-extrabold ${isDark ? "text-white" : "text-ink"}`}>
+                            Test the live voice demo
+                        </h3>
+                        <p className={`mt-4 text-sm leading-6 ${isDark ? "text-white/72" : "text-muted"}`}>
+                            {selectedProvider.description}
+                        </p>
+                        <button
+                            className={`mt-6 inline-flex h-12 w-full items-center justify-center rounded-full px-6 text-base font-extrabold transition-colors disabled:cursor-not-allowed disabled:opacity-70 ${isConnected
+                                ? "bg-red-500/90 text-white shadow-[0_4px_16px_rgba(239,68,68,0.25)] hover:bg-red-500"
+                                : isDark
+                                    ? "bg-[#1db993] text-white shadow-[0_4px_18px_rgba(29,185,147,0.3)] hover:bg-[#22c9a1]"
+                                    : "bg-[#0d1720] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] hover:bg-[#101f2b]"
+                                }`}
+                            type="button"
+                            onClick={handleToggleCall}
+                            disabled={isConnecting}
+                        >
+                            {buttonText}
+                        </button>
+                        <p className={`mt-3 text-center text-xs leading-5 ${isDark ? "text-white/42" : "text-muted"
+                            }`}>
+                            Your browser may request microphone access. This assistant is for demonstration purposes only.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}

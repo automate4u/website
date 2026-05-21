@@ -4,7 +4,7 @@ Before rebuilding the homepage, AI Voice page, case studies, or Industry Acceler
 
 The goal is to avoid generic claims, fake testimonials, inflated ROI, or case studies that sound invented.
 
-Because many Automate4U client relationships are under NDA, public proof must protect identity. The goal is not to reveal real client work. The goal is to create truthful, specific, anonymous or representative workflow stories that show Automate4U understands these operational categories.
+Because many Automate4U client relationships are under NDA, public proof must protect identity while still sounding like real operational work. The goal is to create truthful, specific, outcome-oriented proof stories that show the kinds of problems Automate4U has solved, can defend, or can pursue deliberately without exposing client names or confidential details.
 
 ## Required Proof Inventory
 
@@ -30,9 +30,9 @@ For each client story or internal demo, collect:
 
 ## Current Public Proof Layer
 
-The site now uses representative, NDA-safe proof patterns in `data/proof-stories.ts`. These are intentionally written as workflow evidence, not named case studies. They should be treated as placeholders until the team confirms which details can be upgraded to anonymous, sanitized, or named proof.
+The site now uses NDA-safe, outcome-backed proof patterns in `data/proof-stories.ts`. These are intentionally written as workflow evidence rather than named case studies: they should feel like real work, show business results, and stay safe for public use. They are not weak placeholders. They are public proof assets that can be strengthened over time with approved anonymous labels, metrics, screenshots, or testimonials.
 
-Current representative proof patterns:
+Current public proof patterns:
 
 - Industrial manufacturing: parts, availability, quoting, order-response agent.
 - Education and childcare: daycare front-desk voice assistant with staff-controlled escalation.
@@ -59,11 +59,28 @@ For each proof pattern above, gather the strongest available version:
 - **Systems involved:** CRM, email, phone, chat, calendar, ERP, inventory, ecommerce platform, helpdesk, classroom software, booking tool, spreadsheets, or custom tools.
 - **Automate4U build scope:** what was built, what was connected, what was automated, and what stayed human-owned.
 - **Human control model:** approval rules, escalation rules, audit logs, review queues, monitoring, and sensitive-case handling.
-- **Measured or defensible results:** response time, quote cycle time, missed calls recovered, bookings created, manual touches removed, support tickets deflected, content shipped, or admin hours saved.
+- **Measured or defensible results:** response time improved, quote cycle time reduced, missed calls recovered, bookings created, manual touches removed, support tickets deflected or triaged, content shipped, admin hours saved, backlog reduced, or staff interruptions reduced.
 - **Permission level:** named public, anonymous public, sanitized public, representative public, internal sales only, or do not use.
 - **Artifacts:** sanitized screenshots, diagrams, Loom clips, dashboard snapshots, sample transcripts, approval flows, before/after workflow maps, or internal demo recordings.
 
-If exact metrics are not available, collect ranges and operational observations. The public site should say what is measured rather than inventing outcomes.
+If exact metrics are not available, collect ranges and operational observations. The public site can still use results-oriented language when the result is grounded in real work or defensible experience. Do not invent precise numbers, but do not weaken credible outcomes into vague measurement language.
+
+## Highest-Priority Result Ranges To Collect
+
+Start with the proof stories most likely to support near-term sales conversations:
+
+- **Industrial manufacturing response workflow:** first response time improvement, quote cycle time reduction, number of repetitive requests handled, CRM follow-up completion, and staff time redirected.
+- **Daycare/front-desk voice workflow:** missed calls reduced, routine calls handled, front-desk interruptions reduced, tour inquiries captured, sensitive escalations logged, and staff time redirected.
+- **Home services dispatch workflow:** after-hours leads recovered, booked appointments, response time improvement, quote follow-up completion, and dispatch/admin touches reduced.
+- **Professional services intake workflow:** intake completion rate, appointment conversion, missing-document follow-up reduction, cycle time to booked next step, and staff touches reduced.
+- **Marketing automation workflow:** approved content shipped, drafting hours reduced, follow-up tasks created, campaign reporting cadence, and lead movement visibility.
+
+Useful formats:
+
+- Exact metric when approved: "reduced response time from X to Y."
+- Rounded range when safer: "saved roughly 10-20 admin hours per week."
+- Directional result when exact data is unavailable: "reduced front-desk interruptions during peak hours."
+- Private-call detail only: keep precise numbers for sales calls if public publication could identify the client.
 
 ## Proof Permission Levels
 
@@ -72,7 +89,7 @@ Use these labels internally:
 - **Named public:** client name/logo/testimonial can be used.
 - **Anonymous public:** client can be described without identifying details.
 - **Sanitized public:** screenshots or diagrams can be shown after removing sensitive data.
-- **Representative public:** a workflow story can be shown as a representative example based on Automate4U expertise, without implying it is a direct client case.
+- **Outcome-backed public:** a workflow story can be shown as an NDA-safe proof pattern based on real delivery experience, founder/team experience, or a defensible composite. It should sound like real operational work while avoiding client-identifying details.
 - **Internal sales only:** can be discussed in private calls but not on the public site.
 - **Do not use:** not approved or too sensitive.
 
@@ -83,7 +100,8 @@ Do:
 - Use broad labels such as "industrial manufacturing supplier," "regional HVAC company," "private education operator," "professional services clinic," or "retail ecommerce brand."
 - Remove geography, dates, client names, staff names, product names, proprietary system names, exact volumes, and unique system combinations when they could identify the client.
 - Use metric ranges or rounded values when exact numbers would be identifying.
-- Say "representative workflow example" when the story combines patterns from multiple projects or prospects.
+- Use outcome-oriented language when the result is grounded in real work or defensible experience.
+- Use "workflow pattern" or "NDA-safe proof story" when a story combines patterns from multiple projects, prospects, or founder/team experience.
 - Make the workflow specific: problem, before state, system actions, handoff, and KPI.
 
 Do not:
@@ -92,7 +110,7 @@ Do not:
 - Reuse confidential screenshots.
 - Describe proprietary internal processes.
 - Publish exact client metrics unless explicitly approved.
-- Pretend a representative example is a named or direct case study.
+- Pretend a composite proof pattern is a named or direct case study.
 
 ## Priority Industry Proof Categories
 
@@ -164,6 +182,14 @@ Before launch, the homepage should have at least:
 
 ## Related Documents
 
+- `proof-stories/README.md`: proof-story workspace and workflow.
+- `proof-stories/proof-story-quick-capture.md`: short form for fast project notes.
+- `proof-stories/proof-story-intake-template.md`: full intake template for polished proof stories.
+- `proof-stories/proof-story-review-tracker.md`: proof-story status board and approval tracker.
+- `proof-stories/proof-opportunity-map.md`: sales pursuit map for turning examples into demos, pilots, and future case studies.
+- `proof-stories/founder-experience-proof.md`: how to use founder/team background as credibility without overstating client proof.
+- `proof-stories/safe-claims-and-metrics-library.md`: claim patterns, metric language, and phrases to avoid.
+- `proof-stories/asset-redaction-checklist.md`: screenshot, transcript, dashboard, and diagram redaction checklist.
 - `../implementation-reference/05-content-proof-and-wow-factor.md`: proof and wow-factor plan.
 - `../implementation-reference/12-expertise-demonstration-experiences.md`: demos and interactive proof modules.
 - `../implementation-reference/14-labor-efficiency-and-human-redeployment.md`: labor-efficiency claims.

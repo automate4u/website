@@ -60,8 +60,8 @@ export const servicePages: ServicePageData[] = [
       steps: [
         { title: "Listen", text: "Monitor approved channels such as inboxes, forms, chat, CRM queues, documents, and task lists." },
         { title: "Decide", text: "Classify the request, check business rules, pull context, and decide whether to act, draft, or escalate." },
-        { title: "Act", text: "Create records, route work, draft replies, update statuses, notify staff, and log the outcome." },
-        { title: "Improve", text: "Review exceptions, tune prompts, update rules, and measure the workflow against real KPIs." },
+        { title: "Act", text: "Create records, route work, draft replies, update statuses, notify staff, validate actions, and avoid duplicates." },
+        { title: "Improve", text: "Review exceptions, failed actions, staff overrides, prompt changes, and workflow performance against real KPIs." },
       ],
     },
     operationalReality: {
@@ -110,7 +110,7 @@ export const servicePages: ServicePageData[] = [
       "Human approval for sensitive replies, refunds, pricing, legal, financial, or policy-sensitive decisions.",
       "Audit logs for agent decisions, source context, workflow actions, and staff overrides.",
       "Approved knowledge sources so agents do not invent answers outside the business rules.",
-      "Escalation paths when confidence is low, data conflicts, or the request falls outside scope.",
+      "Validation, retries, duplicate-action prevention, and escalation paths when confidence is low, data conflicts, or the request falls outside scope.",
     ],
     rollout: [
       { step: "01", title: "Workflow selection", text: "Choose one repeated workflow with clear volume, ownership, and measurable impact." },
@@ -146,7 +146,7 @@ export const servicePages: ServicePageData[] = [
     heroModel: {
       label: "Messaging model",
       steps: [
-        { title: "Answer", text: "Respond from approved knowledge, policies, product details, service areas, and business rules." },
+        { title: "Answer", text: "Respond from approved knowledge, policies, product details, service areas, and business rules, with fallback when source context is missing." },
         { title: "Qualify", text: "Capture intent, urgency, contact details, fit, location, product need, or support category." },
         { title: "Route", text: "Create CRM records, helpdesk tickets, bookings, quote tasks, and internal notifications." },
         { title: "Handoff", text: "Escalate live or asynchronously with transcript, summary, source, and recommended next step." },
@@ -195,10 +195,10 @@ export const servicePages: ServicePageData[] = [
       { title: "Knowledge sources", items: ["FAQs", "Policy docs", "Product catalogs", "Service areas", "Pricing rules", "Help articles"] },
     ],
     controls: [
-      "Approved-response libraries and knowledge boundaries for claims, pricing, policies, and support advice.",
+      "Source-grounded response libraries and knowledge boundaries for claims, pricing, policies, and support advice.",
       "Escalation when a customer is frustrated, the request is sensitive, or the answer is uncertain.",
       "Transcript summaries and CRM/ticket notes so staff can continue without asking customers to repeat themselves.",
-      "Review loops to improve answers based on real conversations.",
+      "Review loops to improve answers, fix knowledge gaps, and reduce unsupported responses based on real conversations.",
     ],
     rollout: [
       { step: "01", title: "Conversation inventory", text: "Identify the top questions, lead paths, support paths, and escalation scenarios." },
@@ -212,7 +212,7 @@ export const servicePages: ServicePageData[] = [
       drivers: ["Conversation volume", "Knowledge base readiness", "CRM/helpdesk integration", "Human handoff needs", "Number of channels", "Monitoring level"],
     },
     faq: [
-      { q: "Can it answer from our own documents?", a: "Yes. We design around approved knowledge sources and set boundaries for what the assistant should not answer." },
+      { q: "Can it answer from our own documents?", a: "Yes. We design around approved knowledge sources, source-grounded retrieval, and fallback rules for questions the assistant should not answer." },
       { q: "Can it hand off to a person?", a: "Yes. Handoffs can include transcript, summary, customer details, urgency, and recommended next action." },
       { q: "Is this just a chatbot?", a: "No. The value is the workflow after the message: CRM updates, bookings, tickets, tasks, follow-up, and reporting." },
       { q: "Can it support multiple channels?", a: "Yes, but we usually start with one channel and one workflow before expanding to SMS, WhatsApp, or other messaging paths." },
@@ -230,14 +230,14 @@ export const servicePages: ServicePageData[] = [
     eyebrow: "AI Operations Strategy",
     title: "A practical roadmap for automating the work that actually slows the business down.",
     description:
-      "We help teams identify the right workflows, prioritize by value and risk, design safe pilots, and connect AI initiatives to operational KPIs.",
+      "We help teams identify the right workflows, prioritize by value and risk, choose the first paid step, and connect AI initiatives to operational KPIs.",
     heroModel: {
       label: "Strategy model",
       steps: [
         { title: "Diagnose", text: "Map operational pain, manual effort, data quality, systems, handoffs, and current constraints." },
         { title: "Prioritize", text: "Rank opportunities by value, feasibility, risk, adoption effort, and speed to a useful pilot." },
-        { title: "Design", text: "Define pilot scope, controls, integrations, success metrics, staff roles, and budget drivers." },
-        { title: "Sequence", text: "Plan what to deploy first, what to defer, and how to expand after proof." },
+        { title: "Design", text: "Define pilot scope, controls, integrations, success metrics, staff roles, owner decisions, and budget drivers." },
+        { title: "Sequence", text: "Plan the assessment, paid blueprint or pilot, launch milestone, and expansion decision." },
       ],
     },
     operationalReality: {
@@ -245,7 +245,7 @@ export const servicePages: ServicePageData[] = [
       description:
         "A good roadmap protects the team from scattered experiments and helps leaders approve a focused first step.",
       points: [
-        { title: "Too many possible AI projects", text: "Teams need a practical way to choose what should happen first and what should wait." },
+        { title: "Too many possible AI projects", text: "Teams need a practical way to choose what should happen first, what should wait, and what should not be automated yet." },
         { title: "Spend needs a clear reason", text: "Many SMB teams are careful with every new expense, so the first milestone should be narrow, measurable, and low-risk." },
         { title: "Adoption can block value", text: "If staff do not trust or understand the workflow, even good technology will underperform." },
         { title: "Risk varies by workflow", text: "A marketing draft, customer support reply, invoice action, or child-safety handoff should not use the same control model." },
@@ -255,13 +255,13 @@ export const servicePages: ServicePageData[] = [
       {
         title: "Workflow assessment",
         trigger: "Leadership wants to use AI but is unsure where it will pay off.",
-        action: "Map repetitive work, systems, data, risk, volume, team readiness, and cost drivers.",
-        outcome: "A ranked shortlist of workflows worth piloting.",
+        action: "Map repetitive work, systems, data, risk, volume, team readiness, owner decisions, and cost drivers.",
+        outcome: "A ranked shortlist of workflows, with a recommended first paid step.",
       },
       {
         title: "Pilot design",
         trigger: "A workflow looks valuable but needs a safe first milestone.",
-        action: "Define scope, success metrics, handoffs, budget range, implementation path, and review cadence.",
+        action: "Define scope, success metrics, handoffs, budget range, implementation path, approval points, and review cadence.",
         outcome: "A pilot that can be approved without pretending every problem is solved at once.",
       },
       {
@@ -284,15 +284,15 @@ export const servicePages: ServicePageData[] = [
     ],
     controls: [
       "Automation boundaries are defined before build, especially for safety, finance, policy, legal, or customer-impacting work.",
-      "Pilot scope is constrained so the team can prove value before committing to a larger program.",
+      "Pilot scope is constrained so the team can prove value before committing to a larger program or managed operating model.",
       "Staff adoption and training are included in the plan, not treated as an afterthought.",
-      "Budget ranges are tied to volume, integrations, workflow risk, monitoring, and support expectations.",
+      "Budget ranges are tied to volume, integrations, workflow risk, monitoring, support expectations, and the decision after the pilot.",
     ],
     rollout: [
       { step: "01", title: "Executive discovery", text: "Clarify goals, constraints, spend comfort, current systems, and top operational bottlenecks." },
       { step: "02", title: "Workflow and systems map", text: "Document the work, handoffs, data sources, exceptions, and human decision points." },
-      { step: "03", title: "Prioritized roadmap", text: "Rank opportunities and recommend the first paid blueprint, pilot, or build sprint." },
-      { step: "04", title: "Value review path", text: "Define how the first 30, 60, and 90 days will be measured." },
+      { step: "03", title: "Prioritized roadmap", text: "Rank opportunities and recommend the first paid blueprint, pilot, build sprint, or cleanup step." },
+      { step: "04", title: "Value review path", text: "Define how the first 30, 60, and 90 days will be measured and what decision happens next." },
     ],
     budget: {
       title: "Strategy should make spend easier to approve.",
@@ -323,9 +323,9 @@ export const servicePages: ServicePageData[] = [
       label: "Marketing operating model",
       steps: [
         { title: "Plan", text: "Turn offers, audiences, topics, and campaign goals into a structured content and follow-up plan." },
-        { title: "Draft", text: "Generate first drafts, variations, summaries, emails, posts, and repurposed content from approved inputs." },
+        { title: "Draft", text: "Generate first drafts, variations, summaries, emails, posts, and repurposed content from approved source material." },
         { title: "Approve", text: "Route work through brand, compliance, owner, or sales review before anything important goes live." },
-        { title: "Measure", text: "Track output, engagement, lead movement, follow-up, and campaign performance." },
+        { title: "Measure", text: "Track output, engagement, lead movement, CRM follow-up, and campaign performance." },
       ],
     },
     operationalReality: {
@@ -336,20 +336,20 @@ export const servicePages: ServicePageData[] = [
         { title: "Content stalls before publishing", text: "Ideas, drafts, edits, approvals, captions, images, and scheduling are split across too many manual steps." },
         { title: "Follow-up is inconsistent", text: "Leads, inquiries, abandoned carts, old customers, and event contacts often need structured nurture." },
         { title: "Brand control matters", text: "AI can speed up drafts, but people should control voice, claims, offers, and final approval." },
-        { title: "Reporting is disconnected", text: "Teams need to know what was created, what shipped, and what moved leads or customers forward." },
+        { title: "Reporting is disconnected", text: "Teams need to know what was created, what shipped, what follow-up happened, and what moved leads or customers forward." },
       ],
     },
     workflows: [
       {
         title: "Social content workflow",
         trigger: "Team needs recurring posts, captions, repurposed ideas, or campaign content.",
-        action: "Agent drafts content from approved topics, routes for review, schedules approved posts, and logs output.",
+        action: "Agent drafts content from approved topics and examples, routes for review, schedules approved posts, and logs output.",
         outcome: "More consistent publishing with brand control.",
       },
       {
         title: "Lead nurture and follow-up",
         trigger: "A lead submits a form, attends an event, requests info, or goes inactive.",
-        action: "Workflow segments the contact, drafts or sends approved follow-up, creates CRM tasks, and tracks outcomes.",
+        action: "Workflow segments the contact, drafts or sends approved follow-up, creates CRM tasks, and tracks replies or next steps.",
         outcome: "Less manual follow-up and fewer cold leads lost.",
       },
       {
@@ -374,18 +374,18 @@ export const servicePages: ServicePageData[] = [
       "Human approval before publishing public content or sending sensitive campaign messages.",
       "Brand voice, claims, compliance, offer, and audience rules defined before generation.",
       "Audit trail for drafts, approvals, scheduled content, and campaign actions.",
-      "Reporting loops so output is connected to engagement, leads, and revenue signals.",
+      "Reporting loops so output is connected to engagement, lead movement, follow-up tasks, and revenue signals.",
     ],
     rollout: [
       { step: "01", title: "Content and campaign audit", text: "Review current channels, offers, bottlenecks, approvals, and reporting gaps." },
-      { step: "02", title: "Workflow design", text: "Define prompts, source material, approval queues, schedules, CRM triggers, and reporting." },
+      { step: "02", title: "Workflow design", text: "Define source material, prompts, approval queues, schedules, CRM triggers, follow-up rules, and reporting." },
       { step: "03", title: "Pilot one content lane", text: "Start with one recurring content or nurture workflow before expanding." },
       { step: "04", title: "Scale with controls", text: "Add more channels, templates, campaigns, and reporting once quality is stable." },
     ],
     budget: {
       title: "Marketing automation cost depends on output volume and review complexity.",
       text: "A simple drafting workflow is very different from a connected campaign system with CRM segmentation, approvals, scheduling, and reporting.",
-      drivers: ["Content volume", "Number of channels", "Approval complexity", "CRM segmentation", "Scheduling tools", "Reporting depth"],
+      drivers: ["Content volume", "Number of channels", "Approval complexity", "CRM segmentation", "Follow-up rules", "Reporting depth"],
     },
     faq: [
       { q: "Will AI publish directly?", a: "It can, but we usually recommend human approval for public content until the brand rules and workflow are proven." },
@@ -410,10 +410,10 @@ export const servicePages: ServicePageData[] = [
     heroModel: {
       label: "Operate model",
       steps: [
-        { title: "Monitor", text: "Watch usage, failures, escalations, outcomes, integration health, and unusual patterns." },
+        { title: "Monitor", text: "Watch usage, failures, escalations, costs, outcomes, integration health, and unusual patterns." },
         { title: "Tune", text: "Improve prompts, rules, knowledge sources, handoffs, and workflow steps as real usage changes." },
         { title: "Govern", text: "Review sensitive workflows, audit logs, permissions, approval rules, and risk boundaries." },
-        { title: "Improve", text: "Use KPI reviews to decide what to fix, expand, pause, or automate next." },
+        { title: "Improve", text: "Use KPI reviews, runbooks, and incident notes to decide what to fix, expand, pause, or automate next." },
       ],
     },
     operationalReality: {
@@ -460,14 +460,14 @@ export const servicePages: ServicePageData[] = [
     ],
     controls: [
       "Regular review of prompts, model behavior, knowledge sources, escalation rules, and workflow outcomes.",
-      "Issue response for failed integrations, unexpected behavior, broken automations, and support requests.",
-      "KPI reporting that connects managed operations to response time, cycle time, cost, workload, and conversion.",
+      "Runbooks and issue response for failed integrations, unexpected behavior, broken automations, and support requests.",
+      "KPI and cost reporting that connects managed operations to response time, cycle time, workload, conversion, and usage spend.",
       "Governance reviews for sensitive workflows and human-in-the-loop requirements.",
     ],
     rollout: [
       { step: "01", title: "Operational baseline", text: "Define what needs monitoring, who owns issues, and which metrics matter." },
-      { step: "02", title: "Monitoring setup", text: "Track workflows, errors, escalations, usage, costs, and important business outcomes." },
-      { step: "03", title: "Review cadence", text: "Run recurring quality, risk, and value reviews with clear action items." },
+      { step: "02", title: "Monitoring setup", text: "Track workflows, errors, escalations, usage, costs, retries, and important business outcomes." },
+      { step: "03", title: "Review cadence", text: "Run recurring quality, risk, cost, and value reviews with clear action items." },
       { step: "04", title: "Continuous improvement", text: "Tune, fix, expand, or pause workflows based on real evidence." },
     ],
     budget: {
@@ -500,8 +500,8 @@ export const servicePages: ServicePageData[] = [
       steps: [
         { title: "Define", text: "Clarify the workflow, users, systems, data, permissions, success metrics, and support expectations." },
         { title: "Prototype", text: "Create the smallest useful interface or workflow layer that proves the system direction." },
-        { title: "Build", text: "Implement the application, integrations, AI features, dashboards, approvals, and audit paths." },
-        { title: "Operate", text: "Monitor usage, support staff, tune workflows, and decide what to expand after launch." },
+        { title: "Build", text: "Implement the application, integrations, AI features, dashboards, approvals, audit paths, and role-based access." },
+        { title: "Operate", text: "Monitor usage, support staff, tune workflows, maintain integrations, and decide what to expand after launch." },
       ],
     },
     operationalReality: {
@@ -550,12 +550,12 @@ export const servicePages: ServicePageData[] = [
       "Role-based permissions for staff, admins, customers, partners, or reviewers.",
       "Human approval for actions that affect customers, money, safety, compliance, or business commitments.",
       "Audit logs for AI outputs, staff edits, workflow actions, and integration events.",
-      "Support and maintenance plan so the software does not become an unsupported one-off build.",
+      "Support, monitoring, and maintenance plan so the software does not become an unsupported one-off build.",
     ],
     rollout: [
       { step: "01", title: "Workflow architecture", text: "Define users, jobs to be done, system boundaries, data movement, and decision points." },
       { step: "02", title: "Prototype", text: "Build a narrow version that proves the interface and workflow before full production." },
-      { step: "03", title: "Production build", text: "Add integrations, permissions, AI capabilities, monitoring, and operational controls." },
+      { step: "03", title: "Production build", text: "Add integrations, permissions, AI capabilities, monitoring, audit trails, and operational controls." },
       { step: "04", title: "Support and expand", text: "Monitor usage, fix issues, train staff, and expand based on measured value." },
     ],
     budget: {

@@ -89,6 +89,41 @@ const systems = [
   },
 ];
 
+const integrationEcosystem = [
+  {
+    title: "CRM, sales, and customer records",
+    items: ["HubSpot", "Salesforce", "Pipedrive", "GoHighLevel", "Zoho", "Airtable", "Notion", "Custom CRMs"],
+  },
+  {
+    title: "Communication and support",
+    items: ["Twilio", "WhatsApp", "Slack", "Microsoft Teams", "Gmail", "Outlook", "Zendesk", "Intercom"],
+  },
+  {
+    title: "Scheduling and operations",
+    items: ["Calendly", "Google Calendar", "Microsoft 365", "Asana", "Trello", "Jira", "Monday.com", "Service platforms"],
+  },
+  {
+    title: "Ecommerce and payments",
+    items: ["Shopify", "WooCommerce", "BigCommerce", "Stripe", "Square", "PayPal", "Order systems", "Marketplaces"],
+  },
+  {
+    title: "Marketing and content",
+    items: ["Mailchimp", "Klaviyo", "Meta", "LinkedIn", "Webflow", "WordPress", "Squarespace", "Analytics tools"],
+  },
+  {
+    title: "Data, AI, and infrastructure",
+    items: ["OpenAI", "Retell", "Botpress", "Make", "n8n", "Zapier", "Postgres", "AWS"],
+  },
+  {
+    title: "Identity, observability, and governance",
+    items: ["Okta", "Google Workspace", "Splunk", "Sentry", "PostHog", "CloudWatch", "Audit logs", "Role permissions"],
+  },
+  {
+    title: "Documents and knowledge",
+    items: ["Google Drive", "SharePoint", "Dropbox", "PDF libraries", "Knowledge bases", "SOPs", "Manuals", "Custom databases"],
+  },
+];
+
 const relatedPillars = howWeBuildPillars.filter(
   (pillar) => pillar.href !== "/capabilities/data-integrations-infrastructure"
 );
@@ -197,6 +232,39 @@ export default function DataIntegrationsInfrastructurePage() {
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Integration ecosystem</p>
+              <h2 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[42px]">
+                If your system has a usable API, webhook, export, or database, we can usually bring it into the workflow.
+              </h2>
+              <p className="mt-5 text-base leading-8 text-muted">
+                We have worked across government, Fortune 500, SaaS, ecommerce, marketplace, professional-services, and SMB environments. The exact tool matters less than the integration pattern: approved access, clean field mapping, safe actions, monitoring, and a fallback path when something fails.
+              </p>
+              <p className="mt-4 text-sm leading-7 text-muted">
+                During discovery, we confirm API access, permissions, pricing, official partner requirements, and the safest way to connect each system.
+              </p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              {integrationEcosystem.map((group) => (
+                <article key={group.title} className="rounded-lg border border-card-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                  <h3 className="text-base font-extrabold leading-tight text-ink">{group.title}</h3>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <span key={item} className="rounded-md border border-card-border bg-[#f8fbfa] px-3 py-1.5 text-xs font-bold text-ink">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>

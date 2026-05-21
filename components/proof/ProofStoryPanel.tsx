@@ -128,15 +128,15 @@ function ProofStoryCard({ story, compact }: { story: ProofStory; compact: boolea
 
       {compact ? (
         <div className="mt-4 grid gap-3 md:grid-cols-3">
-          <CompactProofList title="Connected" items={story.connectedActions} />
-          <CompactProofList title="Control" items={story.humanControls} />
-          <CompactProofList title="Measure" items={story.metrics} />
+          <CompactProofList title="Actions" items={story.connectedActions} />
+          <CompactProofList title="Controls" items={story.humanControls} />
+          <CompactProofList title="Results" items={story.metrics} />
         </div>
       ) : (
         <div className="mt-4 grid gap-4 md:grid-cols-3">
-          <ProofList title="Connected systems" items={story.connectedActions} />
-          <ProofList title="Human control" items={story.humanControls} />
-          <ProofList title="Measured outcomes" items={story.metrics} />
+          <ProofList title="Business actions" items={story.connectedActions} />
+          <ProofList title="Human controls" items={story.humanControls} />
+          <ProofList title="Results tracked" items={story.metrics} />
         </div>
       )}
 
