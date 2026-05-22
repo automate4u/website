@@ -110,12 +110,12 @@ const pilotDeliverables = [
 const pricingCards = [
   {
     title: "Focused pilot",
-    range: "$3k-$5k/mo planning range",
+    range: "$300-$1000/mo planning range",
     text: "Best for proving one call workflow with a defined usage allowance, staff review, and limited integrations.",
   },
   {
     title: "Production voice operations",
-    range: "$5k-$10k+/mo planning range",
+    range: "$500-$5k+/mo planning range",
     text: "Best when voice becomes part of daily operations, with monitoring, tuning, reporting, integrations, and support.",
   },
   {
