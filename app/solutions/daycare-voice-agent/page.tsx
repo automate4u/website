@@ -294,7 +294,7 @@ export default function DaycareVoiceAgentPage() {
             />
           </div>
 
-          <div className="mx-auto mt-8 max-w-[720px] text-center">
+          {/* <div className="mx-auto mt-8 max-w-[720px] text-center">
             <p className="text-sm leading-6 text-white/68">
               These example conversations show how the assistant handles common daycare scenarios. Each demonstrates the natural flow from parent inquiry to appropriate action or handoff.
             </p>
@@ -323,7 +323,7 @@ export default function DaycareVoiceAgentPage() {
                 <p className="mt-5 text-sm leading-6 text-white/64">{scenario.details}</p>
               </article>
             ))}
-          </div>
+          </div> */}
           <p className="mx-auto mt-8 max-w-[720px] text-center text-xs leading-6 text-white/42">
             During a walkthrough, we can review approved examples and map the call scenarios that matter most to your centers.
           </p>
