@@ -47,11 +47,11 @@ export default function Header() {
             })),
         ],
         industries: [
+            { name: "Professional Services", href: "/industries/professional-services" },
+            { name: "Home Services", href: "/industries/home-services" },
+            { name: "Manufacturing", href: "/industries/manufacturing" },
             { name: "Education & Childcare", href: "/industries/education-childcare" },
             { name: "Healthcare & Wellness Clinics", href: "/industries/healthcare" },
-            { name: "Manufacturing", href: "/industries/manufacturing" },
-            { name: "Home Services", href: "/industries/home-services" },
-            { name: "Professional Services", href: "/industries/professional-services" },
             { name: "Guest Services & Hospitality", href: "/industries/hospitality" },
         ],
         howWeBuild: [

@@ -60,6 +60,9 @@ type IndustryAcceleratorPageProps = {
   valueTitle: string;
   valueDescription: string;
   valuePatterns: ValuePattern[];
+  neverTitle?: string;
+  neverDescription?: string;
+  neverItems?: TextBlock[];
   serviceTitle: string;
   serviceDescription: string;
   servicePaths: ServicePath[];
@@ -98,6 +101,9 @@ export default function IndustryAcceleratorPage({
   valueTitle,
   valueDescription,
   valuePatterns,
+  neverTitle,
+  neverDescription,
+  neverItems,
   serviceTitle,
   serviceDescription,
   servicePaths,
@@ -225,6 +231,26 @@ export default function IndustryAcceleratorPage({
           </div>
         </div>
       </section>
+
+      {neverItems?.length ? (
+        <section className="border-y border-card-border bg-white px-4 py-14 md:py-20" aria-labelledby="never-title">
+          <div className="mx-auto max-w-[1180px]">
+            <SectionHeader
+              eyebrow="Clear boundaries"
+              title={neverTitle ?? "What the AI should never do."}
+              description={neverDescription}
+            />
+            <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {neverItems.map((item) => (
+                <article key={item.title} className="rounded-lg border border-card-border bg-[#f8fbfa] p-5">
+                  <h3 className="text-lg font-extrabold leading-6 text-ink">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-muted">{item.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="services-title">
         <div className="mx-auto max-w-[1180px]">

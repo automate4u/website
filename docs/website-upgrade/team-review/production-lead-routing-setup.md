@@ -12,7 +12,7 @@ Production lead routing has two parts:
 The assessment form code already supports:
 
 - Shared assessment form submissions.
-- Server-side validation requiring email.
+- Server-side validation requiring work email, company, industry, workflow pain, tools used, timeline, and budget range.
 - HubSpot private app token via `HUBSPOT_PRIVATE_APP_TOKEN`.
 - Resend email notifications via `RESEND_API_KEY`.
 - Notification recipients:
@@ -181,7 +181,7 @@ Production lead routing is complete when:
 - A real assessment submission creates or updates a HubSpot contact.
 - The submission context is visible in HubSpot.
 - The three internal recipients receive a readable email notification.
-- The success state shows the expected next step and booking path.
+- The success state and notification email show the expected Calendly booking path.
 - The submission preserves source page, CTA location, landing page, referrer, and UTM fields.
 - Form submission errors show a clear retry path.
 - `npm run lint`, `npm run build`, and `npm run test:e2e` pass.

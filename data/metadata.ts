@@ -30,6 +30,24 @@ export const routeMetadata: RouteMetadata[] = [
       "Explore focused AI automation solutions for voice, chat, email, operations, marketing, workflow handoffs, and managed AI operations.",
   },
   {
+    path: "/solutions/manufacturing-quote-order-agent",
+    title: "Manufacturing Quote and Order Response Agent | Automate4U",
+    description:
+      "AI workflow for RFQ intake, parts availability, quote follow-up, order questions, ERP/CRM handoff, and human pricing review.",
+  },
+  {
+    path: "/solutions/healthcare-front-desk-agent",
+    title: "Healthcare Front Desk Agent for Clinic Admin Workflows | Automate4U",
+    description:
+      "AI workflow for healthcare and wellness clinic appointment requests, reminders, forms, administrative questions, staff handoff, and conservative escalation.",
+  },
+  {
+    path: "/solutions/home-services-missed-call-dispatch-agent",
+    title: "Home Services Missed-Call and Dispatch Agent | Automate4U",
+    description:
+      "AI workflow for missed-call recovery, after-hours intake, booking handoff, dispatch notes, estimate follow-up, and staff escalation for home service teams.",
+  },
+  {
     path: "/industries/hospitality",
     title: "Guest Services & Hospitality AI Automation | Automate4U",
     description:

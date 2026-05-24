@@ -88,7 +88,7 @@ export default function AssessmentLeadForm({
   return (
     <form action={formAction} onFocusCapture={trackStarted} className="grid gap-4">
       <div className="rounded-xl border border-[#cfe9df] bg-[#ecfbf6] px-4 py-3 text-sm leading-6 text-[#155f4d]">
-        <strong className="text-ink">Most fields are optional.</strong> Work email and company are the only required fields, answering others will reduce the time it takes for us to recommend actionable first steps.
+        <strong className="text-ink">A few details help us qualify the right next step.</strong> Work email, company, industry, workflow pain, tools, timeline, and budget range are required so the assessment is useful instead of generic.
       </div>
 
       <input type="hidden" name="sourcePage" value={sourcePage} />
@@ -120,13 +120,13 @@ export default function AssessmentLeadForm({
         </label>
 
         <label className="grid gap-1.5">
-          <span className="text-sm font-semibold text-ink">Industry <span className="font-normal text-muted">(optional)</span></span>
-          <input name="industry" className="rounded-xl border border-card-border px-3 py-3" />
+          <span className="text-sm font-semibold text-ink">Industry *</span>
+          <input name="industry" required autoComplete="organization-title" className="rounded-xl border border-card-border px-3 py-3" />
         </label>
 
         <label className="grid gap-1.5">
-          <span className="text-sm font-semibold text-ink">Timeline <span className="font-normal text-muted">(optional)</span></span>
-          <select name="timeline" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
+          <span className="text-sm font-semibold text-ink">Timeline *</span>
+          <select name="timeline" required defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
             <option value="" disabled>Select a timeline</option>
             <option>ASAP</option>
             <option>1-2 months</option>
@@ -136,18 +136,18 @@ export default function AssessmentLeadForm({
         </label>
 
         <label className="grid gap-1.5 md:col-span-2">
-          <span className="text-sm font-semibold text-ink">Biggest workflow pain <span className="font-normal text-muted">(optional)</span></span>
-          <textarea name="workflowPain" rows={3} className="rounded-xl border border-card-border px-3 py-3" />
+          <span className="text-sm font-semibold text-ink">Biggest workflow pain *</span>
+          <textarea name="workflowPain" required rows={3} placeholder="What repetitive calls, emails, admin work, handoffs, or system updates are slowing the team down?" className="rounded-xl border border-card-border px-3 py-3" />
         </label>
 
         <label className="grid gap-1.5 md:col-span-2">
-          <span className="text-sm font-semibold text-ink">Tools currently used <span className="font-normal text-muted">(optional)</span></span>
-          <input name="tools" placeholder="HubSpot, Calendly, QuickBooks, spreadsheets..." className="rounded-xl border border-card-border px-3 py-3" />
+          <span className="text-sm font-semibold text-ink">Tools currently used *</span>
+          <input name="tools" required placeholder="HubSpot, Calendly, QuickBooks, spreadsheets..." className="rounded-xl border border-card-border px-3 py-3" />
         </label>
 
         <label className="grid gap-1.5 md:col-span-2">
-          <span className="text-sm font-semibold text-ink">Budget range <span className="font-normal text-muted">(optional)</span></span>
-          <select name="budget" defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
+          <span className="text-sm font-semibold text-ink">Budget range *</span>
+          <select name="budget" required defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
             <option value="" disabled>Select a budget range</option>
             <option>Exploring fit first</option>
             <option>Under $3k/month</option>

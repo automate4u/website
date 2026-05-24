@@ -6,6 +6,16 @@ const notificationRecipients = [
   "hello@automate4u.co",
 ];
 
+const requiredAssessmentFields = [
+  ["email", "Work email"],
+  ["company", "Company"],
+  ["industry", "Industry"],
+  ["workflowPain", "Biggest workflow pain"],
+  ["tools", "Tools currently used"],
+  ["timeline", "Timeline"],
+  ["budget", "Budget range"],
+] as const;
+
 export type AssessmentLeadState = {
   ok: boolean;
   message: string;
@@ -116,6 +126,7 @@ async function sendNotification(data: Record<string, string>) {
     notificationLine("UTM campaign", data.utmCampaign),
     notificationLine("UTM term", data.utmTerm),
     notificationLine("UTM content", data.utmContent),
+    notificationLine("Calendly assessment link", process.env.NEXT_PUBLIC_CALENDLY_ASSESSMENT_URL),
   ].join("\n");
 
   const response = await fetch("https://api.resend.com/emails", {
@@ -141,8 +152,9 @@ async function sendNotification(data: Record<string, string>) {
 export async function submitAssessmentLead(formData: FormData) {
   const data = formDataToObject(formData);
 
-  if (!getField(formData, "email")) {
-    throw new Error("Email is required.");
+  const missingFields = requiredAssessmentFields.filter(([field]) => !getField(formData, field));
+  if (missingFields.length > 0) {
+    throw new Error(`${missingFields.map(([, label]) => label).join(", ")} required.`);
   }
 
   if (
@@ -195,7 +207,7 @@ export async function submitAssessmentLeadWithState(
   } catch {
     return {
       ok: false,
-      message: "Something went wrong. Please try again or email hello@automate4u.co.",
+      message: "Please complete the required fields and try again, or email hello@automate4u.co.",
     };
   }
 }

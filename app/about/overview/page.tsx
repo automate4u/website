@@ -28,6 +28,25 @@ const strengths = [
   "Security, monitoring, integrations, reporting, and staff adoption",
 ];
 
+const experienceSignals = [
+  {
+    title: "20+ years of software and automation depth",
+    text: "Founder experience spans business software, automation, AI systems, integrations, ecommerce, marketplaces, internal tools, and production reliability.",
+  },
+  {
+    title: "Enterprise, government, and SMB environments",
+    text: "We are comfortable reasoning about different operating constraints: speed, access control, approvals, data sensitivity, legacy systems, and practical support.",
+  },
+  {
+    title: "AI agents, RAG, and tool-calling workflows",
+    text: "The technical work behind useful AI includes source-grounded answers, actions in business systems, validation, retries, fallbacks, and human escalation.",
+  },
+  {
+    title: "Dozens of workflow patterns",
+    text: "That background helps us move quickly across calls, scheduling, quotes, documents, forms, CRM updates, reporting, support, marketing, and admin operations.",
+  },
+];
+
 export default function Page() {
   return (
     <main className="min-h-screen bg-white">
@@ -85,6 +104,24 @@ export default function Page() {
       </section>
 
       <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Why our background matters"
+            title="You get a builder-led team with real production software experience."
+            description="Automating an important workflow is not just a prompt exercise. It requires judgment about systems, data, permissions, reliability, staff adoption, and what should stay human-controlled."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {experienceSignals.map((item) => (
+              <article key={item.title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <h2 className="text-xl font-extrabold leading-tight text-ink">{item.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-14 md:py-20">
         <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Why teams talk to us</p>

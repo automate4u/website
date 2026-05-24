@@ -63,15 +63,16 @@ const valuePatterns = [
 
 const servicePaths = [
   {
+    title: "Missed-Call & Dispatch Agent",
+    description: "A focused solution for missed-call recovery, after-hours intake, booking handoff, dispatch notes, estimate follow-up, and staff escalation.",
+    href: "/solutions/home-services-missed-call-dispatch-agent",
+    cta: "View solution",
+  },
+  {
     title: "AI Voice for inbound calls",
     description: "A voice-led starting point for answering routine calls, qualifying service requests, recovering missed calls, and routing urgent issues.",
     href: "/services/ai-voice",
     cta: "Explore AI Voice",
-  },
-  {
-    title: "Dispatch workflow agent",
-    description: "A focused workflow pattern for job intake, calendar checks, technician handoff, property notes, customer confirmation, and operational logging.",
-    cta: "Discuss this path",
   },
   {
     title: "Sales follow-up agent",

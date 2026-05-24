@@ -41,11 +41,11 @@ export const industryAccelerators: IndustryAcceleratorSummary[] = [
     slug: "manufacturing",
     href: "/industries/manufacturing",
     title: "Manufacturing Customer Response Accelerator",
-    metaTitle: "AI Agents for Manufacturing Customer Response | Automate4U",
+    metaTitle: "AI Agents for Manufacturing RFQ and Quote Response | Automate4U",
     metaDescription:
-      "AI chat and email agents for parts availability, quoting, order status, timelines, and sales handoff.",
-    primaryKpi: "Quote response time reduced",
-    commonWorkflows: ["Parts availability", "Quote triage", "Order status", "Sales handoff"],
+      "AI chat and email agents for RFQ intake, parts availability, quote follow-up, order status, timelines, ERP/CRM handoff, and human pricing review.",
+    primaryKpi: "Quote cycle time reduced",
+    commonWorkflows: ["RFQ intake", "Parts availability", "Quote follow-up", "Order status"],
   },
   {
     slug: "professional-services",

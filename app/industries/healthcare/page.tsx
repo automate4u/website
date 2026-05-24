@@ -19,10 +19,18 @@ const valuePatterns = [
   { label: "Patient question routing", outcome: "Answer approved administrative questions and route clinical, urgent, billing, privacy, or uncertain requests to the right staff member." },
 ];
 
+const neverItems = [
+  { title: "No diagnosis or treatment advice", text: "The system should not diagnose symptoms, recommend treatment, interpret medical issues, or replace practitioner judgment." },
+  { title: "No emergency triage", text: "Urgent symptoms, emergency language, safety concerns, or unclear clinical situations should route to authorized staff or approved emergency instructions." },
+  { title: "No clinical decisions", text: "The workflow should support administrative routing, reminders, and intake. It should not decide care pathways, eligibility, medication, or clinical next steps." },
+  { title: "No independent privacy-sensitive resolution", text: "Requests involving identity, records, complaints, billing disputes, private details, or uncertainty should escalate instead of being resolved automatically." },
+  { title: "No replacement for authorized staff", text: "AI can prepare context, summarize, route, and remind. Staff remain responsible for sensitive judgment, approvals, exceptions, and patient experience." },
+];
+
 const servicePaths = [
+  { title: "Healthcare Front Desk Agent", description: "A focused solution for appointment requests, reminders, forms, administrative questions, staff handoff, and conservative escalation.", href: "/solutions/healthcare-front-desk-agent", cta: "View solution" },
   { title: "AI Voice for front desk support", description: "A voice-led starting point for routine calls, appointment requests, reminders, directions, and administrative intake with staff handoff.", href: "/services/ai-voice", cta: "Explore AI Voice" },
   { title: "AI Agents for routing and follow-up", description: "Workflow agents that turn calls, forms, emails, and messages into tasks, reminders, summaries, handoffs, and operational reporting.", href: "/services/ai-agents", cta: "Explore AI Agents" },
-  { title: "Security and monitoring", description: "Controls for escalation, audit logs, monitoring, human review, and implementation practices that respect sensitive workflows.", href: "/capabilities/security-monitoring-ai-safety", cta: "Explore Safety Controls" },
 ];
 
 const sectorShifts = [
@@ -73,6 +81,9 @@ export default function HealthcarePage() {
       valueTitle="Start with low-risk administrative workflows before expanding."
       valueDescription="The first useful automation should reduce routine front-desk pressure while keeping staff in control of anything clinical, urgent, private, or unclear."
       valuePatterns={valuePatterns}
+      neverTitle="What AI will never do in a healthcare workflow."
+      neverDescription="The safest healthcare automation is explicit about its limits. The system should support administration, routing, reminders, and handoffs while keeping clinical and privacy-sensitive decisions with authorized people."
+      neverItems={neverItems}
       serviceTitle="Healthcare automation should begin with supportable workflows and clear boundaries."
       serviceDescription="The strongest starting points are non-clinical workflows where approved information, staff handoff, and auditability can be designed from the beginning."
       servicePaths={servicePaths}

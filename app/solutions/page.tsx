@@ -27,9 +27,6 @@ const solutionFitChecks = [
 ];
 
 const plannedSolutions = [
-  "Manufacturing parts availability and quote response agent",
-  "Home services missed-call recovery and dispatch assistant",
-  "Daycare front-desk voice and parent communication assistant",
   "Professional services intake and appointment routing agent",
   "Marketing content production and approval workflow agent",
 ];
@@ -106,7 +103,7 @@ export default function SolutionsPage() {
                 href={solution.href}
                 className="group rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1db993]/45 hover:shadow-[0_16px_38px_rgba(15,23,32,0.08)]"
               >
-                <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Voice solution</p>
+                <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Focused solution</p>
                 <h3 className="mt-3 text-2xl font-extrabold leading-tight text-ink">{solution.title}</h3>
                 <p className="mt-4 text-sm leading-6 text-muted">{solution.metaDescription}</p>
                 <span className="mt-6 inline-flex text-sm font-extrabold text-[#167f65]">

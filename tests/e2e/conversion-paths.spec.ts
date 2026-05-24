@@ -11,6 +11,7 @@ test("assessment form submits without losing source context", async ({ page }) =
   await page.getByLabel("Biggest workflow pain").fill("Customers wait too long for quote and parts availability responses.");
   await page.getByLabel("Tools currently used").fill("HubSpot, Gmail, spreadsheets");
   await page.getByLabel("Timeline").selectOption("ASAP");
+  await page.getByLabel("Budget range").selectOption("$5k-$10k/month");
 
   await page.getByRole("button", { name: "Request My Assessment" }).click();
 
@@ -28,7 +29,11 @@ test("ai voice page exposes demo and assessment conversion paths", async ({ page
 
   await page.getByLabel("Work email *").fill("voice-test@example.com");
   await page.getByLabel("Company *").fill("Voice Example Co");
+  await page.getByLabel("Industry *").fill("Home services");
   await page.getByLabel("Biggest workflow pain").fill("Recover missed calls and route booking updates to the right team.");
+  await page.getByLabel("Tools currently used").fill("ServiceTitan, Google Calendar, phone system");
+  await page.getByLabel("Timeline").selectOption("1-2 months");
+  await page.getByLabel("Budget range").selectOption("$3k-$5k/month");
   await page.getByRole("button", { name: "Request My Assessment" }).click();
 
   await expect(page.getByRole("heading", { name: "Assessment request received." })).toBeVisible();

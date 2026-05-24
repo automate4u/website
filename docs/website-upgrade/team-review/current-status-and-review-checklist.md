@@ -6,14 +6,18 @@ This document is the quick team-review version of the upgrade work.
 
 Use:
 
+- `active-execution-checklist.md` for the active work queue. Use this first when deciding what Codex should do next.
 - `../implementation-reference/04-implementation-roadmap.md` for the full build roadmap.
 - `../implementation-reference/20-final-site-quality-review-plan.md` for the final page-quality review standard Codex should use from here forward.
+- `deep-dive-audit-action-plan.md` for the latest team audit priorities around proof, authority, delivery certainty, premium CTA, and productized vertical solution pages.
 - `services-and-how-we-build-taxonomy.md` for the service/capability taxonomy.
 - `production-lead-routing-setup.md` for HubSpot, Resend, Calendly, and PostHog setup.
 
 ## Current Status
 
-The upgrade is in a strong pre-launch review state. The main website rebuild is largely complete; the remaining work is page focus/reduction, production lead routing, team/legal/proof review, and final page polish.
+The upgrade is in a strong pre-launch review state. The main website rebuild is largely complete; the remaining work is team/legal/proof review, final launch QA, and HubSpot production routing as the last blocked step.
+
+Latest team audit adds one new priority: the next public-site improvements should create more executive authority. The site should more quickly prove production readiness, delivery speed, founder/team credibility, implementation certainty, and measurable outcomes for higher-budget decision-makers.
 
 ## Simple Checklist
 
@@ -50,6 +54,17 @@ The upgrade is in a strong pre-launch review state. The main website rebuild is 
 - [x] Remaining active industry pages reviewed visually: Home Services, Professional Services, Healthcare & Wellness Clinics, and Guest Services & Hospitality. Retail & Ecommerce, Technology & Media, Real Estate, and Financial Services were later removed from the active industry set and redirected.
 - [x] Professional Services sharpened after industry-focus cleanup so it clearly covers advisory/financial intake, real estate and property lead response, legal/accounting/consulting follow-up, document-heavy workflows, CRM tasks, and human-controlled handoffs.
 - [x] Home Services sharpened around higher-value operators: HVAC, plumbing, electrical, restoration, roofing, pest control, landscaping, cleaning, property maintenance, multi-location teams, missed-call recovery, dispatch, estimate follow-up, and owner trust controls.
+- [x] Homepage authority pass added after the deep-dive audit: sharper production-ready hero, immediate proof points, bounded 2-4 week delivery model, and best-fit/not-fit filtering for higher-value buyers.
+- [x] Education & Childcare ROI pass added: multi-location rollout framing, enrollment response time, tour follow-up, staff hours saved per center, missed-call reduction, and location-level operating visibility.
+- [x] Manufacturing financial/RFQ pass added: RFQ intake, quote cycle time, missed RFQs, response SLA, ERP/CRM handoff, margin protection, and human pricing review are now clearer.
+- [x] Healthcare trust pass added: a clear `What AI will never do` boundary now covers no diagnosis, no emergency triage, no clinical decisions, no independent privacy-sensitive resolution, and no replacement for authorized staff judgment.
+- [x] Manufacturing Quote & Order Response Agent solution page added and linked from Solutions and Manufacturing.
+- [x] Healthcare Front Desk Agent solution page added and linked from Solutions and Healthcare.
+- [x] Home Services Missed-Call & Dispatch Agent solution page added and linked from Solutions and Home Services.
+- [x] Founder/team authority pass added across Homepage, About Overview, and Our Team with 20+ years of founder software experience, production systems, AI agents, RAG, integrations, enterprise/government/SMB exposure, and human-controlled workflow judgment.
+- [x] Contact form lead quality pass completed: assessment submissions now require work email, company, industry, workflow pain, tools used, timeline, and budget range in both the UI and Server Action validation.
+- [x] Homepage trust strip added immediately above the hero to show builder-led AI experience, human-controlled operations, and muted official technology marks under "Technology we build with and integrate" without implying false client partnerships.
+- [x] New Manufacturing, Healthcare, and Home Services solution pages received buyer-priority sections so each page speaks to the operator or executive reviewing the page before implementation details.
 - [x] Privacy and Terms reviewed visually; public legal-review disclaimer removed from the pages and retained only as an internal/team-review requirement.
 - [x] Remaining How We Build pages reviewed visually: Data & Integrations, Operational Intelligence, Workflow Architecture, Staff Training & Adoption, and Technology Strategy.
 - [x] Redirects added for intuitive Workflow Architecture URLs so `/capabilities/workflow-systems-architecture` and `/capabilities/workflow-architecture` resolve to the implemented Workflow & Systems Architecture page.
@@ -64,11 +79,16 @@ The upgrade is in a strong pre-launch review state. The main website rebuild is 
 
 ### Still To Do
 
-- [ ] Final production lead routing once credentials and HubSpot field/object decisions are ready.
+- [x] Deep-dive audit implementation pass completed for homepage authority/proof, 2 to 4 week delivery model, best-fit filtering, priority industry improvements, and three productized solution pages.
+- [ ] Decide whether the primary above-fold CTA should remain **Get Free Assessment** or become more premium, such as **Book a Technical Strategy Call** or **Request AI Workflow Assessment**.
+- [ ] Decide whether `production-ready AI agents, voice assistants, and RAG systems integrated into existing tools in 2 to 4 weeks` is an approved public promise for bounded first workflows.
+- [ ] Add stronger approved proof assets and replace broad founder/team proof with sharper approved specifics where useful.
+- [x] Productized solution page set completed for Manufacturing Quote & Order Response Agent, Healthcare Front Desk Agent, and Home Services Missed-Call & Dispatch Agent.
+- [ ] Final production lead routing is intentionally moved to the last step until HubSpot access, field names, and object decisions are ready.
 - [x] Staging/local buyer-perception QA pass across the highest-intent pages to check clarity, trust, proof credibility, page length, CTA rhythm, and premium feel after the latest polish.
 - [ ] Human review the shortened priority pages for taste, scanability, and whether any removed context needs to return in a more compact format.
-- [ ] Real production-style form submission test into HubSpot and internal email notifications.
-- [ ] Add final Calendly assessment link to form success states and notification emails.
+- [ ] Real production-style form submission test into internal email notifications.
+- [ ] Add or confirm final Calendly assessment link in form success states and notification emails.
 - [x] Add final PostHog project key and confirm live funnel events.
 - [ ] Team review of top buyer pages for tone, density, claims, and sales clarity.
 - [ ] Cofounder review of AI Voice before major flow changes.
@@ -78,6 +98,7 @@ The upgrade is in a strong pre-launch review state. The main website rebuild is 
 
 ### Next Work While Credentials Are Pending
 
+- [ ] Apply the deep-dive audit priority pass from `deep-dive-audit-action-plan.md`.
 - [x] Run the buyer-perception QA pass from `../implementation-reference/20-final-site-quality-review-plan.md` across `/`, `/services`, `/services/ai-voice`, `/services/ai-agents`, `/services/ai-chat`, `/industries/manufacturing`, `/industries/education-childcare`, `/solutions/daycare-voice-agent`, `/capabilities/security-monitoring-ai-safety`, and `/contact`.
 - [ ] Review `/services`, `/services/ai-voice`, `/industries/manufacturing`, `/industries/education-childcare`, and `/solutions/daycare-voice-agent` on staging after the reduction pass.
 - [ ] Complete one final click-through on production/staging after each deploy so redirects, forms, analytics, and third-party scripts are verified in the hosted environment.
@@ -339,11 +360,11 @@ Review questions:
 
 ## Codex Implementation Queue
 
-These are the remaining items Codex can continue implementing without needing strategic re-approval, assuming credentials are available where required.
+These are the remaining items Codex can continue implementing without needing HubSpot access.
 
 ### Production Lead Routing Code
 
-- Finalize HubSpot field mappings once the team confirms the object model.
+- Keep HubSpot field mappings deferred until the team confirms access and object model.
 - Add company, deal, ticket, or note creation if the team wants more than contact-only v1.
 - Add the final Calendly link to success states and notification emails.
 - Improve internal notification email formatting.
@@ -378,9 +399,7 @@ These items require Automate4U account access, business judgment, or approval.
 
 ### Required For Production Lead Routing
 
-- Create or confirm HubSpot private app token.
-- Decide HubSpot v1 model: contact-only, or contact plus company/deal/ticket.
-- Provide exact HubSpot custom property names if custom fields are desired.
+- HubSpot private app token, object model, and custom property names are final-step items, not active blockers for the rest of the site.
 - Create Resend account/API key if using Resend for internal notification emails.
 - Verify the sender/domain for `hello@automate4u.co`.
 - Provide final Calendly Free AI Workflow Assessment link.
@@ -406,7 +425,7 @@ These items require Automate4U account access, business judgment, or approval.
 
 ## Known Caveats
 
-The site is strong enough for serious team review, but it should not be treated as fully launch-final until production routing, proof review, and legal review are complete.
+The site is strong enough for serious team review, but it should not be treated as fully launch-final until proof review, legal review, final launch QA, and the deferred HubSpot routing step are complete.
 
 Remaining risks:
 
@@ -415,7 +434,7 @@ Remaining risks:
 - AI Chat has a polished fallback/preview, but the external embedded demo can still depend on third-party availability.
 - Proof/case study assets still need NDA-safe review before adding stronger claims.
 - Representative proof stories should be replaced or supplemented with approved anonymous/sanitized case studies when the proof inventory is collected.
-- HubSpot, Resend, Calendly, and PostHog final credentials/configuration still need real production setup.
+- Resend, Calendly, and PostHog should be verified in production. HubSpot is deferred to the final routing step.
 - Privacy and Terms pages are practical website pages and should still be reviewed by legal counsel before being treated as final legal policy.
 
 ## Recommended Next Work
@@ -425,8 +444,9 @@ When work resumes, prioritize in this order:
 1. Codex completes the page focus and reduction pass on the priority buyer paths listed above.
 2. Codex only adds new credibility/proof sections when they help answer one of the five buyer questions in `../implementation-reference/20-final-site-quality-review-plan.md`.
 3. Team reviews the shorter page flow for homepage, Services overview, AI Voice, AI Chat, AI Agents, Manufacturing, Education & Childcare, and Daycare Voice Agent.
-4. Team provides production routing credentials and decisions from `production-lead-routing-setup.md`.
-5. Codex finalizes production lead routing code and tests the path.
+4. Team verifies Resend, Calendly, PostHog, and the production smoke-test path.
+5. HubSpot access and object decisions are gathered last using `production-lead-routing-setup.md`.
+6. Codex finalizes HubSpot routing and tests the HubSpot path.
 6. Team gathers proof inventory for anonymous case studies and measurable outcomes.
 7. Codex replaces representative proof with approved anonymous/sanitized proof where available.
 8. Legal review of Privacy and Terms pages.

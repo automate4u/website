@@ -17,11 +17,11 @@ export const proofStories: ProofStory[] = [
   {
     slug: "manufacturing-response-agent",
     label: "Manufacturing response workflow",
-    title: "Parts, availability, quoting, and order-response workflow",
+    title: "RFQ intake, parts availability, quote follow-up, and order-response workflow",
     context:
-      "Industrial teams often receive repetitive customer questions about part availability, quote status, order timing, substitutions, and next steps while sales and operations staff are already busy.",
+      "Industrial teams often receive repetitive customer questions about RFQs, part availability, quote status, order timing, substitutions, and next steps while sales and operations staff are already busy.",
     workflow:
-      "An email or chat request is classified, checked against approved inventory/order context, summarized, routed to the right owner, and prepared for reply or quote follow-up.",
+      "An email or chat request is classified, checked against approved inventory, ERP, CRM, quote, or order context, summarized, routed to the right owner, and prepared for reply or quote follow-up.",
     connectedActions: [
       "Look up approved product, inventory, or order context",
       "Create or update CRM activity",
@@ -29,15 +29,15 @@ export const proofStories: ProofStory[] = [
       "Create a task for sales, parts, or operations",
     ],
     humanControls: [
-      "Human review for pricing, substitutions, delivery commitments, or unusual requests",
+      "Human review for pricing, substitutions, margin-sensitive responses, delivery commitments, or unusual requests",
       "Escalation when source data conflicts or the answer is uncertain",
       "Audit trail for source context and staff approval",
     ],
     metrics: [
       "First response time",
       "Quote cycle time",
+      "Missed RFQs recovered",
       "Requests routed without manual triage",
-      "CRM follow-up completion",
     ],
     links: [
       { label: "Manufacturing", href: "/industries/manufacturing" },
@@ -65,9 +65,9 @@ export const proofStories: ProofStory[] = [
     ],
     metrics: [
       "Routine calls handled",
-      "Missed calls reduced",
+      "Enrollment response time",
+      "Tour follow-up completion",
       "Front-desk interruptions reduced",
-      "Sensitive escalations logged",
     ],
     links: [
       { label: "Daycare Voice Agent", href: "/solutions/daycare-voice-agent" },
