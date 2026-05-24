@@ -17,11 +17,11 @@ export const proofStories: ProofStory[] = [
   {
     slug: "manufacturing-response-agent",
     label: "Manufacturing response workflow",
-    title: "Parts, availability, quoting, and order-response workflow",
+    title: "RFQ intake, parts availability, quote follow-up, and order-response workflow",
     context:
-      "Industrial teams often receive repetitive customer questions about part availability, quote status, order timing, substitutions, and next steps while sales and operations staff are already busy.",
+      "Industrial teams often receive repetitive customer questions about RFQs, part availability, quote status, order timing, substitutions, and next steps while sales and operations staff are already busy.",
     workflow:
-      "An email or chat request is classified, checked against approved inventory/order context, summarized, routed to the right owner, and prepared for reply or quote follow-up.",
+      "An email or chat request is classified, checked against approved inventory, ERP, CRM, quote, or order context, summarized, routed to the right owner, and prepared for reply or quote follow-up.",
     connectedActions: [
       "Look up approved product, inventory, or order context",
       "Create or update CRM activity",
@@ -29,15 +29,15 @@ export const proofStories: ProofStory[] = [
       "Create a task for sales, parts, or operations",
     ],
     humanControls: [
-      "Human review for pricing, substitutions, delivery commitments, or unusual requests",
+      "Human review for pricing, substitutions, margin-sensitive responses, delivery commitments, or unusual requests",
       "Escalation when source data conflicts or the answer is uncertain",
       "Audit trail for source context and staff approval",
     ],
     metrics: [
       "First response time",
       "Quote cycle time",
+      "Missed RFQs recovered",
       "Requests routed without manual triage",
-      "CRM follow-up completion",
     ],
     links: [
       { label: "Manufacturing", href: "/industries/manufacturing" },
@@ -65,9 +65,9 @@ export const proofStories: ProofStory[] = [
     ],
     metrics: [
       "Routine calls handled",
-      "Missed calls reduced",
+      "Enrollment response time",
+      "Tour follow-up completion",
       "Front-desk interruptions reduced",
-      "Sensitive escalations logged",
     ],
     links: [
       { label: "Daycare Voice Agent", href: "/solutions/daycare-voice-agent" },
@@ -77,19 +77,19 @@ export const proofStories: ProofStory[] = [
   {
     slug: "home-services-dispatch",
     label: "Home services dispatch workflow",
-    title: "Missed-call recovery, booking, dispatch intake, and quote follow-up",
+    title: "Missed-call recovery, booking, dispatch intake, and estimate follow-up",
     context:
-      "Home service teams lose opportunities when calls arrive after hours, while staff are on another call, or when technicians and office teams are coordinating urgent requests.",
+      "Home service teams lose opportunities when calls arrive after hours, while staff are on another call, or when technicians and office teams are coordinating urgent requests, property access, or open estimates.",
     workflow:
-      "A voice or chat workflow captures job details, service location, urgency, preferred times, and equipment notes, then creates the booking path, dispatch task, or quote follow-up for the office team.",
+      "A voice or chat workflow captures job details, service location, urgency, preferred times, equipment notes, access details, and customer history, then creates the booking path, dispatch task, or estimate follow-up for the office team.",
     connectedActions: [
       "Qualify service need and urgency",
       "Create calendar, CRM, or dispatch task",
-      "Send customer confirmation or follow-up",
+      "Send customer confirmation or estimate follow-up",
       "Notify office staff or technician owner",
     ],
     humanControls: [
-      "Human review for pricing, emergency promises, warranty questions, or edge cases",
+      "Human review for pricing, emergency promises, access constraints, warranty questions, or edge cases",
       "Clear escalation when scheduling rules are unavailable",
       "Manual override for dispatch and priority decisions",
     ],
@@ -97,7 +97,7 @@ export const proofStories: ProofStory[] = [
       "Booked appointments",
       "Response time",
       "After-hours leads recovered",
-      "Quote follow-up completion",
+      "Estimate follow-up completion",
     ],
     links: [
       { label: "Home Services", href: "/industries/home-services" },
@@ -131,37 +131,7 @@ export const proofStories: ProofStory[] = [
     ],
     links: [
       { label: "Marketing Automation", href: "/services/marketing-automation" },
-      { label: "Retail & Ecommerce", href: "/industries/retail-ecommerce" },
-    ],
-  },
-  {
-    slug: "retail-support-order-agent",
-    label: "Retail support workflow",
-    title: "Product questions, order status, returns, and support triage",
-    context:
-      "Retail and ecommerce teams often answer the same product, sizing, order, return, delivery, and promo questions across chat, email, social, and support queues.",
-    workflow:
-      "A customer message is matched to approved product, order, and policy context, routed by intent, summarized for staff when needed, and logged against support or CRM records.",
-    connectedActions: [
-      "Answer from approved FAQs, product data, and policy rules",
-      "Create or update support ticket context",
-      "Route refund, complaint, or exception cases",
-      "Trigger follow-up or review request when appropriate",
-    ],
-    humanControls: [
-      "Human review for refunds, complaints, high-value customers, or unusual policy requests",
-      "Brand and claims rules for public-facing responses",
-      "Transcript review to improve answer quality over time",
-    ],
-    metrics: [
-      "First response time",
-      "Tickets deflected or triaged for review",
-      "Cost per request",
-      "Escalation quality",
-    ],
-    links: [
-      { label: "AI Chat", href: "/services/ai-chat" },
-      { label: "Retail & Ecommerce", href: "/industries/retail-ecommerce" },
+      { label: "AI Agents", href: "/services/ai-agents" },
     ],
   },
   {
@@ -315,36 +285,6 @@ export const proofStories: ProofStory[] = [
     ],
   },
   {
-    slug: "real-estate-lead-response",
-    label: "Real estate lead workflow",
-    title: "Speed-to-lead, showing request, CRM update, and agent handoff",
-    context:
-      "Real estate teams lose opportunities when listing inquiries, missed calls, portal leads, and showing requests sit without fast qualification and follow-up.",
-    workflow:
-      "An inbound lead is captured, qualified with approved questions, routed to the right agent or property workflow, and logged with next-step reminders.",
-    connectedActions: [
-      "Capture property interest, timeline, budget, and contact details",
-      "Create CRM task, lead note, or showing request",
-      "Send approved confirmation or follow-up",
-      "Notify the agent with a concise lead summary",
-    ],
-    humanControls: [
-      "Licensed advice, pricing, negotiation, and contract questions stay human-led",
-      "Routing rules for territory, listing ownership, and agent availability",
-      "Escalation for unusual requests or unclear listing data",
-    ],
-    metrics: [
-      "Speed to lead",
-      "Booked showings",
-      "CRM completeness",
-      "Follow-up completion",
-    ],
-    links: [
-      { label: "Real Estate", href: "/industries/real-estate" },
-      { label: "AI Voice", href: "/services/ai-voice" },
-    ],
-  },
-  {
     slug: "hospitality-guest-response",
     label: "Hospitality guest workflow",
     title: "Guest questions, booking support, request routing, and service recovery",
@@ -370,46 +310,16 @@ export const proofStories: ProofStory[] = [
       "Service recovery escalations",
     ],
     links: [
-      { label: "Hospitality", href: "/industries/hospitality" },
+      { label: "Guest Services & Hospitality", href: "/industries/hospitality" },
       { label: "AI Chat", href: "/services/ai-chat" },
     ],
   },
   {
-    slug: "technology-media-workflow",
-    label: "Technology and media workflow",
-    title: "Support triage, content workflow, customer update, and reporting",
-    context:
-      "Technology and media teams often need to turn messy inputs into clear tickets, briefs, summaries, drafts, tasks, and status reports without lowering quality.",
-    workflow:
-      "Inbound support, content, or internal requests are classified, summarized, connected to approved context, routed for review, and reported against backlog or output metrics.",
-    connectedActions: [
-      "Summarize support messages, transcripts, briefs, or campaign requests",
-      "Create ticket, content task, customer update, or review queue item",
-      "Route technical, editorial, or customer-sensitive work to owners",
-      "Report themes, backlog, draft acceptance, and workflow volume",
-    ],
-    humanControls: [
-      "Expert review for technical claims, public content, and customer commitments",
-      "Approved product docs, briefs, and knowledge boundaries",
-      "Audit trail for generated drafts, routing, and published actions",
-    ],
-    metrics: [
-      "Backlog reduced",
-      "Routing accuracy",
-      "Draft acceptance",
-      "Reporting visibility",
-    ],
-    links: [
-      { label: "Technology & Media", href: "/industries/technology-media" },
-      { label: "Marketing Automation", href: "/services/marketing-automation" },
-    ],
-  },
-  {
-    slug: "financial-document-intake",
-    label: "Financial services intake workflow",
+    slug: "professional-services-document-intake",
+    label: "Professional services document workflow",
     title: "Client intake, document follow-up, status routing, and advisor handoff",
     context:
-      "Financial service teams often need to chase documents, clarify intake details, answer process questions, and route cases without automating regulated judgment.",
+      "Document-heavy service teams often need to chase files, clarify intake details, answer process questions, and route cases without automating professional judgment.",
     workflow:
       "A client request is captured, checked against approved process rules, routed with missing-document context, and escalated when advice, approval, or compliance review is required.",
     connectedActions: [
@@ -430,7 +340,7 @@ export const proofStories: ProofStory[] = [
       "Review handoff quality",
     ],
     links: [
-      { label: "Financial Services", href: "/industries/financial-services" },
+      { label: "Professional Services", href: "/industries/professional-services" },
       { label: "AI Agents", href: "/services/ai-agents" },
     ],
   },

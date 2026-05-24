@@ -28,6 +28,26 @@ const nextConfig: NextConfig = {
         destination: "/services/:path*",
         permanent: true,
       },
+      {
+        source: "/industries/retail-ecommerce",
+        destination: "/services/ai-chat",
+        permanent: true,
+      },
+      {
+        source: "/industries/technology-media",
+        destination: "/services/custom-ai-software",
+        permanent: true,
+      },
+      {
+        source: "/industries/real-estate",
+        destination: "/industries/professional-services",
+        permanent: true,
+      },
+      {
+        source: "/industries/financial-services",
+        destination: "/industries/professional-services",
+        permanent: true,
+      },
     ];
   },
 };

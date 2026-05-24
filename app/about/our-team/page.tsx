@@ -9,13 +9,15 @@ const team = [
     role: "Client Experience & Data Strategy",
     text: "Daniel brings a client-service and operations lens to automation work. He helps translate messy business workflows into practical systems that improve customer experience, reduce manual coordination, and make staff support easier.",
     strengths: ["Client operations", "Workflow mapping", "Service experience"],
+    proof: ["Operational discovery", "Customer experience design", "Data-informed workflow planning"],
   },
   {
     initials: "MM",
     name: "Michael Mastrella",
     role: "Engineering & AI",
-    text: "Michael leads the technical architecture behind Automate4U systems: AI agents, integrations, custom software, voice and chat workflows, data movement, monitoring, and production reliability.",
-    strengths: ["AI engineering", "System architecture", "Custom software"],
+    text: "Michael leads the technical architecture behind Automate4U systems. His 20+ years of software and automation experience includes AI agents, RAG and document workflows, integrations, custom software, ecommerce and marketplace systems, observability, and production reliability.",
+    strengths: ["AI engineering", "RAG and agents", "System architecture", "Custom software"],
+    proof: ["Production agent systems", "Enterprise, government, and SMB environments", "APIs, permissions, dashboards, and reliability"],
   },
   {
     initials: "JZ",
@@ -23,6 +25,26 @@ const team = [
     role: "Marketing & Partnerships",
     text: "Johnny brings the growth and partnership perspective: connecting automation work to demand generation, customer follow-up, practical sales outcomes, and long-term client relationships.",
     strengths: ["Growth systems", "Partnerships", "Marketing automation"],
+    proof: ["Lead response systems", "Partnership development", "Revenue-focused automation"],
+  },
+];
+
+const credibilitySnapshot = [
+  {
+    title: "Production systems, not demos",
+    text: "The technical bar includes tool-calling, validation, fallbacks, logs, alerts, dashboards, and support paths.",
+  },
+  {
+    title: "Real operating environments",
+    text: "Founder experience spans SMB, enterprise, government, ecommerce, marketplace, sensitive-data, and custom software contexts.",
+  },
+  {
+    title: "AI connected to business tools",
+    text: "Useful systems connect to CRMs, calendars, inboxes, documents, databases, messaging tools, APIs, and internal workflows.",
+  },
+  {
+    title: "Human control built in",
+    text: "We design around approvals, escalation, audit trails, staff review, and clear boundaries for sensitive decisions.",
   },
 ];
 
@@ -95,12 +117,12 @@ export default function Page() {
           </div>
 
           <div className="rounded-lg border border-white/12 bg-white/[0.07] p-5 shadow-[0_18px_55px_rgba(0,0,0,0.20)]">
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Team model</p>
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Credibility snapshot</p>
             <div className="mt-5 grid gap-3">
               {[
-                ["Business workflow", "Understand the operating pain, customer experience, staff constraints, and value case."],
-                ["Technical build", "Design the agent, integrations, controls, dashboards, software, and support model."],
-                ["Go-to-market impact", "Connect the system to faster response, better follow-up, sales outcomes, and customer satisfaction."],
+                ["20+ years", "Founder software and automation experience across production systems and business workflows."],
+                ["Broad environments", "Work across SMB, enterprise, government, ecommerce, marketplace, and sensitive-data contexts."],
+                ["AI implementation", "Agents, RAG, integrations, custom software, monitoring, and human-controlled workflows."],
               ].map(([title, text], index) => (
                 <div key={title} className="grid gap-3 rounded-lg border border-white/10 bg-[#0d1720]/70 p-4 sm:grid-cols-[auto_1fr]">
                   <div className="grid h-9 w-9 place-items-center rounded-full bg-[#1db993] text-sm font-extrabold text-[#05251d]">
@@ -133,6 +155,13 @@ export default function Page() {
                 <h2 className="mt-5 text-2xl font-extrabold leading-tight text-ink">{person.name}</h2>
                 <p className="mt-1 text-sm font-bold uppercase tracking-[0.08em] text-[#167f65]">{person.role}</p>
                 <p className="mt-4 text-sm leading-6 text-muted">{person.text}</p>
+                <div className="mt-5 grid gap-2">
+                  {person.proof.map((item) => (
+                    <p key={item} className="rounded-lg border border-card-border bg-[#f8fbfa] px-3 py-2 text-xs font-semibold leading-5 text-ink">
+                      {item}
+                    </p>
+                  ))}
+                </div>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {person.strengths.map((strength) => (
                     <span key={strength} className="rounded-full border border-card-border bg-[#f8fbfa] px-3 py-1.5 text-xs font-semibold text-muted">
@@ -147,6 +176,24 @@ export default function Page() {
       </section>
 
       <section className="border-t border-card-border bg-[#f8fbfa] px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <SectionHeader
+            eyebrow="Experience clients can pressure-test"
+            title="A practical mix of business, AI, software, and operating judgment."
+            description="The team is built to connect what the business needs with what the system can reliably do."
+          />
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {credibilitySnapshot.map((item) => (
+              <article key={item.title} className="rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
+                <h2 className="text-xl font-extrabold leading-tight text-ink">{item.title}</h2>
+                <p className="mt-4 text-sm leading-6 text-muted">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-card-border bg-white px-4 py-14 md:py-20">
         <div className="mx-auto max-w-[1280px]">
           <SectionHeader
             eyebrow="Technical depth"

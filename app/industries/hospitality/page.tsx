@@ -3,7 +3,7 @@ import IndustryAcceleratorPage from "@/components/industry/IndustryAcceleratorPa
 export default function HospitalityPage() {
   return (
     <IndustryAcceleratorPage
-      eyebrow="Hospitality"
+      eyebrow="Guest Services & Hospitality"
       title="AI guest response and operations workflows for hospitality teams."
       description="We help hotels, venues, restaurants, short-term rental operators, and guest-service teams answer routine questions, route requests, support bookings, and keep staff focused on the moments where hospitality needs a human touch."
       primaryCta={{ label: "Explore AI Voice", href: "/services/ai-voice" }}

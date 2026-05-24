@@ -2,13 +2,9 @@ export type IndustryAcceleratorSlug =
   | "home-services"
   | "education-childcare"
   | "manufacturing"
-  | "retail-ecommerce"
   | "professional-services"
   | "healthcare"
-  | "real-estate"
-  | "financial-services"
-  | "hospitality"
-  | "technology-media";
+  | "hospitality";
 
 export interface IndustryAcceleratorSummary {
   slug: IndustryAcceleratorSlug;
@@ -25,11 +21,11 @@ export const industryAccelerators: IndustryAcceleratorSummary[] = [
     slug: "home-services",
     href: "/industries/home-services",
     title: "Home Services Dispatch Engine",
-    metaTitle: "AI Automation for Home Services and HVAC | Automate4U",
+    metaTitle: "AI Automation for Home Services, HVAC, and Property Maintenance | Automate4U",
     metaDescription:
-      "AI voice, dispatch, booking, follow-up, and CRM workflows for home service and HVAC businesses.",
+      "AI voice, dispatch, booking, estimate follow-up, property maintenance intake, and CRM workflows for high-value home service businesses.",
     primaryKpi: "Missed calls recovered and booked jobs increased",
-    commonWorkflows: ["Missed-call recovery", "Booking", "Dispatch notification", "Quote follow-up"],
+    commonWorkflows: ["Missed-call recovery", "Booking", "Dispatch notification", "Estimate follow-up"],
   },
   {
     slug: "education-childcare",
@@ -45,21 +41,11 @@ export const industryAccelerators: IndustryAcceleratorSummary[] = [
     slug: "manufacturing",
     href: "/industries/manufacturing",
     title: "Manufacturing Customer Response Accelerator",
-    metaTitle: "AI Agents for Manufacturing Customer Response | Automate4U",
+    metaTitle: "AI Agents for Manufacturing RFQ and Quote Response | Automate4U",
     metaDescription:
-      "AI chat and email agents for parts availability, quoting, order status, timelines, and sales handoff.",
-    primaryKpi: "Quote response time reduced",
-    commonWorkflows: ["Parts availability", "Quote triage", "Order status", "Sales handoff"],
-  },
-  {
-    slug: "retail-ecommerce",
-    href: "/industries/retail-ecommerce",
-    title: "Retail AI Support Accelerator",
-    metaTitle: "AI Support Automation for Retail Ecommerce | Automate4U",
-    metaDescription:
-      "AI support workflows for ecommerce product questions, order status, returns, marketing content, and escalations.",
-    primaryKpi: "Cost per request lowered",
-    commonWorkflows: ["Product questions", "Order status", "Returns triage", "Support escalation"],
+      "AI chat and email agents for RFQ intake, parts availability, quote follow-up, order status, timelines, ERP/CRM handoff, and human pricing review.",
+    primaryKpi: "Quote cycle time reduced",
+    commonWorkflows: ["RFQ intake", "Parts availability", "Quote follow-up", "Order status"],
   },
   {
     slug: "professional-services",
@@ -74,51 +60,34 @@ export const industryAccelerators: IndustryAcceleratorSummary[] = [
   {
     slug: "healthcare",
     href: "/industries/healthcare",
-    title: "Healthcare Front Desk Automation Accelerator",
-    metaTitle: "AI Front Desk Automation for Clinics | Automate4U",
+    title: "Healthcare & Wellness Clinic Operations",
+    metaTitle: "AI Front Desk Automation for Healthcare and Wellness Clinics | Automate4U",
     metaDescription:
-      "AI front desk workflows for appointment requests, patient questions, reminders, routing, and human handoff.",
+      "AI front desk workflows for clinics, dental teams, wellness practices, appointment requests, reminders, routing, and human handoff.",
     primaryKpi: "Front desk interruptions reduced",
     commonWorkflows: ["Appointment requests", "Reminder calls", "Routing", "Human handoff"],
   },
   {
-    slug: "real-estate",
-    href: "/industries/real-estate",
-    title: "Real Estate Lead Response Engine",
-    metaTitle: "AI Lead Response for Real Estate | Automate4U",
-    metaDescription:
-      "AI voice, chat, and follow-up workflows for real estate lead response, qualification, booking, and CRM updates.",
-    primaryKpi: "Speed to lead improved",
-    commonWorkflows: ["Lead qualification", "Showing booking", "CRM update", "Follow-up"],
-  },
-  {
-    slug: "financial-services",
-    href: "/industries/financial-services",
-    title: "Financial Services Operations",
-    metaTitle: "AI Intake Automation for Financial Services | Automate4U",
-    metaDescription:
-      "AI-assisted intake, document workflows, support routing, human review, and traceable escalation for financial service teams.",
-    primaryKpi: "Intake and support cycle time reduced",
-    commonWorkflows: ["Client intake", "Document follow-up", "Support routing", "Advisor handoff"],
-  },
-  {
     slug: "hospitality",
     href: "/industries/hospitality",
-    title: "Hospitality Guest Response",
+    title: "Guest Services & Hospitality",
     metaTitle: "AI Guest Response Automation for Hospitality | Automate4U",
     metaDescription:
-      "AI voice, chat, booking support, guest response, request routing, review workflows, and operations automation for hospitality teams.",
+      "AI voice, chat, booking support, guest response, request routing, review workflows, and operations automation for hospitality and guest-service teams.",
     primaryKpi: "Guest response speed improved",
     commonWorkflows: ["Booking questions", "Guest requests", "Review follow-up", "Staff routing"],
   },
-  {
-    slug: "technology-media",
-    href: "/industries/technology-media",
-    title: "Technology & Media Operations",
-    metaTitle: "AI Workflow Automation for Technology and Media | Automate4U",
-    metaDescription:
-      "AI workflow automation for support triage, content operations, customer response, reporting, and internal routing for technology and media teams.",
-    primaryKpi: "Content and support backlog reduced",
-    commonWorkflows: ["Support triage", "Content workflow", "Customer updates", "Reporting"],
-  },
 ];
+
+export const coreIndustryAcceleratorSlugs: IndustryAcceleratorSlug[] = [
+  "home-services",
+  "education-childcare",
+  "manufacturing",
+  "professional-services",
+  "healthcare",
+  "hospitality",
+];
+
+export const coreIndustryAccelerators = industryAccelerators.filter((industry) =>
+  coreIndustryAcceleratorSlugs.includes(industry.slug),
+);

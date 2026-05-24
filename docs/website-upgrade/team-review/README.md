@@ -6,9 +6,12 @@ The files use plain names because they are review documents, not numbered implem
 
 ## Review First
 
+- `active-execution-checklist.md`: the single active implementation checklist to work from now.
 - `current-status-and-review-checklist.md`: simple done/todo checklist, priority pages to review, remaining risks, and next actions.
 - `production-lead-routing-setup.md`: HubSpot, Resend, Calendly, and PostHog setup instructions.
+- `final-launch-qa-without-hubspot.md`: final pre-launch QA checklist for Resend, Calendly, PostHog, route smoke tests, and manual review while HubSpot is deferred.
 - `founder-credibility-implementation-gameplan.md`: implementation plan for adding founder/team credibility to the website without confusing it with case-study proof.
+- `deep-dive-audit-action-plan.md`: latest team audit converted into roadmap actions around authority, proof, premium CTA, delivery certainty, and productized solutions.
 - `proof-inventory-checklist.md`: what to gather for anonymous/sanitized proof and case studies.
 - `proof-stories/`: working folder with the proof-story intake template, quick capture form, examples, and filled submissions.
 - `proof-stories/proof-opportunity-map.md`: practical sales pursuit map for turning examples into real pilots and future case studies.

@@ -55,39 +55,6 @@ const supportCards = [
   },
 ];
 
-const callScenarios = [
-  {
-    scenario: "Scenario 01",
-    title: "Enrollment inquiry",
-    duration: "1:24",
-    details: "A parent asks about age groups, availability, waitlist process, and what happens after submitting an inquiry.",
-  },
-  {
-    scenario: "Scenario 02",
-    title: "Tour scheduling",
-    duration: "1:07",
-    details: "The assistant gathers parent details, preferred timing, child age, and routes the request to the right location.",
-  },
-  {
-    scenario: "Scenario 03",
-    title: "Absence reporting",
-    duration: "0:52",
-    details: "A parent reports an absence and the assistant captures the details for the right classroom or admin team.",
-  },
-  {
-    scenario: "Scenario 04",
-    title: "Pickup authorization notice",
-    duration: "1:01",
-    details: "Routine pickup updates can be documented and routed, while sensitive exceptions stay with authorized staff.",
-  },
-  {
-    scenario: "Scenario 05",
-    title: "Program availability",
-    duration: "1:18",
-    details: "Parents can get approved guidance on program options, location availability, and next steps without waiting for a callback.",
-  },
-];
-
 const controls = [
   {
     title: "Configure approved responses",
@@ -294,36 +261,6 @@ export default function DaycareVoiceAgentPage() {
             />
           </div>
 
-          {/* <div className="mx-auto mt-8 max-w-[720px] text-center">
-            <p className="text-sm leading-6 text-white/68">
-              These example conversations show how the assistant handles common daycare scenarios. Each demonstrates the natural flow from parent inquiry to appropriate action or handoff.
-            </p>
-          </div>
-
-          <div className="mx-auto mt-10 grid max-w-[1040px] gap-5 md:grid-cols-3">
-            {callScenarios.map((scenario) => (
-              <article key={scenario.title} className="rounded-lg border border-white/10 bg-white/[0.04] p-5 shadow-[0_14px_34px_rgba(0,0,0,0.18)]">
-                <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#70e7ca]">{scenario.scenario}</p>
-                <h3 className="mt-3 text-base font-extrabold leading-6 text-white">{scenario.title}</h3>
-                <div className="mt-5 flex items-center gap-3">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#24d6aa] text-sm font-extrabold text-[#051C2C]" aria-hidden="true">
-                    ▶
-                  </span>
-                  <div className="flex h-8 flex-1 items-center gap-1" aria-hidden="true">
-                    {[12, 18, 9, 22, 14, 26, 11, 19, 15, 24, 10, 17, 13, 21].map((height, index) => (
-                      <span
-                        key={`${scenario.title}-${index}`}
-                        className="w-1.5 rounded-full bg-[#1db993]/55"
-                        style={{ height }}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-xs font-semibold text-white/42">{scenario.duration}</span>
-                </div>
-                <p className="mt-5 text-sm leading-6 text-white/64">{scenario.details}</p>
-              </article>
-            ))}
-          </div> */}
           <p className="mx-auto mt-8 max-w-[720px] text-center text-xs leading-6 text-white/42">
             During a walkthrough, we can review approved examples and map the call scenarios that matter most to your centers.
           </p>

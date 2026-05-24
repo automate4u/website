@@ -21,7 +21,9 @@ Use three clear layers:
 
 2. **Industries**
    - Where those services are applied.
-   - Examples: Manufacturing, Education & Childcare, Home Services, Professional Services, Retail & Ecommerce, Healthcare, Real Estate, Financial Services, Hospitality, and Technology & Media.
+   - Current promoted focus: Education & Childcare, Manufacturing, Home Services, Healthcare & Wellness Clinics, Professional Services, and Guest Services & Hospitality.
+   - Real Estate and Financial Services are treated as sub-segments of Professional Services, not standalone promoted industry pages.
+   - Retail & Ecommerce and Technology & Media are no longer active target industry pages. Their old URLs redirect to broader service pages unless there is active pipeline reason to rebuild them later.
 
 3. **How We Build**
    - The trust and delivery capability layer.

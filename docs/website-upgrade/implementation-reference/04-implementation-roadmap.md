@@ -14,7 +14,13 @@ Do not treat each phase as a fully separate project. The safest implementation p
 6. Reduce and sharpen the page experience so priority buyer paths are easier to scan.
 7. Keep legacy-pattern checks in release QA and avoid reintroducing migrated HTML.
 
-Use `../README.md` for the full doc map. Use this file as the active task sequence.
+Use `../README.md` for the full doc map. Use `../team-review/active-execution-checklist.md` as the active task sequence from here forward. This file remains the historical/full roadmap.
+
+Latest team audit reference:
+
+- `../team-review/deep-dive-audit-action-plan.md`
+
+That audit adds a new post-build priority: the site should feel less like a technical capability library and more like a high-authority implementation partner for high-budget decision-makers. The next work should emphasize proof, delivery certainty, production readiness, stronger founder/team credibility, and productized vertical solution pages.
 
 ## Roadmap Checklist
 
@@ -47,6 +53,10 @@ Use `../README.md` for the full doc map. Use this file as the active task sequen
 
 ### Remaining Before Launch/Team Signoff
 
+- [ ] Deep-dive audit authority pass: homepage proof/authority rewrite, premium CTA decision, 2 to 4 week delivery model, best-fit filtering, and stronger proof assets.
+- [ ] Decide whether to use `production-ready AI agents, voice assistants, and RAG systems integrated into existing tools in 2 to 4 weeks` as a public hero promise or a bounded delivery-model claim.
+- [ ] Decide whether the site-wide primary CTA should remain **Get Free Assessment** or shift to a more premium CTA such as **Book a Technical Strategy Call**, **Request AI Workflow Assessment**, or **Discuss a Production AI Pilot**.
+- [ ] Add productized solution pages for Manufacturing Quote & Order Response Agent, Healthcare Front Desk Agent, and Home Services Missed-Call & Dispatch Agent if approved as priority sales paths.
 - [ ] Human review the shortened priority pages for taste, scanability, and whether any removed context needs to return in a more compact format.
 - [ ] Finalize production lead routing after credentials and field decisions are available.
 - [ ] Run a real production-style form submission test into HubSpot and internal email notifications.
@@ -60,6 +70,7 @@ Use `../README.md` for the full doc map. Use this file as the active task sequen
 
 ### Recommended Next Steps While Credentials Are Pending
 
+- [ ] Start with the deep-dive audit action plan: homepage authority/proof pass, delivery-model section, best-fit filtering, and vertical proof improvements.
 - [ ] Final human-quality pass on the remaining highest-value buyer paths:
   `/services`, `/services/ai-voice`, `/industries/manufacturing`, `/industries/education-childcare`, and `/solutions/daycare-voice-agent`.
 - [ ] For each priority page, define the one main buyer question, remove duplicate sections, and keep only the proof/process blocks needed to move that buyer forward.
@@ -82,6 +93,7 @@ Last updated: after Phase 5 representative proof placement, visual QA polish, do
 | Phase 6: Analytics + iteration | Code started; live config pending | Optional PostHog loading, attribution capture, first event tracking, and first conversion-path tests are implemented. Full funnel reporting needs PostHog credentials and production validation. |
 | Phase 7: Remaining migration | Audit complete | Active `app/`, `components/`, and `data/` surfaces no longer show migrated-page usage of `dangerouslySetInnerHTML`, raw `<img>` tags, old WordPress/HTTP assets, or Formspree. The intentional exceptions are JSON-LD injection and the AI Chat demo iframe. Keep this audit in release QA so legacy patterns are not reintroduced. |
 | Phase 8: Page focus and reduction | Added after team feedback | First team feedback says many pages feel long and hard to get through. Next pass should shorten priority buyer paths, remove repeated sections, and move depth into supporting pages only where useful. |
+| Phase 9: Authority and high-budget conversion | Added after deep-dive audit | Next work should increase executive confidence with a sharper production-ready value proposition, proof near the top of the funnel, premium CTA testing, a 2 to 4 week bounded delivery model, stronger founder/team credibility, productized vertical solution pages, and more explicit lead qualification. |
 
 Completed in the first implementation pass:
 

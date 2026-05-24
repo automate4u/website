@@ -21,7 +21,7 @@ export const routeMetadata: RouteMetadata[] = [
     path: "/industries",
     title: "AI Industry Accelerators | Automate4U",
     description:
-      "Explore Automate4U Industry Accelerators for manufacturing, education, home services, professional services, retail ecommerce, healthcare, real estate, financial services, hospitality, and technology teams.",
+      "Explore Automate4U Industry Accelerators for manufacturing, education and childcare, home services, healthcare and wellness clinics, professional services, and guest services teams.",
   },
   {
     path: "/solutions",
@@ -30,22 +30,28 @@ export const routeMetadata: RouteMetadata[] = [
       "Explore focused AI automation solutions for voice, chat, email, operations, marketing, workflow handoffs, and managed AI operations.",
   },
   {
-    path: "/industries/financial-services",
-    title: "AI Automation for Financial Services | Automate4U",
+    path: "/solutions/manufacturing-quote-order-agent",
+    title: "Manufacturing Quote and Order Response Agent | Automate4U",
     description:
-      "AI automation patterns for financial service teams that need faster intake, support routing, document workflows, and human-controlled escalation.",
+      "AI workflow for RFQ intake, parts availability, quote follow-up, order questions, ERP/CRM handoff, and human pricing review.",
+  },
+  {
+    path: "/solutions/healthcare-front-desk-agent",
+    title: "Healthcare Front Desk Agent for Clinic Admin Workflows | Automate4U",
+    description:
+      "AI workflow for healthcare and wellness clinic appointment requests, reminders, forms, administrative questions, staff handoff, and conservative escalation.",
+  },
+  {
+    path: "/solutions/home-services-missed-call-dispatch-agent",
+    title: "Home Services Missed-Call and Dispatch Agent | Automate4U",
+    description:
+      "AI workflow for missed-call recovery, after-hours intake, booking handoff, dispatch notes, estimate follow-up, and staff escalation for home service teams.",
   },
   {
     path: "/industries/hospitality",
-    title: "AI Automation for Hospitality | Automate4U",
+    title: "Guest Services & Hospitality AI Automation | Automate4U",
     description:
-      "AI voice, chat, booking, guest response, and operations automation for hospitality businesses.",
-  },
-  {
-    path: "/industries/technology-media",
-    title: "AI Automation for Technology and Media | Automate4U",
-    description:
-      "AI automation for content operations, support workflows, customer response, metadata, reporting, and internal operations.",
+      "AI voice, chat, booking support, guest response, request routing, review workflows, and operations automation for hospitality and guest-service teams.",
   },
   {
     path: "/capabilities/custom-software-ai-solutions",

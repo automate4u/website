@@ -24,7 +24,6 @@ const filters: ProofFilter[] = [
       "home-services-dispatch",
       "healthcare-front-desk",
       "hospitality-guest-response",
-      "real-estate-lead-response",
     ],
   },
   {
@@ -32,18 +31,15 @@ const filters: ProofFilter[] = [
     slugs: [
       "manufacturing-response-agent",
       "home-services-dispatch",
-      "real-estate-lead-response",
       "professional-services-intake",
     ],
   },
   {
     label: "Support",
     slugs: [
-      "retail-support-order-agent",
       "healthcare-front-desk",
       "hospitality-guest-response",
-      "technology-media-workflow",
-      "financial-document-intake",
+      "professional-services-document-intake",
     ],
   },
   {
@@ -53,18 +49,23 @@ const filters: ProofFilter[] = [
       "managed-ai-operations-rhythm",
       "ai-roadmap-value-realization",
       "manufacturing-response-agent",
-      "technology-media-workflow",
     ],
   },
   {
     label: "Marketing",
-    slugs: ["marketing-content-operations", "retail-support-order-agent", "technology-media-workflow"],
+    slugs: ["marketing-content-operations"],
   },
 ];
 
 export default function ProofStoryPanel({ stories, compact = false, filterable = false }: ProofStoryPanelProps) {
+  const storySlugSet = useMemo(() => new Set(stories.map((story) => story.slug)), [stories]);
+  const availableFilters = useMemo(
+    () =>
+      filters.filter((filter) => !filter.slugs?.length || filter.slugs.some((slug) => storySlugSet.has(slug))),
+    [storySlugSet],
+  );
   const [activeFilter, setActiveFilter] = useState(filters[0].label);
-  const active = filters.find((filter) => filter.label === activeFilter) ?? filters[0];
+  const active = availableFilters.find((filter) => filter.label === activeFilter) ?? availableFilters[0] ?? filters[0];
 
   const visibleStories = useMemo(() => {
     if (!filterable || !active.slugs?.length) return stories;
@@ -78,7 +79,7 @@ export default function ProofStoryPanel({ stories, compact = false, filterable =
     <div className="mt-8">
       {filterable ? (
         <div className="mb-5 flex gap-2 overflow-x-auto pb-1" aria-label="Filter workflow examples">
-          {filters.map((filter) => {
+          {availableFilters.map((filter) => {
             const isActive = filter.label === activeFilter;
             return (
               <button

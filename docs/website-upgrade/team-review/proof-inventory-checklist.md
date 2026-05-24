@@ -36,14 +36,10 @@ Current public proof patterns:
 
 - Industrial manufacturing: parts, availability, quoting, order-response agent.
 - Education and childcare: daycare front-desk voice assistant with staff-controlled escalation.
-- Home services: missed-call recovery, booking, dispatch intake, and quote follow-up.
-- Retail and ecommerce: product questions, order status, returns, support triage, and marketing content operations.
-- Professional services: intake, booking, document follow-up, and staff handoff.
-- Healthcare: routine front-desk automation with conservative escalation.
-- Financial services: client intake, document follow-up, status routing, and advisor handoff.
-- Real estate: speed-to-lead, showing request, CRM update, and agent handoff.
-- Hospitality: guest questions, booking support, request routing, and service recovery.
-- Technology and media: support triage, content workflow, customer update, and reporting.
+- Home services: missed-call recovery, booking, dispatch intake, estimate follow-up, and property-maintenance intake.
+- Healthcare and wellness clinics: routine front-desk automation with conservative escalation.
+- Professional services: intake, booking, document follow-up, advisor handoff, lead response, and staff routing.
+- Guest services and hospitality: guest questions, booking support, request routing, and service recovery.
 - Custom software: AI-enabled workbench for review, approvals, and operating visibility.
 - Managed AI Operations: monitoring, review, tuning, and monthly value reporting.
 - AI strategy: workflow assessment, pilot selection, and 30/60/90-day value roadmap.
@@ -71,7 +67,7 @@ Start with the proof stories most likely to support near-term sales conversation
 
 - **Industrial manufacturing response workflow:** first response time improvement, quote cycle time reduction, number of repetitive requests handled, CRM follow-up completion, and staff time redirected.
 - **Daycare/front-desk voice workflow:** missed calls reduced, routine calls handled, front-desk interruptions reduced, tour inquiries captured, sensitive escalations logged, and staff time redirected.
-- **Home services dispatch workflow:** after-hours leads recovered, booked appointments, response time improvement, quote follow-up completion, and dispatch/admin touches reduced.
+- **Home services dispatch workflow:** after-hours leads recovered, booked appointments, response time improvement, estimate follow-up completion, property-maintenance intake quality, and dispatch/admin touches reduced.
 - **Professional services intake workflow:** intake completion rate, appointment conversion, missing-document follow-up reduction, cycle time to booked next step, and staff touches reduced.
 - **Marketing automation workflow:** approved content shipped, drafting hours reduced, follow-up tasks created, campaign reporting cadence, and lead movement visibility.
 
@@ -114,13 +110,19 @@ Do not:
 
 ## Priority Industry Proof Categories
 
-Build proof around the industries Automate4U already understands or is actively selling into:
+Build proof first around the industries Automate4U already understands or is actively selling into:
 
 - Industrial manufacturing: parts availability, quote requests, ordering information, timelines, sales handoff.
 - Education, daycare, prep school, and childcare: routine calls, parent messages, scheduling, attendance, sensitive exceptions, staff handoff.
-- Home services and HVAC: missed calls, dispatch, booking, quote follow-up, customer updates.
+- Home services and HVAC: missed calls, dispatch, booking, estimate follow-up, property-maintenance intake, customer updates.
 - Professional services: massage, dental, orthopedic, osteopathy, intake, scheduling, reminders, document collection, follow-up.
+
+Secondary proof categories can remain in the internal inventory, but should not be promoted as target industries unless there is active pipeline demand:
+
 - Retail ecommerce: product questions, order status, returns, support triage, marketing content operations.
+- Real estate: speed-to-lead, showing request, CRM update, and advisor/agent handoff.
+- Financial services: client intake, document follow-up, status routing, and advisor handoff.
+- Technology and media: support triage, content workflow, customer update, reporting, and internal routing.
 
 ## Minimum Case Study Standard
 

@@ -11,9 +11,11 @@ The docs are split into two practical folders:
 
 For the Automate4U team:
 
+- `team-review/active-execution-checklist.md`
 - `team-review/current-status-and-review-checklist.md`
 - `team-review/production-lead-routing-setup.md`
 - `team-review/proof-inventory-checklist.md`
+- `team-review/deep-dive-audit-action-plan.md`
 - `team-review/services-and-how-we-build-taxonomy.md`
 - `team-review/project-decisions-summary.md`
 
