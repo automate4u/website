@@ -29,8 +29,8 @@ const solutionFitChecks = [
 const plannedSolutions = [
   "Manufacturing parts availability and quote response agent",
   "Home services missed-call recovery and dispatch assistant",
+  "Daycare front-desk voice and parent communication assistant",
   "Professional services intake and appointment routing agent",
-  "Retail ecommerce support, returns, and product-question agent",
   "Marketing content production and approval workflow agent",
 ];
 

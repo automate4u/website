@@ -123,11 +123,11 @@ Use "Industry Accelerators" to signal repeatable expertise and lower perceived i
 Examples:
 
 - Home Services Dispatch Engine.
-- Retail AI Support Accelerator.
 - Professional Services Intake Engine.
+- Professional Services Document Intake Engine.
 - Healthcare Front Desk Automation Accelerator.
-- Real Estate Lead Response Engine.
 - Manufacturing Customer Response Accelerator.
+- Guest Services Response Accelerator.
 - Marketing Content Operations Accelerator.
 
 ### People & Process Adoption

@@ -4,6 +4,8 @@ These examples show the level of detail that is useful.
 
 Important: these are **not approved public case studies**. They are realistic examples of how the team can fill out the proof intake form. Replace the example details with real, approved project notes before using them as stronger website proof.
 
+Some examples cover secondary sectors such as retail ecommerce, payments, or technology workflows. Keep those as internal proof inventory unless the public industry focus changes again.
+
 Use the examples to understand:
 
 - How specific the before-state should be.

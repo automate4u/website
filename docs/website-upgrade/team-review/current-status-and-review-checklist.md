@@ -26,6 +26,9 @@ The upgrade is in a strong pre-launch review state. The main website rebuild is 
 - [x] Service pages rebuilt or added.
 - [x] Industry pages rebuilt as native React pages.
 - [x] Industry pages standardized on the shared `IndustryAcceleratorPage` structure so every industry uses the same trusted flow while keeping industry-specific copy, proof, controls, and sector thinking.
+- [x] Industry focus narrowed to six public targets: Education & Childcare, Manufacturing, Home Services, Healthcare & Wellness Clinics, Professional Services, and Guest Services & Hospitality.
+- [x] Retail & Ecommerce and Technology & Media are no longer active public target industries. Old URLs now redirect to relevant service pages instead of being promoted as standalone industry pages.
+- [x] Real Estate and Financial Services are no longer standalone public target industries. Old URLs now redirect to Professional Services.
 - [x] Daycare Voice Agent added under Solutions as a focused implementation.
 - [x] Capabilities reframed into How We Build trust pages.
 - [x] Representative proof/workflow examples added across homepage, service pages, and industry pages.
@@ -41,10 +44,10 @@ The upgrade is in a strong pre-launch review state. The main website rebuild is 
 - [x] Public internal-language cleanup completed for obvious terms found during review, including "Flagship wedge," "buyers need," "what clients should see," and page-explaining copy.
 - [x] Homepage and industry proof cards were made more compact so proof stays useful without making the page feel as heavy.
 - [x] Secondary service pages reviewed visually: AI Operations Strategy, Marketing Automation, Managed AI Operations, and Custom AI Software.
-- [x] Shared industry-page template reviewed visually through Hospitality, Financial Services, and Real Estate.
+- [x] Shared industry-page template reviewed visually across the active industry-page structure.
 - [x] About Overview, Our Team, and Security/Safety trust page reviewed visually.
 - [x] Additional audience-facing cleanup completed across How We Build and About pages so sections speak directly to the visitor instead of referring to "clients" or "buyers" as an outside group.
-- [x] Remaining industry pages reviewed visually: Home Services, Professional Services, Retail & Ecommerce, Healthcare, and Technology & Media.
+- [x] Remaining active industry pages reviewed visually: Home Services, Professional Services, Healthcare & Wellness Clinics, and Guest Services & Hospitality. Retail & Ecommerce, Technology & Media, Real Estate, and Financial Services were later removed from the active industry set and redirected.
 - [x] Privacy and Terms reviewed visually; public legal-review disclaimer removed from the pages and retained only as an internal/team-review requirement.
 - [x] Remaining How We Build pages reviewed visually: Data & Integrations, Operational Intelligence, Workflow Architecture, Staff Training & Adoption, and Technology Strategy.
 - [x] Redirects added for intuitive Workflow Architecture URLs so `/capabilities/workflow-systems-architecture` and `/capabilities/workflow-architecture` resolve to the implemented Workflow & Systems Architecture page.
@@ -213,16 +216,13 @@ Current proof stories:
 - Daycare front-desk voice assistant with staff-controlled escalation.
 - Home services missed-call recovery, booking, dispatch intake, and quote follow-up.
 - Marketing content workflow for drafting, approval, scheduling, and reporting.
-- Retail support/order agent for product questions, order status, returns, and support triage.
 - Professional services intake, booking, document follow-up, and staff handoff.
 - Healthcare front-desk support with conservative escalation.
 - Custom operations workbench for review, approvals, and operating visibility.
 - Managed AI Operations rhythm for monitoring, review, tuning, and value reporting.
 - AI roadmap/value realization assessment.
-- Real estate speed-to-lead and showing request workflow.
-- Hospitality guest response and service request routing.
-- Technology and media support, content, customer update, and reporting workflow.
-- Financial services document intake and advisor handoff workflow.
+- Guest services and hospitality response, booking support, and service request routing.
+- Professional services document intake and advisor handoff workflow.
 
 Important proof rule:
 
@@ -238,12 +238,15 @@ All listed industry pages have been rebuilt into native React pages:
 - Education & Childcare.
 - Home Services.
 - Professional Services.
-- Retail & Ecommerce.
-- Healthcare.
-- Real Estate.
-- Financial Services.
-- Hospitality.
-- Technology & Media.
+- Healthcare & Wellness Clinics.
+- Guest Services & Hospitality.
+
+Removed from public target industry list:
+
+- Retail & Ecommerce now redirects to AI Chat.
+- Technology & Media now redirects to Custom AI Software.
+- Real Estate now redirects to Professional Services.
+- Financial Services now redirects to Professional Services.
 
 The Industry pages now focus on operating pain, connected workflows, systems, controls, KPIs, spend confidence, and relevant solution links.
 

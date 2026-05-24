@@ -2,13 +2,9 @@ export type IndustryAcceleratorSlug =
   | "home-services"
   | "education-childcare"
   | "manufacturing"
-  | "retail-ecommerce"
   | "professional-services"
   | "healthcare"
-  | "real-estate"
-  | "financial-services"
-  | "hospitality"
-  | "technology-media";
+  | "hospitality";
 
 export interface IndustryAcceleratorSummary {
   slug: IndustryAcceleratorSlug;
@@ -52,16 +48,6 @@ export const industryAccelerators: IndustryAcceleratorSummary[] = [
     commonWorkflows: ["Parts availability", "Quote triage", "Order status", "Sales handoff"],
   },
   {
-    slug: "retail-ecommerce",
-    href: "/industries/retail-ecommerce",
-    title: "Retail AI Support Accelerator",
-    metaTitle: "AI Support Automation for Retail Ecommerce | Automate4U",
-    metaDescription:
-      "AI support workflows for ecommerce product questions, order status, returns, marketing content, and escalations.",
-    primaryKpi: "Cost per request lowered",
-    commonWorkflows: ["Product questions", "Order status", "Returns triage", "Support escalation"],
-  },
-  {
     slug: "professional-services",
     href: "/industries/professional-services",
     title: "Professional Services Intake Engine",
@@ -74,51 +60,34 @@ export const industryAccelerators: IndustryAcceleratorSummary[] = [
   {
     slug: "healthcare",
     href: "/industries/healthcare",
-    title: "Healthcare Front Desk Automation Accelerator",
-    metaTitle: "AI Front Desk Automation for Clinics | Automate4U",
+    title: "Healthcare & Wellness Clinic Operations",
+    metaTitle: "AI Front Desk Automation for Healthcare and Wellness Clinics | Automate4U",
     metaDescription:
-      "AI front desk workflows for appointment requests, patient questions, reminders, routing, and human handoff.",
+      "AI front desk workflows for clinics, dental teams, wellness practices, appointment requests, reminders, routing, and human handoff.",
     primaryKpi: "Front desk interruptions reduced",
     commonWorkflows: ["Appointment requests", "Reminder calls", "Routing", "Human handoff"],
   },
   {
-    slug: "real-estate",
-    href: "/industries/real-estate",
-    title: "Real Estate Lead Response Engine",
-    metaTitle: "AI Lead Response for Real Estate | Automate4U",
-    metaDescription:
-      "AI voice, chat, and follow-up workflows for real estate lead response, qualification, booking, and CRM updates.",
-    primaryKpi: "Speed to lead improved",
-    commonWorkflows: ["Lead qualification", "Showing booking", "CRM update", "Follow-up"],
-  },
-  {
-    slug: "financial-services",
-    href: "/industries/financial-services",
-    title: "Financial Services Operations",
-    metaTitle: "AI Intake Automation for Financial Services | Automate4U",
-    metaDescription:
-      "AI-assisted intake, document workflows, support routing, human review, and traceable escalation for financial service teams.",
-    primaryKpi: "Intake and support cycle time reduced",
-    commonWorkflows: ["Client intake", "Document follow-up", "Support routing", "Advisor handoff"],
-  },
-  {
     slug: "hospitality",
     href: "/industries/hospitality",
-    title: "Hospitality Guest Response",
+    title: "Guest Services & Hospitality",
     metaTitle: "AI Guest Response Automation for Hospitality | Automate4U",
     metaDescription:
-      "AI voice, chat, booking support, guest response, request routing, review workflows, and operations automation for hospitality teams.",
+      "AI voice, chat, booking support, guest response, request routing, review workflows, and operations automation for hospitality and guest-service teams.",
     primaryKpi: "Guest response speed improved",
     commonWorkflows: ["Booking questions", "Guest requests", "Review follow-up", "Staff routing"],
   },
-  {
-    slug: "technology-media",
-    href: "/industries/technology-media",
-    title: "Technology & Media Operations",
-    metaTitle: "AI Workflow Automation for Technology and Media | Automate4U",
-    metaDescription:
-      "AI workflow automation for support triage, content operations, customer response, reporting, and internal routing for technology and media teams.",
-    primaryKpi: "Content and support backlog reduced",
-    commonWorkflows: ["Support triage", "Content workflow", "Customer updates", "Reporting"],
-  },
 ];
+
+export const coreIndustryAcceleratorSlugs: IndustryAcceleratorSlug[] = [
+  "home-services",
+  "education-childcare",
+  "manufacturing",
+  "professional-services",
+  "healthcare",
+  "hospitality",
+];
+
+export const coreIndustryAccelerators = industryAccelerators.filter((industry) =>
+  coreIndustryAcceleratorSlugs.includes(industry.slug),
+);

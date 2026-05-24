@@ -2,23 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import SectionHeader from "@/components/sections/SectionHeader";
-import { industryAccelerators } from "@/data/industry-accelerators";
+import { coreIndustryAccelerators } from "@/data/industry-accelerators";
 import { solutions } from "@/data/solutions";
 
 const industryImages: Record<string, string> = {
-  "financial-services": "/images/industries/financialServices.jpg",
   "education-childcare": "/images/home/how-it-works.jpg",
   healthcare: "/images/industries/healthcare.jpg",
   "home-services": "/images/industries/home-services.avif",
   hospitality: "/images/industries/hospitality.jpg",
   manufacturing: "/images/industries/manufacturing.jpg",
   "professional-services": "/images/industries/professional-services.jpg",
-  "real-estate": "/images/industries/real_estate.jpg",
-  "retail-ecommerce": "/images/industries/retail.jpg",
-  "technology-media": "/images/industries/tech.jpg",
 };
 
-const industryCards = [...industryAccelerators].sort((a, b) => a.title.localeCompare(b.title));
+const industryCards = [...coreIndustryAccelerators].sort((a, b) => a.title.localeCompare(b.title));
 
 const operatingPatterns = [
   {
@@ -83,7 +79,7 @@ export default function IndustriesPage() {
               <div className="rounded-lg border border-card-border bg-white p-5">
                 <h2 className="text-xl font-extrabold text-ink">Industries show the operating environment.</h2>
                 <p className="mt-2 text-sm leading-6 text-muted">
-                  Use these pages when you want to see how AI fits into a sector such as manufacturing, education, home services, retail, or professional services.
+                  Use these pages when you want to see how AI fits into a sector such as manufacturing, education, home services, healthcare and wellness clinics, professional services, or guest services.
                 </p>
               </div>
               <div className="rounded-lg border border-card-border bg-white p-5">

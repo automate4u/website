@@ -58,8 +58,9 @@ export default function Footer() {
                             <li><Link href="/industries/home-services" className="hover:text-accent">Home Services</Link></li>
                             <li><Link href="/industries/education-childcare" className="hover:text-accent">Education & Childcare</Link></li>
                             <li><Link href="/industries/manufacturing" className="hover:text-accent">Manufacturing</Link></li>
+                            <li><Link href="/industries/healthcare" className="hover:text-accent">Healthcare & Wellness Clinics</Link></li>
                             <li><Link href="/industries/professional-services" className="hover:text-accent">Professional Services</Link></li>
-                            <li><Link href="/industries/hospitality" className="hover:text-accent">Hospitality</Link></li>
+                            <li><Link href="/industries/hospitality" className="hover:text-accent">Guest Services & Hospitality</Link></li>
                             <li className="pt-2"><Link href="/industries" className="hover:text-accent font-semibold flex items-center gap-1">See all industries <span aria-hidden="true">&rarr;</span></Link></li>
                         </ul>
                     </div>

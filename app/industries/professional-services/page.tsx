@@ -17,6 +17,7 @@ const valuePatterns = [
   { label: "Client and patient intake", outcome: "Collect the details staff ask for repeatedly, route requests to the right person, and reduce back-and-forth before the first appointment or consultation." },
   { label: "Appointment scheduling", outcome: "Support booking, rescheduling, reminders, confirmations, cancellation handling, and follow-up while respecting staff availability and office rules." },
   { label: "Document and next-step follow-up", outcome: "Request missing forms, send instructions, remind clients of next steps, and escalate unanswered or sensitive cases before they stall." },
+  { label: "Advisor and real estate follow-up", outcome: "Capture inquiries, qualify intent, create CRM tasks, send approved next steps, and route time-sensitive opportunities to the right person." },
 ];
 
 const servicePaths = [
@@ -61,7 +62,7 @@ export default function ProfessionalServicesPage() {
     <IndustryAcceleratorPage
       eyebrow="Professional services"
       title="AI intake and follow-up systems for appointment-driven service teams."
-      description="We help professional practices, clinics, wellness teams, advisory firms, and client-service businesses reduce repetitive intake, scheduling, document follow-up, and front-office routing while keeping judgment with the right people."
+      description="We help advisory firms, real estate teams, legal and accounting offices, consultants, agencies, and client-service businesses reduce repetitive intake, scheduling, document follow-up, CRM updates, and front-office routing while keeping judgment with the right people."
       primaryCta={{ label: "Explore AI Agents", href: "/services/ai-agents" }}
       image={{ src: "/images/home/how-it-works.jpg", alt: "Professional services team reviewing client intake and workflow information" }}
       typicalRequest="Can I book an appointment, and what information do you need from me first?"

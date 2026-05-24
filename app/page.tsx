@@ -163,7 +163,21 @@ export default function Home() {
         </div>
       </section>
 
-      <ProofStorySection filterable compact />
+      <ProofStorySection
+        filterable
+        compact
+        storySlugs={[
+          "manufacturing-response-agent",
+          "daycare-front-desk-voice",
+          "home-services-dispatch",
+          "professional-services-intake",
+          "healthcare-front-desk",
+          "hospitality-guest-response",
+          "custom-operations-workbench",
+          "managed-ai-operations-rhythm",
+          "ai-roadmap-value-realization",
+        ]}
+      />
 
       <AssessmentCTA sourcePage="/" ctaLocation="homepage_assessment_section" />
     </div>

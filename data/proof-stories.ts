@@ -131,37 +131,7 @@ export const proofStories: ProofStory[] = [
     ],
     links: [
       { label: "Marketing Automation", href: "/services/marketing-automation" },
-      { label: "Retail & Ecommerce", href: "/industries/retail-ecommerce" },
-    ],
-  },
-  {
-    slug: "retail-support-order-agent",
-    label: "Retail support workflow",
-    title: "Product questions, order status, returns, and support triage",
-    context:
-      "Retail and ecommerce teams often answer the same product, sizing, order, return, delivery, and promo questions across chat, email, social, and support queues.",
-    workflow:
-      "A customer message is matched to approved product, order, and policy context, routed by intent, summarized for staff when needed, and logged against support or CRM records.",
-    connectedActions: [
-      "Answer from approved FAQs, product data, and policy rules",
-      "Create or update support ticket context",
-      "Route refund, complaint, or exception cases",
-      "Trigger follow-up or review request when appropriate",
-    ],
-    humanControls: [
-      "Human review for refunds, complaints, high-value customers, or unusual policy requests",
-      "Brand and claims rules for public-facing responses",
-      "Transcript review to improve answer quality over time",
-    ],
-    metrics: [
-      "First response time",
-      "Tickets deflected or triaged for review",
-      "Cost per request",
-      "Escalation quality",
-    ],
-    links: [
-      { label: "AI Chat", href: "/services/ai-chat" },
-      { label: "Retail & Ecommerce", href: "/industries/retail-ecommerce" },
+      { label: "AI Agents", href: "/services/ai-agents" },
     ],
   },
   {
@@ -315,36 +285,6 @@ export const proofStories: ProofStory[] = [
     ],
   },
   {
-    slug: "real-estate-lead-response",
-    label: "Real estate lead workflow",
-    title: "Speed-to-lead, showing request, CRM update, and agent handoff",
-    context:
-      "Real estate teams lose opportunities when listing inquiries, missed calls, portal leads, and showing requests sit without fast qualification and follow-up.",
-    workflow:
-      "An inbound lead is captured, qualified with approved questions, routed to the right agent or property workflow, and logged with next-step reminders.",
-    connectedActions: [
-      "Capture property interest, timeline, budget, and contact details",
-      "Create CRM task, lead note, or showing request",
-      "Send approved confirmation or follow-up",
-      "Notify the agent with a concise lead summary",
-    ],
-    humanControls: [
-      "Licensed advice, pricing, negotiation, and contract questions stay human-led",
-      "Routing rules for territory, listing ownership, and agent availability",
-      "Escalation for unusual requests or unclear listing data",
-    ],
-    metrics: [
-      "Speed to lead",
-      "Booked showings",
-      "CRM completeness",
-      "Follow-up completion",
-    ],
-    links: [
-      { label: "Real Estate", href: "/industries/real-estate" },
-      { label: "AI Voice", href: "/services/ai-voice" },
-    ],
-  },
-  {
     slug: "hospitality-guest-response",
     label: "Hospitality guest workflow",
     title: "Guest questions, booking support, request routing, and service recovery",
@@ -370,46 +310,16 @@ export const proofStories: ProofStory[] = [
       "Service recovery escalations",
     ],
     links: [
-      { label: "Hospitality", href: "/industries/hospitality" },
+      { label: "Guest Services & Hospitality", href: "/industries/hospitality" },
       { label: "AI Chat", href: "/services/ai-chat" },
     ],
   },
   {
-    slug: "technology-media-workflow",
-    label: "Technology and media workflow",
-    title: "Support triage, content workflow, customer update, and reporting",
-    context:
-      "Technology and media teams often need to turn messy inputs into clear tickets, briefs, summaries, drafts, tasks, and status reports without lowering quality.",
-    workflow:
-      "Inbound support, content, or internal requests are classified, summarized, connected to approved context, routed for review, and reported against backlog or output metrics.",
-    connectedActions: [
-      "Summarize support messages, transcripts, briefs, or campaign requests",
-      "Create ticket, content task, customer update, or review queue item",
-      "Route technical, editorial, or customer-sensitive work to owners",
-      "Report themes, backlog, draft acceptance, and workflow volume",
-    ],
-    humanControls: [
-      "Expert review for technical claims, public content, and customer commitments",
-      "Approved product docs, briefs, and knowledge boundaries",
-      "Audit trail for generated drafts, routing, and published actions",
-    ],
-    metrics: [
-      "Backlog reduced",
-      "Routing accuracy",
-      "Draft acceptance",
-      "Reporting visibility",
-    ],
-    links: [
-      { label: "Technology & Media", href: "/industries/technology-media" },
-      { label: "Marketing Automation", href: "/services/marketing-automation" },
-    ],
-  },
-  {
-    slug: "financial-document-intake",
-    label: "Financial services intake workflow",
+    slug: "professional-services-document-intake",
+    label: "Professional services document workflow",
     title: "Client intake, document follow-up, status routing, and advisor handoff",
     context:
-      "Financial service teams often need to chase documents, clarify intake details, answer process questions, and route cases without automating regulated judgment.",
+      "Document-heavy service teams often need to chase files, clarify intake details, answer process questions, and route cases without automating professional judgment.",
     workflow:
       "A client request is captured, checked against approved process rules, routed with missing-document context, and escalated when advice, approval, or compliance review is required.",
     connectedActions: [
@@ -430,7 +340,7 @@ export const proofStories: ProofStory[] = [
       "Review handoff quality",
     ],
     links: [
-      { label: "Financial Services", href: "/industries/financial-services" },
+      { label: "Professional Services", href: "/industries/professional-services" },
       { label: "AI Agents", href: "/services/ai-agents" },
     ],
   },

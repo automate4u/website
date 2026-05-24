@@ -59,9 +59,9 @@ const confidenceNotes = [
 export default function HealthcarePage() {
   return (
     <IndustryAcceleratorPage
-      eyebrow="Healthcare"
-      title="AI front desk support for routine healthcare communication and admin workflows."
-      description="We help clinics, wellness practices, therapy offices, dental teams, and healthcare-adjacent service providers reduce repetitive administrative communication while keeping clinical judgment, sensitive situations, and exceptions with staff."
+      eyebrow="Healthcare & wellness clinics"
+      title="AI front desk support for healthcare, wellness, and clinic admin workflows."
+      description="We help clinics, wellness practices, therapy offices, dental teams, osteopathy, massage, and healthcare-adjacent service providers reduce repetitive administrative communication while keeping clinical judgment, sensitive situations, and exceptions with staff."
       primaryCta={{ label: "Explore AI Voice", href: "/services/ai-voice" }}
       image={{ src: "/images/industries/healthcare.jpg", alt: "Healthcare staff supporting patient communication and administrative workflow" }}
       typicalRequest="Can I reschedule my appointment, and do I need to bring anything with me?"
