@@ -46,8 +46,24 @@ function notificationLine(label: string, value: string | undefined): string {
   return `${label}: ${present(value)}`;
 }
 
+function isInternalTestSubmission(data: Record<string, string>): boolean {
+  const email = data.email?.toLowerCase();
+  const emailDomain = email?.split("@").at(1);
+  const reservedTestDomains = new Set(["example.com", "example.org", "example.net", "example.invalid"]);
+
+  return (
+    Boolean(emailDomain && reservedTestDomains.has(emailDomain)) ||
+    email === "test@example.com" ||
+    email === "voice-test@example.com" ||
+    data.utmSource === "e2e" ||
+    data.utmMedium === "test" ||
+    data.utmCampaign === "conversion_path"
+  );
+}
+
 async function submitToHubSpot(data: Record<string, string>) {
   if (process.env.A4U_E2E_TEST_MODE === "1") return;
+  if (isInternalTestSubmission(data)) return;
 
   const token = process.env.HUBSPOT_PRIVATE_APP_TOKEN;
   if (!token || !data.email) return;
@@ -92,6 +108,7 @@ async function submitToHubSpot(data: Record<string, string>) {
 
 async function sendNotification(data: Record<string, string>) {
   if (process.env.A4U_E2E_TEST_MODE === "1") return;
+  if (isInternalTestSubmission(data)) return;
 
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.RESEND_FROM_EMAIL ?? "hello@automate4u.co";
