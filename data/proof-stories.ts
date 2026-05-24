@@ -77,19 +77,19 @@ export const proofStories: ProofStory[] = [
   {
     slug: "home-services-dispatch",
     label: "Home services dispatch workflow",
-    title: "Missed-call recovery, booking, dispatch intake, and quote follow-up",
+    title: "Missed-call recovery, booking, dispatch intake, and estimate follow-up",
     context:
-      "Home service teams lose opportunities when calls arrive after hours, while staff are on another call, or when technicians and office teams are coordinating urgent requests.",
+      "Home service teams lose opportunities when calls arrive after hours, while staff are on another call, or when technicians and office teams are coordinating urgent requests, property access, or open estimates.",
     workflow:
-      "A voice or chat workflow captures job details, service location, urgency, preferred times, and equipment notes, then creates the booking path, dispatch task, or quote follow-up for the office team.",
+      "A voice or chat workflow captures job details, service location, urgency, preferred times, equipment notes, access details, and customer history, then creates the booking path, dispatch task, or estimate follow-up for the office team.",
     connectedActions: [
       "Qualify service need and urgency",
       "Create calendar, CRM, or dispatch task",
-      "Send customer confirmation or follow-up",
+      "Send customer confirmation or estimate follow-up",
       "Notify office staff or technician owner",
     ],
     humanControls: [
-      "Human review for pricing, emergency promises, warranty questions, or edge cases",
+      "Human review for pricing, emergency promises, access constraints, warranty questions, or edge cases",
       "Clear escalation when scheduling rules are unavailable",
       "Manual override for dispatch and priority decisions",
     ],
@@ -97,7 +97,7 @@ export const proofStories: ProofStory[] = [
       "Booked appointments",
       "Response time",
       "After-hours leads recovered",
-      "Quote follow-up completion",
+      "Estimate follow-up completion",
     ],
     links: [
       { label: "Home Services", href: "/industries/home-services" },

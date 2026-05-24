@@ -21,11 +21,11 @@ export const industryAccelerators: IndustryAcceleratorSummary[] = [
     slug: "home-services",
     href: "/industries/home-services",
     title: "Home Services Dispatch Engine",
-    metaTitle: "AI Automation for Home Services and HVAC | Automate4U",
+    metaTitle: "AI Automation for Home Services, HVAC, and Property Maintenance | Automate4U",
     metaDescription:
-      "AI voice, dispatch, booking, follow-up, and CRM workflows for home service and HVAC businesses.",
+      "AI voice, dispatch, booking, estimate follow-up, property maintenance intake, and CRM workflows for high-value home service businesses.",
     primaryKpi: "Missed calls recovered and booked jobs increased",
-    commonWorkflows: ["Missed-call recovery", "Booking", "Dispatch notification", "Quote follow-up"],
+    commonWorkflows: ["Missed-call recovery", "Booking", "Dispatch notification", "Estimate follow-up"],
   },
   {
     slug: "education-childcare",

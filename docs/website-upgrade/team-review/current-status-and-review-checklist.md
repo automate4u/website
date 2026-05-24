@@ -48,6 +48,8 @@ The upgrade is in a strong pre-launch review state. The main website rebuild is 
 - [x] About Overview, Our Team, and Security/Safety trust page reviewed visually.
 - [x] Additional audience-facing cleanup completed across How We Build and About pages so sections speak directly to the visitor instead of referring to "clients" or "buyers" as an outside group.
 - [x] Remaining active industry pages reviewed visually: Home Services, Professional Services, Healthcare & Wellness Clinics, and Guest Services & Hospitality. Retail & Ecommerce, Technology & Media, Real Estate, and Financial Services were later removed from the active industry set and redirected.
+- [x] Professional Services sharpened after industry-focus cleanup so it clearly covers advisory/financial intake, real estate and property lead response, legal/accounting/consulting follow-up, document-heavy workflows, CRM tasks, and human-controlled handoffs.
+- [x] Home Services sharpened around higher-value operators: HVAC, plumbing, electrical, restoration, roofing, pest control, landscaping, cleaning, property maintenance, multi-location teams, missed-call recovery, dispatch, estimate follow-up, and owner trust controls.
 - [x] Privacy and Terms reviewed visually; public legal-review disclaimer removed from the pages and retained only as an internal/team-review requirement.
 - [x] Remaining How We Build pages reviewed visually: Data & Integrations, Operational Intelligence, Workflow Architecture, Staff Training & Adoption, and Technology Strategy.
 - [x] Redirects added for intuitive Workflow Architecture URLs so `/capabilities/workflow-systems-architecture` and `/capabilities/workflow-architecture` resolve to the implemented Workflow & Systems Architecture page.
@@ -214,7 +216,7 @@ Current proof stories:
 
 - Manufacturing response agent for parts, availability, quoting, and order questions.
 - Daycare front-desk voice assistant with staff-controlled escalation.
-- Home services missed-call recovery, booking, dispatch intake, and quote follow-up.
+- Home services missed-call recovery, booking, dispatch intake, estimate follow-up, and property-maintenance intake.
 - Marketing content workflow for drafting, approval, scheduling, and reporting.
 - Professional services intake, booking, document follow-up, and staff handoff.
 - Healthcare front-desk support with conservative escalation.
