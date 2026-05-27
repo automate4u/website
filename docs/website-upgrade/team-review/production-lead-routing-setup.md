@@ -36,7 +36,7 @@ Codex can handle these once credentials/field decisions are available:
 - Add deal or ticket creation if the team wants lead pipeline tracking in HubSpot.
 - Add assessment notes to HubSpot records.
 - Add notification email formatting.
-- Add Calendly link to success states and notification emails.
+- Add HubSpot meeting link to success states and notification emails.
 - Add PostHog event names and funnel tracking.
 - Add fallback webhook support if Automate4U wants a second backup destination.
 - Add Playwright checks that the form still submits in test mode.
@@ -51,7 +51,7 @@ Automate4U must provide or confirm:
 - **HubSpot field names:** exact internal property names for any custom fields.
 - **Resend API key:** production value for `RESEND_API_KEY`, if using Resend.
 - **Verified sender:** production `RESEND_FROM_EMAIL`, such as `hello@automate4u.co`, after domain verification.
-- **Calendly link:** final Free AI Workflow Assessment booking URL.
+- **HubSpot meeting link:** final Free AI Workflow Assessment booking URL.
 - **PostHog key:** production value for `NEXT_PUBLIC_POSTHOG_KEY`, if using PostHog.
 - **Legal/privacy approval:** confirm that form, analytics, CRM, email notification, and AI demo language is acceptable.
 
@@ -104,7 +104,7 @@ RESEND_API_KEY=...
 RESEND_FROM_EMAIL=hello@automate4u.co
 NEXT_PUBLIC_POSTHOG_KEY=...
 NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
-NEXT_PUBLIC_CALENDLY_ASSESSMENT_URL=https://calendly.com/...
+NEXT_PUBLIC_HUBSPOT_MEETING_URL=https://meetings-na3.hubspot.com/jzhang
 ```
 
 Testing:
@@ -129,9 +129,9 @@ Steps:
 6. Set `RESEND_FROM_EMAIL` to a verified sender, ideally `hello@automate4u.co`.
 7. Submit a test assessment and confirm all three recipients receive the email.
 
-## Calendly Setup Checklist
+## HubSpot Meeting Setup Checklist
 
-Use Calendly Free for v1 if one assessment event type is enough.
+Use the HubSpot meeting link for the assessment booking path.
 
 Recommended event:
 
@@ -142,7 +142,7 @@ Recommended event:
 
 After setup:
 
-- Add the final link as `NEXT_PUBLIC_CALENDLY_ASSESSMENT_URL`.
+- Add the final link as `NEXT_PUBLIC_HUBSPOT_MEETING_URL`.
 - Add the link to form success states and notification emails.
 - Optionally add it to follow-up emails.
 
@@ -181,7 +181,7 @@ Production lead routing is complete when:
 - A real assessment submission creates or updates a HubSpot contact.
 - The submission context is visible in HubSpot.
 - The three internal recipients receive a readable email notification.
-- The success state and notification email show the expected Calendly booking path.
+- The success state and notification email show the expected HubSpot meeting booking path.
 - The submission preserves source page, CTA location, landing page, referrer, and UTM fields.
 - Form submission errors show a clear retry path.
 - `npm run lint`, `npm run build`, and `npm run test:e2e` pass.
@@ -190,6 +190,6 @@ Production lead routing is complete when:
 
 - Whether v1 should remain contact-only or also create a HubSpot deal/ticket.
 - Exact HubSpot custom property names.
-- Final Calendly URL.
+- Final HubSpot meeting URL.
 - Whether HubSpot-native notifications are enough or Resend should remain mandatory.
 - Whether a fallback webhook is useful.

@@ -7,6 +7,9 @@ import type { ServiceSlug } from "@/data/services";
 import type { IndustryAcceleratorSlug } from "@/data/industry-accelerators";
 import { trackEvent } from "@/lib/analytics";
 
+const assessmentMeetingUrl =
+  process.env.NEXT_PUBLIC_HUBSPOT_MEETING_URL ?? "https://meetings-na3.hubspot.com/jzhang";
+
 type AssessmentLeadFormProps = {
   sourcePage: string;
   ctaLocation: string;
@@ -29,7 +32,6 @@ export default function AssessmentLeadForm({
     message: "",
   });
   const formStarted = useRef(false);
-  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_ASSESSMENT_URL;
 
   useEffect(() => {
     if (!state.message) return;
@@ -71,9 +73,9 @@ export default function AssessmentLeadForm({
           <strong className="block text-ink">What happens next:</strong>
           We review the workflow, look for the smallest useful automation opportunity, and follow up with a practical next step.
         </div>
-        {calendlyUrl ? (
+        {assessmentMeetingUrl ? (
           <a
-            href={calendlyUrl}
+            href={assessmentMeetingUrl}
             target="_blank"
             rel="noreferrer"
             className="inline-flex w-fit items-center justify-center rounded-full bg-accent px-5 py-3 font-bold text-white hover:bg-btn-hover"
@@ -150,8 +152,8 @@ export default function AssessmentLeadForm({
           <select name="budget" required defaultValue="" className="rounded-xl border border-card-border px-3 py-3">
             <option value="" disabled>Select a budget range</option>
             <option>Exploring fit first</option>
-            <option>Under $3k/month</option>
-            <option>$3k-$5k/month</option>
+            <option>Under $2k/month</option>
+            <option>$2k-$5k/month</option>
             <option>$5k-$10k/month</option>
             <option>$10k+/month</option>
             <option>Project budget, not monthly</option>

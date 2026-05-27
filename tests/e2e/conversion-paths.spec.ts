@@ -17,6 +17,10 @@ test("assessment form submits without losing source context", async ({ page }) =
 
   await expect(page.getByRole("heading", { name: "Assessment request received." })).toBeVisible();
   await expect(page.getByText("What happens next:")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Book Assessment Call" })).toHaveAttribute(
+    "href",
+    "https://meetings-na3.hubspot.com/jzhang",
+  );
 });
 
 test("ai voice page exposes demo and assessment conversion paths", async ({ page }) => {
@@ -33,7 +37,7 @@ test("ai voice page exposes demo and assessment conversion paths", async ({ page
   await page.getByLabel("Biggest workflow pain").fill("Recover missed calls and route booking updates to the right team.");
   await page.getByLabel("Tools currently used").fill("ServiceTitan, Google Calendar, phone system");
   await page.getByLabel("Timeline").selectOption("1-2 months");
-  await page.getByLabel("Budget range").selectOption("$3k-$5k/month");
+  await page.getByLabel("Budget range").selectOption("$2k-$5k/month");
   await page.getByRole("button", { name: "Request My Assessment" }).click();
 
   await expect(page.getByRole("heading", { name: "Assessment request received." })).toBeVisible();

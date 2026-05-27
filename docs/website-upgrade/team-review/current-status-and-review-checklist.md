@@ -11,13 +11,15 @@ Use:
 - `../implementation-reference/20-final-site-quality-review-plan.md` for the final page-quality review standard Codex should use from here forward.
 - `deep-dive-audit-action-plan.md` for the latest team audit priorities around proof, authority, delivery certainty, premium CTA, and productized vertical solution pages.
 - `services-and-how-we-build-taxonomy.md` for the service/capability taxonomy.
-- `production-lead-routing-setup.md` for HubSpot, Resend, Calendly, and PostHog setup.
+- `production-lead-routing-setup.md` for HubSpot, Resend, HubSpot Meetings, and PostHog setup.
 
 ## Current Status
 
-The upgrade is in a strong pre-launch review state. The main website rebuild is largely complete; the remaining work is team/legal/proof review, final launch QA, and HubSpot production routing as the last blocked step.
+The upgrade is in a strong pre-launch review state. The main website rebuild is largely complete; the remaining work is buyer-confidence proof, team/legal/proof review, final launch QA, and HubSpot production routing as the last blocked step.
 
 Latest team audit adds one new priority: the next public-site improvements should create more executive authority. The site should more quickly prove production readiness, delivery speed, founder/team credibility, implementation certainty, and measurable outcomes for higher-budget decision-makers.
+
+Latest external buyer review adds a sharper version of the same priority: the site feels legitimate and clear, but not proven enough yet. The next improvement pass should make founder/team experience, demo evidence, vertical workflow examples, risk reduction, and buying path clarity more visible without inventing fake testimonials, fake logos, fake results, or unsupported compliance claims.
 
 ## Simple Checklist
 
@@ -80,6 +82,7 @@ Latest team audit adds one new priority: the next public-site improvements shoul
 ### Still To Do
 
 - [x] Deep-dive audit implementation pass completed for homepage authority/proof, 2 to 4 week delivery model, best-fit filtering, priority industry improvements, and three productized solution pages.
+- [ ] Complete the external buyer-review response pass from `active-execution-checklist.md`: stronger founder/team proof, relevant systems snapshots, demo-as-proof framing, vertical-specific workflow proof, a production workflow section using Plan/Build/Test/Guardrails/Observability/Integrations, a safe proof section equivalent to "real workflows/practical outcomes," risk-reduction copy, clearer buying path, pricing visibility, team credibility, and navigation consistency.
 - [ ] Decide whether the primary above-fold CTA should remain **Get Free Assessment** or become more premium, such as **Book a Technical Strategy Call** or **Request AI Workflow Assessment**.
 - [ ] Decide whether `production-ready AI agents, voice assistants, and RAG systems integrated into existing tools in 2 to 4 weeks` is an approved public promise for bounded first workflows.
 - [ ] Add stronger approved proof assets and replace broad founder/team proof with sharper approved specifics where useful.
@@ -88,7 +91,7 @@ Latest team audit adds one new priority: the next public-site improvements shoul
 - [x] Staging/local buyer-perception QA pass across the highest-intent pages to check clarity, trust, proof credibility, page length, CTA rhythm, and premium feel after the latest polish.
 - [ ] Human review the shortened priority pages for taste, scanability, and whether any removed context needs to return in a more compact format.
 - [ ] Real production-style form submission test into internal email notifications.
-- [ ] Add or confirm final Calendly assessment link in form success states and notification emails.
+- [x] Add or confirm final HubSpot assessment meeting link in form success states and notification emails.
 - [x] Add final PostHog project key and confirm live funnel events.
 - [ ] Team review of top buyer pages for tone, density, claims, and sales clarity.
 - [ ] Cofounder review of AI Voice before major flow changes.
@@ -366,7 +369,7 @@ These are the remaining items Codex can continue implementing without needing Hu
 
 - Keep HubSpot field mappings deferred until the team confirms access and object model.
 - Add company, deal, ticket, or note creation if the team wants more than contact-only v1.
-- Add the final Calendly link to success states and notification emails.
+- Add the final HubSpot meeting link to success states and notification emails.
 - Improve internal notification email formatting.
 - Add or refine PostHog event names once the production key is available.
 - Add fallback webhook support if the team wants a backup destination.
@@ -402,7 +405,7 @@ These items require Automate4U account access, business judgment, or approval.
 - HubSpot private app token, object model, and custom property names are final-step items, not active blockers for the rest of the site.
 - Create Resend account/API key if using Resend for internal notification emails.
 - Verify the sender/domain for `hello@automate4u.co`.
-- Provide final Calendly Free AI Workflow Assessment link.
+- Provide final HubSpot Free AI Workflow Assessment meeting link.
 - Provide PostHog project key if using PostHog.
 - Confirm notification recipients remain:
   - `johnny@automate4u.co`
@@ -434,7 +437,7 @@ Remaining risks:
 - AI Chat has a polished fallback/preview, but the external embedded demo can still depend on third-party availability.
 - Proof/case study assets still need NDA-safe review before adding stronger claims.
 - Representative proof stories should be replaced or supplemented with approved anonymous/sanitized case studies when the proof inventory is collected.
-- Resend, Calendly, and PostHog should be verified in production. HubSpot is deferred to the final routing step.
+- Resend, HubSpot Meetings, and PostHog should be verified in production. HubSpot CRM routing is deferred to the final routing step.
 - Privacy and Terms pages are practical website pages and should still be reviewed by legal counsel before being treated as final legal policy.
 
 ## Recommended Next Work
@@ -444,7 +447,7 @@ When work resumes, prioritize in this order:
 1. Codex completes the page focus and reduction pass on the priority buyer paths listed above.
 2. Codex only adds new credibility/proof sections when they help answer one of the five buyer questions in `../implementation-reference/20-final-site-quality-review-plan.md`.
 3. Team reviews the shorter page flow for homepage, Services overview, AI Voice, AI Chat, AI Agents, Manufacturing, Education & Childcare, and Daycare Voice Agent.
-4. Team verifies Resend, Calendly, PostHog, and the production smoke-test path.
+4. Team verifies Resend, HubSpot Meetings, PostHog, and the production smoke-test path.
 5. HubSpot access and object decisions are gathered last using `production-lead-routing-setup.md`.
 6. Codex finalizes HubSpot routing and tests the HubSpot path.
 6. Team gathers proof inventory for anonymous case studies and measurable outcomes.

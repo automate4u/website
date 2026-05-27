@@ -4,6 +4,50 @@ This is the single checklist to work from now. Older roadmap docs remain useful 
 
 ## Current Sprint: Authority And High-Budget Conversion
 
+### 0. External Buyer Review Response
+
+Status: New priority from latest external review.
+
+Goal: move the site from "clear and capable" to "credible enough for a serious operator to book and consider a paid pilot." The review says the site feels legitimate, but not proven enough yet. The fix is not more generic explanation. The fix is sharper evidence, founder/team experience, vertical-specific workflow proof, demo confidence, and risk reduction.
+
+Do not invent testimonials, client logos, named customer results, certifications, or metrics that are not true. Use real founder/team experience, representative workflow examples, approved sanitized proof, product/demo artifacts, and clearly labeled implementation patterns. Be precise about compliance: Automate4U should not claim to be SOC 2, HIPAA, GDPR, or PCI DSS certified unless that is true, but we can say we build with compliant/compliance-ready vendors, client-owned accounts, data-handling requirements, access controls, logs, human review, and architecture choices that support regulated or sensitive workflows.
+
+Priority tasks:
+
+- [ ] Add a stronger homepage proof section using real founder/team experience: production systems, SaaS, enterprise/government/SMB environments, AI agents, RAG, integrations, scheduling, messaging, reporting, observability, and sensitive workflow controls.
+- [ ] Add or improve "relevant systems we have built before" snapshots. These should be framed as founder/team experience or representative patterns, not fake Automate4U case studies.
+- [ ] Make the live voice demo feel like a proof asset, not just a secondary CTA. Add clearer scenario framing for missed calls, daycare tour requests, professional intake, angry/escalated callers, and fallback behavior where feasible.
+- [ ] Add buyer-specific proof blocks to the strongest vertical paths: Home Services, Daycare/Education, Professional Services, Healthcare/Wellness, and Manufacturing/Trades.
+- [ ] Add a compact risk-reduction section: one bounded workflow, approved sources/scripts, human escalation, action logs, monitoring, and expand only after value is proven.
+- [ ] Add a homepage trust/safety section that makes the compliance support offer clearer without overclaiming formal Automate4U certification. Recommended framing:
+  - Built with compliance-capable vendors and client-approved infrastructure where required.
+  - Map data handling, storage, retention, consent, access, and deletion requirements before launch.
+  - Use least-privilege access, audit logs, human review, escalation paths, and safe failure behavior.
+  - Support sensitive workflows in healthcare, childcare, professional services, and regulated operations without implying autonomous legal/clinical/safety decisions.
+  - If a client requires SOC 2, HIPAA, GDPR, PCI DSS, data residency, BAAs, DPAs, or security review, the implementation plan should identify which vendors, accounts, contracts, settings, and controls satisfy those requirements.
+- [ ] Add a homepage "production workflow" section inspired by the trust pattern of Plan -> Build -> Test -> Guardrails -> Observability -> Integrations, adapted for Automate4U as an implementation partner rather than a self-serve platform. Recommended cards:
+  - Plan: map the workflow, systems, edge cases, risk boundaries, and success metric.
+  - Build: create the agent, RAG layer, prompts, tools, actions, and first workflow.
+  - Test: run real scenarios, edge cases, fallback behavior, and staff handoff paths before launch.
+  - Guardrails: define approved sources, allowed actions, escalation rules, and human review points.
+  - Observability: monitor outcomes, transcripts/summaries, errors, handoffs, usage, cost, and improvement opportunities.
+  - Integrations: connect to CRMs, calendars, inboxes, phone systems, documents, spreadsheets, databases, and custom APIs.
+- [ ] Create a proof section that serves the same trust role as "Real customers. Real revenue." without unsupported claims. Use one of these formats until approved case studies exist:
+  - "Real workflows. Practical outcomes." with anonymized/sanitized workflow snapshots.
+  - "Relevant systems we have built before." with founder/team experience snapshots.
+  - "What a first pilot can prove." with target metrics such as missed calls recovered, response time reduced, admin hours saved, quote cycle time reduced, handoff quality, and cost per request.
+  Do not use fake names, fake testimonials, fake revenue, fake customer logos, or fake metrics. Replace with approved named stories later.
+- [ ] Add a clearer buying path: free workflow assessment, paid blueprint or focused pilot, controlled launch, managed AI operations.
+- [ ] Review pricing visibility outside AI Voice so buyers understand the likely investment path before booking.
+- [ ] Strengthen Our Team with real credibility: headshots if available, LinkedIn links if approved, stronger founder/operator/engineering background, and concrete systems experience.
+- [ ] Fix any remaining navigation or taxonomy inconsistency, especially older industry names appearing in menus or page links.
+- [ ] Keep pages concise while adding proof. If proof makes a page longer, use compact cards, examples, tabs, or links instead of large explanatory blocks.
+
+Definition of done:
+
+- A skeptical daycare, home services, healthcare/wellness, or professional services operator can quickly see that Automate4U understands their workflow, has relevant real systems experience, offers a controlled low-risk path, and can demonstrate the kind of system being proposed.
+- The sales call no longer has to prove basic legitimacy from scratch.
+
 ### 1. Homepage Authority Pass
 
 Status: Completed in code. Needs human review.
@@ -126,11 +170,11 @@ Status: In progress.
 Tasks:
 
 - [ ] Final internal email notification test through Resend.
-- [ ] Final Calendly success-link check.
+- [ ] Final HubSpot meeting success-link check.
 - [ ] Production smoke test after deploy.
 - [ ] Confirm PostHog events are still firing after the latest deploy.
 - [x] Add final pre-launch QA checklist for the team.
-- [x] Include Calendly assessment link in internal notification emails.
+- [x] Include HubSpot assessment meeting link in internal notification emails.
 - [x] Run pre-deploy local checks: lint, build, and e2e.
 
 ### 10A. Buyer Trust And Solution Page Polish

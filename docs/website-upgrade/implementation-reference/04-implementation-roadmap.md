@@ -60,7 +60,7 @@ That audit adds a new post-build priority: the site should feel less like a tech
 - [ ] Human review the shortened priority pages for taste, scanability, and whether any removed context needs to return in a more compact format.
 - [ ] Finalize production lead routing after credentials and field decisions are available.
 - [ ] Run a real production-style form submission test into HubSpot and internal email notifications.
-- [ ] Add final Calendly assessment link to success states and notification emails.
+- [x] Add final HubSpot assessment meeting link to success states and notification emails.
 - [ ] Add final PostHog project key and confirm live funnel events.
 - [ ] Team reviews the top buyer pages for tone, density, claims, and sales clarity.
 - [ ] Cofounder reviews AI Voice before major flow changes.
@@ -111,7 +111,7 @@ Completed in the first implementation pass:
 - UTM/referrer/landing-page attribution fields added to assessment forms.
 - Optional PostHog loader added behind `NEXT_PUBLIC_POSTHOG_KEY`.
 - Assessment and AI Voice demo analytics events wired for key conversion actions.
-- Assessment success state upgraded with next-step copy and optional Calendly link.
+- Assessment success state upgraded with next-step copy and HubSpot meeting link.
 - Global Organization/WebSite JSON-LD added.
 - Service/Breadcrumb JSON-LD added for typed service and Industry Accelerator routes.
 - Playwright installed and first conversion-path tests added for the assessment form and AI Voice assessment path.
