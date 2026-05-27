@@ -2,7 +2,7 @@
 
 Use this checklist before the next production push while HubSpot access is still pending.
 
-HubSpot is intentionally out of scope for this pass. The goal is to confirm that the public site, assessment flow, email notifications, Calendly path, analytics, and high-intent routes are working cleanly.
+HubSpot CRM routing is intentionally out of scope for this pass. The goal is to confirm that the public site, assessment flow, email notifications, HubSpot meeting path, analytics, and high-intent routes are working cleanly.
 
 ## Codex-Verified Items
 
@@ -46,14 +46,14 @@ The email should include:
 - Landing page.
 - Referrer.
 - UTM fields when available.
-- Calendly assessment link.
+- HubSpot assessment meeting link.
 
-### Calendly Booking Path
+### HubSpot Meeting Booking Path
 
 After submitting the assessment form, confirm:
 
 - The success screen appears.
-- The `Book Assessment Call` button opens the correct Calendly event.
+- The `Book Assessment Call` button opens the correct HubSpot meeting link.
 - The event duration, meeting location, and availability are correct.
 
 ### PostHog Events

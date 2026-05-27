@@ -16,7 +16,7 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
     env: {
       A4U_E2E_TEST_MODE: "1",
-      NEXT_PUBLIC_CALENDLY_ASSESSMENT_URL: "https://calendly.com/automate4u/assessment",
+      NEXT_PUBLIC_HUBSPOT_MEETING_URL: "https://meetings-na3.hubspot.com/jzhang",
     },
   },
   projects: [

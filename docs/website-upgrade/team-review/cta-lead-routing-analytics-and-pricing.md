@@ -128,7 +128,7 @@ Show:
 
 Route assessment leads to HubSpot as the primary source of truth.
 
-For the production setup checklist, environment variables, team-owned credentials, and HubSpot/Resend/Calendly/PostHog ownership split, see `production-lead-routing-setup.md`.
+For the production setup checklist, environment variables, team-owned credentials, and HubSpot/Resend/HubSpot Meetings/PostHog ownership split, see `production-lead-routing-setup.md`.
 
 Required destinations:
 
@@ -195,14 +195,14 @@ See `pricing-transparency-and-cost-model.md` for the detailed cost model.
 
 ## Scheduling Recommendation
 
-Use Calendly Free for v1 if the workflow only needs one assessment event type and one connected calendar.
+Use HubSpot Meetings for v1 assessment scheduling.
 
 Recommended setup:
 
 - One event type: Free AI Workflow Assessment.
 - Duration: 20-30 minutes.
-- Add the Calendly link to the form success state, final CTA sections, and follow-up email.
-- Upgrade only if Automate4U needs multiple event types, round-robin routing, HubSpot-native scheduling automation, advanced reminders, or lead routing.
+- Add the HubSpot meeting link to the form success state, final CTA sections, and follow-up email.
+- Upgrade only if Automate4U needs multiple event types, round-robin routing, advanced reminders, or lead routing.
 
 ## Free Tool Recommendations
 
@@ -210,7 +210,7 @@ For v1:
 
 - **CRM:** HubSpot Free CRM as the lead source of truth.
 - **Notification email:** Resend Free for Server Action-triggered internal notifications.
-- **Scheduling:** Calendly Free for one assessment booking link.
+- **Scheduling:** HubSpot Meetings for one assessment booking link.
 - **Analytics:** PostHog Free for funnels, demos, and behavior tracking.
 
 Notes:

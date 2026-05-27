@@ -192,7 +192,7 @@ Automate4U should communicate that it designs AI systems with:
 - Audit and escalation paths.
 - Compliance-aware vendor and architecture choices.
 
-Public copy should be careful and accurate. Do not claim SOC 2, HIPAA, or other compliance status unless the specific implementation and vendor stack support it. Use "compliance-aware" and "designed with requirements in mind" language until formal requirements are confirmed.
+Public copy should be careful and accurate, but should not undersell what Automate4U can support. Do not claim Automate4U itself is SOC 2, HIPAA, GDPR, PCI DSS, or otherwise formally certified unless that is true. It is acceptable to say Automate4U can build client workflows using compliant or compliance-ready vendors, client-owned accounts, BAAs/DPAs where required, least-privilege access, audit logs, human review, retention/deletion rules, data residency choices, and other implementation controls when the client workflow requires them.
 
 ## Tone And Style
 

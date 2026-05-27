@@ -5,6 +5,8 @@ const notificationRecipients = [
   "michael@automate4u.co",
   "hello@automate4u.co",
 ];
+const assessmentMeetingUrl =
+  process.env.NEXT_PUBLIC_HUBSPOT_MEETING_URL ?? "https://meetings-na3.hubspot.com/jzhang";
 
 const requiredAssessmentFields = [
   ["email", "Work email"],
@@ -143,7 +145,7 @@ async function sendNotification(data: Record<string, string>) {
     notificationLine("UTM campaign", data.utmCampaign),
     notificationLine("UTM term", data.utmTerm),
     notificationLine("UTM content", data.utmContent),
-    notificationLine("Calendly assessment link", process.env.NEXT_PUBLIC_CALENDLY_ASSESSMENT_URL),
+    notificationLine("HubSpot assessment meeting link", assessmentMeetingUrl),
   ].join("\n");
 
   const response = await fetch("https://api.resend.com/emails", {

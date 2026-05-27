@@ -247,7 +247,7 @@ Production routing needs:
 - Exact custom property names if custom fields are desired.
 - Resend or another notification email provider.
 - Verified sender/domain for `hello@automate4u.co`.
-- Final Calendly assessment link.
+- Final HubSpot assessment meeting link.
 - PostHog project key if using PostHog.
 - Real test submission into HubSpot and internal inboxes.
 
