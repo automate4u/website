@@ -385,6 +385,39 @@ function UnifiedVoiceDemoInner({
                     </span>
                 </div>
 
+                <div className={`mb-5 rounded-[18px] border p-5 text-center md:p-6 ${isDark
+                    ? "border-[#1db993]/28 bg-[#1db993]/12"
+                    : "border-[#1db993]/24 bg-[#e9f9f3]"
+                    }`}>
+                    <h3 className={`text-xl font-extrabold md:text-2xl ${isDark ? "text-white" : "text-ink"}`}>
+                        Test the live voice demo
+                    </h3>
+                    <p className={`mx-auto mt-3 max-w-[640px] text-sm leading-6 ${isDark ? "text-white/72" : "text-muted"}`}>
+                        {selectedProvider.description}
+                    </p>
+                    <button
+                        className={`mx-auto mt-5 inline-flex min-h-16 w-full max-w-[420px] items-center justify-center gap-3 rounded-full px-7 py-4 text-lg font-extrabold transition-colors disabled:cursor-not-allowed disabled:opacity-70 sm:text-xl ${isConnected
+                            ? "bg-red-500/95 text-white shadow-[0_14px_34px_rgba(239,68,68,0.28)] hover:bg-red-500"
+                            : isDark
+                                ? "bg-[#1db993] text-white shadow-[0_16px_38px_rgba(29,185,147,0.36)] hover:bg-[#22c9a1]"
+                                : "bg-[#0d1720] text-white shadow-[0_16px_38px_rgba(13,23,32,0.24)] hover:bg-[#101f2b]"
+                            }`}
+                        type="button"
+                        onClick={handleToggleCall}
+                        disabled={isConnecting}
+                    >
+                        <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-full ${isConnected ? "bg-white/18" : "bg-white/16"}`} aria-hidden="true">
+                            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92Z" />
+                            </svg>
+                        </span>
+                        {buttonText}
+                    </button>
+                    <p className={`mt-3 text-xs leading-5 ${isDark ? "text-white/50" : "text-muted"}`}>
+                        Your browser may request microphone access. This assistant is for demonstration purposes only.
+                    </p>
+                </div>
+
                 <div className="grid gap-5 lg:grid-cols-[1.48fr_0.72fr] lg:items-start">
                     {/* Main demo panel */}
                     <div className={`rounded-[18px] border p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] md:p-6 ${isDark
@@ -467,28 +500,17 @@ function UnifiedVoiceDemoInner({
                         : "border-card-border bg-white"
                         }`}>
                         <h3 className={`text-lg font-extrabold ${isDark ? "text-white" : "text-ink"}`}>
-                            Test the live voice demo
+                            What to try
                         </h3>
                         <p className={`mt-4 text-sm leading-6 ${isDark ? "text-white/72" : "text-muted"}`}>
-                            {selectedProvider.description}
+                            Speak naturally and ask about the workflow above. The assistant should collect context, stay within the demo scenario, and route toward a clear next step.
                         </p>
-                        <button
-                            className={`mt-6 inline-flex h-12 w-full items-center justify-center rounded-full px-6 text-base font-extrabold transition-colors disabled:cursor-not-allowed disabled:opacity-70 ${isConnected
-                                ? "bg-red-500/90 text-white shadow-[0_4px_16px_rgba(239,68,68,0.25)] hover:bg-red-500"
-                                : isDark
-                                    ? "bg-[#1db993] text-white shadow-[0_4px_18px_rgba(29,185,147,0.3)] hover:bg-[#22c9a1]"
-                                    : "bg-[#0d1720] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] hover:bg-[#101f2b]"
-                                }`}
-                            type="button"
-                            onClick={handleToggleCall}
-                            disabled={isConnecting}
-                        >
-                            {buttonText}
-                        </button>
-                        <p className={`mt-3 text-center text-xs leading-5 ${isDark ? "text-white/42" : "text-muted"
+                        <div className={`mt-5 rounded-xl border px-4 py-3 text-sm font-bold ${isDark
+                            ? "border-white/12 bg-white/10 text-white/78"
+                            : "border-card-border bg-[#f8fbfa] text-muted"
                             }`}>
-                            Your browser may request microphone access. This assistant is for demonstration purposes only.
-                        </p>
+                            Current demo: <span className={isDark ? "text-white" : "text-ink"}>{selectedProvider.label}</span>
+                        </div>
                     </div>
                 </div>
             </div>
