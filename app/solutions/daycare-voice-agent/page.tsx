@@ -152,11 +152,11 @@ export default function DaycareVoiceAgentPage() {
               Automate4U’s voice assistant helps daycare organizations manage repetitive calls, enrollment inquiries, and parent communication workflows while keeping staff focused on children and families.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="#walkthrough" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white shadow-[0_10px_28px_rgba(29,185,147,0.22)] hover:bg-btn-hover">
-                Schedule a Walkthrough
+              <Link href="#call-examples" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white shadow-[0_10px_28px_rgba(29,185,147,0.22)] hover:bg-btn-hover">
+                Try the Demo
               </Link>
-              <Link href="#call-examples" className="inline-flex h-12 items-center justify-center rounded-full border border-card-border px-6 text-base font-extrabold text-ink hover:border-[#1db993]/45 hover:text-[#167f65]">
-                Hear Call Examples
+              <Link href="#walkthrough" className="inline-flex h-12 items-center justify-center rounded-full border border-card-border px-6 text-base font-extrabold text-ink hover:border-[#1db993]/45 hover:text-[#167f65]">
+                Schedule a Walkthrough
               </Link>
             </div>
           </div>
