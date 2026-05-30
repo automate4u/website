@@ -1,6 +1,7 @@
 import Link from "next/link";
 import AssessmentTrigger from "@/components/AssessmentTrigger";
 import UnifiedVoiceDemo from "@/components/UnifiedVoiceDemo";
+import { elevenLabsAgents } from "@/data/elevenlabs";
 import SectionHeader from "@/components/sections/SectionHeader";
 
 const frontDeskReality = [
@@ -123,13 +124,12 @@ const faqs = [
   },
 ];
 
-const elevenLabsDaycareAgentId = "agent_6901kqk9zt0jffzbynnxaggqhr16";
-
 const daycareVoiceProvider = [
   {
-    id: "elevenlabs" as const,
+    id: "daycare-demo",
+    provider: "elevenlabs" as const,
     label: "Daycare Voice Assistant",
-    agentId: elevenLabsDaycareAgentId,
+    agentId: elevenLabsAgents.daycareDemo,
     title: "Daycare Voice Assistant",
     subtitle: "Enrollment, tours, absence reporting, and staff handoff",
     description: "Speak naturally about enrollment, tours, absence reporting, pickup notices, or program availability.",
@@ -257,7 +257,7 @@ export default function DaycareVoiceAgentPage() {
               sourcePage="/solutions/daycare-voice-agent"
               ctaLocation="daycare_voice_unified_demo"
               variant="dark"
-              defaultProvider="elevenlabs"
+              defaultProvider="daycare-demo"
             />
           </div>
 
