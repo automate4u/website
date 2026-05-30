@@ -52,17 +52,20 @@ function extractMessage(event: unknown): WidgetMessage | null {
 function AvaWidgetInner() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [isTextMode, setIsTextMode] = useState(false);
+  const [activeMode, setActiveMode] = useState<"voice" | "text">("text");
   const [text, setText] = useState("");
   const [messages, setMessages] = useState<WidgetMessage[]>([
     {
       id: "welcome",
       role: "assistant",
-      text: "Hi, I am Ava with Automate4U. What can I help with?",
+      text: "Hi, I can connect you with Automate4U support. Start a voice call or send a message.",
     },
   ]);
   const [error, setError] = useState("");
   const pendingTextRef = useRef<string>("");
   const modeRef = useRef<"voice" | "text">("text");
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const transcriptRef = useRef<HTMLDivElement | null>(null);
 
   const dynamicVariables = useMemo(
@@ -101,7 +104,7 @@ function AvaWidgetInner() {
     },
     onError: (sessionError) => {
       console.error("Ava widget error:", sessionError);
-      setError("Ava is unavailable right now.");
+      setError("The assistant is unavailable right now.");
       trackEvent("site_voice_demo_failed", {
         page: pathname || "/",
         ctaLocation: "sitewide_widget",
@@ -136,8 +139,13 @@ function AvaWidgetInner() {
     });
   }, [messages]);
 
+  useEffect(() => {
+    if (isTextMode) inputRef.current?.focus();
+  }, [isTextMode]);
+
   const startSession = (mode: "voice" | "text") => {
     modeRef.current = mode;
+    setActiveMode(mode);
     conversation.startSession({
       agentId: elevenLabsAgents.avaUniversal,
       textOnly: mode === "text",
@@ -176,11 +184,24 @@ function AvaWidgetInner() {
 
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
+      setIsTextMode(false);
       startSession("voice");
     } catch (voiceError) {
       console.error("Ava widget microphone error:", voiceError);
+      setIsTextMode(true);
       setError("Microphone access was not available. You can still send a message.");
     }
+  };
+
+  const handleTextMode = () => {
+    setIsTextMode(true);
+    trackEvent("site_chat_demo_viewed", {
+      page: pathname || "/",
+      ctaLocation: "sitewide_widget_text",
+      serviceInterest: "ai-voice",
+      provider: "elevenlabs-ava",
+      agentId: elevenLabsAgents.avaUniversal,
+    });
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -190,6 +211,7 @@ function AvaWidgetInner() {
     if (!nextText || isConnecting) return;
 
     setError("");
+    setIsTextMode(true);
     setText("");
     setMessages((current) => [
       ...current.slice(-9),
@@ -212,84 +234,216 @@ function AvaWidgetInner() {
         ? "Ava speaking"
         : "Connected"
       : "Online";
+  const showConversation = isTextMode || isConnected || messages.length > 1;
+  const voiceButtonLabel = isConnecting
+    ? "Connecting"
+    : isConnected
+      ? "End call"
+      : "Start voice call";
+  const assistantName = "Welcome to Automate4U";
 
   return (
     <div className="fixed bottom-5 right-4 z-50 flex max-w-[calc(100vw-2rem)] flex-col items-end gap-3 sm:bottom-6 sm:right-6">
       {isOpen && (
         <section
-          className="w-[min(380px,calc(100vw-2rem))] overflow-hidden rounded-lg border border-card-border bg-white shadow-[0_18px_46px_rgba(15,23,32,0.18)]"
-          aria-label="Ava Automate4U assistant"
+          className="w-[min(410px,calc(100vw-2rem))] overflow-hidden rounded-[18px] border border-white/12 bg-[#081821] text-white shadow-[0_22px_70px_rgba(8,24,33,0.32)]"
+          aria-label="Automate4U assistant"
         >
-          <div className="flex items-center justify-between gap-4 border-b border-card-border bg-[#f8fbfa] px-4 py-3">
-            <div className="min-w-0">
-              <p className="truncate text-sm font-extrabold text-ink">Ava</p>
-              <p className="mt-0.5 truncate text-xs font-bold text-muted">Automate4U</p>
+          <div className="relative overflow-hidden border-b border-white/10 px-4 pb-4 pt-4">
+            <div
+              className="absolute inset-0 opacity-[0.16]"
+              aria-hidden="true"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(125,240,209,0.42) 1px, transparent 1px), linear-gradient(90deg, rgba(125,240,209,0.32) 1px, transparent 1px)",
+                backgroundSize: "28px 28px",
+              }}
+            />
+            <div className="relative flex items-start justify-between gap-4">
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#7df0d1]/35 bg-[#1db993]/18 text-sm font-extrabold text-[#7df0d1] shadow-[0_0_22px_rgba(29,185,147,0.22)]">
+                    {isConnected ? "A" : ""}
+                    {!isConnected && (
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2.2"
+                        aria-hidden="true"
+                      >
+                        <path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3ZM5 11a7 7 0 0 0 14 0M12 18v3" />
+                      </svg>
+                    )}
+                  </span>
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-extrabold text-white">{assistantName}</p>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={handleToggleOpen}
+                className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-white/12 bg-white/8 text-white/64 transition-colors hover:border-white/24 hover:text-white"
+                aria-label="Close assistant"
+              >
+                <span aria-hidden="true">x</span>
+              </button>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-card-border bg-white px-2.5 py-1 text-xs font-bold text-muted">
+
+            <div className="relative mt-4 flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/8 px-3 py-2">
+              <span className="inline-flex items-center gap-2 text-xs font-extrabold text-white/78">
                 <span
                   className={`h-2 w-2 rounded-full ${
                     isConnected
                       ? "bg-[#1db993]"
                       : isConnecting
                         ? "bg-amber-400"
-                        : "bg-muted/50"
+                        : "bg-white/40"
                   }`}
                   aria-hidden="true"
                 />
                 {statusLabel}
               </span>
+              <span className="rounded-full border border-[#7df0d1]/22 bg-[#7df0d1]/10 px-2.5 py-1 text-[11px] font-extrabold uppercase text-[#7df0d1]">
+                {activeMode === "voice" && isConnected ? "Voice" : "Voice + chat"}
+              </span>
+            </div>
+          </div>
+
+          <div className="px-4 py-4">
+            <div className="rounded-[16px] border border-white/10 bg-white/[0.06] p-4">
+              <div className="flex items-center justify-center py-2">
+                <div className="relative grid h-24 w-24 place-items-center rounded-full border border-[#7df0d1]/28 bg-[#0d2530] shadow-[inset_0_0_24px_rgba(29,185,147,0.12)]">
+                  <span className="absolute h-24 w-24 rounded-full border border-[#7df0d1]/18" aria-hidden="true" />
+                  <span className="absolute h-16 w-16 rounded-full border border-[#7df0d1]/28" aria-hidden="true" />
+                  <svg
+                    viewBox="0 0 24 24"
+                    className={`h-9 w-9 ${isConnected ? "text-[#7df0d1]" : "text-white"}`}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2.2"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3ZM5 11a7 7 0 0 0 14 0M12 18v3" />
+                  </svg>
+                </div>
+              </div>
+
+              <div className="mt-3 grid grid-cols-3 gap-1.5" aria-hidden="true">
+                {[12, 22, 34, 18, 28, 40, 24, 16, 32].map((height, index) => (
+                  <span
+                    key={`${height}-${index}`}
+                    className={`rounded-full ${
+                      isConnected ? "bg-[#7df0d1]" : "bg-white/22"
+                    }`}
+                    style={{ height: `${Math.max(3, height / 6)}px` }}
+                  />
+                ))}
+              </div>
+
               <button
                 type="button"
-                onClick={handleToggleOpen}
-                className="grid h-8 w-8 place-items-center rounded-full border border-card-border bg-white text-muted transition-colors hover:text-ink"
-                aria-label="Close Ava"
+                onClick={handleVoice}
+                disabled={isConnecting}
+                className={`mt-4 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl px-4 text-sm font-extrabold transition-colors disabled:cursor-not-allowed disabled:opacity-65 ${
+                  isConnected
+                    ? "bg-red-500 text-white hover:bg-red-600"
+                    : "bg-[#1db993] text-white shadow-[0_12px_28px_rgba(29,185,147,0.24)] hover:bg-[#22c9a1]"
+                }`}
               >
-                <span aria-hidden="true">x</span>
-              </button>
-            </div>
-          </div>
-
-          <div ref={transcriptRef} className="max-h-[310px] overflow-y-auto px-4 py-4">
-            <div className="grid gap-3">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`max-w-[88%] rounded-lg px-3 py-2 text-sm leading-6 ${
-                    message.role === "assistant"
-                      ? "justify-self-start bg-[#f2f7f5] text-ink"
-                      : "justify-self-end bg-[#1db993] text-white"
-                  }`}
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2.2"
+                  aria-hidden="true"
                 >
-                  {message.text}
-                </div>
-              ))}
+                  {isConnected ? (
+                    <path d="M5 5h14v14H5z" />
+                  ) : (
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92Z" />
+                  )}
+                </svg>
+                {voiceButtonLabel}
+              </button>
+
+              {!isTextMode && !isConnected && (
+                <button
+                  type="button"
+                  onClick={handleTextMode}
+                  className="mt-2 flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/8 px-4 text-sm font-extrabold text-white/82 transition-colors hover:border-[#7df0d1]/35 hover:text-white"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2.2"
+                    aria-hidden="true"
+                  >
+                    <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z" />
+                  </svg>
+                  Message instead
+                </button>
+              )}
             </div>
+
+            {showConversation && (
+              <div ref={transcriptRef} className="mt-3 max-h-[220px] overflow-y-auto rounded-[14px] border border-white/10 bg-white/[0.04] p-3">
+                <div className="grid gap-2.5">
+                  {messages.map((message) => (
+                    <div
+                      key={message.id}
+                      className={`max-w-[90%] rounded-xl px-3 py-2 text-sm leading-6 ${
+                        message.role === "assistant"
+                          ? "justify-self-start bg-white/10 text-white/88"
+                          : "justify-self-end bg-[#1db993] text-white"
+                      }`}
+                    >
+                      {message.text}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {error && (
+              <p className="mt-3 rounded-xl border border-red-300/28 bg-red-500/12 px-3 py-2 text-xs font-bold leading-5 text-red-100">
+                {error}{" "}
+                <Link href="/contact" className="underline underline-offset-2">
+                  Contact Automate4U
+                </Link>
+                .
+              </p>
+            )}
           </div>
 
-          {error && (
-            <p className="mx-4 mb-3 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs font-bold leading-5 text-red-700">
-              {error}{" "}
-              <Link href="/contact" className="underline underline-offset-2">
-                Contact Automate4U
-              </Link>
-              .
-            </p>
-          )}
-
-          <form onSubmit={handleSubmit} className="border-t border-card-border p-3">
+          {isTextMode && (
+          <form onSubmit={handleSubmit} className="border-t border-white/10 bg-white/[0.04] p-3">
             <div className="flex items-center gap-2">
               <input
+                ref={inputRef}
                 value={text}
                 onChange={(event) => setText(event.target.value)}
-                className="min-h-11 min-w-0 flex-1 rounded-lg border border-card-border bg-white px-3 text-sm font-medium text-ink outline-none transition-colors placeholder:text-muted/70 focus:border-[#1db993]"
-                placeholder="Message Ava"
-                aria-label="Message Ava"
+                className="min-h-11 min-w-0 flex-1 rounded-xl border border-white/12 bg-white px-3 text-sm font-medium text-ink outline-none transition-colors placeholder:text-muted/70 focus:border-[#1db993]"
+                placeholder="Type a message"
+                aria-label="Type a message"
               />
               <button
                 type="submit"
                 disabled={!text.trim() || isConnecting}
-                className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-ink text-white transition-colors hover:bg-[#101f2b] disabled:cursor-not-allowed disabled:opacity-45"
+                className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#1db993] text-white transition-colors hover:bg-[#22c9a1] disabled:cursor-not-allowed disabled:opacity-45"
                 aria-label="Send message"
               >
                 <svg
@@ -306,49 +460,32 @@ function AvaWidgetInner() {
                   <path d="m10 14 4-4" />
                 </svg>
               </button>
-              <button
-                type="button"
-                onClick={handleVoice}
-                disabled={isConnecting}
-                className={`grid h-11 w-11 shrink-0 place-items-center rounded-lg transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${
-                  isConnected
-                    ? "bg-red-500 text-white hover:bg-red-600"
-                    : "bg-[#1db993] text-white hover:bg-[#22c9a1]"
-                }`}
-                aria-label={isConnected ? "End call" : "Start voice call"}
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2.2"
-                  aria-hidden="true"
-                >
-                  {isConnected ? (
-                    <path d="M5 5h14v14H5z" />
-                  ) : (
-                    <path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3ZM5 11a7 7 0 0 0 14 0M12 18v3" />
-                  )}
-                </svg>
-              </button>
             </div>
           </form>
+          )}
         </section>
       )}
 
       <button
         type="button"
         onClick={handleToggleOpen}
-        className="flex h-14 items-center gap-3 rounded-full bg-ink px-4 pr-5 text-white shadow-[0_14px_36px_rgba(15,23,32,0.24)] transition-colors hover:bg-[#101f2b]"
-        aria-label={isOpen ? "Close Ava" : "Open Ava"}
+        className="a4u-voice-blob group"
+        aria-label={isOpen ? "Close Automate4U assistant" : "Open Automate4U assistant"}
       >
-        <span className="grid h-9 w-9 place-items-center rounded-full bg-[#1db993] text-sm font-extrabold" aria-hidden="true">
-          A
+        <span className="a4u-voice-blob-pulse" aria-hidden="true" />
+        <span className="a4u-voice-blob-core" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            className="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2.2"
+          >
+            <path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3ZM5 11a7 7 0 0 0 14 0M12 18v3" />
+          </svg>
         </span>
-        <span className="text-sm font-extrabold">Ask Ava</span>
       </button>
     </div>
   );
