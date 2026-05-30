@@ -25,6 +25,8 @@ function extractMessage(event: unknown): WidgetMessage | null {
 
   const record = event as Record<string, unknown>;
   const type = readString(record.type);
+  const role = readString(record.role);
+  const source = readString(record.source);
 
   const agentResponse = readString(record.agent_response);
   const userTranscript = readString(record.user_transcript);
@@ -36,6 +38,14 @@ function extractMessage(event: unknown): WidgetMessage | null {
 
   if (userTranscript) {
     return { id: crypto.randomUUID(), role: "user", text: userTranscript };
+  }
+
+  if (directMessage && (role === "agent" || source === "ai")) {
+    return { id: crypto.randomUUID(), role: "assistant", text: directMessage };
+  }
+
+  if (directMessage && role === "user") {
+    return { id: crypto.randomUUID(), role: "user", text: directMessage };
   }
 
   if (directMessage && type.includes("agent")) {
@@ -116,13 +126,16 @@ function AvaWidgetInner() {
     onMessage: (event) => {
       const message = extractMessage(event);
       if (message) {
+        if (message.role === "user" && modeRef.current === "text") return;
         setMessages((current) => [...current.slice(-9), message]);
       }
     },
   });
 
-  const isConnected = conversation.status === "connected";
+  const isSessionConnected = conversation.status === "connected";
   const isConnecting = conversation.status === "connecting";
+  const isVoiceActive = isSessionConnected && activeMode === "voice";
+  const isTextSessionActive = isSessionConnected && activeMode === "text";
 
   useEffect(() => {
     if (conversation.status !== "connected" || !pendingTextRef.current) return;
@@ -158,7 +171,7 @@ function AvaWidgetInner() {
   };
 
   const handleToggleOpen = async () => {
-    if (isOpen && (isConnected || isConnecting)) {
+    if (isOpen && (isSessionConnected || isConnecting)) {
       conversation.endSession();
     }
 
@@ -177,9 +190,13 @@ function AvaWidgetInner() {
   const handleVoice = async () => {
     setError("");
 
-    if (isConnected || isConnecting) {
+    if (isVoiceActive || isConnecting) {
       conversation.endSession();
       return;
+    }
+
+    if (isTextSessionActive) {
+      conversation.endSession();
     }
 
     try {
@@ -218,7 +235,7 @@ function AvaWidgetInner() {
       { id: crypto.randomUUID(), role: "user", text: nextText },
     ]);
 
-    if (isConnected) {
+    if (isTextSessionActive) {
       conversation.sendUserMessage(nextText);
       return;
     }
@@ -229,15 +246,17 @@ function AvaWidgetInner() {
 
   const statusLabel = isConnecting
     ? "Connecting"
-    : isConnected
+    : isVoiceActive
       ? conversation.isSpeaking
-        ? "Ava speaking"
-        : "Connected"
+        ? "Speaking"
+        : "Voice connected"
+      : isTextSessionActive
+        ? "Chat connected"
       : "Online";
-  const showConversation = isTextMode || isConnected || messages.length > 1;
+  const showConversation = isTextMode || isSessionConnected || messages.length > 1;
   const voiceButtonLabel = isConnecting
     ? "Connecting"
-    : isConnected
+    : isVoiceActive
       ? "End call"
       : "Start voice call";
   const assistantName = "Welcome to Automate4U";
@@ -263,8 +282,8 @@ function AvaWidgetInner() {
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
                   <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#7df0d1]/35 bg-[#1db993]/18 text-sm font-extrabold text-[#7df0d1] shadow-[0_0_22px_rgba(29,185,147,0.22)]">
-                    {isConnected ? "A" : ""}
-                    {!isConnected && (
+                    {isVoiceActive ? "A" : ""}
+                    {!isVoiceActive && (
                       <svg
                         viewBox="0 0 24 24"
                         className="h-4 w-4"
@@ -298,7 +317,7 @@ function AvaWidgetInner() {
               <span className="inline-flex items-center gap-2 text-xs font-extrabold text-white/78">
                 <span
                   className={`h-2 w-2 rounded-full ${
-                    isConnected
+                    isSessionConnected
                       ? "bg-[#1db993]"
                       : isConnecting
                         ? "bg-amber-400"
@@ -309,7 +328,7 @@ function AvaWidgetInner() {
                 {statusLabel}
               </span>
               <span className="rounded-full border border-[#7df0d1]/22 bg-[#7df0d1]/10 px-2.5 py-1 text-[11px] font-extrabold uppercase text-[#7df0d1]">
-                {activeMode === "voice" && isConnected ? "Voice" : "Voice + chat"}
+                {isVoiceActive ? "Voice" : "Voice + chat"}
               </span>
             </div>
           </div>
@@ -322,7 +341,7 @@ function AvaWidgetInner() {
                   <span className="absolute h-16 w-16 rounded-full border border-[#7df0d1]/28" aria-hidden="true" />
                   <svg
                     viewBox="0 0 24 24"
-                    className={`h-9 w-9 ${isConnected ? "text-[#7df0d1]" : "text-white"}`}
+                    className={`h-9 w-9 ${isVoiceActive ? "text-[#7df0d1]" : "text-white"}`}
                     fill="none"
                     stroke="currentColor"
                     strokeLinecap="round"
@@ -340,7 +359,7 @@ function AvaWidgetInner() {
                   <span
                     key={`${height}-${index}`}
                     className={`rounded-full ${
-                      isConnected ? "bg-[#7df0d1]" : "bg-white/22"
+                      isVoiceActive ? "bg-[#7df0d1]" : "bg-white/22"
                     }`}
                     style={{ height: `${Math.max(3, height / 6)}px` }}
                   />
@@ -352,7 +371,7 @@ function AvaWidgetInner() {
                 onClick={handleVoice}
                 disabled={isConnecting}
                 className={`mt-4 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl px-4 text-sm font-extrabold transition-colors disabled:cursor-not-allowed disabled:opacity-65 ${
-                  isConnected
+                  isVoiceActive
                     ? "bg-red-500 text-white hover:bg-red-600"
                     : "bg-[#1db993] text-white shadow-[0_12px_28px_rgba(29,185,147,0.24)] hover:bg-[#22c9a1]"
                 }`}
@@ -367,7 +386,7 @@ function AvaWidgetInner() {
                   strokeWidth="2.2"
                   aria-hidden="true"
                 >
-                  {isConnected ? (
+                  {isVoiceActive ? (
                     <path d="M5 5h14v14H5z" />
                   ) : (
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92Z" />
@@ -376,7 +395,7 @@ function AvaWidgetInner() {
                 {voiceButtonLabel}
               </button>
 
-              {!isTextMode && !isConnected && (
+              {!isTextMode && !isVoiceActive && (
                 <button
                   type="button"
                   onClick={handleTextMode}
