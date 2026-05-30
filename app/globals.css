@@ -311,6 +311,31 @@ body {
   animation: a4u-voice-blob-pulse 7.5s ease-out infinite;
 }
 
+.a4u-widget-scrollbar {
+  scrollbar-color: rgba(125, 240, 209, 0.34) rgba(255, 255, 255, 0.06);
+  scrollbar-width: thin;
+}
+
+.a4u-widget-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.a4u-widget-scrollbar::-webkit-scrollbar-track {
+  margin-block: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.a4u-widget-scrollbar::-webkit-scrollbar-thumb {
+  border: 2px solid rgba(8, 24, 33, 0.86);
+  border-radius: 999px;
+  background: rgba(125, 240, 209, 0.46);
+}
+
+.a4u-widget-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(125, 240, 209, 0.68);
+}
+
 @keyframes a4u-voice-blob-breathe {
   0%,
   74%,
