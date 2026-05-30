@@ -16,8 +16,33 @@ type WidgetMessage = {
 
 type ClientToolArgs = Record<string, unknown>;
 
+const URL_PATTERN = /(https?:\/\/[^\s]+)/g;
+
 function readString(value: unknown): string {
   return typeof value === "string" ? value.trim() : "";
+}
+
+function renderMessageText(text: string) {
+  return text.split(URL_PATTERN).map((part, index) => {
+    if (!part.match(URL_PATTERN)) return part;
+
+    const trailingPunctuation = part.match(/[),.!?;:]+$/)?.[0] ?? "";
+    const href = trailingPunctuation ? part.slice(0, -trailingPunctuation.length) : part;
+
+    return (
+      <span key={`${href}-${index}`}>
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-extrabold text-[#7df0d1] underline underline-offset-2 hover:text-white"
+        >
+          {href}
+        </a>
+        {trailingPunctuation}
+      </span>
+    );
+  });
 }
 
 function extractMessage(event: unknown): WidgetMessage | null {
@@ -260,6 +285,7 @@ function AvaWidgetInner() {
       ? "End call"
       : "Start voice call";
   const assistantName = "Welcome to Automate4U";
+  const shouldCompactVoicePanel = isTextMode && !isVoiceActive;
 
   return (
     <div className="fixed bottom-5 right-4 z-50 flex max-w-[calc(100vw-2rem)] flex-col items-end gap-3 sm:bottom-6 sm:right-6">
@@ -334,6 +360,35 @@ function AvaWidgetInner() {
           </div>
 
           <div className="px-4 py-4">
+            {shouldCompactVoicePanel ? (
+              <button
+                type="button"
+                onClick={handleVoice}
+                disabled={isConnecting}
+                className="flex min-h-11 w-full items-center justify-between gap-3 rounded-xl border border-[#7df0d1]/18 bg-white/[0.06] px-3 text-sm font-extrabold text-white transition-colors hover:border-[#7df0d1]/38 hover:bg-white/[0.09] disabled:cursor-not-allowed disabled:opacity-65"
+              >
+                <span className="inline-flex min-w-0 items-center gap-2">
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-[#7df0d1]/28 bg-[#1db993]/16 text-[#7df0d1]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2.2"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3ZM5 11a7 7 0 0 0 14 0M12 18v3" />
+                    </svg>
+                  </span>
+                  <span className="truncate">Switch to voice</span>
+                </span>
+                <span className="rounded-full bg-[#1db993] px-3 py-1.5 text-xs text-white">
+                  Call
+                </span>
+              </button>
+            ) : (
             <div className="rounded-[16px] border border-white/10 bg-white/[0.06] p-4">
               <div className="flex items-center justify-center py-2">
                 <div className="relative grid h-24 w-24 place-items-center rounded-full border border-[#7df0d1]/28 bg-[#0d2530] shadow-[inset_0_0_24px_rgba(29,185,147,0.12)]">
@@ -417,9 +472,10 @@ function AvaWidgetInner() {
                 </button>
               )}
             </div>
+            )}
 
             {showConversation && (
-              <div ref={transcriptRef} className="mt-3 max-h-[220px] overflow-y-auto rounded-[14px] border border-white/10 bg-white/[0.04] p-3">
+              <div ref={transcriptRef} className="a4u-widget-scrollbar mt-3 max-h-[220px] overflow-y-auto rounded-[14px] border border-white/10 bg-white/[0.04] p-3">
                 <div className="grid gap-2.5">
                   {messages.map((message) => (
                     <div
@@ -430,7 +486,7 @@ function AvaWidgetInner() {
                           : "justify-self-end bg-[#1db993] text-white"
                       }`}
                     >
-                      {message.text}
+                      {renderMessageText(message.text)}
                     </div>
                   ))}
                 </div>
