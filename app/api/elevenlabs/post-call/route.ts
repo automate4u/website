@@ -17,8 +17,8 @@ const SIGNATURE_TOLERANCE_SECS = 30 * 60;
 
 function webhookSecret() {
   return (
-    process.env.ELEVENLABS_WEBHOOK_SECRET ||
     process.env.A4U_ELEVENLABS_WEBHOOK_SECRET ||
+    process.env.ELEVENLABS_WEBHOOK_SECRET ||
     process.env.WEBHOOK_SECRET ||
     ""
   ).trim();
