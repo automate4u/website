@@ -4,10 +4,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
 import { trackEvent } from "@/lib/analytics";
 
-type VoiceProvider = "retell" | "elevenlabs";
+type VoiceProviderKind = "retell" | "elevenlabs";
 
 type RetellClient = {
-    on: (event: string, handler: (...args: unknown[]) => void) => void;
+        on: (event: string, handler: (...args: unknown[]) => void) => void;
     startCall: (args: { accessToken: string }) => Promise<void>;
     stopCall: () => void;
 };
@@ -15,7 +15,8 @@ type RetellClient = {
 type UnifiedVoiceDemoProps = {
     // Provider configuration
     providers: Array<{
-        id: VoiceProvider;
+        id: string;
+        provider: VoiceProviderKind;
         label: string;
         agentId?: string; // For ElevenLabs
         title: string;
@@ -32,7 +33,7 @@ type UnifiedVoiceDemoProps = {
 
     // Visual configuration
     variant?: "dark" | "light";
-    defaultProvider?: VoiceProvider;
+    defaultProvider?: string;
 
     // Optional customization
     title?: string;
@@ -42,7 +43,7 @@ type UnifiedVoiceDemoProps = {
 const BAR_COUNT = 12;
 
 function generateIdleBars(): number[] {
-    return Array.from({ length: BAR_COUNT }, () => 12 + Math.random() * 8);
+    return Array.from({ length: BAR_COUNT }, (_, index) => 12 + ((index * 5) % 8));
 }
 
 function generateActiveBars(speaking: boolean): number[] {
@@ -70,11 +71,12 @@ function UnifiedVoiceDemoInner({
     sourcePage,
     ctaLocation,
     variant = "dark",
-    defaultProvider = "retell",
+    defaultProvider,
     title,
     description,
 }: UnifiedVoiceDemoProps) {
-    const [activeProvider, setActiveProvider] = useState<VoiceProvider>(defaultProvider);
+    const initialProvider = defaultProvider ?? providers[0]?.id ?? "";
+    const [activeProvider, setActiveProvider] = useState<string>(initialProvider);
     const [bars, setBars] = useState<number[]>(generateIdleBars);
     const animationRef = useRef<number>(0);
 
@@ -83,59 +85,64 @@ function UnifiedVoiceDemoInner({
     const [retellCallActive, setRetellCallActive] = useState(false);
     const [retellCallStarting, setRetellCallStarting] = useState(false);
 
+    const selectedProvider = providers.find(p => p.id === activeProvider) ?? providers[0];
+    const selectedProviderRef = useRef(selectedProvider);
+    useEffect(() => {
+        selectedProviderRef.current = selectedProvider;
+    }, [selectedProvider]);
+
     // ElevenLabs state
     const conversation = useConversation({
         onConnect: () => {
-            const provider = providers.find(p => p.id === "elevenlabs");
+            const provider = selectedProviderRef.current;
             if (provider?.agentId) {
                 trackEvent("site_voice_demo_started", {
                     page: sourcePage,
                     ctaLocation,
                     serviceInterest: "ai-voice",
-                    provider: "elevenlabs",
+                    provider: provider.id,
                     agentId: provider.agentId,
                 });
             }
         },
         onDisconnect: () => {
-            const provider = providers.find(p => p.id === "elevenlabs");
+            const provider = selectedProviderRef.current;
             if (provider?.agentId) {
                 trackEvent("site_voice_demo_completed", {
                     page: sourcePage,
                     ctaLocation,
                     serviceInterest: "ai-voice",
-                    provider: "elevenlabs",
+                    provider: provider.id,
                     agentId: provider.agentId,
                 });
             }
         },
         onError: (error) => {
             console.error("ElevenLabs error:", error);
-            const provider = providers.find(p => p.id === "elevenlabs");
+            const provider = selectedProviderRef.current;
             if (provider?.agentId) {
                 trackEvent("site_voice_demo_failed", {
                     page: sourcePage,
                     ctaLocation,
                     serviceInterest: "ai-voice",
-                    provider: "elevenlabs",
+                    provider: provider.id,
                     agentId: provider.agentId,
                 });
             }
         },
     });
 
-    const selectedProvider = providers.find(p => p.id === activeProvider) ?? providers[0];
-
     // Determine connection state based on active provider
-    const isConnected = activeProvider === "retell"
+    const isRetell = selectedProvider.provider === "retell";
+    const isConnected = isRetell
         ? retellCallActive
         : conversation.status === "connected";
 
-    const isConnecting = activeProvider === "retell"
+    const isConnecting = isRetell
         ? retellCallStarting
         : conversation.status === "connecting";
 
-    const isSpeaking = activeProvider === "elevenlabs" ? conversation.isSpeaking : false;
+    const isSpeaking = selectedProvider.provider === "elevenlabs" ? conversation.isSpeaking : false;
 
     // Keep a ref in sync for animation
     const isSpeakingRef = useRef(isSpeaking);
@@ -166,39 +173,44 @@ function UnifiedVoiceDemoInner({
 
     // Initialize Retell client
     useEffect(() => {
+        if (!providers.some((provider) => provider.provider === "retell")) return;
+
         import("retell-client-js-sdk").then(({ RetellWebClient }) => {
             const client = new RetellWebClient() as RetellClient;
             retellClientRef.current = client;
 
             client.on("call_started", () => {
+                const provider = selectedProviderRef.current;
                 trackEvent("site_voice_demo_started", {
                     page: sourcePage,
                     ctaLocation,
                     serviceInterest: "ai-voice",
-                    provider: "retell",
+                    provider: provider.id,
                 });
                 setRetellCallActive(true);
                 setRetellCallStarting(false);
             });
 
             client.on("call_ended", () => {
+                const provider = selectedProviderRef.current;
                 trackEvent("site_voice_demo_completed", {
                     page: sourcePage,
                     ctaLocation,
                     serviceInterest: "ai-voice",
-                    provider: "retell",
+                    provider: provider.id,
                 });
                 setRetellCallActive(false);
                 setRetellCallStarting(false);
             });
 
             client.on("error", (error) => {
+                const provider = selectedProviderRef.current;
                 console.error("Retell error:", error);
                 trackEvent("site_voice_demo_failed", {
                     page: sourcePage,
                     ctaLocation,
                     serviceInterest: "ai-voice",
-                    provider: "retell",
+                    provider: provider.id,
                 });
                 setRetellCallActive(false);
                 setRetellCallStarting(false);
@@ -214,7 +226,7 @@ function UnifiedVoiceDemoInner({
                 }
             }
         };
-    }, [sourcePage, ctaLocation]);
+    }, [providers, sourcePage, ctaLocation]);
 
     const handleRetellCall = async () => {
         if (!retellClientRef.current) return;
@@ -249,7 +261,7 @@ function UnifiedVoiceDemoInner({
                 page: sourcePage,
                 ctaLocation,
                 serviceInterest: "ai-voice",
-                provider: "retell",
+                provider: selectedProvider.id,
             });
             alert(`Sorry, couldn't start the voice session. (${message})`);
             setRetellCallStarting(false);
@@ -269,7 +281,20 @@ function UnifiedVoiceDemoInner({
                 throw new Error("No agent ID configured for ElevenLabs");
             }
 
-            await conversation.startSession({ agentId });
+            await conversation.startSession({
+                agentId,
+                dynamicVariables: {
+                    entry_mode: "website_demo",
+                    source_page: sourcePage,
+                    cta_location: ctaLocation,
+                },
+                clientTools: {
+                    a4u_demo_show_action: () => undefined,
+                    a4u_demo_open_meeting_link: ({ meeting_url }: { meeting_url?: string }) => {
+                        if (meeting_url) window.open(meeting_url, "_blank", "noopener,noreferrer");
+                    },
+                },
+            });
         } catch (error) {
             const message = error instanceof Error ? error.message : "Unknown error";
             console.error("ElevenLabs session error:", error);
@@ -277,14 +302,14 @@ function UnifiedVoiceDemoInner({
                 page: sourcePage,
                 ctaLocation,
                 serviceInterest: "ai-voice",
-                provider: "elevenlabs",
+                provider: selectedProvider.id,
                 agentId: selectedProvider.agentId,
             });
             alert(`Sorry, couldn't start the voice session. (${message})`);
         }
     };
 
-    const handleToggleCall = activeProvider === "retell" ? handleRetellCall : handleElevenLabsCall;
+    const handleToggleCall = isRetell ? handleRetellCall : handleElevenLabsCall;
 
     // Status and button text
     let statusLabel = "Ready to connect";

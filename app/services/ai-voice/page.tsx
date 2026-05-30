@@ -6,6 +6,7 @@ import Link from "next/link";
 import AssessmentTrigger from "@/components/AssessmentTrigger";
 import UnifiedVoiceDemo from "@/components/UnifiedVoiceDemo";
 import SectionHeader from "@/components/sections/SectionHeader";
+import { elevenLabsAgents } from "@/data/elevenlabs";
 import { solutions } from "@/data/solutions";
 
 
@@ -56,23 +57,24 @@ const workflowExamples = [
   href?: string;
 }>;
 
-const elevenLabsDaycareAgentId = "agent_6901kqk9zt0jffzbynnxaggqhr16";
-
 const voiceDemoProviders = [
   {
-    id: "retell" as const,
+    id: "ava-reception",
+    provider: "elevenlabs" as const,
     label: "Automate4U reception",
-    title: "Automate4U Voice Receptionist",
+    agentId: elevenLabsAgents.avaUniversal,
+    title: "Ava, Automate4U Reception",
     subtitle: "Natural intake, qualification, and handoff",
-    description: "Once connected, speak naturally and test the live experience in real time.",
-    tags: ["Front-desk style intake", "Lead capture and routing", "Built for CRM and calendar workflows"],
+    description: "Once connected, speak naturally and test Ava as the Automate4U front desk assistant.",
+    tags: ["Front-desk intake", "Lead capture and routing", "HubSpot and meeting workflows"],
     agentLine: "Thanks for calling. I can help answer questions, collect details, and direct you to the right next step.",
     callerLine: "I want to book a consultation and check whether someone can call me back today.",
   },
   {
-    id: "elevenlabs" as const,
+    id: "daycare-demo",
+    provider: "elevenlabs" as const,
     label: "Daycare demo",
-    agentId: elevenLabsDaycareAgentId,
+    agentId: elevenLabsAgents.daycareDemo,
     title: "Daycare Voice Assistant",
     subtitle: "Enrollment, parent questions, tour requests, and staff handoff",
     description: "Once connected, speak naturally about enrollment, tours, and daycare operations.",
@@ -273,7 +275,7 @@ export default function AIVoicePage() {
           sourcePage="/services/ai-voice"
           ctaLocation="ai_voice_unified_demo"
           variant="light"
-          defaultProvider="retell"
+          defaultProvider="ava-reception"
           title="Experience live AI voice workflows before you commit."
           description="Choose from our voice receptionist or implementation-specific voice assistant demos to hear how different workflows can be shaped around real operations."
         />
