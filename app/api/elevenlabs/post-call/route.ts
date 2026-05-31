@@ -5,7 +5,15 @@ import { createContactNote, lookupContact } from "@/lib/elevenlabs/hubspot";
 import { sendInternalNotification } from "@/lib/elevenlabs/notifications";
 import { serverError } from "@/lib/elevenlabs/request";
 import { requireElevenLabsAuth } from "@/lib/elevenlabs/auth";
-import { asRecord, booleanField, optionalString, stringField, type JsonObject, type Priority } from "@/lib/elevenlabs/types";
+import {
+  asRecord,
+  booleanField,
+  hasCredentialLikeText,
+  optionalString,
+  stringField,
+  type JsonObject,
+  type Priority,
+} from "@/lib/elevenlabs/types";
 
 export const runtime = "nodejs";
 
@@ -163,6 +171,13 @@ function normalizePostCallPayload(payload: JsonObject): JsonObject {
     entry_mode: firstString(dynamicVariables.entry_mode, payload.entry_mode),
     source_page: firstString(dynamicVariables.source_page, payload.source_page),
     cta_location: firstString(dynamicVariables.cta_location, payload.cta_location),
+    utm_source: firstString(dynamicVariables.utm_source, payload.utm_source),
+    utm_medium: firstString(dynamicVariables.utm_medium, payload.utm_medium),
+    utm_campaign: firstString(dynamicVariables.utm_campaign, payload.utm_campaign),
+    utm_term: firstString(dynamicVariables.utm_term, payload.utm_term),
+    utm_content: firstString(dynamicVariables.utm_content, payload.utm_content),
+    landing_page: firstString(dynamicVariables.landing_page, payload.landing_page),
+    referrer: firstString(dynamicVariables.referrer, payload.referrer),
     intent_route: firstString(dynamicVariables.intent_route, payload.intent_route),
     action_taken: firstString(dynamicVariables.action_taken, payload.action_taken),
     hubspot_contact_id: firstString(dynamicVariables.hubspot_contact_id, payload.hubspot_contact_id),
@@ -195,12 +210,36 @@ function reviewPriority(data: Record<string, unknown>): Priority {
   return "normal";
 }
 
+function qaReview(data: JsonObject) {
+  const flags: string[] = [];
+  const route = stringField(data, "intent_route");
+  const webhookType = stringField(data, "webhook_event_type");
+  const summary = stringField(data, "summary") || stringField(data, "conversation_summary");
+  const actionTaken = stringField(data, "action_taken");
+
+  if (!stringField(data, "conversation_id")) flags.push("missing_conversation_id");
+  if (!summary) flags.push("missing_summary");
+  if (!actionTaken) flags.push("missing_action_taken");
+  if (webhookType === "call_initiation_failure") flags.push("call_initiation_failure");
+  if (stringField(data, "failure_reason")) flags.push("failure_reason_present");
+  if (booleanField(data, "human_escalation")) flags.push("human_escalation");
+  if (route === "legal_compliance" || route === "unknown_sensitive") flags.push("sensitive_route");
+  if (route === "existing_client_support") flags.push("support_route_review");
+  if (hasCredentialLikeText(summary)) flags.push("credential_like_text_redacted");
+
+  const score = Math.max(0, 100 - flags.length * 15);
+  const status = flags.length === 0 ? "pass" : flags.some((flag) => flag.includes("failure") || flag.includes("sensitive") || flag.includes("credential")) ? "high_review" : "review";
+
+  return { status, score, flags };
+}
+
 export async function POST(request: Request) {
   const parsed = await parsePostCallPayload(request);
   if ("error" in parsed) return parsed.error;
 
   try {
     const priority = reviewPriority(parsed.data);
+    const qa = qaReview(parsed.data);
     const summary = redactedSummary(stringField(parsed.data, "summary") || stringField(parsed.data, "conversation_summary"));
     const conversationId = stringField(parsed.data, "conversation_id");
     const suppliedContactId = stringField(parsed.data, "hubspot_contact_id");
@@ -214,6 +253,8 @@ export async function POST(request: Request) {
       intent_route: stringField(parsed.data, "intent_route"),
       action_taken: stringField(parsed.data, "action_taken"),
       human_escalation: booleanField(parsed.data, "human_escalation"),
+      qa_status: qa.status,
+      qa_score: qa.score,
     });
 
     let matchedContact: Awaited<ReturnType<typeof lookupContact>> = null;
@@ -245,11 +286,21 @@ export async function POST(request: Request) {
           notificationLine("Call duration seconds", stringField(parsed.data, "call_duration_secs")),
           notificationLine("Failure reason", stringField(parsed.data, "failure_reason")),
           notificationLine("Entry mode", stringField(parsed.data, "entry_mode")),
-          notificationLine("Source page", stringField(parsed.data, "source_page")),
-          notificationLine("CTA location", stringField(parsed.data, "cta_location")),
-          notificationLine("Intent route", stringField(parsed.data, "intent_route")),
+        notificationLine("Source page", stringField(parsed.data, "source_page")),
+        notificationLine("CTA location", stringField(parsed.data, "cta_location")),
+        notificationLine("Landing page", stringField(parsed.data, "landing_page")),
+        notificationLine("Referrer", stringField(parsed.data, "referrer")),
+        notificationLine("UTM source", stringField(parsed.data, "utm_source")),
+        notificationLine("UTM medium", stringField(parsed.data, "utm_medium")),
+        notificationLine("UTM campaign", stringField(parsed.data, "utm_campaign")),
+        notificationLine("UTM term", stringField(parsed.data, "utm_term")),
+        notificationLine("UTM content", stringField(parsed.data, "utm_content")),
+        notificationLine("Intent route", stringField(parsed.data, "intent_route")),
           notificationLine("Action taken", stringField(parsed.data, "action_taken")),
           notificationLine("Human escalation", String(booleanField(parsed.data, "human_escalation"))),
+          notificationLine("QA status", qa.status),
+          notificationLine("QA score", String(qa.score)),
+          notificationLine("QA flags", qa.flags.join(", ")),
           notificationLine("Summary", summary),
         ].join("\n"),
       });
@@ -272,9 +323,15 @@ export async function POST(request: Request) {
         notificationLine("Failure reason", stringField(parsed.data, "failure_reason")),
         notificationLine("Entry mode", stringField(parsed.data, "entry_mode")),
         notificationLine("Source page", stringField(parsed.data, "source_page")),
+        notificationLine("Landing page", stringField(parsed.data, "landing_page")),
+        notificationLine("UTM source", stringField(parsed.data, "utm_source")),
+        notificationLine("UTM campaign", stringField(parsed.data, "utm_campaign")),
         notificationLine("Intent route", stringField(parsed.data, "intent_route")),
         notificationLine("Action taken", stringField(parsed.data, "action_taken")),
         notificationLine("Human escalation", String(booleanField(parsed.data, "human_escalation"))),
+        notificationLine("QA status", qa.status),
+        notificationLine("QA score", String(qa.score)),
+        notificationLine("QA flags", qa.flags.join(", ")),
         notificationLine("Summary", summary),
       ].join("\n");
 
@@ -290,7 +347,7 @@ export async function POST(request: Request) {
       }
     }
 
-    return NextResponse.json({ ok: true, note, notification });
+    return NextResponse.json({ ok: true, note, notification, qa });
   } catch (error) {
     return serverError("[ElevenLabs Post Call] failed", error);
   }

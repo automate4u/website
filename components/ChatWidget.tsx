@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
 
 import { elevenLabsAgents } from "@/data/elevenlabs";
-import { trackEvent } from "@/lib/analytics";
+import { getElevenLabsAttributionVariables, trackEvent } from "@/lib/analytics";
 
 type WidgetMessage = {
   id: string;
@@ -189,6 +189,7 @@ function AvaWidgetInner() {
       textOnly: mode === "text",
       dynamicVariables: {
         ...dynamicVariables,
+        ...getElevenLabsAttributionVariables(),
         entry_mode: mode === "voice" ? "website_widget_voice" : "website_widget_text",
       },
       clientTools,

@@ -107,6 +107,20 @@ export function getStoredAttribution() {
   }
 }
 
+export function getElevenLabsAttributionVariables() {
+  const attribution = getStoredAttribution() as Partial<Record<string, string>>;
+
+  return {
+    utm_source: attribution.utmSource ?? "",
+    utm_medium: attribution.utmMedium ?? "",
+    utm_campaign: attribution.utmCampaign ?? "",
+    utm_term: attribution.utmTerm ?? "",
+    utm_content: attribution.utmContent ?? "",
+    landing_page: attribution.landingPage ?? "",
+    referrer: attribution.referrer ?? "",
+  };
+}
+
 export function trackEvent(eventName: AnalyticsEventName, payload: AnalyticsPayload = {}) {
   if (typeof window === "undefined") return;
 
