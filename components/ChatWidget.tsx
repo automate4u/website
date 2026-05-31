@@ -103,7 +103,7 @@ function AvaWidgetInner() {
     {
       id: "welcome",
       role: "assistant",
-      text: "Hi, I can connect you with Automate4U support. Start a voice call or send a message.",
+      text: "Welcome to Automate4U. Start a voice call or send a message.",
     },
   ]);
   const [error, setError] = useState("");
