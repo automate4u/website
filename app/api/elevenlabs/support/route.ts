@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { notificationLine, payloadLines, redactedSummary } from "@/lib/elevenlabs/format";
-import { createContactNote, createOrUpdateContact } from "@/lib/elevenlabs/hubspot";
+import { createContactNote, createOrUpdateContact, createSupportTicket } from "@/lib/elevenlabs/hubspot";
 import { sendInternalNotification } from "@/lib/elevenlabs/notifications";
 import { authorizedJson, badRequest, serverError } from "@/lib/elevenlabs/request";
 import { optionalString, stringField, type Priority } from "@/lib/elevenlabs/types";
@@ -47,11 +47,27 @@ export async function POST(request: Request) {
     });
 
     const priority = priorityFromSeverity(severity);
+    const ticket = await createSupportTicket({
+      contactId: hubspot.contactId,
+      company,
+      issueSummary,
+      severity,
+      affectedWorkflow: optionalString(stringField(parsed.data, "affected_workflow")),
+      customerImpact: optionalString(stringField(parsed.data, "customer_impact")),
+      startedAt: optionalString(stringField(parsed.data, "started_at")),
+      conversationId: optionalString(stringField(parsed.data, "conversation_id")),
+      conversationSummary: optionalString(redactedSummary(stringField(parsed.data, "conversation_summary"))),
+    }).catch((error) => {
+      console.error("[ElevenLabs Support] optional HubSpot ticket creation failed", error);
+      return { configured: true, ticketId: undefined, skipped: "hubspot_ticket_creation_failed" };
+    });
+
     const body = [
       "Automate4U support intake from Ava",
       "",
       ...payloadLines(parsed.data, supportFields),
       notificationLine("Conversation summary", redactedSummary(stringField(parsed.data, "conversation_summary"))),
+      notificationLine("HubSpot ticket", ticket.ticketId ?? ticket.skipped ?? "Not configured"),
     ].join("\n");
 
     const note = await createContactNote({
@@ -70,6 +86,7 @@ export async function POST(request: Request) {
       priority,
       human_escalation_recommended: severity === "P0" || severity === "P1",
       hubspot,
+      ticket,
       note,
       notification,
     });

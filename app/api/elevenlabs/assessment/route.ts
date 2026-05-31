@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { assessmentMeetingUrl, notificationLine, payloadLines, redactedSummary } from "@/lib/elevenlabs/format";
-import { createContactNote, createOrUpdateContact } from "@/lib/elevenlabs/hubspot";
+import { createAssessmentDeal, createContactNote, createOrUpdateContact } from "@/lib/elevenlabs/hubspot";
 import { sendInternalNotification } from "@/lib/elevenlabs/notifications";
 import { authorizedJson, badRequest, missingFields, serverError } from "@/lib/elevenlabs/request";
 import { optionalString, stringField } from "@/lib/elevenlabs/types";
@@ -25,6 +25,10 @@ const assessmentFields: Array<[string, string]> = [
   ["UTM source", "utm_source"],
   ["UTM medium", "utm_medium"],
   ["UTM campaign", "utm_campaign"],
+  ["UTM term", "utm_term"],
+  ["UTM content", "utm_content"],
+  ["Landing page", "landing_page"],
+  ["Referrer", "referrer"],
   ["Conversation ID", "conversation_id"],
 ];
 
@@ -48,12 +52,29 @@ export async function POST(request: Request) {
       source: "elevenlabs_assessment",
     });
 
+    const deal = await createAssessmentDeal({
+      contactId: hubspot.contactId,
+      name: optionalString(stringField(parsed.data, "name")),
+      company: optionalString(stringField(parsed.data, "company")),
+      workflowPain: optionalString(stringField(parsed.data, "workflow_pain")),
+      serviceInterest: optionalString(stringField(parsed.data, "service_interest")),
+      timeline: optionalString(stringField(parsed.data, "timeline")),
+      budget: optionalString(stringField(parsed.data, "budget")),
+      sourcePage: optionalString(stringField(parsed.data, "source_page")),
+      conversationId: optionalString(stringField(parsed.data, "conversation_id")),
+      conversationSummary: optionalString(redactedSummary(stringField(parsed.data, "conversation_summary"))),
+    }).catch((error) => {
+      console.error("[ElevenLabs Assessment] optional HubSpot deal creation failed", error);
+      return { configured: true, dealId: undefined, skipped: "hubspot_deal_creation_failed" };
+    });
+
     const body = [
       "New AI workflow assessment request from Ava",
       "",
       ...payloadLines(parsed.data, assessmentFields),
       notificationLine("Conversation summary", redactedSummary(stringField(parsed.data, "conversation_summary"))),
       notificationLine("HubSpot assessment meeting link", assessmentMeetingUrl),
+      notificationLine("HubSpot deal", deal.dealId ?? deal.skipped ?? "Not configured"),
     ].join("\n");
 
     const note = await createContactNote({
@@ -70,6 +91,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       ok: true,
       hubspot,
+      deal,
       note,
       notification,
       meeting_url: assessmentMeetingUrl,

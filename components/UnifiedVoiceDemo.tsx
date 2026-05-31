@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
-import { trackEvent } from "@/lib/analytics";
+import { getElevenLabsAttributionVariables, trackEvent } from "@/lib/analytics";
 
 type VoiceProviderKind = "retell" | "elevenlabs";
 
@@ -287,6 +287,7 @@ function UnifiedVoiceDemoInner({
                     entry_mode: "website_demo",
                     source_page: sourcePage,
                     cta_location: ctaLocation,
+                    ...getElevenLabsAttributionVariables(),
                 },
                 clientTools: {
                     a4u_demo_show_action: () => undefined,

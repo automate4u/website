@@ -13,6 +13,21 @@ type ContactInput = {
   source?: string;
 };
 
+type HubSpotObjectResult = {
+  configured: boolean;
+  skipped?: string;
+};
+
+type HubSpotDealResult = HubSpotObjectResult & {
+  dealId?: string;
+  associatedContactId?: string;
+};
+
+type HubSpotTicketResult = HubSpotObjectResult & {
+  ticketId?: string;
+  associatedContactId?: string;
+};
+
 function hubSpotHeaders() {
   const token = process.env.HUBSPOT_PRIVATE_APP_TOKEN;
   if (!token) return null;
@@ -57,6 +72,43 @@ async function hubSpotFetch(path: string, init: RequestInit) {
   });
 
   return { configured: true as const, response };
+}
+
+function optionalPipelineConfig(pipelineEnv: string, stageEnv: string) {
+  const pipelineId = process.env[pipelineEnv];
+  const stageId = process.env[stageEnv];
+
+  if (!pipelineId || !stageId) {
+    return {
+      configured: false as const,
+      skipped: `${pipelineEnv} and ${stageEnv} are required`,
+    };
+  }
+
+  return { configured: true as const, pipelineId, stageId };
+}
+
+async function associateHubSpotObject(args: {
+  fromObjectType: string;
+  fromObjectId?: string;
+  toObjectType: string;
+  toObjectId?: string;
+}) {
+  if (!args.fromObjectId || !args.toObjectId) return { configured: true, skipped: "missing_object_id" };
+
+  const associationResult = await hubSpotFetch(
+    `/crm/v4/objects/${encodeURIComponent(args.fromObjectType)}/${encodeURIComponent(
+      args.fromObjectId
+    )}/associations/default/${encodeURIComponent(args.toObjectType)}/${encodeURIComponent(args.toObjectId)}`,
+    { method: "PUT" }
+  );
+
+  if (!associationResult.configured) return { configured: false, skipped: "missing_hubspot_token" };
+  if (!associationResult.response.ok) {
+    throw new Error(`HubSpot ${args.fromObjectType} association failed: ${associationResult.response.status}`);
+  }
+
+  return { configured: true };
 }
 
 export async function findContactByEmail(email: string): Promise<HubSpotContact | null> {
@@ -209,6 +261,210 @@ export async function createContactNote(args: { contactId?: string; body: string
   }
 
   return { configured: true, noteId: note.id, associatedContactId: args.contactId };
+}
+
+export async function createAssessmentDeal(args: {
+  contactId?: string;
+  name?: string;
+  company?: string;
+  workflowPain?: string;
+  serviceInterest?: string;
+  timeline?: string;
+  budget?: string;
+  sourcePage?: string;
+  conversationId?: string;
+  conversationSummary?: string;
+}): Promise<HubSpotDealResult> {
+  if (!process.env.HUBSPOT_PRIVATE_APP_TOKEN) return { configured: false, skipped: "missing_hubspot_token" };
+
+  const config = optionalPipelineConfig("HUBSPOT_ASSESSMENT_DEAL_PIPELINE_ID", "HUBSPOT_ASSESSMENT_DEAL_STAGE_ID");
+  if (!config.configured) return { configured: false, skipped: config.skipped };
+
+  const dealName = [args.company || args.name || "Unknown prospect", "AI Workflow Assessment"].join(" - ");
+  const amount = process.env.HUBSPOT_ASSESSMENT_DEAL_AMOUNT;
+  const properties = compactObject({
+    dealname: dealName,
+    pipeline: config.pipelineId,
+    dealstage: config.stageId,
+    amount,
+    description: [
+      args.workflowPain ? `Workflow pain: ${args.workflowPain}` : "",
+      args.serviceInterest ? `Service interest: ${args.serviceInterest}` : "",
+      args.timeline ? `Timeline: ${args.timeline}` : "",
+      args.budget ? `Budget: ${args.budget}` : "",
+      args.sourcePage ? `Source page: ${args.sourcePage}` : "",
+      args.conversationId ? `Conversation ID: ${args.conversationId}` : "",
+      args.conversationSummary ? `Summary: ${args.conversationSummary}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n")
+      .slice(0, 4000),
+  }) as Record<string, string>;
+
+  const createResult = await hubSpotFetch("/crm/v3/objects/deals", {
+    method: "POST",
+    body: JSON.stringify({ properties }),
+  });
+
+  if (!createResult.configured) return { configured: false, skipped: "missing_hubspot_token" };
+  if (!createResult.response.ok) {
+    throw new Error(`HubSpot assessment deal creation failed: ${createResult.response.status}`);
+  }
+
+  const deal = (await createResult.response.json()) as { id?: string };
+  if (!deal.id) return { configured: true, skipped: "missing_deal_id" };
+
+  const association = await associateHubSpotObject({
+    fromObjectType: "deal",
+    fromObjectId: deal.id,
+    toObjectType: "contact",
+    toObjectId: args.contactId,
+  });
+
+  return {
+    configured: true,
+    dealId: deal.id,
+    associatedContactId: association.configured && !association.skipped ? args.contactId : undefined,
+  };
+}
+
+function ticketPriority(value?: string) {
+  if (value === "P0" || value === "urgent") return "HIGH";
+  if (value === "P1" || value === "high") return "HIGH";
+  if (value === "low" || value === "P3") return "LOW";
+  return "MEDIUM";
+}
+
+export async function createSupportTicket(args: {
+  contactId?: string;
+  company?: string;
+  issueSummary: string;
+  severity?: string;
+  affectedWorkflow?: string;
+  customerImpact?: string;
+  startedAt?: string;
+  conversationId?: string;
+  conversationSummary?: string;
+}): Promise<HubSpotTicketResult> {
+  if (!process.env.HUBSPOT_PRIVATE_APP_TOKEN) return { configured: false, skipped: "missing_hubspot_token" };
+
+  const config = optionalPipelineConfig("HUBSPOT_SUPPORT_TICKET_PIPELINE_ID", "HUBSPOT_SUPPORT_TICKET_STAGE_ID");
+  if (!config.configured) return { configured: false, skipped: config.skipped };
+
+  const properties = compactObject({
+    subject: `Ava support intake${args.company ? ` - ${args.company}` : ""}`,
+    content: [
+      args.issueSummary,
+      args.affectedWorkflow ? `Affected workflow: ${args.affectedWorkflow}` : "",
+      args.customerImpact ? `Customer impact: ${args.customerImpact}` : "",
+      args.startedAt ? `Started at: ${args.startedAt}` : "",
+      args.conversationId ? `Conversation ID: ${args.conversationId}` : "",
+      args.conversationSummary ? `Summary: ${args.conversationSummary}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n")
+      .slice(0, 4000),
+    hs_pipeline: config.pipelineId,
+    hs_pipeline_stage: config.stageId,
+    hs_ticket_priority: ticketPriority(args.severity),
+  }) as Record<string, string>;
+
+  const createResult = await hubSpotFetch("/crm/v3/objects/tickets", {
+    method: "POST",
+    body: JSON.stringify({ properties }),
+  });
+
+  if (!createResult.configured) return { configured: false, skipped: "missing_hubspot_token" };
+  if (!createResult.response.ok) {
+    throw new Error(`HubSpot support ticket creation failed: ${createResult.response.status}`);
+  }
+
+  const ticket = (await createResult.response.json()) as { id?: string };
+  if (!ticket.id) return { configured: true, skipped: "missing_ticket_id" };
+
+  const association = await associateHubSpotObject({
+    fromObjectType: "ticket",
+    fromObjectId: ticket.id,
+    toObjectType: "contact",
+    toObjectId: args.contactId,
+  });
+
+  return {
+    configured: true,
+    ticketId: ticket.id,
+    associatedContactId: association.configured && !association.skipped ? args.contactId : undefined,
+  };
+}
+
+export async function createClientSuccessTicket(args: {
+  contactId?: string;
+  company?: string;
+  requestedChange: string;
+  currentWorkflow?: string;
+  businessReason?: string;
+  urgency?: string;
+  scopeOrPricingRisk?: boolean;
+  conversationId?: string;
+  conversationSummary?: string;
+}): Promise<HubSpotTicketResult> {
+  if (!process.env.HUBSPOT_PRIVATE_APP_TOKEN) return { configured: false, skipped: "missing_hubspot_token" };
+
+  const pipelineId =
+    process.env.HUBSPOT_CLIENT_SUCCESS_TICKET_PIPELINE_ID ?? process.env.HUBSPOT_SUPPORT_TICKET_PIPELINE_ID;
+  const stageId = process.env.HUBSPOT_CLIENT_SUCCESS_TICKET_STAGE_ID ?? process.env.HUBSPOT_SUPPORT_TICKET_STAGE_ID;
+
+  if (!pipelineId || !stageId) {
+    return {
+      configured: false,
+      skipped:
+        "HUBSPOT_CLIENT_SUCCESS_TICKET_PIPELINE_ID/HUBSPOT_CLIENT_SUCCESS_TICKET_STAGE_ID or support ticket pipeline env vars are required",
+    };
+  }
+
+  const properties = compactObject({
+    subject: `Ava client success request${args.company ? ` - ${args.company}` : ""}`,
+    content: [
+      args.requestedChange,
+      args.currentWorkflow ? `Current workflow: ${args.currentWorkflow}` : "",
+      args.businessReason ? `Business reason: ${args.businessReason}` : "",
+      args.urgency ? `Urgency: ${args.urgency}` : "",
+      args.scopeOrPricingRisk ? "Scope or pricing risk: yes" : "",
+      args.conversationId ? `Conversation ID: ${args.conversationId}` : "",
+      args.conversationSummary ? `Summary: ${args.conversationSummary}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n")
+      .slice(0, 4000),
+    hs_pipeline: pipelineId,
+    hs_pipeline_stage: stageId,
+    hs_ticket_priority: args.scopeOrPricingRisk ? "HIGH" : ticketPriority(args.urgency),
+  }) as Record<string, string>;
+
+  const createResult = await hubSpotFetch("/crm/v3/objects/tickets", {
+    method: "POST",
+    body: JSON.stringify({ properties }),
+  });
+
+  if (!createResult.configured) return { configured: false, skipped: "missing_hubspot_token" };
+  if (!createResult.response.ok) {
+    throw new Error(`HubSpot client success ticket creation failed: ${createResult.response.status}`);
+  }
+
+  const ticket = (await createResult.response.json()) as { id?: string };
+  if (!ticket.id) return { configured: true, skipped: "missing_ticket_id" };
+
+  const association = await associateHubSpotObject({
+    fromObjectType: "ticket",
+    fromObjectId: ticket.id,
+    toObjectType: "contact",
+    toObjectId: args.contactId,
+  });
+
+  return {
+    configured: true,
+    ticketId: ticket.id,
+    associatedContactId: association.configured && !association.skipped ? args.contactId : undefined,
+  };
 }
 
 export function contactDisplayName(contact: HubSpotContact | null) {

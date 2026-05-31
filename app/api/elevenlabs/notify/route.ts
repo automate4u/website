@@ -11,6 +11,10 @@ const notificationFields: Array<[string, string]> = [
   ["Email", "email"],
   ["Phone", "phone"],
   ["Company", "company"],
+  ["Preferred callback window", "preferred_callback_window"],
+  ["Urgency", "urgency"],
+  ["Source page", "source_page"],
+  ["CTA location", "cta_location"],
   ["Requested action", "requested_action"],
   ["Conversation ID", "conversation_id"],
 ];
