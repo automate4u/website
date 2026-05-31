@@ -45,6 +45,9 @@ export async function POST(request: Request) {
   if (isPhoneCallbackRequest(parsed.data) && !stringField(parsed.data, "phone")) {
     return badRequest("phone is required for phone callback requests.");
   }
+  if (isPhoneCallbackRequest(parsed.data) && !stringField(parsed.data, "preferred_callback_window")) {
+    return badRequest("preferred_callback_window is required for phone callback requests.");
+  }
 
   try {
     const priority = asPriority(stringField(parsed.data, "priority"));
