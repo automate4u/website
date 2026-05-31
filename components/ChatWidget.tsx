@@ -45,6 +45,15 @@ function renderMessageText(text: string) {
   });
 }
 
+function isTextSessionOpeningGreeting(message: WidgetMessage) {
+  if (message.role !== "assistant") return false;
+
+  return [
+    "Hi, this is Ava with Automate4U. How can I help today?",
+    "Hi, I am Ava with Automate4U.",
+  ].some((opening) => message.text.startsWith(opening));
+}
+
 function extractMessage(event: unknown): WidgetMessage | null {
   if (!event || typeof event !== "object") return null;
 
@@ -152,6 +161,7 @@ function AvaWidgetInner() {
       const message = extractMessage(event);
       if (message) {
         if (message.role === "user" && modeRef.current === "text") return;
+        if (modeRef.current === "text" && isTextSessionOpeningGreeting(message)) return;
         setMessages((current) => [...current.slice(-9), message]);
       }
     },
@@ -257,7 +267,7 @@ function AvaWidgetInner() {
     setIsTextMode(true);
     setText("");
     setMessages((current) => [
-      ...current.slice(-9),
+      ...current.filter((message) => message.id !== "welcome").slice(-9),
       { id: crypto.randomUUID(), role: "user", text: nextText },
     ]);
 
