@@ -267,7 +267,7 @@ function AvaWidgetInner() {
     setIsTextMode(true);
     setText("");
     setMessages((current) => [
-      ...current.filter((message) => message.id !== "welcome").slice(-9),
+      ...current.slice(-9),
       { id: crypto.randomUUID(), role: "user", text: nextText },
     ]);
 
