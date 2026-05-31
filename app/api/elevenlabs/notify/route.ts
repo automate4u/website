@@ -23,12 +23,28 @@ function asPriority(value: string): Priority {
   return value === "urgent" || value === "high" || value === "low" ? value : "normal";
 }
 
+function isPhoneCallbackRequest(data: Record<string, unknown>) {
+  const combined = [
+    stringField(data, "notification_type"),
+    stringField(data, "requested_action"),
+    stringField(data, "summary"),
+    stringField(data, "preferred_callback_window"),
+  ]
+    .join(" ")
+    .toLowerCase();
+
+  return /\b(call|callback|call\s*back|phone)\b/.test(combined);
+}
+
 export async function POST(request: Request) {
   const parsed = await authorizedJson(request);
   if (parsed.error) return parsed.error;
 
   const summary = redactedSummary(stringField(parsed.data, "summary"));
   if (!summary) return badRequest("summary is required.");
+  if (isPhoneCallbackRequest(parsed.data) && !stringField(parsed.data, "phone")) {
+    return badRequest("phone is required for phone callback requests.");
+  }
 
   try {
     const priority = asPriority(stringField(parsed.data, "priority"));
