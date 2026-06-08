@@ -6,6 +6,19 @@ export const notificationRecipients = ["johnny@automate4u.co", "michael@automate
 export const assessmentMeetingUrl =
   process.env.NEXT_PUBLIC_HUBSPOT_MEETING_URL ?? "https://meetings-na3.hubspot.com/jzhang";
 
+export function assessmentMeetingSlug(): string {
+  const configuredSlug = process.env.HUBSPOT_ASSESSMENT_MEETING_SLUG?.trim();
+  if (configuredSlug) return configuredSlug;
+
+  try {
+    const url = new URL(assessmentMeetingUrl);
+    const [slug] = url.pathname.split("/").filter(Boolean);
+    return slug || "jzhang";
+  } catch {
+    return "jzhang";
+  }
+}
+
 export function present(value: unknown): string {
   return typeof value === "string" && value.trim() ? value.trim() : "Not provided";
 }

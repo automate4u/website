@@ -28,6 +28,18 @@ type HubSpotTicketResult = HubSpotObjectResult & {
   associatedContactId?: string;
 };
 
+type HubSpotMeetingAvailability = {
+  startMillisUtc: number;
+  endMillisUtc: number;
+  startIso: string;
+  endIso: string;
+  durationMillis: number;
+};
+
+type HubSpotMeetingBookingResult = HubSpotObjectResult & {
+  booking?: JsonObject;
+};
+
 function hubSpotHeaders() {
   const token = process.env.HUBSPOT_PRIVATE_APP_TOKEN;
   if (!token) return null;
@@ -72,6 +84,29 @@ async function hubSpotFetch(path: string, init: RequestInit) {
   });
 
   return { configured: true as const, response };
+}
+
+async function hubSpotSchedulerFetch(path: string, init: RequestInit = {}) {
+  const headers = hubSpotHeaders();
+  if (!headers) return { configured: false as const };
+
+  const response = await fetch(`https://api.hubapi.com${path}`, {
+    ...init,
+    headers: {
+      ...headers,
+      ...(init.headers ?? {}),
+    },
+  });
+
+  const raw = await response.text();
+  let data: JsonObject;
+  try {
+    data = raw ? (JSON.parse(raw) as JsonObject) : {};
+  } catch {
+    data = { raw };
+  }
+
+  return { configured: true as const, response, data };
 }
 
 function optionalPipelineConfig(pipelineEnv: string, stageEnv: string) {
@@ -261,6 +296,141 @@ export async function createContactNote(args: { contactId?: string; body: string
   }
 
   return { configured: true, noteId: note.id, associatedContactId: args.contactId };
+}
+
+export async function getMeetingAvailability(args: {
+  slug: string;
+  timezone: string;
+  monthOffset?: number;
+  durationMillis?: number;
+  limit?: number;
+}): Promise<{
+  configured: boolean;
+  slug: string;
+  timezone: string;
+  durationMillis?: number;
+  availabilities: HubSpotMeetingAvailability[];
+  hasMore?: boolean;
+  skipped?: string;
+  error?: string;
+}> {
+  if (!process.env.HUBSPOT_PRIVATE_APP_TOKEN) {
+    return {
+      configured: false,
+      slug: args.slug,
+      timezone: args.timezone,
+      availabilities: [],
+      skipped: "missing_hubspot_token",
+    };
+  }
+
+  const query = new URLSearchParams({ timezone: args.timezone });
+  if (args.monthOffset !== undefined) query.set("monthOffset", String(args.monthOffset));
+
+  const result = await hubSpotSchedulerFetch(
+    `/scheduler/v3/meetings/meeting-links/book/availability-page/${encodeURIComponent(args.slug)}?${query.toString()}`
+  );
+
+  if (!result.configured) {
+    return {
+      configured: false,
+      slug: args.slug,
+      timezone: args.timezone,
+      availabilities: [],
+      skipped: "missing_hubspot_token",
+    };
+  }
+
+  if (!result.response.ok) {
+    return {
+      configured: true,
+      slug: args.slug,
+      timezone: args.timezone,
+      availabilities: [],
+      error: `HubSpot scheduler availability failed: ${result.response.status}`,
+      skipped: typeof result.data.message === "string" ? result.data.message : "hubspot_scheduler_availability_failed",
+    };
+  }
+
+  const linkAvailability = result.data.linkAvailability as JsonObject | undefined;
+  const byDuration = (linkAvailability?.linkAvailabilityByDuration ?? {}) as Record<string, JsonObject>;
+  const durationKeys = Object.keys(byDuration).sort((a, b) => Number(a) - Number(b));
+  const preferredKey =
+    args.durationMillis && byDuration[String(args.durationMillis)]
+      ? String(args.durationMillis)
+      : durationKeys.find((key) => Number(key) === 1800000) ?? durationKeys[0];
+
+  const selected = preferredKey ? byDuration[preferredKey] : undefined;
+  const durationMillis = Number((selected?.meetingDurationMillis as number | undefined) ?? preferredKey ?? args.durationMillis);
+  const rawAvailabilities = Array.isArray(selected?.availabilities) ? (selected.availabilities as JsonObject[]) : [];
+  const limit = Math.max(1, Math.min(args.limit ?? 5, 10));
+
+  return {
+    configured: true,
+    slug: args.slug,
+    timezone: args.timezone,
+    durationMillis: Number.isFinite(durationMillis) ? durationMillis : undefined,
+    hasMore: Boolean(linkAvailability?.hasMore),
+    availabilities: rawAvailabilities
+      .map((slot) => {
+        const startMillisUtc = Number(slot.startMillisUtc);
+        const endMillisUtc = Number(slot.endMillisUtc);
+        return {
+          startMillisUtc,
+          endMillisUtc,
+          startIso: new Date(startMillisUtc).toISOString(),
+          endIso: new Date(endMillisUtc).toISOString(),
+          durationMillis: Number.isFinite(durationMillis) ? durationMillis : endMillisUtc - startMillisUtc,
+        };
+      })
+      .filter((slot) => Number.isFinite(slot.startMillisUtc) && Number.isFinite(slot.endMillisUtc))
+      .slice(0, limit),
+  };
+}
+
+export async function bookMeeting(args: {
+  slug: string;
+  timezone: string;
+  startTimeMillis: number;
+  durationMillis: number;
+  name?: string;
+  email: string;
+  guestEmails?: string[];
+}): Promise<HubSpotMeetingBookingResult> {
+  if (!process.env.HUBSPOT_PRIVATE_APP_TOKEN) return { configured: false, skipped: "missing_hubspot_token" };
+
+  const { firstname, lastname } = splitName(args.name || args.email.split("@")[0]);
+  const result = await hubSpotSchedulerFetch(
+    `/scheduler/v3/meetings/meeting-links/book?${new URLSearchParams({ timezone: args.timezone }).toString()}`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        slug: args.slug,
+        firstName: firstname || args.email.split("@")[0],
+        lastName: lastname || "",
+        email: args.email,
+        startTime: args.startTimeMillis,
+        duration: args.durationMillis,
+        guestEmails: args.guestEmails ?? [],
+        timezone: args.timezone,
+        locale: "en-us",
+        likelyAvailableUserIds: [],
+      }),
+    }
+  );
+
+  if (!result.configured) return { configured: false, skipped: "missing_hubspot_token" };
+  if (!result.response.ok) {
+    return {
+      configured: true,
+      skipped: typeof result.data.message === "string" ? result.data.message : "hubspot_scheduler_booking_failed",
+    };
+  }
+
+  return {
+    configured: true,
+    booking: result.data,
+  };
 }
 
 export async function createAssessmentDeal(args: {
