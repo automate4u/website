@@ -86,6 +86,12 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       ok: Boolean(booking.booking),
+      booking_status: booking.status ?? (booking.booking ? "created" : "failed"),
+      booking_created: Boolean(booking.booking),
+      booking_failed_reason: booking.booking ? null : booking.error ?? booking.skipped ?? "hubspot_scheduler_booking_failed",
+      assistant_guidance: booking.booking
+        ? "Confirm the booked time and tell the caller the calendar invitation should arrive through HubSpot."
+        : "Tell the caller the direct booking did not complete, give the exact reason if it is understandable, share the meeting link, and confirm any callback already captured.",
       meeting_type: meetingType,
       meeting_url: assessmentMeetingUrl,
       start_time_millis: startTimeMillis,

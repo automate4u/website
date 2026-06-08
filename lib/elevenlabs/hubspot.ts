@@ -38,6 +38,10 @@ type HubSpotMeetingAvailability = {
 
 type HubSpotMeetingBookingResult = HubSpotObjectResult & {
   booking?: JsonObject;
+  status?: "created" | "failed" | "not_configured";
+  error?: string;
+  statusCode?: number;
+  hubspotResponse?: JsonObject;
 };
 
 function hubSpotHeaders() {
@@ -397,7 +401,9 @@ export async function bookMeeting(args: {
   email: string;
   guestEmails?: string[];
 }): Promise<HubSpotMeetingBookingResult> {
-  if (!process.env.HUBSPOT_PRIVATE_APP_TOKEN) return { configured: false, skipped: "missing_hubspot_token" };
+  if (!process.env.HUBSPOT_PRIVATE_APP_TOKEN) {
+    return { configured: false, status: "not_configured", skipped: "missing_hubspot_token" };
+  }
 
   const { firstname, lastname } = splitName(args.name || args.email.split("@")[0]);
   const result = await hubSpotSchedulerFetch(
@@ -419,16 +425,22 @@ export async function bookMeeting(args: {
     }
   );
 
-  if (!result.configured) return { configured: false, skipped: "missing_hubspot_token" };
+  if (!result.configured) return { configured: false, status: "not_configured", skipped: "missing_hubspot_token" };
   if (!result.response.ok) {
+    const message = typeof result.data.message === "string" ? result.data.message : "hubspot_scheduler_booking_failed";
     return {
       configured: true,
-      skipped: typeof result.data.message === "string" ? result.data.message : "hubspot_scheduler_booking_failed",
+      status: "failed",
+      skipped: message,
+      error: message,
+      statusCode: result.response.status,
+      hubspotResponse: result.data,
     };
   }
 
   return {
     configured: true,
+    status: "created",
     booking: result.data,
   };
 }
