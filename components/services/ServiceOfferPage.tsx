@@ -1,6 +1,7 @@
 import Link from "next/link";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import AssessmentTrigger from "@/components/AssessmentTrigger";
+import AgentOperationsConsole from "@/components/sections/AgentOperationsConsole";
 import SectionHeader from "@/components/sections/SectionHeader";
 import ServiceProofModules from "@/components/services/ServiceProofModule";
 import { howWeBuildPillars } from "@/data/how-we-build";
@@ -208,7 +209,7 @@ export default function ServiceOfferPage({ service }: ServiceOfferPageProps) {
       <section className="bg-[#051C2C] px-4 py-12 text-white md:py-[72px]">
         <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <div>
-            <h1 className="max-w-[760px] text-[36px] font-extrabold leading-[1.06] tracking-[-0.02em] md:text-[54px]">
+            <h1 className="max-w-[760px] text-[36px] font-extrabold leading-[1.06] md:text-[54px]">
               {service.title}
             </h1>
             <p className="mt-5 max-w-[700px] text-base leading-8 text-white/74 md:text-[17px]">
@@ -230,7 +231,7 @@ export default function ServiceOfferPage({ service }: ServiceOfferPageProps) {
           </div>
 
           <div className="rounded-lg border border-white/12 bg-white/[0.07] p-5 shadow-[0_18px_55px_rgba(0,0,0,0.20)]">
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">{service.heroModel.label}</p>
+            <p className="text-xs font-bold uppercase text-[#7df0d1]">{service.heroModel.label}</p>
             <div className="mt-5 grid gap-3">
               {service.heroModel.steps.map((step, index) => (
                 <div key={step.title} className="grid gap-3 rounded-lg border border-white/10 bg-[#0d1720]/70 p-4 sm:grid-cols-[auto_1fr] sm:items-start">
@@ -251,8 +252,8 @@ export default function ServiceOfferPage({ service }: ServiceOfferPageProps) {
       <section className="border-b border-card-border bg-white px-4 py-10 md:py-12">
         <div className="mx-auto grid max-w-[1180px] gap-6 rounded-lg border border-card-border bg-[#f8fbfa] p-6 shadow-[0_12px_36px_rgba(15,23,32,0.05)] md:p-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">{presentation.scenario.eyebrow}</p>
-            <h2 className="mt-3 text-[26px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[34px]">
+            <p className="text-xs font-bold uppercase text-[#167f65]">{presentation.scenario.eyebrow}</p>
+            <h2 className="mt-3 text-[26px] font-extrabold leading-tight text-ink md:text-[34px]">
               {presentation.scenario.title}
             </h2>
             <p className="mt-4 text-base leading-7 text-muted">{presentation.scenario.text}</p>
@@ -271,13 +272,30 @@ export default function ServiceOfferPage({ service }: ServiceOfferPageProps) {
         <div className="mx-auto grid max-w-[1180px] gap-4 md:grid-cols-3">
           {presentation.pilotProof.map((item) => (
             <article key={`${item.label}-${item.title}`} className="rounded-lg border border-card-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
-              <p className="text-xs font-extrabold uppercase tracking-[0.08em] text-[#167f65]">{item.label}</p>
+              <p className="text-xs font-extrabold uppercase text-[#167f65]">{item.label}</p>
               <h2 className="mt-2 text-xl font-extrabold leading-tight text-ink">{item.title}</h2>
               <p className="mt-3 text-sm leading-6 text-muted">{item.text}</p>
             </article>
           ))}
         </div>
       </section>
+
+      {service.slug === "ai-agents" && (
+        <section className="border-b border-card-border bg-white px-4 py-12 md:py-16" aria-labelledby="agent-service-console-title">
+          <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
+            <div>
+              <p className="text-xs font-bold uppercase text-[#169b78]">Agent at work</p>
+              <h2 id="agent-service-console-title" className="mt-3 text-[28px] font-extrabold leading-tight text-ink md:text-[38px]">
+                A useful agent turns messages into completed operational steps.
+              </h2>
+              <p className="mt-4 text-base leading-8 text-muted">
+                The point is not another inbox. The agent should classify the request, prepare the answer or action, update the system of record, and hand off exceptions with context.
+              </p>
+            </div>
+            <AgentOperationsConsole />
+          </div>
+        </section>
+      )}
 
       <ServiceProofModules slug={service.slug} />
 

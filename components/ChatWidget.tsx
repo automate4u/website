@@ -420,15 +420,14 @@ function AvaWidgetInner() {
                 </div>
               </div>
 
-              <div className="mt-3 grid grid-cols-3 gap-1.5" aria-hidden="true">
-                {[12, 22, 34, 18, 28, 40, 24, 16, 32].map((height, index) => (
+              <div className="mt-3 grid grid-cols-3 gap-2 text-center">
+                {["Qualify", "Demo", "Book"].map((item) => (
                   <span
-                    key={`${height}-${index}`}
-                    className={`rounded-full ${
-                      isVoiceActive ? "bg-[#7df0d1]" : "bg-white/22"
-                    }`}
-                    style={{ height: `${Math.max(3, height / 6)}px` }}
-                  />
+                    key={item}
+                    className="rounded-full border border-white/10 bg-white/[0.06] px-2 py-1.5 text-[11px] font-extrabold uppercase text-white/72"
+                  >
+                    {item}
+                  </span>
                 ))}
               </div>
 
@@ -560,17 +559,11 @@ function AvaWidgetInner() {
       >
         <span className="a4u-voice-blob-pulse" aria-hidden="true" />
         <span className="a4u-voice-blob-core" aria-hidden="true">
-          <svg
-            viewBox="0 0 24 24"
-            className="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2.2"
-          >
-            <path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3ZM5 11a7 7 0 0 0 14 0M12 18v3" />
-          </svg>
+          <span className="a4u-voice-blob-meter">
+            <span />
+            <span />
+            <span />
+          </span>
         </span>
       </button>
     </div>
