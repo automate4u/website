@@ -198,6 +198,54 @@ body {
   animation: agent-console-spin 920ms linear infinite;
 }
 
+.agent-console-sparkline {
+  position: relative;
+  display: block;
+  width: 72px;
+  height: 22px;
+  opacity: 0.86;
+}
+
+.agent-console-sparkline::before,
+.agent-console-sparkline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+}
+
+.agent-console-sparkline::before {
+  background-image:
+    linear-gradient(180deg, transparent 0 38%, rgba(125, 240, 209, 0.74) 38% 100%),
+    linear-gradient(180deg, transparent 0 56%, rgba(125, 240, 209, 0.74) 56% 100%),
+    linear-gradient(180deg, transparent 0 30%, rgba(125, 240, 209, 0.74) 30% 100%),
+    linear-gradient(180deg, transparent 0 48%, rgba(125, 240, 209, 0.74) 48% 100%),
+    linear-gradient(180deg, transparent 0 22%, rgba(125, 240, 209, 0.74) 22% 100%);
+  background-position: 8px 0, 21px 0, 34px 0, 47px 0, 60px 0;
+  background-size: 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%;
+  animation: agent-console-bars 1.8s ease-in-out infinite;
+}
+
+.agent-console-sparkline-1::before,
+.agent-console-sparkline-3::before {
+  background-image: none;
+}
+
+.agent-console-sparkline-1::after,
+.agent-console-sparkline-3::after {
+  top: 8px;
+  height: 12px;
+  border-top: 2px solid rgba(125, 240, 209, 0.7);
+  border-radius: 50%;
+  transform: skewX(-18deg);
+  animation: agent-console-wave 2.6s ease-in-out infinite;
+}
+
+.agent-console-sparkline-3::after {
+  border-top-color: rgba(191, 219, 254, 0.62);
+  animation-delay: 480ms;
+}
+
 @keyframes agent-console-sheen {
   0%,
   40%,
@@ -267,6 +315,32 @@ body {
 @keyframes agent-console-spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes agent-console-bars {
+  0%,
+  100% {
+    transform: scaleY(0.82);
+    opacity: 0.72;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes agent-console-wave {
+  0%,
+  100% {
+    transform: translateY(1px) skewX(-18deg);
+    opacity: 0.62;
+  }
+
+  50% {
+    transform: translateY(-2px) skewX(-18deg);
+    opacity: 1;
   }
 }
 
@@ -441,6 +515,8 @@ body {
   .agent-console-pulse,
   .agent-console-spinner,
   .agent-console-status-spinner,
+  .agent-console-sparkline::before,
+  .agent-console-sparkline::after,
   .a4u-voice-blob,
   .a4u-voice-blob-pulse,
   .a4u-voice-blob-meter span {
