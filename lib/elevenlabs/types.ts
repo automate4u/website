@@ -12,6 +12,7 @@ export type IntentRoute =
   | "billing"
   | "pricing"
   | "legal_compliance"
+  | "partner_referral"
   | "vendor_partner_media_hiring"
   | "unknown_sensitive";
 
