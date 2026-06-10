@@ -82,6 +82,54 @@ const voiceDemoProviders = [
     agentLine: "Thanks for calling. I can help with enrollment questions, tour requests, absence notices, and routing to the right location.",
     callerLine: "I want to ask about availability for my child and see if I can schedule a tour this week.",
   },
+  {
+    id: "home-services-demo",
+    provider: "elevenlabs" as const,
+    label: "Home services",
+    agentId: elevenLabsAgents.homeServicesDemo,
+    title: "Home Services Reception",
+    subtitle: "Missed calls, urgency triage, quote requests, and dispatch handoff",
+    description: "Test a homeowner call for repairs, after-hours coverage, estimates, or dispatch routing.",
+    tags: ["Missed-call recovery", "Dispatch notes", "Urgency triage"],
+    agentLine: "Thanks for calling. I can take the service request, understand urgency, and prepare the handoff for dispatch.",
+    callerLine: "My water heater is leaking and I need to know if someone can come out today.",
+  },
+  {
+    id: "healthcare-wellness-demo",
+    provider: "elevenlabs" as const,
+    label: "Healthcare front desk",
+    agentId: elevenLabsAgents.healthcareWellnessDemo,
+    title: "Healthcare Front Desk",
+    subtitle: "Safe intake, callback capture, routing, and staff escalation",
+    description: "Test a clinic or wellness front desk call with conservative intake and human handoff boundaries.",
+    tags: ["Appointment interest", "Callback capture", "Privacy-aware routing"],
+    agentLine: "Thanks for calling. I can help route front desk questions, take callback details, and get the request to the right staff member.",
+    callerLine: "I am a new patient and I want to ask about booking an appointment this week.",
+  },
+  {
+    id: "professional-services-demo",
+    provider: "elevenlabs" as const,
+    label: "Professional services",
+    agentId: elevenLabsAgents.professionalServicesDemo,
+    title: "Professional Services Intake",
+    subtitle: "New client inquiries, discovery requests, CRM-style handoff",
+    description: "Test a B2B intake call for agencies, consultants, advisory firms, accountants, or recruiting teams.",
+    tags: ["Lead qualification", "Discovery routing", "Owner handoff"],
+    agentLine: "Thanks for calling. I can capture the inquiry, understand the project fit, and route the next step to the right owner.",
+    callerLine: "We are looking for help with a project and want to see whether your team is a good fit.",
+  },
+  {
+    id: "manufacturing-demo",
+    provider: "elevenlabs" as const,
+    label: "Manufacturing",
+    agentId: elevenLabsAgents.manufacturingDemo,
+    title: "Manufacturing Quote Intake",
+    subtitle: "RFQs, order questions, supplier intake, and estimating handoff",
+    description: "Test an industrial call for RFQ capture, part details, order-status routing, or estimating follow-up.",
+    tags: ["RFQ capture", "Order routing", "Estimating handoff"],
+    agentLine: "Thanks for calling. I can capture the quote or order request and prepare the details for customer service or estimating.",
+    callerLine: "I need pricing on a part and want to send over the drawing after the call.",
+  },
 ];
 
 const pricingNotes = [
@@ -222,7 +270,7 @@ export default function AIVoicePage() {
       <section className="relative overflow-hidden bg-[#051C2C] px-4 py-12 text-white md:py-[72px]" aria-labelledby="voice-hero-title">
         <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
-            <h1 id="voice-hero-title" className="max-w-[760px] text-[36px] font-extrabold leading-[1.06] tracking-[-0.02em] md:text-[54px]">
+            <h1 id="voice-hero-title" className="max-w-[760px] text-[36px] font-extrabold leading-[1.06] md:text-[54px]">
               AI voice that answers calls and moves the work forward.
             </h1>
             <p className="mt-5 max-w-[650px] text-base leading-8 text-white/74 md:text-[17px]">
@@ -258,7 +306,7 @@ export default function AIVoicePage() {
               className="rounded-lg object-cover"
             />
             <div className="absolute bottom-8 left-8 right-8 rounded-lg border border-white/30 bg-[#06131d]/88 p-4 text-white shadow-[0_12px_34px_rgba(0,0,0,0.22)] backdrop-blur">
-              <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#7df0d1]">Voice to operations</p>
+              <p className="text-xs font-bold uppercase text-[#7df0d1]">Voice to operations</p>
               <div className="mt-3 grid gap-2 text-sm font-semibold sm:grid-cols-3">
                 <span className="rounded-md bg-white/10 px-3 py-2">Intent captured</span>
                 <span className="rounded-md bg-white/10 px-3 py-2">Action routed</span>
@@ -312,8 +360,8 @@ export default function AIVoicePage() {
         <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="focused-solution-title">
           <div className="mx-auto grid max-w-[1180px] gap-10 rounded-lg border border-card-border bg-[#f8fbfa] p-6 shadow-[0_12px_36px_rgba(15,23,32,0.05)] md:p-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#167f65]">Focused implementation</p>
-              <h2 id="focused-solution-title" className="mt-3 text-[28px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[38px]">
+              <p className="text-xs font-bold uppercase text-[#167f65]">Focused implementation</p>
+              <h2 id="focused-solution-title" className="mt-3 text-[28px] font-extrabold leading-tight text-ink md:text-[38px]">
                 See how voice works when it is designed for one real operating environment.
               </h2>
               <p className="mt-5 text-base leading-8 text-muted">
@@ -472,8 +520,8 @@ export default function AIVoicePage() {
       <section className="bg-[#051C2C] px-4 py-14 text-white md:py-20" aria-labelledby="voice-final-title">
         <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
-            <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.1em] text-[#7df0d1]">Free AI Workflow Assessment</p>
-            <h2 id="voice-final-title" className="text-[30px] font-extrabold leading-tight tracking-[-0.01em] md:text-[40px]">
+            <p className="mb-3 text-sm font-extrabold uppercase text-[#7df0d1]">Free AI Workflow Assessment</p>
+            <h2 id="voice-final-title" className="text-[30px] font-extrabold leading-tight md:text-[40px]">
               Find the first call workflow worth automating.
             </h2>
             <p className="mt-4 max-w-[720px] text-base leading-7 text-white/70">

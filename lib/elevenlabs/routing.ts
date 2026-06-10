@@ -29,6 +29,18 @@ export function inferRoutingContext(args: {
     intentRoute = "sales_follow_up";
     specialist = "sales_outreach";
     nextBestAction = "Confirm prior context, continue qualification, and offer the HubSpot Meetings link.";
+  } else if (
+    intent.includes("partner") ||
+    intent.includes("partnership") ||
+    intent.includes("refer") ||
+    intent.includes("referral") ||
+    intent.includes("bring you clients") ||
+    intent.includes("bring clients") ||
+    intent.includes("agency partner")
+  ) {
+    intentRoute = "partner_referral";
+    specialist = "none";
+    nextBestAction = "Answer service questions, capture referral fit, and log partner intake if they want follow-up.";
   } else if (intent.includes("support") || intent.includes("broken") || intent.includes("not working") || intent.includes("outage")) {
     intentRoute = "existing_client_support";
     specialist = "support";

@@ -41,6 +41,7 @@ type UnifiedVoiceDemoProps = {
 };
 
 const BAR_COUNT = 12;
+const workflowActions = ["Caller intent", "Context captured", "System action", "Human handoff"];
 
 function generateIdleBars(): number[] {
     return Array.from({ length: BAR_COUNT }, (_, index) => 12 + ((index * 5) % 8));
@@ -329,7 +330,7 @@ function UnifiedVoiceDemoInner({
             {/* Only show title/description section if provided */}
             {title && (
                 <div className="mx-auto mb-8 max-w-[780px] text-center">
-                    <h2 className={`text-[30px] font-extrabold leading-[1.1] tracking-[-0.01em] md:text-[40px] ${isDark ? "text-white" : "text-ink"
+                    <h2 className={`text-[30px] font-extrabold leading-[1.1] md:text-[40px] ${isDark ? "text-white" : "text-ink"
                         }`}>
                         {title}
                     </h2>
@@ -344,7 +345,7 @@ function UnifiedVoiceDemoInner({
 
             {/* Provider selector - only show if there are multiple providers */}
             {providers.length > 1 && (
-                <div className="mx-auto mb-5 flex max-w-[760px] flex-wrap justify-center gap-2">
+                <div className="mx-auto mb-6 grid max-w-[1120px] gap-2 sm:grid-cols-2 lg:grid-cols-3">
                     {providers.map((provider) => {
                         const isActive = provider.id === activeProvider;
                         return (
@@ -360,17 +361,35 @@ function UnifiedVoiceDemoInner({
                                         provider: provider.id,
                                     });
                                 }}
-                                className={`rounded-full border px-4 py-2 text-sm font-extrabold transition-colors ${isActive
+                                className={`group min-h-[92px] rounded-lg border px-4 py-3 text-left transition-all ${isActive
                                     ? isDark
-                                        ? "border-[#1db993] bg-[#1db993] text-white"
-                                        : "border-[#167f65] bg-[#167f65] text-white"
+                                        ? "border-[#7df0d1]/70 bg-[#1db993]/24 text-white shadow-[0_14px_38px_rgba(29,185,147,0.18)]"
+                                        : "border-[#167f65] bg-[#e9f9f3] text-ink shadow-[0_14px_34px_rgba(29,185,147,0.12)]"
                                     : isDark
-                                        ? "border-white/20 bg-white/10 text-white/80 hover:border-[#1db993]/50 hover:text-white"
-                                        : "border-card-border bg-white text-muted hover:border-[#1db993]/50 hover:text-ink"
+                                        ? "border-white/14 bg-white/8 text-white/76 hover:border-[#7df0d1]/38 hover:bg-white/12 hover:text-white"
+                                        : "border-card-border bg-white text-muted hover:border-[#1db993]/45 hover:text-ink hover:shadow-[0_10px_28px_rgba(15,23,32,0.06)]"
                                     }`}
                                 aria-pressed={isActive}
                             >
-                                {provider.label}
+                                <span className="flex items-center gap-3">
+                                    <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg border ${isActive
+                                        ? isDark
+                                            ? "border-[#7df0d1]/40 bg-[#7df0d1]/16 text-[#7df0d1]"
+                                            : "border-[#1db993]/28 bg-white text-[#167f65]"
+                                        : isDark
+                                            ? "border-white/12 bg-white/8 text-white/70"
+                                            : "border-card-border bg-[#f8fbfa] text-muted"
+                                        }`} aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M12 3a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z" />
+                                            <path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8" />
+                                        </svg>
+                                    </span>
+                                    <span className="min-w-0">
+                                        <span className={`block text-sm font-extrabold ${isActive ? (isDark ? "text-white" : "text-ink") : ""}`}>{provider.label}</span>
+                                        <span className={`mt-1 block text-xs font-bold leading-5 ${isActive ? (isDark ? "text-white/66" : "text-muted") : ""}`}>{provider.subtitle}</span>
+                                    </span>
+                                </span>
                             </button>
                         );
                     })}
@@ -378,10 +397,11 @@ function UnifiedVoiceDemoInner({
             )}
 
             {/* Main demo interface */}
-            <div className={`mx-auto max-w-[1120px] rounded-[24px] border p-4 shadow-[0_22px_60px_rgba(15,23,32,0.16)] md:p-5 ${isDark
-                ? "border-white/10 bg-[radial-gradient(circle_at_70%_85%,rgba(29,185,147,0.18),transparent_34%),linear-gradient(135deg,#0b2230,#102734)] text-white"
-                : "border-card-border bg-white text-ink"
+            <div className={`relative mx-auto max-w-[1120px] overflow-hidden rounded-[24px] border p-4 shadow-[0_24px_72px_rgba(15,23,32,0.16)] md:p-5 ${isDark
+                ? "border-white/10 bg-[radial-gradient(circle_at_78%_12%,rgba(125,240,209,0.18),transparent_28%),radial-gradient(circle_at_18%_84%,rgba(48,145,220,0.18),transparent_32%),linear-gradient(135deg,#071821,#102734)] text-white"
+                : "border-card-border bg-[linear-gradient(135deg,#ffffff,#f8fbfa)] text-ink"
                 }`}>
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#7df0d1]/60 to-transparent" aria-hidden="true" />
                 {/* Header */}
                 <div className="mb-5 flex items-center justify-between gap-4 px-1">
                     <div className="flex items-center gap-3">
@@ -391,7 +411,7 @@ function UnifiedVoiceDemoInner({
                             <span className={`h-1.5 w-1.5 rounded-full ${isDark ? "bg-white/38" : "bg-muted/38"}`} />
                         </span>
                         <p className={`text-sm font-extrabold ${isDark ? "text-white/88" : "text-ink"}`}>
-                            Live Voice Preview
+                            Agent Network Studio
                         </p>
                     </div>
                     <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-extrabold ${isDark
@@ -411,18 +431,20 @@ function UnifiedVoiceDemoInner({
                     </span>
                 </div>
 
-                <div className={`mb-5 rounded-[18px] border p-5 text-center md:p-6 ${isDark
+                <div className={`mb-5 grid gap-5 rounded-[18px] border p-5 md:grid-cols-[1fr_auto] md:items-center md:p-6 ${isDark
                     ? "border-[#1db993]/28 bg-[#1db993]/12"
                     : "border-[#1db993]/24 bg-[#e9f9f3]"
                     }`}>
-                    <h3 className={`text-xl font-extrabold md:text-2xl ${isDark ? "text-white" : "text-ink"}`}>
-                        Test the live voice demo
-                    </h3>
-                    <p className={`mx-auto mt-3 max-w-[640px] text-sm leading-6 ${isDark ? "text-white/72" : "text-muted"}`}>
-                        {selectedProvider.description}
-                    </p>
+                    <div className="text-left">
+                        <h3 className={`text-xl font-extrabold md:text-2xl ${isDark ? "text-white" : "text-ink"}`}>
+                            Try the selected live agent
+                        </h3>
+                        <p className={`mt-3 max-w-[680px] text-sm leading-6 ${isDark ? "text-white/72" : "text-muted"}`}>
+                            {selectedProvider.description}
+                        </p>
+                    </div>
                     <button
-                        className={`mx-auto mt-5 inline-flex min-h-16 w-full max-w-[420px] items-center justify-center gap-3 rounded-full px-7 py-4 text-lg font-extrabold transition-colors disabled:cursor-not-allowed disabled:opacity-70 sm:text-xl ${isConnected
+                        className={`inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-full px-6 py-4 text-base font-extrabold transition-colors disabled:cursor-not-allowed disabled:opacity-70 md:w-[260px] ${isConnected
                             ? "bg-red-500/95 text-white shadow-[0_14px_34px_rgba(239,68,68,0.28)] hover:bg-red-500"
                             : isDark
                                 ? "bg-[#1db993] text-white shadow-[0_16px_38px_rgba(29,185,147,0.36)] hover:bg-[#22c9a1]"
@@ -439,9 +461,6 @@ function UnifiedVoiceDemoInner({
                         </span>
                         {buttonText}
                     </button>
-                    <p className={`mt-3 text-xs leading-5 ${isDark ? "text-white/50" : "text-muted"}`}>
-                        Your browser may request microphone access. This assistant is for demonstration purposes only.
-                    </p>
                 </div>
 
                 <div className="grid gap-5 lg:grid-cols-[1.48fr_0.72fr] lg:items-start">
@@ -451,8 +470,12 @@ function UnifiedVoiceDemoInner({
                         : "border-card-border bg-[#f8fbfa]"
                         }`}>
                         <div className="flex items-center gap-4">
-                            <div className="grid h-12 w-12 place-items-center rounded-[14px] bg-[#1db993] text-lg font-extrabold text-white">
-                                AI
+                            <div className="relative grid h-14 w-14 place-items-center rounded-[16px] bg-[#1db993] text-lg font-extrabold text-white shadow-[0_14px_30px_rgba(29,185,147,0.25)]">
+                                <span className="absolute inset-2 rounded-full border border-white/22" aria-hidden="true" />
+                                <svg viewBox="0 0 24 24" className="relative h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                    <path d="M12 3a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z" />
+                                    <path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8" />
+                                </svg>
                             </div>
                             <div>
                                 <h3 className={`font-extrabold ${isDark ? "text-white" : "text-ink"}`}>
@@ -495,13 +518,24 @@ function UnifiedVoiceDemoInner({
                             ))}
                         </div>
 
+                        <div className="mt-5 grid gap-2 sm:grid-cols-4">
+                            {workflowActions.map((action, index) => (
+                                <div key={action} className={`rounded-lg border px-3 py-2 ${isDark ? "border-white/10 bg-white/8" : "border-card-border bg-white"}`}>
+                                    <span className={`text-[10px] font-extrabold uppercase ${isDark ? "text-[#7df0d1]" : "text-[#167f65]"}`}>
+                                        0{index + 1}
+                                    </span>
+                                    <p className={`mt-1 text-xs font-extrabold leading-4 ${isDark ? "text-white/82" : "text-ink"}`}>{action}</p>
+                                </div>
+                            ))}
+                        </div>
+
                         {/* Conversation preview */}
                         <div className="mt-5 grid gap-3">
                             <div className={`rounded-xl px-4 py-3 text-center text-sm leading-6 ${isDark
                                 ? "bg-white/14 text-white/88"
                                 : "bg-white border border-card-border text-ink"
                                 }`}>
-                                <strong className={`block text-xs uppercase tracking-[0.08em] ${isDark ? "text-[#7df0d1]" : "text-[#167f65]"
+                                <strong className={`block text-xs uppercase ${isDark ? "text-[#7df0d1]" : "text-[#167f65]"
                                     }`}>
                                     Agent
                                 </strong>
@@ -511,7 +545,7 @@ function UnifiedVoiceDemoInner({
                                 ? "border-[#1db993]/30 bg-[#1db993]/18 text-white/90"
                                 : "border-[#1db993]/30 bg-[#1db993]/10 text-ink"
                                 }`}>
-                                <strong className={`block text-xs uppercase tracking-[0.08em] ${isDark ? "text-[#7df0d1]" : "text-[#167f65]"
+                                <strong className={`block text-xs uppercase ${isDark ? "text-[#7df0d1]" : "text-[#167f65]"
                                     }`}>
                                     Caller
                                 </strong>
@@ -526,10 +560,10 @@ function UnifiedVoiceDemoInner({
                         : "border-card-border bg-white"
                         }`}>
                         <h3 className={`text-lg font-extrabold ${isDark ? "text-white" : "text-ink"}`}>
-                            What to try
+                            Scenario to test
                         </h3>
                         <p className={`mt-4 text-sm leading-6 ${isDark ? "text-white/72" : "text-muted"}`}>
-                            Speak naturally and ask about the workflow above. The assistant should collect context, stay within the demo scenario, and route toward a clear next step.
+                            Speak naturally and use the caller prompt below, or ask your own question. The assistant should collect context, stay in the selected business scenario, and route toward a clear next step.
                         </p>
                         <div className={`mt-5 rounded-xl border px-4 py-3 text-sm font-bold ${isDark
                             ? "border-white/12 bg-white/10 text-white/78"
@@ -537,6 +571,18 @@ function UnifiedVoiceDemoInner({
                             }`}>
                             Current demo: <span className={isDark ? "text-white" : "text-ink"}>{selectedProvider.label}</span>
                         </div>
+                        <div className={`mt-3 rounded-xl border px-4 py-3 text-sm leading-6 ${isDark
+                            ? "border-[#1db993]/25 bg-[#1db993]/12 text-white/82"
+                            : "border-[#1db993]/25 bg-[#e9f9f3] text-ink"
+                            }`}>
+                            <span className={`block text-xs font-extrabold uppercase ${isDark ? "text-[#7df0d1]" : "text-[#167f65]"}`}>
+                                Try saying
+                            </span>
+                            {selectedProvider.callerLine}
+                        </div>
+                        <p className={`mt-4 text-xs leading-5 ${isDark ? "text-white/50" : "text-muted"}`}>
+                            Your browser may request microphone access. Use realistic business questions for the best test.
+                        </p>
                     </div>
                 </div>
             </div>

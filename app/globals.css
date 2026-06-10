@@ -53,230 +53,320 @@ body {
   }
 }
 
-.workflow-flow-card {
-  position: relative;
-  animation: workflow-card-rise 620ms ease-out both;
-}
-
-.workflow-core {
+.agent-console {
   position: relative;
   overflow: hidden;
 }
 
-.workflow-core::after {
+.agent-console::before {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: inherit;
-  border: 1px solid rgba(125, 240, 209, 0.22);
-  box-shadow: inset 0 0 0 1px rgba(125, 240, 209, 0.08);
-  opacity: 0.65;
   pointer-events: none;
-  animation: workflow-core-pulse 3.8s ease-in-out infinite;
+  background:
+    linear-gradient(110deg, transparent 0%, rgba(125, 240, 209, 0.045) 48%, transparent 70%),
+    radial-gradient(circle at 78% 16%, rgba(125, 240, 209, 0.08), transparent 34%);
+  animation: agent-console-sheen 6.5s ease-in-out infinite;
 }
 
-.workflow-core-streams {
+.agent-console-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(125, 240, 209, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 240, 209, 0.14) 1px, transparent 1px);
+  background-size: 24px 24px;
+  animation: agent-console-grid-move 9s linear infinite;
+}
+
+.agent-console-row {
+  position: relative;
+  overflow: hidden;
+}
+
+.agent-console-row-active {
+  border-color: rgba(125, 240, 209, 0.28);
+  background: rgba(29, 185, 147, 0.08);
+  box-shadow:
+    inset 0 0 0 1px rgba(125, 240, 209, 0.06),
+    0 0 18px rgba(29, 185, 147, 0.08);
+}
+
+.agent-console-row::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: -40%;
+  width: 34%;
+  background: linear-gradient(90deg, transparent, rgba(125, 240, 209, 0.09), transparent);
+  animation: agent-console-row-scan 4.4s ease-in-out infinite;
+}
+
+.agent-console-timeline {
+  position: relative;
+}
+
+.agent-console-timeline::before {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  top: 10px;
+  width: 1px;
+  background: linear-gradient(rgba(125, 240, 209, 0), rgba(125, 240, 209, 0.22), rgba(125, 240, 209, 0));
+}
+
+.agent-console-timeline-row {
+  position: relative;
+  z-index: 1;
+}
+
+.agent-console-active {
+  overflow: hidden;
+}
+
+.agent-console-active::before {
+  content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
+  background: linear-gradient(90deg, rgba(125, 240, 209, 0.06), transparent 52%, rgba(125, 240, 209, 0.08));
+  animation: agent-console-active-sweep 2.6s ease-in-out infinite;
 }
 
-.workflow-core-streams span {
-  position: absolute;
-  left: 12%;
-  width: 30%;
-  height: 1px;
+.agent-console-status {
+  flex-shrink: 0;
   border-radius: 999px;
-  background: linear-gradient(90deg, transparent, rgba(125, 240, 209, 0.85), transparent);
-  opacity: 0;
-  animation: workflow-core-stream 3.4s ease-in-out infinite;
+  padding: 4px 8px;
+  font-size: 11px;
+  line-height: 1;
 }
 
-.workflow-core-streams span:nth-child(1) {
-  top: 28%;
+.agent-console-status-green {
+  background: rgba(29, 185, 147, 0.18);
+  color: #7df0d1;
 }
 
-.workflow-core-streams span:nth-child(2) {
-  top: 50%;
-  animation-delay: 0.9s;
+.agent-console-status-blue {
+  background: rgba(96, 165, 250, 0.18);
+  color: #bfdbfe;
 }
 
-.workflow-core-streams span:nth-child(3) {
-  top: 72%;
-  animation-delay: 1.8s;
+.agent-console-status-amber {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fde68a;
 }
 
-@media (min-width: 768px) {
-  .workflow-input-card::after,
-  .workflow-output-card::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 1rem;
-    height: 1px;
-    background: linear-gradient(90deg, rgba(125, 240, 209, 0), rgba(125, 240, 209, 0.55));
-  }
-
-  .workflow-input-card::after {
-    right: -1rem;
-  }
-
-  .workflow-output-card::before {
-    left: -1rem;
-    background: linear-gradient(90deg, rgba(125, 240, 209, 0.55), rgba(125, 240, 209, 0));
-  }
-
-  .workflow-input-card::before,
-  .workflow-output-card::after {
-    content: "";
-    position: absolute;
-    top: calc(50% - 3px);
-    z-index: 1;
-    width: 6px;
-    height: 6px;
-    border-radius: 999px;
-    background: #7df0d1;
-    box-shadow: 0 0 14px rgba(125, 240, 209, 0.75);
-  }
-
-  .workflow-input-card::before {
-    right: -1rem;
-    animation: workflow-dot-to-core 2.8s ease-in-out infinite;
-  }
-
-  .workflow-output-card::after {
-    left: -1rem;
-    animation: workflow-dot-from-core 2.8s ease-in-out infinite;
-  }
-
-  .workflow-input-card:nth-child(2)::before,
-  .workflow-output-card:nth-child(2)::after {
-    animation-delay: 0.45s;
-  }
-
-  .workflow-input-card:nth-child(3)::before,
-  .workflow-output-card:nth-child(3)::after {
-    animation-delay: 0.9s;
-  }
-
-  .workflow-input-card:nth-child(4)::before,
-  .workflow-output-card:nth-child(4)::after {
-    animation-delay: 1.35s;
-  }
-
-  .workflow-input-card:nth-child(5)::before,
-  .workflow-output-card:nth-child(5)::after {
-    animation-delay: 1.8s;
-  }
-
-  .workflow-output-card:nth-child(6)::after {
-    animation-delay: 2.25s;
-  }
+.agent-console-status-running {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(125, 240, 209, 0.11);
+  color: #7df0d1;
 }
 
-@keyframes workflow-core-stream {
-  0% {
-    opacity: 0;
-    transform: translateX(-24%);
-  }
-
-  18%,
-  48% {
-    opacity: 0.45;
-  }
-
-  72%,
-  100% {
-    opacity: 0;
-    transform: translateX(150%);
-  }
+.agent-console-status-spinner {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(125, 240, 209, 0.22);
+  border-top-color: #7df0d1;
+  border-radius: 999px;
+  animation: agent-console-spin 820ms linear infinite;
 }
 
-@keyframes workflow-dot-to-core {
+.agent-console-pulse {
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: #7df0d1;
+  box-shadow: 0 0 0 rgba(125, 240, 209, 0.56);
+  animation: agent-console-pulse 2.4s ease-out infinite;
+}
+
+.agent-console-spinner {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: 2px solid rgba(125, 240, 209, 0.2);
+  border-top-color: #7df0d1;
+  border-radius: 999px;
+  box-shadow: 0 0 16px rgba(125, 240, 209, 0.16);
+  animation: agent-console-spin 920ms linear infinite;
+}
+
+.agent-console-sparkline {
+  position: relative;
+  display: block;
+  width: 72px;
+  height: 22px;
+  opacity: 0.86;
+}
+
+.agent-console-sparkline::before,
+.agent-console-sparkline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+}
+
+.agent-console-sparkline::before {
+  background-image:
+    linear-gradient(180deg, transparent 0 38%, rgba(125, 240, 209, 0.74) 38% 100%),
+    linear-gradient(180deg, transparent 0 56%, rgba(125, 240, 209, 0.74) 56% 100%),
+    linear-gradient(180deg, transparent 0 30%, rgba(125, 240, 209, 0.74) 30% 100%),
+    linear-gradient(180deg, transparent 0 48%, rgba(125, 240, 209, 0.74) 48% 100%),
+    linear-gradient(180deg, transparent 0 22%, rgba(125, 240, 209, 0.74) 22% 100%);
+  background-position: 8px 0, 21px 0, 34px 0, 47px 0, 60px 0;
+  background-size: 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%;
+  animation: agent-console-bars 1.8s ease-in-out infinite;
+}
+
+.agent-console-sparkline-1::before,
+.agent-console-sparkline-3::before {
+  background-image: none;
+}
+
+.agent-console-sparkline-1::after,
+.agent-console-sparkline-3::after {
+  top: 8px;
+  height: 12px;
+  border-top: 2px solid rgba(125, 240, 209, 0.7);
+  border-radius: 50%;
+  transform: skewX(-18deg);
+  animation: agent-console-wave 2.6s ease-in-out infinite;
+}
+
+.agent-console-sparkline-3::after {
+  border-top-color: rgba(191, 219, 254, 0.62);
+  animation-delay: 480ms;
+}
+
+@keyframes agent-console-sheen {
   0%,
-  18% {
-    opacity: 0;
-    transform: translateX(-10px) scale(0.75);
-  }
-
-  38%,
-  70% {
-    opacity: 1;
-    transform: translateX(4px) scale(1);
-  }
-
+  40%,
   100% {
-    opacity: 0;
-    transform: translateX(16px) scale(0.75);
+    transform: translateX(-32%);
+    opacity: 0.42;
+  }
+
+  62% {
+    transform: translateX(32%);
+    opacity: 0.86;
   }
 }
 
-@keyframes workflow-dot-from-core {
-  0%,
-  18% {
-    opacity: 0;
-    transform: translateX(-12px) scale(0.75);
-  }
-
-  38%,
-  70% {
-    opacity: 1;
-    transform: translateX(4px) scale(1);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateX(16px) scale(0.75);
-  }
-}
-
-@keyframes workflow-card-rise {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes workflow-core-pulse {
+@keyframes agent-console-active-sweep {
   0%,
   100% {
-    opacity: 0.4;
+    transform: translateX(-18%);
+    opacity: 0.42;
   }
 
   50% {
-    opacity: 0.95;
+    transform: translateX(18%);
+    opacity: 0.9;
+  }
+}
+
+@keyframes agent-console-row-scan {
+  0%,
+  54% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+
+  68% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(420%);
+    opacity: 0;
+  }
+}
+
+@keyframes agent-console-grid-move {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 48px 24px;
+  }
+}
+
+@keyframes agent-console-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(125, 240, 209, 0.46);
+    opacity: 1;
+  }
+
+  100% {
+    box-shadow: 0 0 0 12px rgba(125, 240, 209, 0);
+    opacity: 0.72;
+  }
+}
+
+@keyframes agent-console-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes agent-console-bars {
+  0%,
+  100% {
+    transform: scaleY(0.82);
+    opacity: 0.72;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes agent-console-wave {
+  0%,
+  100% {
+    transform: translateY(1px) skewX(-18deg);
+    opacity: 0.62;
+  }
+
+  50% {
+    transform: translateY(-2px) skewX(-18deg);
+    opacity: 1;
   }
 }
 
 .a4u-voice-blob {
   position: relative;
   display: grid;
-  width: 68px;
-  height: 68px;
+  width: 72px;
+  height: 72px;
   place-items: center;
-  border: 1px solid rgba(125, 240, 209, 0.24);
-  border-radius: 46% 54% 51% 49% / 48% 44% 56% 52%;
+  border: 1px solid rgba(125, 240, 209, 0.42);
+  border-radius: 999px;
   color: #ffffff;
   background:
-    radial-gradient(circle at 38% 32%, rgba(125, 240, 209, 0.98), rgba(29, 185, 147, 0.72) 28%, transparent 46%),
-    radial-gradient(circle at 72% 74%, rgba(48, 145, 220, 0.65), transparent 38%),
-    linear-gradient(145deg, #071821, #0d2530 64%, #102e36);
+    radial-gradient(circle at 36% 28%, rgba(125, 240, 209, 0.82), transparent 28%),
+    linear-gradient(145deg, #071821, #0d2530 62%, #0b3440);
   box-shadow:
-    0 16px 38px rgba(8, 24, 33, 0.32),
-    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
-    0 0 34px rgba(29, 185, 147, 0.24);
+    0 18px 44px rgba(8, 24, 33, 0.34),
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset,
+    0 0 38px rgba(29, 185, 147, 0.28);
   cursor: pointer;
   outline: none;
   transition:
     border-color 180ms ease,
     box-shadow 180ms ease,
     transform 180ms ease;
-  animation: a4u-voice-blob-breathe 7.5s ease-in-out infinite;
+  animation: a4u-voice-blob-breathe 5.8s ease-in-out infinite;
 }
 
 .a4u-voice-blob:hover,
@@ -293,22 +383,56 @@ body {
   position: relative;
   z-index: 1;
   display: grid;
-  width: 46px;
-  height: 46px;
+  width: 50px;
+  height: 50px;
   place-items: center;
-  border: 1px solid rgba(125, 240, 209, 0.24);
+  border: 1px solid rgba(125, 240, 209, 0.36);
   border-radius: 999px;
-  background: rgba(8, 24, 33, 0.5);
-  box-shadow: inset 0 0 18px rgba(125, 240, 209, 0.14);
+  background: rgba(8, 24, 33, 0.68);
+  box-shadow:
+    inset 0 0 22px rgba(125, 240, 209, 0.16),
+    0 0 22px rgba(29, 185, 147, 0.16);
 }
 
 .a4u-voice-blob-pulse {
   position: absolute;
-  inset: -5px;
-  border: 1px solid rgba(125, 240, 209, 0.18);
-  border-radius: 44% 56% 53% 47% / 48% 45% 55% 52%;
+  inset: -7px;
+  border: 1px solid rgba(125, 240, 209, 0.22);
+  border-radius: 999px;
   opacity: 0;
-  animation: a4u-voice-blob-pulse 7.5s ease-out infinite;
+  animation: a4u-voice-blob-pulse 4.8s ease-out infinite;
+}
+
+.a4u-voice-blob-meter {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  height: 22px;
+  align-items: center;
+  gap: 3px;
+}
+
+.a4u-voice-blob-meter span {
+  display: block;
+  width: 3px;
+  border-radius: 999px;
+  background: #7df0d1;
+  box-shadow: 0 0 10px rgba(125, 240, 209, 0.7);
+  animation: a4u-voice-meter 1.3s ease-in-out infinite;
+}
+
+.a4u-voice-blob-meter span:nth-child(1) {
+  height: 10px;
+}
+
+.a4u-voice-blob-meter span:nth-child(2) {
+  height: 18px;
+  animation-delay: 160ms;
+}
+
+.a4u-voice-blob-meter span:nth-child(3) {
+  height: 13px;
+  animation-delay: 320ms;
 }
 
 .a4u-widget-scrollbar {
@@ -340,18 +464,15 @@ body {
   0%,
   74%,
   100% {
-    border-radius: 46% 54% 51% 49% / 48% 44% 56% 52%;
     transform: scale(1);
   }
 
   82% {
-    border-radius: 54% 46% 43% 57% / 45% 56% 44% 55%;
-    transform: scale(1.08);
+    transform: scale(1.045);
   }
 
   90% {
-    border-radius: 43% 57% 56% 44% / 57% 45% 55% 43%;
-    transform: scale(0.98);
+    transform: scale(0.995);
   }
 }
 
@@ -372,14 +493,33 @@ body {
   }
 }
 
+@keyframes a4u-voice-meter {
+  0%,
+  100% {
+    transform: scaleY(0.72);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: scaleY(1.18);
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .workflow-flow-card,
-  .workflow-core::after,
-  .workflow-core-streams span,
-  .workflow-input-card::before,
-  .workflow-output-card::after,
+  .agent-console::before,
+  .agent-console-grid,
+  .agent-console-active::before,
+  .agent-console-row,
+  .agent-console-row::after,
+  .agent-console-pulse,
+  .agent-console-spinner,
+  .agent-console-status-spinner,
+  .agent-console-sparkline::before,
+  .agent-console-sparkline::after,
   .a4u-voice-blob,
-  .a4u-voice-blob-pulse {
+  .a4u-voice-blob-pulse,
+  .a4u-voice-blob-meter span {
     animation: none;
   }
 }

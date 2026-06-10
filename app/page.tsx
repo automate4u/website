@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import AssessmentTrigger from "@/components/AssessmentTrigger";
 import AssessmentCTA from "@/components/sections/AssessmentCTA";
 import ProofStorySection from "@/components/proof/ProofStorySection";
@@ -92,7 +92,7 @@ export default function Home() {
       <section className="relative overflow-hidden bg-white px-4 py-12 md:py-[72px]" aria-labelledby="home-hero-title">
         <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
-            <h1 id="home-hero-title" className="max-w-[720px] text-[36px] font-extrabold leading-[1.08] tracking-[-0.015em] text-ink md:text-[48px] xl:text-[52px]">
+            <h1 id="home-hero-title" className="max-w-[720px] text-[36px] font-extrabold leading-[1.08] text-ink md:text-[48px] xl:text-[52px]">
               AI automation that works inside the tools you already run.
             </h1>
             <p className="mt-5 max-w-[650px] text-base leading-8 text-muted md:text-[17px]">
@@ -115,27 +115,21 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="rounded-lg border border-card-border bg-[#f8fbfa] p-4 shadow-[0_16px_48px_rgba(15,23,32,0.08)]">
+          <div className="relative min-h-[420px] overflow-hidden rounded-lg border border-card-border bg-[#f8fbfa] shadow-[0_20px_60px_rgba(15,23,32,0.10)]">
             <Image
               src="/images/home/hero-bg.webp"
-              alt="AI automation dashboard and workflow interface"
-              width={900}
-              height={700}
+              alt="Automate4U reviewing workflow opportunities with a business team"
+              fill
               priority
-              className="rounded-lg object-cover"
+              sizes="(min-width: 1024px) 52vw, 100vw"
+              className="object-cover"
             />
-            <div className="mt-3 rounded-md border border-card-border bg-white px-4 py-3">
-              <p className="text-[11px] font-extrabold uppercase tracking-[0.08em] text-[#167f65]">Example workflow outcomes</p>
-              <div className="mt-2.5 grid gap-2 text-sm font-bold text-ink sm:grid-cols-3">
-                {["Request qualified", "CRM updated", "Follow-up sent"].map((step, index) => (
-                  <span key={step} className="inline-flex items-center gap-2">
-                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#e9f9f3] text-[11px] font-extrabold text-[#167f65]">
-                      {index + 1}
-                    </span>
-                    <span className="leading-tight">{step}</span>
-                  </span>
-                ))}
-              </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#051C2C]/38 via-transparent to-white/8" aria-hidden="true" />
+            <div className="absolute bottom-4 left-4 right-4 rounded-lg border border-white/18 bg-white/88 p-4 shadow-[0_16px_38px_rgba(15,23,32,0.16)] backdrop-blur">
+              <p className="text-sm font-extrabold text-ink">Workflow assessment, then implementation.</p>
+              <p className="mt-1 text-xs font-semibold leading-5 text-muted">
+                We map the real intake, handoff, CRM, calendar, and follow-up process before deciding what the agent should automate.
+              </p>
             </div>
           </div>
         </div>
@@ -178,7 +172,7 @@ export default function Home() {
       <section className="border-b border-card-border bg-white px-4 py-12 md:py-16" aria-labelledby="home-credibility-title">
         <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <div>
-            <h2 id="home-credibility-title" className="text-[30px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[42px]">
+            <h2 id="home-credibility-title" className="text-[30px] font-extrabold leading-tight text-ink md:text-[42px]">
               Built by operators and engineers who understand the work.
             </h2>
             <p className="mt-5 text-base leading-8 text-muted">
@@ -199,8 +193,8 @@ export default function Home() {
       <section className="border-y border-card-border bg-[#f8fbfa] px-4 py-12 md:py-16" aria-labelledby="home-diagnosis-title">
         <div className="mx-auto max-w-[1280px]">
           <div className="max-w-[780px]">
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#169b78]">Operational diagnosis</p>
-            <h2 id="home-diagnosis-title" className="mt-3 text-[28px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[38px]">
+            <p className="text-xs font-bold uppercase text-[#169b78]">Operational diagnosis</p>
+            <h2 id="home-diagnosis-title" className="mt-3 text-[28px] font-extrabold leading-tight text-ink md:text-[38px]">
               Most businesses do not have one automation problem. They have scattered conversations, manual handoffs, and disconnected systems.
             </h2>
           </div>
@@ -227,7 +221,7 @@ export default function Home() {
           <div className="mt-8 grid gap-4 lg:grid-cols-4">
             {launchModel.map((item) => (
               <article key={item.week} className="rounded-lg border border-card-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
-                <p className="text-xs font-extrabold uppercase tracking-[0.08em] text-[#169b78]">{item.week}</p>
+                <p className="text-xs font-extrabold uppercase text-[#169b78]">{item.week}</p>
                 <h3 className="mt-3 text-lg font-extrabold leading-6 text-ink">{item.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-muted">{item.text}</p>
               </article>
@@ -249,7 +243,7 @@ export default function Home() {
             {services.map((service) => (
               <Link key={service.slug} href={service.href} className="group rounded-lg border border-card-border bg-white p-6 shadow-[0_8px_24px_rgba(15,23,32,0.04)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_34px_rgba(15,23,32,0.08)]">
                 <article>
-                  <p className="text-sm font-extrabold uppercase tracking-[0.08em] text-[#169b78]">
+                  <p className="text-sm font-extrabold uppercase text-[#169b78]">
                     {serviceLabels[service.slug] ?? "Core capability"}
                   </p>
                   <h3 className="mt-4 text-2xl font-extrabold leading-tight text-ink">{service.title}</h3>
@@ -265,7 +259,7 @@ export default function Home() {
       <section className="border-y border-card-border bg-white px-4 py-14 md:py-20" aria-labelledby="fit-title">
         <div className="mx-auto grid max-w-[1280px] gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
-            <h2 id="fit-title" className="text-[28px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[40px]">
+            <h2 id="fit-title" className="text-[28px] font-extrabold leading-tight text-ink md:text-[40px]">
               Best fit for teams with real operational volume.
             </h2>
             <p className="mt-5 text-base leading-8 text-muted">
