@@ -14,6 +14,7 @@ export const siteConfig = {
 export const staticRoutes = [
   "/",
   "/contact",
+  "/pricing",
   "/privacy",
   "/terms",
   "/services",

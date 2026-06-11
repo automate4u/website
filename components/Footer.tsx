@@ -70,6 +70,7 @@ export default function Footer() {
                     <p>&copy; {new Date().getFullYear()} Automate4U. All rights reserved.</p>
                     <div className="flex flex-wrap gap-x-6 gap-y-2">
                         <Link href="/about/overview" className="hover:text-accent">Company</Link>
+                        <Link href="/pricing" className="hover:text-accent">Pricing</Link>
                         <Link href="/contact" className="hover:text-accent">Contact</Link>
                         <Link href="/privacy" className="hover:text-accent">Privacy</Link>
                         <Link href="/terms" className="hover:text-accent">Terms</Link>

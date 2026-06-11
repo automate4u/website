@@ -200,6 +200,10 @@ export default function Header() {
                         </div>
                     </div>
 
+                    <Link href="/pricing" className="font-semibold text-ink hover:text-accent transition-colors">
+                        Pricing
+                    </Link>
+
                     <Link href="/contact" className="font-semibold text-ink hover:text-accent transition-colors">
                         Contact
                     </Link>
@@ -315,6 +319,8 @@ export default function Header() {
                                 ))}
                             </div>
                         </div>
+
+                        <Link href="/pricing" className="block font-bold text-lg text-ink">Pricing</Link>
 
                         <Link href="/contact" className="block font-bold text-lg text-ink">Contact</Link>
 

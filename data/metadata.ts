@@ -6,6 +6,12 @@ export type RouteMetadata = {
 
 export const routeMetadata: RouteMetadata[] = [
   {
+    path: "/pricing",
+    title: "AI Voice, Chat, and Workflow Automation Pricing | Automate4U",
+    description:
+      "See Automate4U pricing for AI Front Desk plans covering calls, website chat, SMS, email, and DMs, plus workflow automation agent packages with fixed implementation quotes.",
+  },
+  {
     path: "/services",
     title: "AI Automation Services | Automate4U",
     description:

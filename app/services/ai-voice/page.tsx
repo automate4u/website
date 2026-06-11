@@ -518,6 +518,9 @@ export default function AIVoicePage() {
               >
                 Get Free Assessment
               </AssessmentTrigger>
+              <Link href="/pricing#ai-front-desk" className="mt-3 inline-flex text-sm font-extrabold text-[#167f65]">
+                See AI Front Desk plans and pricing <span className="ml-1" aria-hidden="true">-&gt;</span>
+              </Link>
             </div>
           </div>
         </div>
