@@ -23,9 +23,9 @@ const valuePatterns = [
 ];
 
 const servicePaths = [
-  { title: "AI Voice intake", description: "A voice-led starting point for routine calls, lead capture, appointment questions, intake details, and front-office routing.", href: "/services/ai-voice", cta: "Explore AI Voice" },
-  { title: "AI Agents for workflow routing", description: "Agents that turn calls, emails, forms, and chat into CRM updates, booking tasks, document requests, reminders, and staff handoffs.", href: "/services/ai-agents", cta: "Explore AI Agents" },
-  { title: "Custom client operations", description: "A focused operating surface for intake queues, approvals, client status, advisor handoffs, property workflows, or document-heavy processes.", href: "/services/custom-ai-software", cta: "Explore Custom Software" },
+  { title: "Law Firms", description: "Live intake demo for new client calls, conflict-check capture, consultation scheduling, document follow-up, and attorney routing.", href: "/solutions/law-firm-intake-agent", cta: "Try the Law Firm Demo" },
+  { title: "Accounting & Tax Firms", description: "Live intake demo for new client calls, document checklist capture, appointment scheduling, and urgent notice escalation.", href: "/solutions/accounting-firm-intake-agent", cta: "Try the Accounting Demo" },
+  { title: "Wealth Management & Financial Advisors", description: "Live intake demo for prospective client calls, advisor consultation scheduling, and compliance-aware service routing.", href: "/solutions/wealth-management-intake-agent", cta: "Try the Wealth Management Demo" },
 ];
 
 const sectorShifts = [
@@ -76,8 +76,8 @@ export default function ProfessionalServicesPage() {
       valueTitle="Start with the repetitive admin work that slows the client experience."
       valueDescription="The first useful automation is usually a narrow intake, lead-response, scheduling, document, or follow-up workflow where better consistency can save staff time and improve conversion."
       valuePatterns={valuePatterns}
-      serviceTitle="Connect the first client touchpoint to the workflow that follows."
-      serviceDescription="Professional services automation often starts with intake or lead response, then expands into scheduling, documents, reminders, reporting, and managed operations."
+      serviceTitle="Hear how this sounds for your type of practice."
+      serviceDescription="Each practice type has its own live intake demo, built around the questions, routing, and boundaries that matter for that kind of firm."
       servicePaths={servicePaths}
       sectorTitle="Service quality now depends on how quickly the team can move from inquiry to next step."
       sectorDescription="The useful shift is not replacing professionals. It is creating a reliable support layer around the administrative work that surrounds their expertise."

@@ -47,13 +47,45 @@ export default function Header() {
             })),
         ],
         industries: [
-            { name: "Professional Services", href: "/industries/professional-services" },
-            { name: "Home Services", href: "/industries/home-services" },
-            { name: "Manufacturing", href: "/industries/manufacturing" },
-            { name: "Education & Childcare", href: "/industries/education-childcare" },
-            { name: "Healthcare & Wellness Clinics", href: "/industries/healthcare" },
+            {
+                name: "Professional Services", href: "/industries/professional-services", subItems: [
+                    { name: "Law Firms", href: "/solutions/law-firm-intake-agent" },
+                    { name: "Accounting & Tax Firms", href: "/solutions/accounting-firm-intake-agent" },
+                    { name: "Wealth Management", href: "/solutions/wealth-management-intake-agent" },
+                ]
+            },
+            {
+                name: "Home Services", href: "/industries/home-services", subItems: [
+                    { name: "General Contractors & Remodelers", href: "/solutions/home-services-missed-call-dispatch-agent" },
+                    { name: "HVAC Companies", href: "/solutions/hvac-service-call-agent" },
+                    { name: "Plumbing Companies", href: "/solutions/plumbing-service-call-agent" },
+                    { name: "Electrical Contractors", href: "/solutions/electrical-service-call-agent" },
+                ]
+            },
+            {
+                name: "Manufacturing", href: "/industries/manufacturing", subItems: [
+                    { name: "Manufacturing & Fabrication", href: "/solutions/manufacturing-quote-order-agent" },
+                    { name: "Wholesale & Distribution", href: "/solutions/wholesale-distribution-order-agent" },
+                    { name: "Industrial Suppliers", href: "/solutions/industrial-supplier-order-agent" },
+                ]
+            },
+            {
+                name: "Education & Childcare", href: "/industries/education-childcare", subItems: [
+                    { name: "Daycare & Childcare Centers", href: "/solutions/daycare-voice-agent" },
+                    { name: "Montessori & Preschools", href: "/solutions/montessori-preschool-voice-agent" },
+                    { name: "Tutoring & Learning Centers", href: "/solutions/tutoring-learning-center-agent" },
+                ]
+            },
+            {
+                name: "Healthcare & Wellness Clinics", href: "/industries/healthcare", subItems: [
+                    { name: "Medical & Dental Practices", href: "/solutions/healthcare-front-desk-agent" },
+                    { name: "Chiropractic & Physical Therapy", href: "/solutions/chiropractic-pt-front-desk-agent" },
+                    { name: "Med Spas & Wellness Studios", href: "/solutions/med-spa-front-desk-agent" },
+                    { name: "Mental Health & Counseling", href: "/solutions/mental-health-counseling-intake-agent" },
+                ]
+            },
             { name: "Guest Services & Hospitality", href: "/industries/hospitality" },
-        ],
+        ] as { name: string; href: string; subItems?: { name: string; href: string }[] }[],
         howWeBuild: [
             { name: "Overview", href: "/capabilities" },
             ...howWeBuildPillars.map((item) => ({
@@ -117,9 +149,20 @@ export default function Header() {
                         <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2 w-[600px]">
                             <div className="bg-white rounded-2xl shadow-xl border border-card-border p-6 grid grid-cols-2 gap-x-8 gap-y-3">
                                 {menus.industries.map((item) => (
-                                    <Link key={item.href} href={item.href} className="block text-sm font-medium text-muted hover:text-accent hover:bg-green-50 px-3 py-2 rounded-lg transition-colors">
-                                        {item.name}
-                                    </Link>
+                                    <div key={item.href}>
+                                        <Link href={item.href} className="block text-sm font-medium text-muted hover:text-accent hover:bg-green-50 px-3 py-2 rounded-lg transition-colors">
+                                            {item.name}
+                                        </Link>
+                                        {item.subItems && (
+                                            <div className="ml-3 mt-1 grid gap-1 border-l border-card-border pl-3">
+                                                {item.subItems.map((sub) => (
+                                                    <Link key={sub.href} href={sub.href} className="block text-xs font-medium text-muted/80 hover:text-accent hover:bg-green-50 px-3 py-1.5 rounded-lg transition-colors">
+                                                        {sub.name}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
                                 ))}
                             </div>
                         </div>
@@ -217,11 +260,22 @@ export default function Header() {
                                 Industries
                                 <svg className={`w-5 h-5 transition-transform duration-200 ${expandedMobileSection === 'industries' ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
                             </button>
-                            <div className={`grid gap-2 pl-4 border-l-2 border-slate-100 overflow-hidden transition-all duration-300 ${expandedMobileSection === 'industries' ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                            <div className={`grid gap-2 pl-4 border-l-2 border-slate-100 overflow-hidden transition-all duration-300 ${expandedMobileSection === 'industries' ? 'max-h-[1500px] opacity-100' : 'max-h-0 opacity-0'}`}>
                                 {menus.industries.map((item) => (
-                                    <Link key={item.href} href={item.href} className="block text-muted py-1">
-                                        {item.name}
-                                    </Link>
+                                    <div key={item.href}>
+                                        <Link href={item.href} className="block text-muted py-1">
+                                            {item.name}
+                                        </Link>
+                                        {item.subItems && (
+                                            <div className="ml-3 mt-1 grid gap-1 border-l border-slate-100 pl-3">
+                                                {item.subItems.map((sub) => (
+                                                    <Link key={sub.href} href={sub.href} className="block text-sm text-muted/80 py-1">
+                                                        {sub.name}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
                                 ))}
                             </div>
                         </div>

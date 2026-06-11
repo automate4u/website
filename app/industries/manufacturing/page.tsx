@@ -22,9 +22,9 @@ const valuePatterns = [
 ];
 
 const servicePaths = [
-  { title: "Manufacturing Quote & Order Response Agent", description: "A focused solution for RFQ intake, parts availability, quote follow-up, ERP/CRM handoff, response SLA, and human pricing review.", href: "/solutions/manufacturing-quote-order-agent", cta: "View solution" },
-  { title: "AI Agents for response workflows", description: "Agents that classify requests, check approved sources, create tasks, draft replies, and route unclear cases to sales or operations.", href: "/services/ai-agents", cta: "Explore AI Agents" },
-  { title: "AI Chat for customer questions", description: "Customer-facing chat for product questions, order status, parts availability, quote intake, and human handoff.", href: "/services/ai-chat", cta: "Explore AI Chat" },
+  { title: "Manufacturing & Fabrication", description: "Live demo for RFQ intake, parts availability, quote follow-up, ERP/CRM handoff, and human pricing review.", href: "/solutions/manufacturing-quote-order-agent", cta: "Try the Quote Demo" },
+  { title: "Wholesale & Distribution", description: "Live order desk demo for stock availability, order status, and reorder intake with sales routing for new accounts.", href: "/solutions/wholesale-distribution-order-agent", cta: "Try the Order Desk Demo" },
+  { title: "Industrial Suppliers", description: "Live parts counter demo for availability checks, will-call pickup confirmation, and account reorder intake.", href: "/solutions/industrial-supplier-order-agent", cta: "Try the Parts Counter Demo" },
 ];
 
 const sectorShifts = [
@@ -77,8 +77,8 @@ export default function ManufacturingAcceleratorPage() {
       valueTitle="Start where response speed, quote quality, and margin protection matter."
       valueDescription="The first useful automation is usually not a giant replacement project. It is a repeatable customer workflow where better intake, cleaner routing, faster follow-up, and human pricing review can protect revenue while saving staff time."
       valuePatterns={valuePatterns}
-      serviceTitle="Choose the service path that fits the first customer-response bottleneck."
-      serviceDescription="Manufacturing teams usually start with response agents, customer chat, or a custom operations surface depending on where the workflow breaks today."
+      serviceTitle="Hear how this sounds for your type of operation."
+      serviceDescription="Each operation type has its own live demo, built around the inquiries, order data, and routing rules that matter for that kind of business."
       servicePaths={servicePaths}
       sectorTitle="Industrial buyers expect speed, but manufacturing teams still need control."
       sectorDescription="The advantage is not novelty. It is using AI to shorten response cycles while keeping pricing, commitments, substitutions, and margin-sensitive decisions traceable and human-led."

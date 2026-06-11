@@ -28,9 +28,10 @@ const neverItems = [
 ];
 
 const servicePaths = [
-  { title: "Healthcare Front Desk Agent", description: "A focused solution for appointment requests, reminders, forms, administrative questions, staff handoff, and conservative escalation.", href: "/solutions/healthcare-front-desk-agent", cta: "View solution" },
-  { title: "AI Voice for front desk support", description: "A voice-led starting point for routine calls, appointment requests, reminders, directions, and administrative intake with staff handoff.", href: "/services/ai-voice", cta: "Explore AI Voice" },
-  { title: "AI Agents for routing and follow-up", description: "Workflow agents that turn calls, forms, emails, and messages into tasks, reminders, summaries, handoffs, and operational reporting.", href: "/services/ai-agents", cta: "Explore AI Agents" },
+  { title: "Medical & Dental Practices", description: "Live front desk demo for appointment requests, reminders, forms, administrative questions, and conservative escalation.", href: "/solutions/healthcare-front-desk-agent", cta: "Try the Front Desk Demo" },
+  { title: "Chiropractic & Physical Therapy", description: "Live demo for new patient intake, scheduling, reschedules, and insurance question routing.", href: "/solutions/chiropractic-pt-front-desk-agent", cta: "Try the Chiropractic Demo" },
+  { title: "Med Spas & Wellness Studios", description: "Live demo for treatment and pricing inquiries, consultation booking, and provider routing.", href: "/solutions/med-spa-front-desk-agent", cta: "Try the Med Spa Demo" },
+  { title: "Mental Health & Counseling", description: "Live demo for new client intake and scheduling with crisis-aware escalation reviewed by clinical staff.", href: "/solutions/mental-health-counseling-intake-agent", cta: "Try the Counseling Demo" },
 ];
 
 const sectorShifts = [
@@ -84,8 +85,8 @@ export default function HealthcarePage() {
       neverTitle="What AI will never do in a healthcare workflow."
       neverDescription="The safest healthcare automation is explicit about its limits. The system should support administration, routing, reminders, and handoffs while keeping clinical and privacy-sensitive decisions with authorized people."
       neverItems={neverItems}
-      serviceTitle="Healthcare automation should begin with supportable workflows and clear boundaries."
-      serviceDescription="The strongest starting points are non-clinical workflows where approved information, staff handoff, and auditability can be designed from the beginning."
+      serviceTitle="Hear how this sounds for your type of practice."
+      serviceDescription="Each practice type has its own live front desk demo, built around the intake questions, scheduling rules, and clinical boundaries that matter for that kind of practice."
       servicePaths={servicePaths}
       sectorTitle="Patient experience depends on speed, clarity, and knowing when a human must step in."
       sectorDescription="Healthcare automation wins trust when it reduces repetitive friction while being conservative around privacy, urgency, and clinical uncertainty."
