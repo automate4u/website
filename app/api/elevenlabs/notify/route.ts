@@ -65,7 +65,8 @@ export async function POST(request: Request) {
       priority,
     });
 
-    return NextResponse.json({ ok: true, notification: result });
+    const delivered = result.sent ? true : result.skipped === "e2e_test_mode";
+    return NextResponse.json({ ok: delivered, notification: result });
   } catch (error) {
     return serverError("[ElevenLabs Notify] failed", error);
   }
