@@ -3,6 +3,7 @@ import AssessmentTrigger from "@/components/AssessmentTrigger";
 import UnifiedVoiceDemo from "@/components/UnifiedVoiceDemo";
 import { elevenLabsAgents } from "@/data/elevenlabs";
 import SectionHeader from "@/components/sections/SectionHeader";
+import SavingsSection from "@/components/solutions/SavingsSection";
 
 const intakeReality = [
   {
@@ -159,12 +160,6 @@ export default function LawFirmIntakeAgentPage() {
                 Schedule a Walkthrough
               </Link>
             </div>
-            <p className="mt-4 text-sm font-semibold text-muted">
-              Curious about cost?{" "}
-              <Link href="/pricing#ai-front-desk" className="font-extrabold text-[#167f65] hover:underline">
-                View AI Front Desk pricing
-              </Link>
-            </p>
           </div>
 
           <div className="rounded-lg border border-card-border bg-[#f8fbfa] p-5 shadow-[0_16px_48px_rgba(15,23,32,0.08)]">
@@ -321,6 +316,8 @@ export default function LawFirmIntakeAgentPage() {
           </div>
         </div>
       </section>
+
+      <SavingsSection variant="ai-front-desk" />
 
       <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="faq-title">
         <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">

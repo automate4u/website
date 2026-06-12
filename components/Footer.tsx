@@ -12,14 +12,14 @@ export default function Footer() {
 
                     <div>
                         <p
-                            className="mb-4 text-[24px] font-extrabold leading-[1.03] tracking-[-0.01em] text-ink"
+                            className="mb-4 text-[20px] font-extrabold leading-[1.03] tracking-[-0.01em] text-ink"
                             aria-label="We automate calls, emails, messages, workflows, follow-up, data sync, admin work, and customer support for you."
                         >
                             <span className="block">We automate</span>
                             <RotatingFooterWord />
                             <span className="block">for you.</span>
                         </p>
-                        <p className="text-muted text-sm leading-relaxed mb-6">
+                        <p className="text-muted text-xs leading-relaxed mb-6">
                             Practical AI automation for the conversations, tasks, and system handoffs that slow growing teams down.
                         </p>
                         <Link href="/" className="block mb-6">
@@ -28,8 +28,8 @@ export default function Footer() {
                     </div>
 
                     <div>
-                        <h4 className="font-bold mb-4">Services</h4>
-                        <ul className="space-y-2 text-sm text-muted">
+                        <h4 className="text-sm font-bold mb-4">Services</h4>
+                        <ul className="space-y-2 text-xs text-muted">
                             {serviceOffers.map((service) => (
                                 <li key={service.href}><Link href={service.href} className="hover:text-accent">{service.shortTitle}</Link></li>
                             ))}
@@ -37,15 +37,19 @@ export default function Footer() {
                         </ul>
                     </div>
                     <div>
-                        <h4 className="font-bold mb-4">Solutions</h4>
-                        <ul className="space-y-2 text-sm text-muted">
+                        <h4 className="text-sm font-bold mb-4">Solutions</h4>
+                        <ul className="space-y-2 text-xs text-muted">
+                            <li><Link href="/solutions/healthcare-front-desk-agent" className="hover:text-accent">Healthcare Front Desk Agent</Link></li>
+                            <li><Link href="/solutions/home-services-missed-call-dispatch-agent" className="hover:text-accent">Home Services Dispatch Agent</Link></li>
+                            <li><Link href="/solutions/law-firm-intake-agent" className="hover:text-accent">Law Firm Intake Agent</Link></li>
+                            <li><Link href="/solutions/manufacturing-quote-order-agent" className="hover:text-accent">Manufacturing Quote & Order Agent</Link></li>
                             <li><Link href="/solutions/daycare-voice-agent" className="hover:text-accent">Daycare Voice Agent</Link></li>
                             <li className="pt-2"><Link href="/solutions" className="hover:text-accent font-semibold flex items-center gap-1">See all solutions <span aria-hidden="true">&rarr;</span></Link></li>
                         </ul>
                     </div>
                     <div>
-                        <h4 className="font-bold mb-4">How We Build</h4>
-                        <ul className="space-y-2 text-sm text-muted">
+                        <h4 className="text-sm font-bold mb-4">How We Build</h4>
+                        <ul className="space-y-2 text-xs text-muted">
                             {howWeBuildPillars.slice(0, 5).map((pillar) => (
                                 <li key={pillar.href}><Link href={pillar.href} className="hover:text-accent">{pillar.shortTitle}</Link></li>
                             ))}
@@ -53,8 +57,8 @@ export default function Footer() {
                         </ul>
                     </div>
                     <div>
-                        <h4 className="font-bold mb-4">Industries</h4>
-                        <ul className="space-y-2 text-sm text-muted">
+                        <h4 className="text-sm font-bold mb-4">Industries</h4>
+                        <ul className="space-y-2 text-xs text-muted">
                             <li><Link href="/industries/professional-services" className="hover:text-accent">Professional Services</Link></li>
                             <li><Link href="/industries/home-services" className="hover:text-accent">Home Services</Link></li>
                             <li><Link href="/industries/manufacturing" className="hover:text-accent">Manufacturing</Link></li>
@@ -65,8 +69,8 @@ export default function Footer() {
                         </ul>
                     </div>
                     <div>
-                        <h4 className="font-bold mb-4">Company</h4>
-                        <ul className="space-y-2 text-sm text-muted">
+                        <h4 className="text-sm font-bold mb-4">Company</h4>
+                        <ul className="space-y-2 text-xs text-muted">
                             <li><Link href="/about/overview" className="hover:text-accent">Overview</Link></li>
                             <li><Link href="/about/our-mission" className="hover:text-accent">Our Mission</Link></li>
                             <li><Link href="/about/our-team" className="hover:text-accent">Our Team</Link></li>
@@ -75,7 +79,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="border-t border-card-border mt-12 pt-8 flex flex-col gap-4 text-sm text-muted lg:flex-row lg:items-center lg:justify-between">
+                <div className="border-t border-card-border mt-12 pt-8 flex flex-col gap-4 text-xs text-muted lg:flex-row lg:items-center lg:justify-between">
                     <p>&copy; {new Date().getFullYear()} Automate4U. All rights reserved.</p>
                     <div className="flex flex-wrap gap-x-6 gap-y-2">
                         <Link href="/pricing" className="hover:text-accent">Pricing</Link>
