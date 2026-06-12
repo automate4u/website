@@ -156,12 +156,6 @@ const voiceDemoProviders = [
   },
 ].filter((demo) => demo.agentId !== "");
 
-const pricingNotes = [
-  "Voice cost depends on handled minutes, call complexity, model choices, transcription, text-to-speech, routing, and recording needs.",
-  "The platform fee covers monitoring, tuning, integration upkeep, workflow updates, support, and reliability.",
-  "High-risk workflows should keep staff approval, audit logs, and extra checks instead of being priced like routine calls.",
-];
-
 const pilotDeliverables = [
   {
     title: "One defined call workflow",
@@ -178,24 +172,6 @@ const pilotDeliverables = [
   {
     title: "Measured pilot review",
     text: "Track handled calls, escalations, call minutes, response time, handoff quality, and where the workflow should improve next.",
-  },
-];
-
-const pricingCards = [
-  {
-    title: "Focused pilot",
-    range: "$300-$1000/mo planning range",
-    text: "Best for proving one call workflow with a defined usage allowance, staff review, and limited integrations.",
-  },
-  {
-    title: "Production voice operations",
-    range: "$500-$5k+/mo planning range",
-    text: "Best when voice becomes part of daily operations, with monitoring, tuning, reporting, integrations, and support.",
-  },
-  {
-    title: "Usage-based voice volume",
-    range: "$1.00-$1.50/min planning range",
-    text: "Voice usage usually scales by handled call minutes, completed workflows, escalation needs, and risk level.",
   },
 ];
 
@@ -480,49 +456,31 @@ export default function AIVoicePage() {
       </section>
 
       <section className="bg-[#f8fbfa] px-4 py-14 md:py-20" aria-labelledby="pricing-confidence-title">
-        <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        <div className="mx-auto max-w-[760px] text-center">
           <SectionHeader
             eyebrow="Pricing confidence"
             title="Know what drives the cost before you commit."
-            description="Voice automation pricing depends on call volume, risk, integrations, monitoring, support, and how much work the system is allowed to complete. We explain the moving parts upfront so you can start with a pilot that makes financial sense."
+            description="Voice automation pricing depends on call volume, risk, integrations, monitoring, support, and how much work the system is allowed to complete. Our AI Front Desk plans break that down into clear monthly tiers and usage allotments, so you can see real numbers and a fixed setup quote before you start."
+            align="center"
           />
-          <div className="grid gap-4">
-            <div className="grid gap-4 md:grid-cols-3">
-              {pricingCards.map((card) => (
-                <article key={card.title} className="rounded-lg border border-card-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
-                  <h3 className="text-lg font-extrabold text-ink">{card.title}</h3>
-                  <p className="mt-3 text-xl font-extrabold leading-tight text-[#167f65]">{card.range}</p>
-                  <p className="mt-3 text-sm leading-6 text-muted">{card.text}</p>
-                </article>
-              ))}
-            </div>
-            <div className="grid gap-3 md:grid-cols-3">
-              {pricingNotes.map((note) => (
-                <div key={note} className="rounded-lg border border-card-border bg-white p-5 text-sm leading-6 text-muted">
-                  {note}
-                </div>
-              ))}
-            </div>
-            <div className="rounded-lg border border-[#1db993]/30 bg-white p-5">
-              <h3 className="text-xl font-extrabold text-ink">Recommended buying path</h3>
-              <p className="mt-3 text-sm leading-6 text-muted">
-                Free assessment, then either a paid AI Blueprint Sprint or a pilot project. Production systems can expand into Managed AI Operations once usage and value are clear.
-              </p>
-              <AssessmentTrigger
-                sourcePage="/services/ai-voice"
-                ctaLocation="ai_voice_pricing_confidence"
-                serviceInterest="ai-voice"
-                modalTitle="Request Your AI Voice Assessment"
-                modalDescription="Tell us where calls slow your team down. We will assess the workflow, likely savings, guardrails, and the best next step."
-                className="mt-5 rounded-full bg-accent px-6 py-3 font-extrabold text-white hover:bg-btn-hover"
-              >
-                Get Free Assessment
-              </AssessmentTrigger>
-              <Link href="/pricing#ai-front-desk" className="mt-3 inline-flex text-sm font-extrabold text-[#167f65]">
-                See AI Front Desk plans and pricing <span className="ml-1" aria-hidden="true">-&gt;</span>
-              </Link>
-            </div>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link href="/pricing#ai-front-desk" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
+              See AI Front Desk plans &amp; pricing
+            </Link>
+            <AssessmentTrigger
+              sourcePage="/services/ai-voice"
+              ctaLocation="ai_voice_pricing_confidence"
+              serviceInterest="ai-voice"
+              modalTitle="Request Your AI Voice Assessment"
+              modalDescription="Tell us where calls slow your team down. We will assess the workflow, likely savings, guardrails, and the best next step."
+              className="inline-flex h-12 items-center justify-center rounded-full border border-card-border px-6 text-base font-extrabold text-ink hover:border-accent"
+            >
+              Get Free Assessment
+            </AssessmentTrigger>
           </div>
+          <p className="mt-4 text-sm leading-6 text-muted">
+            Free assessment, then either a paid AI Blueprint Sprint or a pilot project. Production systems can expand into Managed AI Operations once usage and value are clear.
+          </p>
         </div>
       </section>
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
 import Header from "@/components/Header";
@@ -10,6 +11,12 @@ import JsonLd from "@/components/JsonLd";
 import { siteConfig } from "@/data/site";
 import { createMetadata } from "@/lib/metadata";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = createMetadata({
   title: siteConfig.defaultTitle,
@@ -23,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <body
         className="antialiased flex flex-col min-h-screen pt-[88px] overflow-x-hidden"
       >
