@@ -162,6 +162,10 @@ export default function Header() {
                         </div>
                     </div>
 
+                    <Link href="/pricing" className="font-semibold text-ink hover:text-accent transition-colors">
+                        Pricing
+                    </Link>
+
                     <div className="group relative">
                         <button className="flex items-center gap-1 font-semibold text-ink hover:text-accent py-2">
                             How We Build
@@ -177,10 +181,6 @@ export default function Header() {
                             </div>
                         </div>
                     </div>
-
-                    <Link href="/pricing" className="font-semibold text-ink hover:text-accent transition-colors">
-                        Pricing
-                    </Link>
 
                     <Link href="/contact" className="font-semibold text-ink hover:text-accent transition-colors">
                         Contact
@@ -262,6 +262,8 @@ export default function Header() {
                             </div>
                         </div>
 
+                        <Link href="/pricing" className="block font-bold text-lg text-ink">Pricing</Link>
+
                         {/* How We Build Mobile */}
                         <div>
                             <button
@@ -279,8 +281,6 @@ export default function Header() {
                                 ))}
                             </div>
                         </div>
-
-                        <Link href="/pricing" className="block font-bold text-lg text-ink">Pricing</Link>
 
                         <Link href="/contact" className="block font-bold text-lg text-ink">Contact</Link>
 
