@@ -22,10 +22,9 @@ const valuePatterns = [
 ];
 
 const servicePaths = [
-  { title: "Daycare Voice Agent", description: "A focused front desk voice assistant for enrollment inquiries, tour requests, parent call routing, absence reporting, and multi-location communication workflows.", href: "/solutions/daycare-voice-agent", cta: "View solution" },
-  { title: "Enrollment Follow-Up Agent", description: "A common starting point for prospective families, learners, and students who need timely next steps after forms, calls, open houses, or inquiries.", cta: "Discuss this path" },
-  { title: "Message Triage Agent", description: "A practical workflow for shared inboxes, parent messages, student questions, staff routing, approvals, and documented escalation.", cta: "Discuss this path" },
-  { title: "Multi-location rollout", description: "A controlled path for center groups, campuses, and networks that need consistent workflows, location-specific rules, and leadership visibility.", cta: "Discuss this path" },
+  { title: "Daycare & Childcare Centers", description: "Live front desk demo for enrollment inquiries, tour requests, parent call routing, absence reporting, and multi-location communication workflows.", href: "/solutions/daycare-voice-agent", cta: "Try the Daycare Demo" },
+  { title: "Montessori & Preschools", description: "Live admissions demo for enrollment and program philosophy questions, tuition information, and tour scheduling with your director.", href: "/solutions/montessori-preschool-voice-agent", cta: "Try the Admissions Demo" },
+  { title: "Tutoring & Learning Centers", description: "Live enrollment demo for new student inquiries, scheduling, pricing questions, and tutor matching support.", href: "/solutions/tutoring-learning-center-agent", cta: "Try the Enrollment Demo" },
 ];
 
 const sectorShifts = [
@@ -78,8 +77,8 @@ export default function EducationChildcarePage() {
       valueTitle="Start with the communication workflows your team handles every day."
       valueDescription="The first useful automation is usually a frequent, structured workflow where better intake, faster routing, and clear escalation can reduce staff interruptions, improve enrollment follow-up, and make performance easier to measure across locations."
       valuePatterns={valuePatterns}
-      serviceTitle="Choose the right workflow first, then explore the focused solution."
-      serviceDescription="Education and childcare organizations can share similar operational pressure while needing different solution entry points by age group, program type, and communication model."
+      serviceTitle="Hear how this sounds for your type of program."
+      serviceDescription="Each program type has its own live admissions or front desk demo, built around the questions, scheduling, and tone that matter for that kind of organization."
       servicePaths={servicePaths}
       sectorTitle="Communication expectations are rising while leaders need cleaner operating visibility."
       sectorDescription="The useful shift is not replacing staff. It is giving teams a reliable support layer for intake, routing, follow-up, escalation, and location-level visibility."

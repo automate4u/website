@@ -107,16 +107,40 @@ const voiceDemoProviders = [
     callerLine: "I am a new patient and I want to ask about booking an appointment this week.",
   },
   {
-    id: "professional-services-demo",
+    id: "law-firm-demo",
     provider: "elevenlabs" as const,
-    label: "Professional services",
-    agentId: elevenLabsAgents.professionalServicesDemo,
-    title: "Professional Services Intake",
-    subtitle: "New client inquiries, discovery requests, CRM-style handoff",
-    description: "Test a B2B intake call for agencies, consultants, advisory firms, accountants, or recruiting teams.",
-    tags: ["Lead qualification", "Discovery routing", "Owner handoff"],
-    agentLine: "Thanks for calling. I can capture the inquiry, understand the project fit, and route the next step to the right owner.",
-    callerLine: "We are looking for help with a project and want to see whether your team is a good fit.",
+    label: "Law firm",
+    agentId: elevenLabsAgents.lawFirmDemo,
+    title: "Law Firm Intake (Example)",
+    subtitle: "Example AI receptionist for a law firm: new client intake, consultations, case status",
+    description: "This is an example AI receptionist for a LAW FIRM (Harlow & Pierce Law). Test a new client call, consultation request, or case status check and hear how it routes to the right attorney.",
+    tags: ["Law firm example", "New client intake", "Attorney handoff"],
+    agentLine: "Thanks for calling Harlow & Pierce Law, this is Mia. How can I help you today?",
+    callerLine: "I'm looking for a lawyer to help with a will and want to know if I can book a consultation.",
+  },
+  {
+    id: "accounting-firm-demo",
+    provider: "elevenlabs" as const,
+    label: "Accounting firm",
+    agentId: elevenLabsAgents.accountingFirmDemo,
+    title: "Accounting Firm Intake (Example)",
+    subtitle: "Example AI receptionist for an accounting firm: new clients, document checklists, scheduling",
+    description: "This is an example AI receptionist for an ACCOUNTING FIRM (Bramwell & Co. Accounting). Test a new client call, tax-season scheduling request, or document follow-up and hear how it routes to the right accountant.",
+    tags: ["Accounting firm example", "New client intake", "Accountant handoff"],
+    agentLine: "Thanks for calling Bramwell & Co. Accounting, this is Dana. How can I help you today?",
+    callerLine: "I need help filing my taxes this year and want to know what to bring.",
+  },
+  {
+    id: "wealth-management-demo",
+    provider: "elevenlabs" as const,
+    label: "Wealth management",
+    agentId: elevenLabsAgents.wealthManagementDemo,
+    title: "Wealth Management Intake (Example)",
+    subtitle: "Example AI receptionist for a wealth management firm: prospective clients, advisor scheduling",
+    description: "This is an example AI receptionist for a WEALTH MANAGEMENT FIRM (Lakeshore Wealth Partners). Test a prospective client call or advisor consultation request and hear how it routes to the right advisor.",
+    tags: ["Wealth management example", "Prospective client intake", "Advisor handoff"],
+    agentLine: "Thanks for calling Lakeshore Wealth Partners, this is Priya. How can I help you today?",
+    callerLine: "I'm thinking about working with a financial advisor for retirement planning.",
   },
   {
     id: "manufacturing-demo",
@@ -130,13 +154,7 @@ const voiceDemoProviders = [
     agentLine: "Thanks for calling. I can capture the quote or order request and prepare the details for customer service or estimating.",
     callerLine: "I need pricing on a part and want to send over the drawing after the call.",
   },
-];
-
-const pricingNotes = [
-  "Voice cost depends on handled minutes, call complexity, model choices, transcription, text-to-speech, routing, and recording needs.",
-  "The platform fee covers monitoring, tuning, integration upkeep, workflow updates, support, and reliability.",
-  "High-risk workflows should keep staff approval, audit logs, and extra checks instead of being priced like routine calls.",
-];
+].filter((demo) => demo.agentId !== "");
 
 const pilotDeliverables = [
   {
@@ -154,24 +172,6 @@ const pilotDeliverables = [
   {
     title: "Measured pilot review",
     text: "Track handled calls, escalations, call minutes, response time, handoff quality, and where the workflow should improve next.",
-  },
-];
-
-const pricingCards = [
-  {
-    title: "Focused pilot",
-    range: "$300-$1000/mo planning range",
-    text: "Best for proving one call workflow with a defined usage allowance, staff review, and limited integrations.",
-  },
-  {
-    title: "Production voice operations",
-    range: "$500-$5k+/mo planning range",
-    text: "Best when voice becomes part of daily operations, with monitoring, tuning, reporting, integrations, and support.",
-  },
-  {
-    title: "Usage-based voice volume",
-    range: "$1.00-$1.50/min planning range",
-    text: "Voice usage usually scales by handled call minutes, completed workflows, escalation needs, and risk level.",
   },
 ];
 
@@ -456,46 +456,31 @@ export default function AIVoicePage() {
       </section>
 
       <section className="bg-[#f8fbfa] px-4 py-14 md:py-20" aria-labelledby="pricing-confidence-title">
-        <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        <div className="mx-auto max-w-[760px] text-center">
           <SectionHeader
             eyebrow="Pricing confidence"
             title="Know what drives the cost before you commit."
-            description="Voice automation pricing depends on call volume, risk, integrations, monitoring, support, and how much work the system is allowed to complete. We explain the moving parts upfront so you can start with a pilot that makes financial sense."
+            description="Voice automation pricing depends on call volume, risk, integrations, monitoring, support, and how much work the system is allowed to complete. Our AI Front Desk plans break that down into clear monthly tiers and usage allotments, so you can see real numbers and a fixed setup quote before you start."
+            align="center"
           />
-          <div className="grid gap-4">
-            <div className="grid gap-4 md:grid-cols-3">
-              {pricingCards.map((card) => (
-                <article key={card.title} className="rounded-lg border border-card-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,32,0.04)]">
-                  <h3 className="text-lg font-extrabold text-ink">{card.title}</h3>
-                  <p className="mt-3 text-xl font-extrabold leading-tight text-[#167f65]">{card.range}</p>
-                  <p className="mt-3 text-sm leading-6 text-muted">{card.text}</p>
-                </article>
-              ))}
-            </div>
-            <div className="grid gap-3 md:grid-cols-3">
-              {pricingNotes.map((note) => (
-                <div key={note} className="rounded-lg border border-card-border bg-white p-5 text-sm leading-6 text-muted">
-                  {note}
-                </div>
-              ))}
-            </div>
-            <div className="rounded-lg border border-[#1db993]/30 bg-white p-5">
-              <h3 className="text-xl font-extrabold text-ink">Recommended buying path</h3>
-              <p className="mt-3 text-sm leading-6 text-muted">
-                Free assessment, then either a paid AI Blueprint Sprint or a pilot project. Production systems can expand into Managed AI Operations once usage and value are clear.
-              </p>
-              <AssessmentTrigger
-                sourcePage="/services/ai-voice"
-                ctaLocation="ai_voice_pricing_confidence"
-                serviceInterest="ai-voice"
-                modalTitle="Request Your AI Voice Assessment"
-                modalDescription="Tell us where calls slow your team down. We will assess the workflow, likely savings, guardrails, and the best next step."
-                className="mt-5 rounded-full bg-accent px-6 py-3 font-extrabold text-white hover:bg-btn-hover"
-              >
-                Get Free Assessment
-              </AssessmentTrigger>
-            </div>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link href="/pricing#ai-front-desk" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-extrabold text-white hover:bg-btn-hover">
+              See AI Front Desk plans &amp; pricing
+            </Link>
+            <AssessmentTrigger
+              sourcePage="/services/ai-voice"
+              ctaLocation="ai_voice_pricing_confidence"
+              serviceInterest="ai-voice"
+              modalTitle="Request Your AI Voice Assessment"
+              modalDescription="Tell us where calls slow your team down. We will assess the workflow, likely savings, guardrails, and the best next step."
+              className="inline-flex h-12 items-center justify-center rounded-full border border-card-border px-6 text-base font-extrabold text-ink hover:border-accent"
+            >
+              Get Free Assessment
+            </AssessmentTrigger>
           </div>
+          <p className="mt-4 text-sm leading-6 text-muted">
+            Free assessment, then either a paid AI Blueprint Sprint or a pilot project. Production systems can expand into Managed AI Operations once usage and value are clear.
+          </p>
         </div>
       </section>
 

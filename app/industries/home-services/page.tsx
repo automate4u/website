@@ -63,27 +63,28 @@ const valuePatterns = [
 
 const servicePaths = [
   {
-    title: "Missed-Call & Dispatch Agent",
-    description: "A focused solution for missed-call recovery, after-hours intake, booking handoff, dispatch notes, estimate follow-up, and staff escalation.",
+    title: "General Contractors & Remodelers",
+    description: "Live missed-call and dispatch demo for after-hours intake, booking handoff, dispatch notes, estimate follow-up, and staff escalation.",
     href: "/solutions/home-services-missed-call-dispatch-agent",
-    cta: "View solution",
+    cta: "Try the Dispatch Demo",
   },
   {
-    title: "AI Voice for inbound calls",
-    description: "A voice-led starting point for answering routine calls, qualifying service requests, recovering missed calls, and routing urgent issues.",
-    href: "/services/ai-voice",
-    cta: "Explore AI Voice",
+    title: "HVAC Companies",
+    description: "Live demo for emergency triage on no-heat and no-cool calls, maintenance scheduling, and new install estimate intake.",
+    href: "/solutions/hvac-service-call-agent",
+    cta: "Try the HVAC Demo",
   },
   {
-    title: "Sales follow-up agent",
-    description: "A follow-up workflow for open estimates, maintenance plans, abandoned forms, financing questions, and review or referral requests.",
-    cta: "Discuss this path",
+    title: "Plumbing Companies",
+    description: "Live demo for burst pipe and leak emergency triage, routine service scheduling, and replacement estimate intake.",
+    href: "/solutions/plumbing-service-call-agent",
+    cta: "Try the Plumbing Demo",
   },
   {
-    title: "Custom operations layer",
-    description: "A stronger fit for larger operators that need intake queues, location rules, approvals, franchise reporting, or property-maintenance workflows in one place.",
-    href: "/services/custom-ai-software",
-    cta: "Explore Custom Software",
+    title: "Electrical Contractors",
+    description: "Live demo for safety hazard triage, service scheduling, and panel or EV charger project intake.",
+    href: "/solutions/electrical-service-call-agent",
+    cta: "Try the Electrical Demo",
   },
 ];
 
@@ -144,8 +145,8 @@ export default function HomeServicesPage() {
       valueTitle="Start where response speed and follow-up directly affect revenue."
       valueDescription="Home service automation should prove value quickly. The strongest first workflows are usually tied to recovered leads, booked appointments, estimate follow-up, maintenance requests, cleaner handoffs, or reduced front-office interruption."
       valuePatterns={valuePatterns}
-      serviceTitle="Start with the first workflow that can pay for itself."
-      serviceDescription="A home services deployment can begin with voice, dispatch intake, property-maintenance intake, or follow-up automation, then expand once booked jobs, response time, and staff capacity improve."
+      serviceTitle="Hear how this sounds for your trade."
+      serviceDescription="Each trade has its own live dispatch demo, built around the emergencies, scheduling, and escalation rules that matter for that kind of business."
       servicePaths={servicePaths}
       sectorTitle="Customer expectations are getting faster while office capacity stays limited."
       sectorDescription="The useful shift is not replacing your team. It is giving them a reliable support layer for intake, routing, follow-up, and exception handling."

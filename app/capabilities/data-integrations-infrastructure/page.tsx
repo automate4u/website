@@ -85,7 +85,7 @@ const systems = [
   },
   {
     title: "AI and automation layer",
-    items: ["Retell", "Botpress", "OpenAI", "Make", "n8n", "Custom APIs"],
+    items: ["Botpress", "OpenAI", "Make", "n8n", "Custom APIs"],
   },
 ];
 
@@ -112,7 +112,7 @@ const integrationEcosystem = [
   },
   {
     title: "Data, AI, and infrastructure",
-    items: ["OpenAI", "Retell", "Botpress", "Make", "n8n", "Zapier", "Postgres", "AWS"],
+    items: ["OpenAI", "Botpress", "Make", "n8n", "Zapier", "Postgres", "AWS"],
   },
   {
     title: "Identity, observability, and governance",

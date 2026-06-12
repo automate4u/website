@@ -62,6 +62,21 @@ export function breadcrumbSchema(path: string, title: string) {
   };
 }
 
+export function faqSchema(faqs: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  };
+}
+
 export function routeSchema(path: string) {
   const service = services.find((item) => item.href === path);
   const accelerator = industryAccelerators.find((item) => item.href === path);

@@ -4,13 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
 import { getElevenLabsAttributionVariables, trackEvent } from "@/lib/analytics";
 
-type VoiceProviderKind = "retell" | "elevenlabs";
-
-type RetellClient = {
-        on: (event: string, handler: (...args: unknown[]) => void) => void;
-    startCall: (args: { accessToken: string }) => Promise<void>;
-    stopCall: () => void;
-};
+type VoiceProviderKind = "elevenlabs";
 
 type UnifiedVoiceDemoProps = {
     // Provider configuration
@@ -81,11 +75,6 @@ function UnifiedVoiceDemoInner({
     const [bars, setBars] = useState<number[]>(generateIdleBars);
     const animationRef = useRef<number>(0);
 
-    // Retell state
-    const retellClientRef = useRef<RetellClient | null>(null);
-    const [retellCallActive, setRetellCallActive] = useState(false);
-    const [retellCallStarting, setRetellCallStarting] = useState(false);
-
     const selectedProvider = providers.find(p => p.id === activeProvider) ?? providers[0];
     const selectedProviderRef = useRef(selectedProvider);
     useEffect(() => {
@@ -133,17 +122,10 @@ function UnifiedVoiceDemoInner({
         },
     });
 
-    // Determine connection state based on active provider
-    const isRetell = selectedProvider.provider === "retell";
-    const isConnected = isRetell
-        ? retellCallActive
-        : conversation.status === "connected";
-
-    const isConnecting = isRetell
-        ? retellCallStarting
-        : conversation.status === "connecting";
-
-    const isSpeaking = selectedProvider.provider === "elevenlabs" ? conversation.isSpeaking : false;
+    // Determine connection state
+    const isConnected = conversation.status === "connected";
+    const isConnecting = conversation.status === "connecting";
+    const isSpeaking = conversation.isSpeaking;
 
     // Keep a ref in sync for animation
     const isSpeakingRef = useRef(isSpeaking);
@@ -171,103 +153,6 @@ function UnifiedVoiceDemoInner({
             cancelAnimationFrame(animationRef.current);
         };
     }, [isConnected]);
-
-    // Initialize Retell client
-    useEffect(() => {
-        if (!providers.some((provider) => provider.provider === "retell")) return;
-
-        import("retell-client-js-sdk").then(({ RetellWebClient }) => {
-            const client = new RetellWebClient() as RetellClient;
-            retellClientRef.current = client;
-
-            client.on("call_started", () => {
-                const provider = selectedProviderRef.current;
-                trackEvent("site_voice_demo_started", {
-                    page: sourcePage,
-                    ctaLocation,
-                    serviceInterest: "ai-voice",
-                    provider: provider.id,
-                });
-                setRetellCallActive(true);
-                setRetellCallStarting(false);
-            });
-
-            client.on("call_ended", () => {
-                const provider = selectedProviderRef.current;
-                trackEvent("site_voice_demo_completed", {
-                    page: sourcePage,
-                    ctaLocation,
-                    serviceInterest: "ai-voice",
-                    provider: provider.id,
-                });
-                setRetellCallActive(false);
-                setRetellCallStarting(false);
-            });
-
-            client.on("error", (error) => {
-                const provider = selectedProviderRef.current;
-                console.error("Retell error:", error);
-                trackEvent("site_voice_demo_failed", {
-                    page: sourcePage,
-                    ctaLocation,
-                    serviceInterest: "ai-voice",
-                    provider: provider.id,
-                });
-                setRetellCallActive(false);
-                setRetellCallStarting(false);
-            });
-        }).catch((error) => console.error("Could not load Retell SDK", error));
-
-        return () => {
-            if (retellClientRef.current) {
-                try {
-                    retellClientRef.current.stopCall();
-                } catch {
-                    // Ignore teardown errors
-                }
-            }
-        };
-    }, [providers, sourcePage, ctaLocation]);
-
-    const handleRetellCall = async () => {
-        if (!retellClientRef.current) return;
-
-        if (retellCallActive) {
-            retellClientRef.current.stopCall();
-            return;
-        }
-
-        try {
-            setRetellCallStarting(true);
-            await navigator.mediaDevices.getUserMedia({ audio: true });
-
-            const response = await fetch("/api/retell/web-call", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ metadata: { source: "unified-voice-demo" } }),
-            });
-
-            const data = await response.json();
-            if (!response.ok || !data.access_token) {
-                throw new Error(data.error || "Failed to start call");
-            }
-
-            await retellClientRef.current.startCall({
-                accessToken: data.access_token,
-            });
-        } catch (error: unknown) {
-            const message = error instanceof Error ? error.message : "Unknown error";
-            console.error(error);
-            trackEvent("site_voice_demo_failed", {
-                page: sourcePage,
-                ctaLocation,
-                serviceInterest: "ai-voice",
-                provider: selectedProvider.id,
-            });
-            alert(`Sorry, couldn't start the voice session. (${message})`);
-            setRetellCallStarting(false);
-        }
-    };
 
     const handleElevenLabsCall = async () => {
         if (conversation.status === "connected") {
@@ -311,7 +196,7 @@ function UnifiedVoiceDemoInner({
         }
     };
 
-    const handleToggleCall = isRetell ? handleRetellCall : handleElevenLabsCall;
+    const handleToggleCall = handleElevenLabsCall;
 
     // Status and button text
     let statusLabel = "Ready to connect";

@@ -8,7 +8,7 @@ export default function Footer() {
     return (
         <footer className="bg-slate-50 border-t border-card-border pt-16 pb-8 text-ink">
             <div className="max-w-[1280px] mx-auto px-6">
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5 lg:gap-10">
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-6 lg:gap-10">
 
                     <div>
                         <p
@@ -64,12 +64,21 @@ export default function Footer() {
                             <li className="pt-2"><Link href="/industries" className="hover:text-accent font-semibold flex items-center gap-1">See all industries <span aria-hidden="true">&rarr;</span></Link></li>
                         </ul>
                     </div>
+                    <div>
+                        <h4 className="font-bold mb-4">Company</h4>
+                        <ul className="space-y-2 text-sm text-muted">
+                            <li><Link href="/about/overview" className="hover:text-accent">Overview</Link></li>
+                            <li><Link href="/about/our-mission" className="hover:text-accent">Our Mission</Link></li>
+                            <li><Link href="/about/our-team" className="hover:text-accent">Our Team</Link></li>
+                            <li><Link href="/about/how-we-work" className="hover:text-accent">How We Work</Link></li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div className="border-t border-card-border mt-12 pt-8 flex flex-col gap-4 text-sm text-muted lg:flex-row lg:items-center lg:justify-between">
                     <p>&copy; {new Date().getFullYear()} Automate4U. All rights reserved.</p>
                     <div className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/about/overview" className="hover:text-accent">Company</Link>
+                        <Link href="/pricing" className="hover:text-accent">Pricing</Link>
                         <Link href="/contact" className="hover:text-accent">Contact</Link>
                         <Link href="/privacy" className="hover:text-accent">Privacy</Link>
                         <Link href="/terms" className="hover:text-accent">Terms</Link>
