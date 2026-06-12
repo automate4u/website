@@ -159,6 +159,12 @@ export default function LawFirmIntakeAgentPage() {
                 Schedule a Walkthrough
               </Link>
             </div>
+            <p className="mt-4 text-sm font-semibold text-muted">
+              Curious about cost?{" "}
+              <Link href="/pricing#ai-front-desk" className="font-extrabold text-[#167f65] hover:underline">
+                View AI Front Desk pricing
+              </Link>
+            </p>
           </div>
 
           <div className="rounded-lg border border-card-border bg-[#f8fbfa] p-5 shadow-[0_16px_48px_rgba(15,23,32,0.08)]">

@@ -161,6 +161,12 @@ export default function ManufacturingQuoteOrderAgentPage() {
                 See Workflow Preview
               </Link>
             </div>
+            <p className="mt-4 text-sm font-semibold text-muted">
+              Curious about cost?{" "}
+              <Link href="/pricing#workflow-agents" className="font-extrabold text-[#167f65] hover:underline">
+                View Workflow Agent pricing
+              </Link>
+            </p>
           </div>
 
           <div className="rounded-lg border border-card-border bg-[#f8fbfa] p-5 shadow-[0_16px_48px_rgba(15,23,32,0.08)]">

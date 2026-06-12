@@ -18,6 +18,10 @@ export default function TradeVariantTemplate({ solution, variant }: { solution: 
     },
   ];
 
+  const isWorkflowSolution = solution.relatedServiceHref === "/services/ai-agents";
+  const pricingHref = isWorkflowSolution ? "/pricing#workflow-agents" : "/pricing#ai-front-desk";
+  const pricingLabel = isWorkflowSolution ? "View Workflow Agent pricing" : "View AI Front Desk pricing";
+
   return (
     <div className="min-h-screen bg-white">
       <section className="relative overflow-hidden bg-white px-4 py-12 md:py-[72px]" aria-labelledby="hero-title">
@@ -37,6 +41,12 @@ export default function TradeVariantTemplate({ solution, variant }: { solution: 
                 {solution.primaryCtaLabel}
               </Link>
             </div>
+            <p className="mt-4 text-sm font-semibold text-muted">
+              Curious about cost?{" "}
+              <Link href={pricingHref} className="font-extrabold text-[#167f65] hover:underline">
+                {pricingLabel}
+              </Link>
+            </p>
           </div>
 
           <div className="rounded-lg border border-card-border bg-[#f8fbfa] p-5 shadow-[0_16px_48px_rgba(15,23,32,0.08)]">
