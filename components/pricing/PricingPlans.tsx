@@ -3,6 +3,14 @@
 import { useEffect, useState } from "react";
 import AssessmentTrigger from "@/components/AssessmentTrigger";
 import SectionHeader from "@/components/sections/SectionHeader";
+import {
+  AI_FRONT_DESK_GROWTH_MONTHLY,
+  IN_HOUSE_MONTHLY,
+  WORKFLOW_STARTER_MONTHLY,
+  annualMonthly,
+  formatMoney,
+  timeSavings,
+} from "@/lib/pricing";
 
 type ChannelStatus = "included" | "addon";
 
@@ -43,7 +51,7 @@ const frontDeskTiers: FrontDeskTier[] = [
     name: "Growth",
     badge: "Most Popular",
     tagline: "Add text messaging, the most common follow-up channel for service businesses.",
-    monthlyPrice: 449,
+    monthlyPrice: AI_FRONT_DESK_GROWTH_MONTHLY,
     setup: "$899 one-time setup",
     usage: ["450 voice minutes included", "500 digital conversations included"],
     overage: ["$0.75/min after that", "$0.40 per conversation after that"],
@@ -147,7 +155,7 @@ const workflowPackages: WorkflowPackage[] = [
   {
     name: "Workflow Starter",
     tagline: "One clearly defined workflow with light integrations.",
-    monthlyPriceFrom: 999,
+    monthlyPriceFrom: WORKFLOW_STARTER_MONTHLY,
     setup: "From $2,500 setup",
     examples: [
       "Lead capture, qualification, CRM update, and follow-up",
@@ -210,25 +218,6 @@ const addOns = [
   { name: "Custom reporting dashboard", price: "From $1,500 one-time" },
   { name: "Priority support / SLA", price: "Custom" },
 ];
-
-const timeSavings = [
-  { task: "Missed call follow-up", hours: "5-10 hrs/mo" },
-  { task: "Lead intake & qualification", hours: "10-20 hrs/mo" },
-  { task: "Appointment reminders & confirmations", hours: "5-15 hrs/mo" },
-  { task: "CRM updates & data entry", hours: "10-30 hrs/mo" },
-  { task: "Weekly reporting", hours: "5-10 hrs/mo" },
-];
-
-const ANNUAL_DISCOUNT = 0.15;
-const IN_HOUSE_MONTHLY = 4000;
-
-function annualMonthly(monthly: number): number {
-  return Math.round(monthly * (1 - ANNUAL_DISCOUNT));
-}
-
-function formatMoney(value: number): string {
-  return `$${value.toLocaleString("en-US")}`;
-}
 
 function hasFixedSetupFee(setup: string): boolean {
   return setup.includes("$");

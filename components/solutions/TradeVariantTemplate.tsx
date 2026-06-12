@@ -2,6 +2,7 @@ import Link from "next/link";
 import AssessmentTrigger from "@/components/AssessmentTrigger";
 import UnifiedVoiceDemo from "@/components/UnifiedVoiceDemo";
 import SectionHeader from "@/components/sections/SectionHeader";
+import SavingsSection from "@/components/solutions/SavingsSection";
 import type { SolutionSummary } from "@/data/solutions";
 import type { TradeVariant } from "@/data/solution-variants";
 import type { ServiceSlug } from "@/data/services";
@@ -19,8 +20,6 @@ export default function TradeVariantTemplate({ solution, variant }: { solution: 
   ];
 
   const isWorkflowSolution = solution.relatedServiceHref === "/services/ai-agents";
-  const pricingHref = isWorkflowSolution ? "/pricing#workflow-agents" : "/pricing#ai-front-desk";
-  const pricingLabel = isWorkflowSolution ? "View Workflow Agent pricing" : "View AI Front Desk pricing";
 
   return (
     <div className="min-h-screen bg-white">
@@ -41,12 +40,6 @@ export default function TradeVariantTemplate({ solution, variant }: { solution: 
                 {solution.primaryCtaLabel}
               </Link>
             </div>
-            <p className="mt-4 text-sm font-semibold text-muted">
-              Curious about cost?{" "}
-              <Link href={pricingHref} className="font-extrabold text-[#167f65] hover:underline">
-                {pricingLabel}
-              </Link>
-            </p>
           </div>
 
           <div className="rounded-lg border border-card-border bg-[#f8fbfa] p-5 shadow-[0_16px_48px_rgba(15,23,32,0.08)]">
@@ -198,6 +191,8 @@ export default function TradeVariantTemplate({ solution, variant }: { solution: 
           </div>
         </div>
       </section>
+
+      <SavingsSection variant={isWorkflowSolution ? "workflow-agents" : "ai-front-desk"} />
 
       <section className="bg-white px-4 py-14 md:py-20" aria-labelledby="faq-title">
         <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
